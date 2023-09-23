@@ -1,0 +1,21 @@
+{
+  "country": "Drzava",
+  "city": "Grad",
+  "street": "Ulica",
+  "name": "Adresa",
+  "locations": "Poslovnice",
+  "add": "Dodaj lokaciju",
+  "lat": "Geo. širina",
+  "lng": "Geo. dužina",
+  "description": "Opis",
+  "openTime": "Vrijeme otvaranja",
+  "closeTime": "Vrijeme zatvaranja",
+  "time": "Vrijeme",
+  "monday": "Ponedjeljak",
+  "tuesday": "Utorak",
+  "wednesday": "Srijeda",
+  "thursday": "Četvrtak",
+  "friday": "Petak",
+  "saturday": "Subota",
+  "sunday": "Nedjelja"
+}

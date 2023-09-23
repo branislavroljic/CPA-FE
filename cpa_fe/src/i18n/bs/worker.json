@@ -1,0 +1,12 @@
+{
+  "firstname": "Ime",
+  "lastname": "Prezime",
+  "username": "Korisničko ime",
+  "status": "Status",
+  "points": "Poeni",
+  "addName": "radnika",
+  "page": "Radnici",
+  "addModalTitle" : "Dodaj radnika",
+  "updateModalTitle" : "Izmijeni radnika",
+  "emailOrPhone" : "Unesite email ili broj telefona"
+}

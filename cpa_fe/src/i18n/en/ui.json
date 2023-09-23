@@ -1,0 +1,14 @@
+{
+  "searchPageLinks": "Search Pages",
+  "myProfile": "My Account",
+  "accountSettings": "Account Settings",
+  "userProfile": "User Account",
+  "changeProfile": "Edit Profile",
+  "chageProfilePicture": "Change Profile Picture Here",
+  "changePassword": "Change Password",
+  "changePasswordDescription": "To change your password, confirm here",
+  "personalDetails": "Personal Details",
+  "personalDetailsDescription": "To change your personal details, edit and save them here",
+  "settings": "Settings",
+  "themeOption" : "Theme option"
+}

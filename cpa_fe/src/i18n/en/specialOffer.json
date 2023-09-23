@@ -1,0 +1,11 @@
+{
+  "name": "Promotions",
+  "title": "Title",
+  "description": "Description",
+  "discount": "Discount",
+  "startDateTime": "From",
+  "endDateTime": "To",
+  "addImageInstructions": "Drag and drop a file here or click to select a file.",
+  "allowedFileTypes": "Allowed file types are: .jpg, .jpeg, and .png.",
+  "startEndDateTimeError": "Start date and time must be before the end date and time."
+}

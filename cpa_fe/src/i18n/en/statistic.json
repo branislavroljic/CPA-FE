@@ -1,0 +1,21 @@
+{
+  "name": "Statistics",
+  "employees": "Employees",
+  "clients": "Clients",
+  "totalIncome": "Total Income",
+  "points": "Points",
+  "totalDiscountSavings": "Total Savings",
+  "numberOfAddresses": "Number of Locations",
+  "currency": "{{value}} KM",
+  "workerTransactions": "Worker Transactions",
+  "totalAmount": "Total Amount",
+  "companyTransactions": "Company Transactions",
+  "companyAddressTransactions": "Location Transactions",
+  "monthlyTransactions": "Monthly Transactions (last 6 months)",
+  "dailyByMonthCompanyTransactions": "Company Transactions for Current Month",
+  "dailyByMonthCompanyAddressTransactions": "Location Transactions for Current Month",
+  "pointTransactions": "Point Transactions",
+  "totalSpentByWorkers" : "Total spent by workers",
+  "totalDiscountSavingsByWorkers" : "Total benefited by workers",
+  "topCardCompany" : "Company: {{name}}"
+}
