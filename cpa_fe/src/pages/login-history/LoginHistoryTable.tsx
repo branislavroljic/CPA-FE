@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import MaterialReactTable, {
   type MRT_ColumnDef,
   type MRT_PaginationState,
-  type MRT_SortingState,
 } from "material-react-table";
 import {
   IconButton,
@@ -64,11 +63,9 @@ export default function LoginHistoryTable() {
       <MaterialReactTable
         columns={columns}
         data={data?.rows ?? defaultData}
-        initialState={{ showColumnFilters: true }}
-        manualFiltering
+        enableSorting={false}
         manualPagination
-        manualSorting
-        enableGlobalFilter={false}
+        enableFilters={false}
         muiToolbarAlertBannerProps={
           isError
             ? {

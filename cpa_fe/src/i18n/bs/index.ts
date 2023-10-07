@@ -6,6 +6,7 @@ import workerTrans from './worker.json';
 import uiTrans from './ui.json';
 import faqTrans from './faq.json';
 import notificationTrans from './notification.json';
+import loginHistoryTrans from './loginHistory.json';
 
 const bsResources = {
   translation: {
@@ -17,6 +18,7 @@ const bsResources = {
     ui: uiTrans,
     faq: faqTrans,
     notification: notificationTrans,
+    loginHistory : loginHistoryTrans
   },
 };
 

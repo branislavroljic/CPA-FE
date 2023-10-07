@@ -15,39 +15,39 @@ const defaultColumns = (
   [
     {
       accessorKey: "ip",
-      header: t("user.firstname"),
+      header: "IP",
     },
     {
       accessorKey: "country",
-      header: t("user.lastname"),
+      header: t("loginHistory.country"),
     },
     {
       accessorKey: "status",
-      header: t("user.lastname"),
+      header: t("loginHistory.status"),
     },
     {
       accessorKey: "device",
-      header: t("user.lastname"),
+      header: t("loginHistory.device"),
     },
     {
       accessorKey: "browser",
-      header: t("user.lastname"),
+      header: t("loginHistory.browser"),
     },
     {
       accessorKey: "browserVersion",
-      header: t("user.lastname"),
+      header: t("loginHistory.browserVersion"),
     },
     {
       accessorKey: "operatingSystem",
-      header: t("user.lastname"),
+      header: t("loginHistory.operatingSystem"),
     },
     {
       accessorKey: "createdTime",
-      header: t("user.lastname"),
+      header: t("loginHistory.createdTime"),
     },
     {
       accessorKey: "userUsername",
-      header: t("user.lastname"),
+      header: t("loginHistory.username"),
     },
     // {
     //   accessorFn: (row) => `${row.discount * 100} %`,

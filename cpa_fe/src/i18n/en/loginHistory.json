@@ -1,0 +1,11 @@
+{
+  "title": "Login History",
+  "country": "Country",
+  "status": "Status",
+  "device": "Device",
+  "browser": "Browser",
+  "browserVersion": "Browser Version",
+  "operatingSystem": "Operating System",
+  "createdTime": "Creation Time",
+  "username": "Username"
+}

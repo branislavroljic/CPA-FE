@@ -1,0 +1,11 @@
+{
+  "title": "Istorija logovanja",
+  "country": "Drzava",
+  "status": "Status",
+  "device": "Uređaj",
+  "browser": "Pretraživač",
+  "browserVersion": "Verzija pretraživača",
+  "operatingSystem": "Operativni sistem",
+  "createdTime": "Vrijeme kreiranja",
+  "username": "Korisničko ime"
+}
