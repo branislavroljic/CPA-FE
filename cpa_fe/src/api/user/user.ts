@@ -1,36 +1,51 @@
 import {
-  ImageInfo,
   InputFormData,
-  post,
-  postMultipartSingle,
-  put,
+  Page,
+  PageRequest,
+  addPaginationParams,
+  get,
 } from "../utils";
 
-const baseUrl = new URL("users/", import.meta.env.VITE_API_URL);
+const baseUrl = new URL("user/", import.meta.env.VITE_API_URL);
 
-export type User = ImageInfo & {
+export type AccountManager = {
+  id: number;
+  name: string;
+  surname: string;
+  email: string;
+  skypeLink: string;
+  telegramLink: string;
+  whatsappLink: string;
+};
+
+export type User = {
   id: number;
   username: string;
   email?: string;
-  phoneNumber?: string;
-  firstname: string;
-  lastname: string;
-  role: string;
-  companyId: number;
+  roles: string[];
   token: string;
   refreshToken: string;
+  accountManager?: AccountManager;
 };
 
-export type PasswordUpdateRequest = {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
+export type LoginHistory = {
+  id: number;
+  ip: string;
+  country: string;
+  status: string;
+  device: string;
+  browser: string;
+  browserVersion: string;
+  operatingSystem: string;
+  createdTime: Date;
+  userUsername: string;
 };
 
-export function updatePassword(request: PasswordUpdateRequest) {
-  return put(new URL("change-password", baseUrl), JSON.stringify(request));
-}
-
-export function updateProfileImage(image: InputFormData<any>) {
-  return postMultipartSingle(new URL("profile-image", baseUrl), image);
+export function getLoginHistory(
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<LoginHistory>> {
+  const url = new URL(id + "/login_history", baseUrl);
+  console.log(url);
+  return get(addPaginationParams(url, pagination));
 }

@@ -4,6 +4,8 @@ import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 import CompanyPage from "@pages/Company/CompanyPage";
 
+import LoginHistoryPage from "@pages/login-history/LoginHistoryPage";
+
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
 const ErrorPage = React.lazy(() => import("@pages/Error/ErrorPage"));
@@ -24,12 +26,12 @@ const browserConfig = createBrowserRouter([
     element: <FullLayout />,
     children: [
       {
-        id: "companies",
+        id: "login_history",
         path: "/",
         children: [
           {
             index: true,
-            element: <CompanyPage />,
+            element: <LoginHistoryPage />,
             errorElement: <ErrorPage />,
           },
         ],

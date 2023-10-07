@@ -6,7 +6,7 @@ const navigation = [
   {
     name: i18n.t('company.page'),
     icon: ApartmentIcon,
-    href: '/companies',
+    href: '/login_history',
     // permission: PermissionNames.Read,
   },
   {

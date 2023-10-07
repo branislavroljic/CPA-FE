@@ -17,16 +17,9 @@ interface MenuitemsType {
 import i18n from '../../../../i18n';
 
 import {
-  IconBell,
-  IconBrandCashapp,
   IconBug,
   IconBuildingCommunity,
   IconBuildingStore,
-  IconChartHistogram,
-  IconHelpOctagon,
-  IconMapPin,
-  IconShoppingCartDiscount,
-  IconUsersGroup,
 } from '@tabler/icons-react';
 import { TFunction } from 'i18next';
 

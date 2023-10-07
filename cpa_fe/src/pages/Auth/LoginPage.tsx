@@ -51,10 +51,10 @@ const loginSchema = z.object({
         field: i18n.t("login.passwordLabel"),
       }),
     })
-    .min(8, {
+    .min(6, {
       message: i18n.t("util.length", {
         field: i18n.t("login.passwordLabel"),
-        num: 8,
+        num: 6,
       }),
     })
     .max(standardMaxLength, {

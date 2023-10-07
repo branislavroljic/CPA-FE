@@ -11,9 +11,11 @@ function App() {
     <ThemeProvider theme={theme}>
       {/* <RTL direction={customizer.activeDir}> */}
       {/* <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de"> */}
+
       <CssBaseline />
       {/* <ScrollToTop> */}
       <RouterProvider router={router} />
+
       {/* </ScrollToTop> */}
       {/* </LocalizationProvider> */}
       {/* </RTL> */}
