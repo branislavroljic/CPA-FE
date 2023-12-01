@@ -13,6 +13,7 @@ export const headers = (
     Accept: "application/json",
     "Content-Type": contentType,
     "Accept-Language": i18n.language,
+    "Access-Control-Allow-Origin": "*",
     ...additionalHeaders,
   };
 };
@@ -33,9 +34,6 @@ const refreshAxios = axios.create({
 
 const refreshTokenFunction = () => {
   const user = getUserFromStorage();
-
-  console.log("biooo")
-  console.log(user?.refreshToken);
 
   return refreshAxios.post(
     "/auth/refreshtoken",

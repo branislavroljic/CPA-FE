@@ -1,12 +1,14 @@
-import utilTrans from './util.json';
-import errorTrans from './error.json';
-import loginTrans from './login.json';
-import userTrans from './user.json';
-import workerTrans from './worker.json';
-import uiTrans from './ui.json';
-import faqTrans from './faq.json';
-import notificationTrans from './notification.json';
-import loginHistoryTrans from './loginHistory.json';
+import utilTrans from "./util.json";
+import errorTrans from "./error.json";
+import loginTrans from "./login.json";
+import userTrans from "./user.json";
+import workerTrans from "./worker.json";
+import uiTrans from "./ui.json";
+import faqTrans from "./faq.json";
+import notificationTrans from "./notification.json";
+import loginHistoryTrans from "./loginHistory.json";
+import paymentsTrans from "./payments.json";
+import domainTrans from "./domain.json";
 
 const bsResources = {
   translation: {
@@ -18,7 +20,9 @@ const bsResources = {
     ui: uiTrans,
     faq: faqTrans,
     notification: notificationTrans,
-    loginHistory : loginHistoryTrans
+    loginHistory: loginHistoryTrans,
+    payments: paymentsTrans,
+    domain: domainTrans,
   },
 };
 

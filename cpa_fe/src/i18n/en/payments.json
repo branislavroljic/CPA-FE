@@ -1,0 +1,13 @@
+{
+  "requestPayment": "Request payment",
+  "title": "Payments",
+  "amount": "Amount",
+  "balanceBeforeRequest": "Balance before request",
+  "method": "Method",
+  "description": "Description",
+  "rejectComment": "Reject comment",
+  "status": "Status",
+  "createdAt": "Created at",
+  "editedAt": "Edited at",
+  "username": "Username"
+}

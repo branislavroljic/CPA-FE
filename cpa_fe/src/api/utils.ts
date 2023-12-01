@@ -1,9 +1,9 @@
-import { USER_KEY } from './auth';
-import { User } from './user/user';
-import { MRT_ColumnFiltersState } from 'material-react-table';
-import axiosClient, { headers } from './axios';
+import { USER_KEY } from "./auth";
+import { User } from "./user/user";
+import { MRT_ColumnFiltersState } from "material-react-table";
+import axiosClient, { headers } from "./axios";
 
-export type PredefinedRequest = Omit<RequestInit, 'method' | 'body'>;
+export type PredefinedRequest = Omit<RequestInit, "method" | "body">;
 
 function addToken(headers: HeadersInit): HeadersInit {
   const user = sessionStorage.getItem(USER_KEY);
@@ -110,7 +110,7 @@ export function del(baseUrl: string | URL, id: number) {
 }
 
 export function restore(baseUrl: string | URL, id: number) {
-  return axiosClient.put(new URL('restore/' + id, baseUrl).toString());
+  return axiosClient.put(new URL("restore/" + id, baseUrl).toString());
 }
 
 // export function restore(baseUrl: URL, id: number, init?: PredefinedRequest) {
@@ -135,7 +135,7 @@ export function appendFormDataFromObject(
       for (let i = 0; i < value.length; i++) {
         formData.append(key, value[i]);
       }
-    } else if (typeof value == 'object') {
+    } else if (typeof value == "object") {
       formData.append(key, JSON.stringify(value));
     } else {
       formData.append(key, String(value));
@@ -161,12 +161,12 @@ export function postMultipartSingle(
   let formData = new FormData();
 
   if (input.image) {
-    formData.append('image', input.image);
+    formData.append("image", input.image);
   }
 
   if (input.body) formData = appendFormDataFromObject(formData, input.body);
   return axiosClient.post(baseUrl.toString(), formData, {
-    headers: headers(undefined, ''),
+    headers: headers(undefined, ""),
   });
 }
 
@@ -178,13 +178,13 @@ export function postMultipart(
 
   if (input.images && input.images.length > 0) {
     for (const image of input.images) {
-      formData.append('images', image);
+      formData.append("images", image);
     }
   }
 
   if (input.body) formData = appendFormDataFromObject(formData, input.body);
   return axiosClient.post(baseUrl.toString(), formData, {
-    headers: headers(undefined, ''),
+    headers: headers(undefined, ""),
   });
 }
 
@@ -225,12 +225,12 @@ export function putMultipartSingle(
   let formData = new FormData();
 
   if (input.image) {
-    formData.append('image', input.image);
+    formData.append("image", input.image);
   }
   formData = appendFormDataFromObject(formData, input.body);
-  
+
   return axiosClient.put(baseUrl.toString(), formData, {
-    headers: headers(undefined, ''),
+    headers: headers(undefined, ""),
   });
 }
 
@@ -242,12 +242,12 @@ export function putMultipart(
 
   if (input.images && input.images.length > 0) {
     for (const image of input.images) {
-      formData.append('images', image);
+      formData.append("images", image);
     }
   }
   formData = appendFormDataFromObject(formData, input.body);
   return axiosClient.put(baseUrl.toString(), formData, {
-    headers: headers(undefined, ''),
+    headers: headers(undefined, ""),
   });
 }
 
@@ -328,7 +328,7 @@ export function putMultipart(
 export function addPaginationParams(baseUrl: URL, ...filters: object[]): URL {
   filters.forEach((f) => {
     for (const [k, v] of Object.entries(f)) {
-      if (v != null && !(typeof v == 'string' && v.trim().length == 0)) {
+      if (v != null && !(typeof v == "string" && v.trim().length == 0)) {
         baseUrl.searchParams.set(k, v);
       }
     }
@@ -339,18 +339,18 @@ export function addPaginationParams(baseUrl: URL, ...filters: object[]): URL {
 export function addFilterParams(baseUrl: URL, filters: MRT_ColumnFiltersState) {
   // baseUrl.searchParams.delete('name');
   // baseUrl.searchParams.delete('typeId');
-  console.log('filteri su: ' + JSON.stringify(filters));
-  console.log('baseUrl prije dodavanja je: ' + baseUrl);
+  console.log("filteri su: " + JSON.stringify(filters));
+  console.log("baseUrl prije dodavanja je: " + baseUrl);
   filters.forEach((f) => {
     if (
       f.value != null &&
-      !(typeof f.value == 'string' && f.value.trim().length == 0)
+      !(typeof f.value == "string" && f.value.trim().length == 0)
     ) {
       baseUrl.searchParams.set(f.id, f.value as string);
     }
   });
 
-  console.log('baseURL nakon filtera je:  ' + baseUrl);
+  console.log("baseURL nakon filtera je:  " + baseUrl);
   return baseUrl;
 }
 
@@ -360,8 +360,8 @@ export type Page<T> = {
 };
 
 export type PageRequest = {
-  pageIndex: number;
-  pageSize: number;
+  page: number;
+  size: number;
   showDeleted?: boolean;
   sortBy?: string;
   sortDirection?: string;
@@ -372,11 +372,11 @@ export type SelectInput = {
   value: number | string;
 };
 
-export type Status = 'ACTIVE' | 'DELETED';
+export type Status = "ACTIVE" | "DELETED";
 
 export type ImageInfo = {
   imageBytes: Uint8Array;
-  imageType: 'png' | 'jpeg';
+  imageType: "png" | "jpeg";
   imageName: string;
 };
 

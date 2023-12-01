@@ -1,26 +1,23 @@
-import i18n from '../i18n';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import BusinessIcon from '@mui/icons-material/Business';
+import i18n from "../i18n";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import BusinessIcon from "@mui/icons-material/Business";
 
 const navigation = [
   {
-    name: i18n.t('company.page'),
+    name: i18n.t("loginHistory.title"),
     icon: ApartmentIcon,
-    href: '/login_history',
-    // permission: PermissionNames.Read,
+    href: "/login_history",
   },
   {
-    name: i18n.t('companyType.name'),
+    name: i18n.t("payments.title"),
     icon: BusinessIcon,
-    href: '/companyTypes',
-    // permission: PermissionNames.Read,
+    href: "/payments",
   },
-  // {
-  //   name: i18n.t('threat.page'),
-  //   icon: FireIcon,
-  //   href: '/threats',
-  //   permission: PermissionNames.Read,
-  // },
+  {
+    name: i18n.t("domains.title"),
+    icon: BusinessIcon,
+    href: "/domains",
+  },
 ];
 
 export default navigation;

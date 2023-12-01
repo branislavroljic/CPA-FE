@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 // import { getCompanyTypes } from '@api/company/companyTypes';
 // import queryClient from "../query-client";
 import React from "react";
-import CompanyPage from "@pages/Company/CompanyPage";
 
 import LoginHistoryPage from "@pages/login-history/LoginHistoryPage";
+import PaymentsPage from "@pages/payments/PaymentsPage";
+import DomainsPage from "@pages/domains/DomainsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -32,6 +33,28 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <LoginHistoryPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "payments",
+        path: "/payments",
+        children: [
+          {
+            index: true,
+            element: <PaymentsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "domains",
+        path: "/domains",
+        children: [
+          {
+            index: true,
+            element: <DomainsPage />,
             errorElement: <ErrorPage />,
           },
         ],

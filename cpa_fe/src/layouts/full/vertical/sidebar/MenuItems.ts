@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash';
+import { uniqueId } from "lodash";
 
 interface MenuitemsType {
   [x: string]: any;
@@ -14,55 +14,48 @@ interface MenuitemsType {
   variant?: string;
   external?: boolean;
 }
-import i18n from '../../../../i18n';
+import i18n from "../../../../i18n";
 
 import {
   IconBug,
   IconBuildingCommunity,
   IconBuildingStore,
-} from '@tabler/icons-react';
-import { TFunction } from 'i18next';
+} from "@tabler/icons-react";
+import { TFunction } from "i18next";
 
-const Menuitems = (t: TFunction<'translation', undefined, 'translation'>) =>
+const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
   [
     {
       navlabel: true,
-      subheader: i18n.t('util.home').toUpperCase(),
+      subheader: i18n.t("util.home").toUpperCase(),
     },
-
-    // {
-    //   id: uniqueId(),
-    //   title: i18n.t('company.page'),
-    //   icon: ApartmentIcon,
-    //   href: '/companies',
-    // },
-    // {
-    //   id: uniqueId(),
-    //   title: i18n.t('companyType.name'),
-    //   icon: BusinessIcon,
-    //   href: '/companyTypes',
-    // },
     {
       id: uniqueId(),
-      title: i18n.t('company.page'),
+      title: i18n.t("loginHistory.title"),
       icon: IconBuildingStore,
-      href: '/',
+      href: "/",
     },
     {
       id: uniqueId(),
-      title: i18n.t('companyType.name'),
+      title: i18n.t("payments.title"),
       icon: IconBuildingCommunity,
-      href: '/companyTypes',
+      href: "/payments",
+    },
+    {
+      id: uniqueId(),
+      title: i18n.t("domain.title"),
+      icon: IconBuildingCommunity,
+      href: "/domains",
     },
     {
       navlabel: true,
-      subheader: t('util.info').toUpperCase(),
+      subheader: t("util.info").toUpperCase(),
     },
     {
       id: uniqueId(),
-      title: 'Prijava grešaka',
+      title: "Prijava grešaka",
       icon: IconBug,
-      href: '/issue-tickets',
+      href: "/issue-tickets",
     },
   ] as MenuitemsType[];
 

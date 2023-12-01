@@ -1,0 +1,13 @@
+{
+  "requestPayment": "Zahtjevaj isplatu",
+  "title": "Plaćanja",
+  "amount": "Iznos",
+  "balanceBeforeRequest": "Stanje pre zahteva",
+  "method": "Metod",
+  "description": "Opis",
+  "rejectComment": "Komentar o odbijanju",
+  "status": "Status",
+  "createdAt": "Kreirano u",
+  "editedAt": "Izmenjeno u",
+  "username": "Korisničko ime"
+}
