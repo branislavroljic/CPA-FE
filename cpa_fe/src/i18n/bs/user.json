@@ -24,5 +24,6 @@
   "newPassword" : "Nova lozinka",
   "confirmPassword" : "Potvrdi lozniku",
   "sameAsOldPasswordError" : "Nova lozinka se mora razlikovati od stare",
-  "passwordsDidNotMatchError" : "Lozinke se ne podudaraju"
+  "passwordsDidNotMatchError" : "Lozinke se ne podudaraju",
+  "country" : "Država"
 }

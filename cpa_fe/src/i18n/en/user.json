@@ -24,5 +24,6 @@
   "newPassword": "New Password",
   "confirmPassword": "Confirm Password",
   "sameAsOldPasswordError": "New password must be different from the old one",
-  "passwordsDidNotMatchError": "Passwords do not match"
+  "passwordsDidNotMatchError": "Passwords do not match",
+  "country": "Country"
 }

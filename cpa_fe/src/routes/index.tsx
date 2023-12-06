@@ -19,6 +19,9 @@ const ForgotPasswordPage = React.lazy(
 const RecoverPasswordPage = React.lazy(
   () => import("@pages/Auth/RecoverPasswordPage")
 );
+const AccountSetting = React.lazy(
+  () => import("@pages/account-setting/AccountSettingsPage")
+);
 
 const browserConfig = createBrowserRouter([
   {
@@ -36,6 +39,12 @@ const browserConfig = createBrowserRouter([
             errorElement: <ErrorPage />,
           },
         ],
+      },
+      {
+        id: "user-profile",
+        path: "/user-profile",
+        element: <AccountSetting />,
+        errorElement: <ErrorPage />,
       },
       {
         id: "payments",

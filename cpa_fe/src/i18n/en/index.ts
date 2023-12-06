@@ -9,6 +9,7 @@ import notificationTrans from "./notification.json";
 import loginHistoryTrans from "./loginHistory.json";
 import paymentsTrans from "./payments.json";
 import domainTrans from "./domain.json";
+import linksTrans from "./links.json";
 
 const enResources = {
   translation: {
@@ -23,6 +24,7 @@ const enResources = {
     loginHistory: loginHistoryTrans,
     payments: paymentsTrans,
     domain: domainTrans,
+    links: linksTrans,
   },
 };
 
