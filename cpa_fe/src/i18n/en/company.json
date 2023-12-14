@@ -1,0 +1,11 @@
+{
+  "companyInfoTitle": "Company info",
+  "companyInfoDescription": "To register your company, please provide correct general information.",
+  "companyName": "Company name",
+  "country": "Country",
+  "city": "City",
+  "address": "Address",
+  "zipcode": "Zip code",
+  "companyEmail": "Company email",
+  "tax": "Tax"
+}

@@ -10,6 +10,7 @@ import loginHistoryTrans from "./loginHistory.json";
 import paymentsTrans from "./payments.json";
 import domainTrans from "./domain.json";
 import linksTrans from "./links.json";
+import companyTrans from "./company.json";
 
 const bsResources = {
   translation: {
@@ -25,6 +26,7 @@ const bsResources = {
     payments: paymentsTrans,
     domain: domainTrans,
     links: linksTrans,
+    company: companyTrans,
   },
 };
 

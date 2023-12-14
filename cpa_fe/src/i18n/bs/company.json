@@ -1,0 +1,11 @@
+{
+  "companyInfoTitle": "Informacije o kompaniji",
+  "companyInfoDescription": "Da biste registrovali svoju kompaniju, molimo vas da pružite tačne opšte informacije.",
+  "companyName": "Naziv kompanije",
+  "country": "Zemlja",
+  "city": "Grad",
+  "address": "Adresa",
+  "zipcode": "Poštanski broj",
+  "companyEmail": "Email kompanije",
+  "tax": "Porez"
+}

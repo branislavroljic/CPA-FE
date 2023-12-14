@@ -51,7 +51,7 @@ export function changePassword(input: ChangePassword, id?: number) {
   return post(new URL(id + "/basic_info", baseUrl), JSON.stringify(input));
 }
 
-export function getSocialMediaLinks(id?: number) {
+export function getSocialMediaLinks(id?: number): Promise<SocialMediaLinks> {
   return get(new URL(id + "/social_media", baseUrl));
 }
 
@@ -59,7 +59,7 @@ export function updateSocialMediaLinks(input: SocialMediaLinks, id?: number) {
   return put(new URL(id + "/social_media", baseUrl), JSON.stringify(input));
 }
 
-export function getMessagingLinks(id?: number) {
+export function getMessagingLinks(id?: number): Promise<MessagingLinks> {
   return get(new URL(id + "/message_social_media", baseUrl));
 }
 
@@ -68,4 +68,12 @@ export function updateMessagingLinks(input: MessagingLinks, id?: number) {
     new URL(id + "/message_social_media", baseUrl),
     JSON.stringify(input)
   );
+}
+
+export function getCompanyInfo(id?: number): Promise<CompanyInfo> {
+  return get(new URL(id + "/company_info", baseUrl));
+}
+
+export function updateCompanyInfo(input: CompanyInfo, id?: number) {
+  return post(new URL(id + "/company_info", baseUrl), JSON.stringify(input));
 }

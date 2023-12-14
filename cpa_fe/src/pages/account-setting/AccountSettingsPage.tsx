@@ -14,6 +14,8 @@ import TabContext from "@mui/lab/TabContext";
 import { AccountCircleOutlined } from "@mui/icons-material";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
+import LinkForms from "./social-links/LinkForms";
+import CompanyInfoForm from "./company-info/CompanyInfoForm";
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -87,7 +89,7 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <ConnectWithoutContactIcon />
-                  <TabName>Security</TabName>
+                  <TabName>Links</TabName>
                 </Box>
               }
             />
@@ -96,7 +98,7 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <ApartmentOutlinedIcon />
-                  <TabName>Info</TabName>
+                  <TabName>Company settings</TabName>
                 </Box>
               }
             />
@@ -106,10 +108,10 @@ const AccountSetting = () => {
             <BasicInfoForms />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="security">
-            {/* <TabSecurity /> */}
+            <LinkForms />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="info">
-            {/* <TabInfo /> */}
+            <CompanyInfoForm />
           </TabPanel>
         </TabContext>
       </Card>

@@ -1,6 +1,4 @@
 import { CardContent, Grid, Typography, Button, Stack } from "@mui/material";
-
-// images
 import BlankCard from "@ui/shared/BlankCard";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import CustomTextField from "@ui/forms/theme-elements/CustomTextField";
@@ -20,23 +18,29 @@ import {
 } from "@api/user/userSettings";
 import socialMediaLinksSchema from "./socialMediaLinksSchema";
 import messagingLinksSchema from "./messagingLinksSchema";
+import Spinner from "@ui/view/spinner/Spinner";
 
-const BasicInfoForms = () => {
+const LinkForms = () => {
   const { user } = useAuthStore((state) => state);
 
-  const { data: socialMediaLinksData, refetch: refetchSocialMediaLinks } =
-    useQuery({
-      queryKey: ["social_media_links", user?.id],
-      queryFn: () => getSocialMediaLinks(user?.id),
-    });
-  const { data: messagingLinksData, refetch: refetchMessagingLinksData } =
-    useQuery({
-      queryKey: ["messaging_links", user?.id],
-      queryFn: () => getMessagingLinks(user?.id),
-    });
+  const {
+    data: socialMediaLinksData,
+    isLoading: isSocialMedialLinksLoading,
+    refetch: refetchSocialMediaLinks,
+  } = useQuery({
+    queryKey: ["social_media_links", user?.id],
+    queryFn: () => getSocialMediaLinks(user?.id),
+  });
+  const {
+    data: messagingLinksData,
+    isLoading: isMessagingLinksLoading,
+    refetch: refetchMessagingLinksData,
+  } = useQuery({
+    queryKey: ["messaging_links", user?.id],
+    queryFn: () => getMessagingLinks(user?.id),
+  });
 
   const {
-    register: registerSocialMediaLinks,
     handleSubmit: handleSubmitSocialMediaLinks,
     reset: resetSocialMediaLinks,
     control: controlSocialMediaLinks,
@@ -49,7 +53,6 @@ const BasicInfoForms = () => {
   });
 
   const {
-    register: registerMessagingLinks,
     handleSubmit: handleSubmitMessagingLinks,
     reset: resetMessagingLinks,
     control: controlMessagingLinks,
@@ -67,7 +70,8 @@ const BasicInfoForms = () => {
   };
 
   const socialMediaLinksMutation = useNotifiedMutation({
-    mutationFn: updateSocialMediaLinks,
+    mutationFn: (params: { socialMediaLinks: SocialMediaLinks; id?: number }) =>
+      updateSocialMediaLinks(params.socialMediaLinks, params.id),
     onSuccess: () => {
       refetchSocialMediaLinks();
     },
@@ -75,7 +79,8 @@ const BasicInfoForms = () => {
   });
 
   const messagingLinksMutation = useNotifiedMutation({
-    mutationFn: updateMessagingLinks,
+    mutationFn: (params: { messagingLinks: MessagingLinks; id?: number }) =>
+      updateMessagingLinks(params.messagingLinks, params.id),
     onSuccess: () => {
       refetchMessagingLinksData();
     },
@@ -86,240 +91,297 @@ const BasicInfoForms = () => {
 
   const submitUpdateSocialMediaLinks = (newItem: SocialMediaLinks) => {
     if (isValidSocialMediaLinks) {
-      socialMediaLinksMutation.mutate(newItem);
+      socialMediaLinksMutation.mutate({
+        socialMediaLinks: newItem,
+        id: user?.id,
+      });
     }
   };
 
   const submitUpdateMessagingLinks = (newItem: MessagingLinks) => {
     if (isValidMessagingLinks) {
-      messagingLinksMutation.mutate(newItem);
+      messagingLinksMutation.mutate({ messagingLinks: newItem, id: user?.id });
     }
   };
 
   return (
     <Grid container spacing={3}>
-      {/*  Change Password */}
-      <Grid item xs={12} lg={6}>
-        <BlankCard>
-          <CardContent>
-            <Typography variant="h5" mb={1}>
-              {t("ui.changePassword")}
-            </Typography>
-            <Typography color="textSecondary" mb={3}>
-              {t("ui.changePasswordDescription")}
-            </Typography>
-            <form>
-              <CustomFormLabel
-                sx={{
-                  mt: 4,
-                }}
-                htmlFor="currentPassword"
-              >
-                {t("user.currentPassword")}
-              </CustomFormLabel>
-              <Controller
-                control={controlPasswordForm}
-                name="oldPassword"
-                defaultValue=""
-                render={({ field }) => (
-                  <CustomTextField
-                    error={errorsPasswordForm.oldPassword !== undefined}
-                    helperText={errorsPasswordForm.oldPassword?.message}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    type="password"
-                    id="oldPassword"
-                    {...field}
-                  />
-                )}
-              />
+      {/*  Social media links */}
+      {isSocialMedialLinksLoading ? (
+        <Spinner></Spinner>
+      ) : (
+        <Grid item xs={12} lg={6}>
+          <BlankCard>
+            <CardContent>
+              <Typography variant="h5" mb={1}>
+                {t("links.socialMediaLinksTitle")}
+              </Typography>
+              <Typography color="textSecondary" mb={3}>
+                {t("links.socialMediaLinksDescription")}
+              </Typography>
+              <form>
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="facebookLink"
+                >
+                  {t("links.facebookLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlSocialMediaLinks}
+                  name="facebookLink"
+                  defaultValue={socialMediaLinksData?.facebookLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsSocialMediaLinks.facebookLink !== undefined}
+                      helperText={errorsSocialMediaLinks.facebookLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="facebookLink"
+                      {...field}
+                    />
+                  )}
+                />
 
-              {/* 2 */}
-              <CustomFormLabel
-                sx={{
-                  mt: 2,
-                }}
-                htmlFor="newPassword"
-              >
-                {t("user.newPassword")}
-              </CustomFormLabel>
-              <Controller
-                control={controlPasswordForm}
-                name="newPassword"
-                defaultValue=""
-                render={({ field }) => (
-                  <CustomTextField
-                    error={errorsPasswordForm.newPassword !== undefined}
-                    helperText={errorsPasswordForm.newPassword?.message}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    type="password"
-                    id="newPassword"
-                    {...field}
-                  />
-                )}
-              />
-              {/* 3 */}
-              <CustomFormLabel
-                sx={{
-                  mt: 2,
-                }}
-                htmlFor="confirmPassword"
-              >
-                {t("user.confirmPassword")}
-              </CustomFormLabel>
-              <Controller
-                control={controlPasswordForm}
-                name="newPasswordConfirm"
-                defaultValue=""
-                render={({ field }) => (
-                  <CustomTextField
-                    error={errorsPasswordForm.newPasswordConfirm !== undefined}
-                    helperText={errorsPasswordForm.newPasswordConfirm?.message}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    type="password"
-                    id="newPasswordConfirm"
-                    {...field}
-                  />
-                )}
-              />
-            </form>
-          </CardContent>
-        </BlankCard>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ justifyContent: "end" }}
-          mt={2}
-        >
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            onClick={handleSubmitPasswordForm(submitUpdatePassword)}
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="googleLink"
+                >
+                  {t("links.googleLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlSocialMediaLinks}
+                  name="googleLink"
+                  defaultValue={socialMediaLinksData?.googleLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsSocialMediaLinks.googleLink !== undefined}
+                      helperText={errorsSocialMediaLinks.googleLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="googleLink"
+                      {...field}
+                    />
+                  )}
+                />
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="twitterLink"
+                >
+                  {t("links.twitterLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlSocialMediaLinks}
+                  name="twitterLink"
+                  defaultValue={socialMediaLinksData?.twitterLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsSocialMediaLinks.twitterLink !== undefined}
+                      helperText={errorsSocialMediaLinks.twitterLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="twitterLink"
+                      {...field}
+                    />
+                  )}
+                />
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="linkedinLink"
+                >
+                  {t("links.linkedinLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlSocialMediaLinks}
+                  name="linkedinLink"
+                  defaultValue={socialMediaLinksData?.linkedinLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsSocialMediaLinks.linkedinLink !== undefined}
+                      helperText={errorsSocialMediaLinks.linkedinLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="linkedinLink"
+                      {...field}
+                    />
+                  )}
+                />
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="instagramLink"
+                >
+                  {t("links.instagramLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlSocialMediaLinks}
+                  name="instagramLink"
+                  defaultValue={
+                    socialMediaLinksData?.instagramLink ?? undefined
+                  }
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsSocialMediaLinks.instagramLink !== undefined}
+                      helperText={errorsSocialMediaLinks.instagramLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="instagramLink"
+                      {...field}
+                    />
+                  )}
+                />
+              </form>
+            </CardContent>
+          </BlankCard>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{ justifyContent: "end" }}
+            mt={2}
           >
-            {t("util.save")}
-          </Button>
-          <Button
-            size="large"
-            variant="text"
-            color="error"
-            onClick={handleCancelMessagingLinksUpdate}
-          >
-            {t("util.cancel")}
-          </Button>
-        </Stack>
-      </Grid>
+            <Button
+              size="large"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitSocialMediaLinks(
+                submitUpdateSocialMediaLinks
+              )}
+            >
+              {t("util.save")}
+            </Button>
+            <Button
+              size="large"
+              variant="text"
+              color="error"
+              onClick={handleCancelSocialMedialLinksUpdate}
+            >
+              {t("util.cancel")}
+            </Button>
+          </Stack>
+        </Grid>
+      )}
+      {/* Messaging links */}
+      {isMessagingLinksLoading ? (
+        <Spinner></Spinner>
+      ) : (
+        <Grid item xs={12} lg={6}>
+          <BlankCard>
+            <CardContent>
+              <Typography variant="h5" mb={1}>
+                {t("links.messagingLinks")}
+              </Typography>
+              <Typography color="textSecondary" mb={3}>
+                {t("links.messagingLinksDescription")}
+              </Typography>
+              <form>
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="skypeLink"
+                >
+                  {t("links.skypeLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlMessagingLinks}
+                  name="skypeLink"
+                  defaultValue={messagingLinksData?.skypeLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsMessagingLinks.skypeLink !== undefined}
+                      helperText={errorsMessagingLinks.skypeLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="skypeLink"
+                      {...field}
+                    />
+                  )}
+                />
 
-      {/* Edit Details */}
-      <Grid item xs={12} lg={6}>
-        <BlankCard>
-          <CardContent>
-            <Typography variant="h5" mb={1}>
-              {t("ui.personalDetails")}
-            </Typography>
-            <Typography color="textSecondary" mb={3}>
-              {t("ui.personalDetailsDescription")}
-            </Typography>
-            <form>
-              <Grid container spacing={3}>
-                {/* <input
-                  type="hidden"
-                  {...register("id", {
-                    required: true,
-                    value: user?.id ?? undefined,
-                  })}
-                /> */}
-                <Grid item xs={12} sm={6}>
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="firstname"
-                  >
-                    {t("user.firstname")}
-                  </CustomFormLabel>
-                  <Controller
-                    name="name"
-                    control={control}
-                    defaultValue={userBasicInfo?.name ?? undefined}
-                    render={({ field }) => (
-                      <CustomTextField
-                        id="name"
-                        required
-                        disabled={socialMediaLinksMutation.isLoading}
-                        error={errors.name !== undefined}
-                        helperText={errors.name?.message}
-                        placeholder={t("user.name")}
-                        variant="outlined"
-                        fullWidth
-                        {...field}
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <CustomFormLabel
-                    sx={{
-                      mt: 0,
-                    }}
-                    htmlFor="lastname"
-                  >
-                    {t("user.lastname")}
-                  </CustomFormLabel>
-                  <Controller
-                    name="surname"
-                    control={control}
-                    defaultValue={userBasicInfo?.surname ?? undefined}
-                    render={({ field }) => (
-                      <CustomTextField
-                        variant="outlined"
-                        required
-                        disabled={socialMediaLinksMutation.isLoading}
-                        error={errors.surname !== undefined}
-                        helperText={errors.surname?.message}
-                        placeholder={t("user.surname")}
-                        id="surname"
-                        fullWidth
-                        {...field}
-                      />
-                    )}
-                  />
-                </Grid>
-              </Grid>
-            </form>
-          </CardContent>
-        </BlankCard>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ justifyContent: "end" }}
-          mt={2}
-        >
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit(submitUpdateSocialMediaLinks)}
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="telegramLink"
+                >
+                  {t("links.telegramLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlMessagingLinks}
+                  name="telegramLink"
+                  defaultValue={messagingLinksData?.telegramLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsMessagingLinks.telegramLink !== undefined}
+                      helperText={errorsMessagingLinks.telegramLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="telegramLink"
+                      {...field}
+                    />
+                  )}
+                />
+                <CustomFormLabel
+                  sx={{
+                    mt: 4,
+                  }}
+                  htmlFor="whatsappLink"
+                >
+                  {t("links.skypeLink")}
+                </CustomFormLabel>
+                <Controller
+                  control={controlMessagingLinks}
+                  name="whatsappLink"
+                  defaultValue={messagingLinksData?.whatsappLink ?? undefined}
+                  render={({ field }) => (
+                    <CustomTextField
+                      error={errorsMessagingLinks.whatsappLink !== undefined}
+                      helperText={errorsMessagingLinks.whatsappLink?.message}
+                      fullWidth
+                      variant="outlined"
+                      id="whatsappLink"
+                      {...field}
+                    />
+                  )}
+                />
+              </form>
+            </CardContent>
+          </BlankCard>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{ justifyContent: "end" }}
+            mt={2}
           >
-            {t("util.save")}
-          </Button>
-          <Button
-            size="large"
-            variant="text"
-            color="error"
-            onClick={handleCancelSocialMedialLinksUpdate}
-          >
-            {t("util.cancel")}
-          </Button>
-        </Stack>
-      </Grid>
+            <Button
+              size="large"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitMessagingLinks(submitUpdateMessagingLinks)}
+            >
+              {t("util.save")}
+            </Button>
+            <Button
+              size="large"
+              variant="text"
+              color="error"
+              onClick={handleCancelMessagingLinksUpdate}
+            >
+              {t("util.cancel")}
+            </Button>
+          </Stack>
+        </Grid>
+      )}
     </Grid>
   );
 };
 
-export default BasicInfoForms;
+export default LinkForms;
