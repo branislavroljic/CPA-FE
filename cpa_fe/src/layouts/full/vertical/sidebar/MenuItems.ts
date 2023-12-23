@@ -17,11 +17,19 @@ interface MenuitemsType {
 import i18n from "../../../../i18n";
 
 import {
+  IconBasket,
   IconBug,
   IconBuildingCommunity,
   IconBuildingStore,
+  IconCoin,
+  IconHistoryToggle,
+  IconLink,
 } from "@tabler/icons-react";
 import { TFunction } from "i18next";
+import {
+  ConnectWithoutContact,
+  ConnectWithoutContactOutlined,
+} from "@mui/icons-material";
 
 const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
   [
@@ -32,26 +40,32 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
     {
       id: uniqueId(),
       title: i18n.t("loginHistory.title"),
-      icon: IconBuildingStore,
+      icon: IconHistoryToggle,
       href: "/",
     },
     {
       id: uniqueId(),
       title: "Products",
-      icon: IconBuildingStore,
+      icon: IconBasket,
       href: "/products",
     },
     {
       id: uniqueId(),
       title: i18n.t("payments.title"),
-      icon: IconBuildingCommunity,
+      icon: IconCoin,
       href: "/payments",
     },
     {
       id: uniqueId(),
       title: i18n.t("domain.title"),
-      icon: IconBuildingCommunity,
+      icon: IconLink,
       href: "/domains",
+    },
+    {
+      id: uniqueId(),
+      title: "Referral",
+      icon: ConnectWithoutContactOutlined,
+      href: "/referrals",
     },
     {
       navlabel: true,

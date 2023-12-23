@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import {
   Box,
   Typography,
   Tabs,
   Tab,
-  Stack,
   CardContent,
   Grid,
   Divider,
+  IconButton,
+  TextField,
+  Button,
 } from "@mui/material";
 import ChildCard from "@ui/shared/ChildCard";
-import { ProductDetails } from "@api/product/product";
-import { CircleFlag } from "react-circle-flags";
+import { LandingPage, ProductDetails } from "@api/product/product";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
-import CustomTextField from "@ui/forms/theme-elements/CustomTextField";
-import { t } from "i18next";
 import { DefaultCopyField } from "@eisberg-labs/mui-copy-field";
+import { IconExternalLink } from "@tabler/icons-react";
 
 const a11yProps = (index: number) => {
   return {
@@ -23,7 +23,6 @@ const a11yProps = (index: number) => {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 };
-
 interface TabProps {
   children: React.ReactNode;
   index: number;
@@ -46,11 +45,67 @@ const TabPanel = (props: TabProps) => {
   );
 };
 
+interface SubValues {
+  sub1: string;
+  sub2: string;
+  sub3: string;
+  sub4: string;
+}
+
 const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const [value, setValue] = React.useState(0);
+  product.offerURL = "https://www.google.com/";
+  const initialOfferURL = useMemo(
+    () => (product.offerURL ? new URL(product.offerURL) : null),
+    [product.offerURL]
+  );
+  const [offerURL] = useState(initialOfferURL);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const [subValues, setSubValues] = useState<SubValues>({
+    sub1: "",
+    sub2: "",
+    sub3: "",
+    sub4: "",
+  });
+
+  const [selectedLandingPage, setSelectedLandingPage] =
+    useState<LandingPage | null>(null);
+
+  const [selectedPrelandingPage, setSelectedPrelandingPage] =
+    useState<LandingPage | null>(null);
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleSubInputChange = (event: any, subKey: any) => {
+    const { value } = event.target;
+    setSubValues((prevValues) => ({
+      ...prevValues,
+      [subKey]: value,
+    }));
+    if (!value || value == "") offerURL?.searchParams.delete(subKey);
+    else offerURL?.searchParams.set(subKey, value);
+  };
+
+  const handleLandingPageSeleted = (page: LandingPage) => {
+    if (page === selectedLandingPage) {
+      setSelectedLandingPage(null);
+      offerURL?.searchParams.delete("lp");
+    } else {
+      setSelectedLandingPage(page);
+      offerURL?.searchParams.set("lp", "" + page.id);
+    }
+  };
+
+  const handlePrelandingPageSeleted = (page: LandingPage) => {
+    if (page === selectedPrelandingPage) {
+      setSelectedPrelandingPage(null);
+      offerURL?.searchParams.delete("plp");
+    } else {
+      setSelectedPrelandingPage(page);
+      offerURL?.searchParams.set("plp", "" + page.id);
+    }
   };
 
   return (
@@ -59,7 +114,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
         <Box sx={{ borderBottom: 1, borderColor: "grey.100" }}>
           <Tabs
             value={value}
-            onChange={handleChange}
+            onChange={handleTabChange}
             aria-label="basic tabs example"
             textColor="primary"
             allowScrollButtonsMobile
@@ -72,12 +127,20 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
           </Tabs>
         </Box>
         {/* ------------------------------------------- */}
-        {/* Decription */}
-        {/* ------------------------------------------- */}
-        <TabPanel value={value} index={0}></TabPanel>
-        {/* ------------------------------------------- */}
         {/* Reviews Tab */}
         {/* ------------------------------------------- */}
+        <TabPanel value={value} index={0}>
+          <Grid container>
+            <Grid item xs={12} sm={7}>
+              <CardContent>
+                <Typography variant="h5" mb={3}>
+                  {"ORDER"}
+                </Typography>
+                <Divider />
+              </CardContent>
+            </Grid>
+          </Grid>
+        </TabPanel>
         <TabPanel value={value} index={1}>
           <Grid container>
             <Grid item xs={12} sm={7}>
@@ -88,78 +151,26 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                 <Divider />
 
                 <Grid container spacing={3} mt={1}>
-                  <Grid item xs={12} sm={3}>
-                    <CustomFormLabel
-                      sx={{
-                        mt: 0,
-                      }}
-                      htmlFor="firstname"
-                    >
-                      {t("user.firstname")}
-                    </CustomFormLabel>
-
-                    <CustomTextField
-                      id="name"
-                      required
-                      placeholder={"Enter sub 1"}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <CustomFormLabel
-                      sx={{
-                        mt: 0,
-                      }}
-                      htmlFor="firstname"
-                    >
-                      {t("user.firstname")}
-                    </CustomFormLabel>
-
-                    <CustomTextField
-                      id="name"
-                      required
-                      placeholder={"Enter sub 1"}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <CustomFormLabel
-                      sx={{
-                        mt: 0,
-                      }}
-                      htmlFor="firstname"
-                    >
-                      {t("user.firstname")}
-                    </CustomFormLabel>
-
-                    <CustomTextField
-                      id="name"
-                      required
-                      placeholder={"Enter sub 1"}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <CustomFormLabel
-                      sx={{
-                        mt: 0,
-                      }}
-                      htmlFor="firstname"
-                    >
-                      {t("user.firstname")}
-                    </CustomFormLabel>
-
-                    <CustomTextField
-                      id="name"
-                      required
-                      placeholder={"Enter sub 1"}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
+                  {Object.keys(subValues).map((subKey) => (
+                    <Grid item xs={12} sm={3} key={subKey}>
+                      <CustomFormLabel sx={{ mt: 0 }} htmlFor={subKey}>
+                        {`Sub${subKey.charAt(subKey.length - 1)}`}
+                      </CustomFormLabel>
+                      <TextField
+                        id={subKey}
+                        required
+                        placeholder={`Enter sub ${subKey.charAt(
+                          subKey.length - 1
+                        )}`}
+                        variant="outlined"
+                        fullWidth
+                        value={subValues[subKey as keyof SubValues]}
+                        onChange={(event) =>
+                          handleSubInputChange(event, subKey)
+                        }
+                      />
+                    </Grid>
+                  ))}
                   <Grid item xs={12} sm={12}>
                     <CustomFormLabel
                       sx={{
@@ -170,8 +181,9 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                       {"Offer URL"}
                     </CustomFormLabel>
                     <DefaultCopyField
+                      id="offerURL"
                       disabled={true}
-                      value={product.offerURL}
+                      value={offerURL}
                       fullWidth
                     />
                   </Grid>
@@ -188,9 +200,67 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                 <Grid container>
                   <Grid item xs={12} sm={6} mt={1}>
                     <Typography>{"PRELANDINGS"}</Typography>
+                    <Box
+                      display={"flex"}
+                      flexDirection={"column"}
+                      gap={1}
+                      mt={2}
+                    >
+                      {product.prelandingPages?.map((page, index) => (
+                        <Button
+                          key={page.id}
+                          variant={
+                            page === selectedPrelandingPage
+                              ? "contained"
+                              : "outlined"
+                          }
+                          color="primary"
+                          onClick={() => handlePrelandingPageSeleted(page)}
+                        >
+                          {`Prelanding page ${index + 1}`}
+                          <IconButton
+                            edge="end"
+                            aria-label="open link"
+                            onClick={() => window.open(page.url, "_blank")}
+                            color="secondary"
+                          >
+                            <IconExternalLink />
+                          </IconButton>
+                        </Button>
+                      ))}
+                    </Box>
                   </Grid>
                   <Grid item xs={12} sm={6} mt={1}>
-                    {"LANDINGS"}
+                    <Typography> {"LANDINGS"}</Typography>
+                    <Box
+                      display={"flex"}
+                      flexDirection={"column"}
+                      gap={1}
+                      mt={2}
+                    >
+                      {product.landingPages.map((page, index) => (
+                        <Button
+                          key={page.id}
+                          variant={
+                            page === selectedLandingPage
+                              ? "contained"
+                              : "outlined"
+                          }
+                          color="primary"
+                          onClick={() => handleLandingPageSeleted(page)}
+                        >
+                          {`Landing page ${index + 1}`}
+                          <IconButton
+                            edge="end"
+                            aria-label="open link"
+                            onClick={() => window.open(page.url, "_blank")}
+                            color="secondary"
+                          >
+                            <IconExternalLink />
+                          </IconButton>
+                        </Button>
+                      ))}
+                    </Box>
                   </Grid>
                 </Grid>
               </CardContent>

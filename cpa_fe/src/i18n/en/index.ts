@@ -11,6 +11,7 @@ import paymentsTrans from "./payments.json";
 import domainTrans from "./domain.json";
 import linksTrans from "./links.json";
 import companyTrans from "./company.json";
+import orderTrans from "./order.json";
 
 const enResources = {
   translation: {
@@ -27,6 +28,7 @@ const enResources = {
     domain: domainTrans,
     links: linksTrans,
     company: companyTrans,
+    order: orderTrans,
   },
 };
 

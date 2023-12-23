@@ -7,10 +7,9 @@ import LoginHistoryPage from "@pages/login-history/LoginHistoryPage";
 import PaymentsPage from "@pages/payments/PaymentsPage";
 import DomainsPage from "@pages/domains/DomainsPage";
 import ProductsPage from "@pages/products/ProductsPage";
-import ProductDetails, {
-  productLoader,
-} from "@pages/productDetails/ProductDetailsPage";
+import { productLoader } from "@pages/productDetails/ProductDetailsPage";
 import ProductDetailsPage from "@pages/productDetails/ProductDetailsPage";
+import ReferralPage from "@pages/referral/ReferralPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -92,6 +91,17 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <DomainsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "referrals",
+        path: "/referrals",
+        children: [
+          {
+            index: true,
+            element: <ReferralPage />,
             errorElement: <ErrorPage />,
           },
         ],

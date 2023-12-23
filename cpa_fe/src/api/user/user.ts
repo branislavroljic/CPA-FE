@@ -58,6 +58,15 @@ export type Domain = {
   userId: number;
 };
 
+export type Referral = {
+  id: number;
+  username: string;
+  name: string;
+  surname: string;
+  email: string;
+  status: string;
+};
+
 export function getLoginHistory(
   pagination: PageRequest,
   id?: number
@@ -81,4 +90,13 @@ export function getDomains(
   id?: number
 ): Promise<Page<Domain>> {
   return get(addPaginationParams(new URL(id + "/domain", baseUrl), pagination));
+}
+
+export function getReferrals(
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<Referral>> {
+  return get(
+    addPaginationParams(new URL(id + "/referral", baseUrl), pagination)
+  );
 }
