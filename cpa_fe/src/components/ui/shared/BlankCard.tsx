@@ -1,8 +1,6 @@
-import { Card } from '@mui/material';
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import { AppState, useSelector } from '../../../store/Store';
-import { useCustomizerStore } from '@stores/customizerStore';
+import { Card } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { useCustomizerStore } from "@stores/customizerStore";
 
 type Props = {
   className?: string;
@@ -21,13 +19,13 @@ const BlankCard = ({ children, className, sx }: Props) => {
     <Card
       sx={{
         p: 0,
-        border: !isCardShadow ? `1px solid ${borderColor}` : 'none',
-        position: 'relative',
+        border: !isCardShadow ? `1px solid ${borderColor}` : "none",
+        position: "relative",
         sx,
       }}
       className={className}
       elevation={isCardShadow ? 9 : 0}
-      variant={!isCardShadow ? 'outlined' : undefined}
+      variant={!isCardShadow ? "outlined" : undefined}
     >
       {children}
     </Card>

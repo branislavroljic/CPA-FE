@@ -6,6 +6,7 @@ import React from "react";
 import LoginHistoryPage from "@pages/login-history/LoginHistoryPage";
 import PaymentsPage from "@pages/payments/PaymentsPage";
 import DomainsPage from "@pages/domains/DomainsPage";
+import ProductsPage from "@pages/products/ProductsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -36,6 +37,17 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <LoginHistoryPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "products",
+        path: "/products",
+        children: [
+          {
+            index: true,
+            element: <ProductsPage />,
             errorElement: <ErrorPage />,
           },
         ],

@@ -37,6 +37,12 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
     },
     {
       id: uniqueId(),
+      title: "Products",
+      icon: IconBuildingStore,
+      href: "/products",
+    },
+    {
+      id: uniqueId(),
       title: i18n.t("payments.title"),
       icon: IconBuildingCommunity,
       href: "/payments",
