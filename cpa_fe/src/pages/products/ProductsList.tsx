@@ -71,12 +71,12 @@ const ProductList = ({ onClick }: Props) => {
       key={product.id}
     >
       <BlankCard className="hoverCard">
-        <Typography
-          component={Link}
-          //   to={`/apps/ecommerce/detail/${product.id}`}
-          to={"#"}
-        >
-          <img src={product.image} alt="img" width="100%" />
+        <Typography component={Link} to={`${product.id}`}>
+          <img
+            src={`http://localhost:9001/api/product/images/${product.image}`}
+            alt="img"
+            width="100%"
+          />
         </Typography>
         <CardContent sx={{ p: 3, pt: 2 }}>
           <Box
@@ -150,6 +150,18 @@ const ProductList = ({ onClick }: Props) => {
     </Grid>
   );
 
+  const renderEmptyList = () => (
+    <Grid item xs={12} lg={12} md={12} sm={12}>
+      <Box textAlign="center" mt={6}>
+        {/* <img src={emptyCart} alt="cart" width="200px" /> */}
+        <Typography variant="h2">There is no Product</Typography>
+        <Typography variant="h6" mb={3}>
+          The Product you are searching is no longer available.
+        </Typography>
+      </Box>
+    </Grid>
+  );
+
   return (
     <Box>
       {/* ------------------------------------------- */}
@@ -172,38 +184,18 @@ const ProductList = ({ onClick }: Props) => {
       {/* Page Listing product */}
       {/* ------------------------------------------- */}
       <Grid container spacing={3}>
-        {data ? (
-          <>
-            <FlatList
-              list={data?.pages?.flatMap((page) => page.data.rows) ?? []}
-              renderItem={renderItem}
-              renderWhenEmpty={"The is no data"}
-              hasMoreItems={hasNextPage}
-              loadMoreItems={fetchNextPage}
-              paginationLoadingIndicator={
-                <div style={{ background: "#090" }}>Getting more items...</div>
-              }
-            />
-          </>
-        ) : (
-          <>
-            <Grid item xs={12} lg={12} md={12} sm={12}>
-              <Box textAlign="center" mt={6}>
-                {/* <img src={emptyCart} alt="cart" width="200px" /> */}
-                <Typography variant="h2">There is no Product</Typography>
-                <Typography variant="h6" mb={3}>
-                  The Product you are searching is no longer available.
-                </Typography>
-                {/* <Button
-                  variant="contained"
-                  onClick={() => dispatch(filterReset())}
-                >
-                  Try Again
-                </Button> */}
-              </Box>
-            </Grid>
-          </>
-        )}
+        <>
+          <FlatList
+            list={data?.pages?.flatMap((page) => page.data.rows) ?? []}
+            renderItem={renderItem}
+            renderWhenEmpty={renderEmptyList}
+            hasMoreItems={hasNextPage}
+            loadMoreItems={fetchNextPage}
+            paginationLoadingIndicator={
+              <div style={{ background: "#090" }}>Getting more items...</div>
+            }
+          />
+        </>
       </Grid>
     </Box>
   );

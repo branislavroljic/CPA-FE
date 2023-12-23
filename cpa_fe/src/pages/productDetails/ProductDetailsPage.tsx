@@ -1,14 +1,42 @@
-import { useEffect } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import {
+  ActionFunctionArgs,
+  LoaderFunction,
+  ParamParseKey,
+  Params,
+  useLoaderData,
+} from "react-router-dom";
 
 // MUI Elements
-import { Box, Typography, Chip, useTheme, Grid } from "@mui/material";
+import { Box, Typography, Chip, Grid, Divider } from "@mui/material";
 
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import PageContainer from "@ui/container/PageContainer";
 import ChildCard from "@ui/shared/ChildCard";
 import ProductInfo from "./ProductInfo";
-import { ProductDetails } from "@api/product/product";
+import { ProductDetails, getProductDetails } from "@api/product/product";
+import queryClient from "../../query-client";
+import ProductLinks from "./ProductLinks";
+
+const PathNames = {
+  product: "/products/:productId",
+} as const;
+
+interface Args extends ActionFunctionArgs {
+  params: Params<ParamParseKey<typeof PathNames.product>>;
+}
+
+const productQuery = (productId?: string) => ({
+  queryKey: ["product_details", productId],
+  queryFn: () => getProductDetails(productId ?? ""),
+});
+
+export const productLoader: LoaderFunction = async ({ params }: Args) => {
+  const query = productQuery(params.productId);
+  return (
+    queryClient.getQueryData(query.queryKey) ??
+    (await queryClient.fetchQuery(query))
+  );
+};
 
 const BCrumb = [
   {
@@ -20,15 +48,8 @@ const BCrumb = [
   },
 ];
 
-const ProductDetails = () => {
-  const theme = useTheme();
-
-  const  product = useLoaderData() as ProductDetails;
-
-  // Get Product
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+const ProductDetailsPage = () => {
+  const productDetails = useLoaderData() as ProductDetails;
 
   return (
     <PageContainer
@@ -49,52 +70,45 @@ const ProductDetails = () => {
             {/* ------------------------------------------- */}
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12} lg={6}>
-                <img src={product.image} alt={product.name} loading="lazy" />
+                <img
+                  src={`http://localhost:9001/api/product/images/${productDetails.image}`}
+                  alt="img"
+                  width="100%"
+                />
               </Grid>
               <Grid item xs={12} sm={12} lg={6}>
                 <Box p={2}>
-                  {product ? (
+                  {productDetails ? (
                     <>
-                      <Box display="flex" alignItems="center">
-                        {/* ------------------------------------------- */}
-                        {/* Badge and category */}
-                        {/* ------------------------------------------- */}
-                        <Chip label="In Stock" color="success" size="small" />
-                        <Typography
-                          color="textSecondary"
-                          variant="caption"
-                          ml={1}
-                          textTransform="capitalize"
-                        >
-                          {product.category}
-                        </Typography>
-                      </Box>
-                      {/* ------------------------------------------- */}
-                      {/* Title and description */}
-                      {/* ------------------------------------------- */}
-                      <Typography fontWeight="600" variant="h4" mt={1}>
-                        {product.title}
-                      </Typography>
-                      <Typography
-                        variant="subtitle2"
-                        mt={1}
-                        color={theme.palette.text.secondary}
+                      <Box
+                        justifyContent={"space-between"}
+                        flexDirection={"row"}
+                        display={"flex"}
                       >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed ex arcu, tincidunt bibendum felis.
-                      </Typography>
+                        <Typography variant="h6" display={"inline"}>
+                          {productDetails.name}
+                        </Typography>
+                        <Chip
+                          label={productDetails.type}
+                          size="small"
+                          color="success"
+                        />
+                      </Box>
+
+                      {/* ------------------------------------------- */}
+                      {/* Categories */}
+                      {/* ------------------------------------------- */}
+                      <Box display="flex" alignItems="center" mt={1} mb={1}>
+                        {productDetails.categories.map((category) => (
+                          <Chip label={category.name} size="small" />
+                        ))}
+                      </Box>
+                      <Divider />
                       {/* ------------------------------------------- */}
                       {/* Price */}
                       {/* ------------------------------------------- */}
                       <Typography mt={2} variant="h4" fontWeight={600}>
-                        <Box
-                          component={"small"}
-                          color={theme.palette.text.secondary}
-                          sx={{ textDecoration: "line-through" }}
-                        >
-                          ${product.salesPrice}
-                        </Box>{" "}
-                        ${product.price}
+                        {`${productDetails.price} ${productDetails.currency}`}
                       </Typography>
                     </>
                   ) : (
@@ -106,11 +120,14 @@ const ProductDetails = () => {
           </ChildCard>
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>
-          <ProductInfo product={product} />
+          <ProductInfo product={productDetails} />
+        </Grid>
+        <Grid item xs={12} sm={12} lg={12}>
+          <ProductLinks product={productDetails} />
         </Grid>
       </Grid>
     </PageContainer>
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;

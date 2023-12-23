@@ -7,18 +7,19 @@ import {
   ListItemIcon,
   Typography,
   Box,
-  Avatar,
   Button,
   Stack,
-  Chip,
+  SelectChangeEvent,
   FormControl,
+  Select,
+  Chip,
   MenuItem,
   OutlinedInput,
-  Select,
-  SelectChangeEvent,
+  InputLabel,
 } from "@mui/material";
-import { IconCheck, IconPremiumRights } from "@tabler/icons-react";
+import { IconPremiumRights } from "@tabler/icons-react";
 import { useProductFilterStore } from "@stores/productStore";
+import { CircleFlag } from "react-circle-flags";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -64,44 +65,53 @@ const ProductFilter = () => {
     <>
       <List>
         {/* ------------------------------------------- */}
-        {/* Category filter */}
+        {/* Type filter */}
         {/* ------------------------------------------- */}
-        {productTypes.map((type, index) => {
-          return (
-            <ListItemButton
-              sx={{ mb: 1, mx: 3 }}
-              selected={filter && filter.type === type}
-              onClick={() => updateFilterProductType(type)}
-              key={index}
-            >
-              <ListItemIcon sx={{ minWidth: "30px" }}>
-                <IconPremiumRights
-                  stroke="1.5"
-                  size="19"
-                  color={
-                    type === "BASIC"
-                      ? "grey"
-                      : type === "REGULAR"
-                      ? "green"
-                      : "yellow"
-                  }
-                />
-              </ListItemIcon>
-              <ListItemText>{type}</ListItemText>
-            </ListItemButton>
-          );
-        })}
-        {/* <Box p={3}>
+        <Box pl={3}>
           <Typography variant="subtitle2" fontWeight={600}>
             By category
           </Typography>
           <br />
-          <FormControl sx={{ m: 1, width: 300 }}>
+          {productTypes.map((type, index) => {
+            return (
+              <ListItemButton
+                sx={{ mb: 1, mx: 1 }}
+                selected={filter && filter.type === type}
+                onClick={() => updateFilterProductType(type)}
+                key={index}
+              >
+                <ListItemIcon sx={{ minWidth: "30px" }}>
+                  <IconPremiumRights
+                    stroke="1.5"
+                    size="19"
+                    color={
+                      type === "BASIC"
+                        ? "grey"
+                        : type === "REGULAR"
+                        ? "green"
+                        : "yellow"
+                    }
+                  />
+                </ListItemIcon>
+                <ListItemText>{type}</ListItemText>
+              </ListItemButton>
+            );
+          })}
+        </Box>
+
+        <Divider></Divider>
+        <Box p={3}>
+          <Typography variant="subtitle2" fontWeight={600}>
+            By category
+          </Typography>
+          <br />
+          <FormControl sx={{ minWidth: 200 }}>
+            <InputLabel id="demo-multiple-chip-label">Category</InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
               multiple
-              value={filter.categories}
+              value={filter.categories ?? []}
               onChange={handleCategoryChange}
               input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => (
@@ -124,7 +134,7 @@ const ProductFilter = () => {
               ))}
             </Select>
           </FormControl>
-        </Box> */}
+        </Box>
         <Divider></Divider>
         <Typography variant="h6" px={3} mt={3} pb={2}>
           By Country
@@ -136,23 +146,13 @@ const ProductFilter = () => {
           <Stack direction={"row"} flexWrap="wrap" gap={1}>
             {countries.map((country: any) => {
               return (
-                <Avatar
-                  sx={{
-                    backgroundColor: country,
-                    width: 24,
-                    height: 24,
-                    cursor: "pointer",
-                  }}
-                  aria-label={country}
+                <CircleFlag
+                
+                  countryCode={country.toLowerCase()}
+                  height="25"
                   key={country}
                   onClick={() => updateFilterCountryCode(country)}
-                >
-                  {filter.country_code === country ? (
-                    <IconCheck size="13" />
-                  ) : (
-                    ""
-                  )}
-                </Avatar>
+                ></CircleFlag>
               );
             })}
           </Stack>

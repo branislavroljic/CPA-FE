@@ -66,25 +66,31 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
               <Typography variant="overline" color={"lightgray"}>
                 APPROVE RATE
               </Typography>
-              <Typography variant="h6">{`${product.approve_rate} %`}</Typography>
+              <Typography variant="h6">{`${
+                product.approve_rate ?? "N/A"
+              } %`}</Typography>
             </Stack>
             <Stack>
               <Typography variant="overline" color={"lightgray"}>
                 CONVERSION RATE
               </Typography>
-              <Typography variant="h6">{`${product.conversion_rate} %`}</Typography>
+              <Typography variant="h6">{`${
+                product.conversion_rate ?? "N/A"
+              } %`}</Typography>
             </Stack>
             <Stack>
               <Typography variant="overline" color={"lightgray"}>
                 EART PER CLICK
               </Typography>
-              <Typography variant="h6">{`${product.earn_per_click} ${product.currency}`}</Typography>
+              <Typography variant="h6">{`${product.earn_per_click ?? "N/A"} ${
+                product.currency
+              }`}</Typography>
             </Stack>
             <Stack>
               <Typography variant="overline" color={"lightgray"}>
                 FLOW
               </Typography>
-              <Typography variant="h6">{product.flow}</Typography>
+              <Typography variant="h6">{product.flow ?? "N/A"}</Typography>
             </Stack>
           </Stack>
           <Typography color="textSecondary" mt={4}>
