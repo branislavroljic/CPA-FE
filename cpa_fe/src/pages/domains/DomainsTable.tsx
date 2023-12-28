@@ -26,17 +26,25 @@ import useAuthStore from "@stores/authStore";
 import { enUS, srRS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { useDomainModalStore } from "@stores/domainStore";
-import { InputDomain, addDomain } from "@api/domain/domain";
+import { InputDomain, addDomain, verifyDomain } from "@api/domain/domain";
 import DomainModal from "./DomainModal";
+import DomainVerificationIcon from "@mui/icons-material/DomainVerification";
+import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
+import { useNotificationStore } from "@stores/notificationStore";
+import queryClient, { invalidateAllQueries } from "../../query-client";
+import { IconDiscountCheckFilled } from "@tabler/icons-react";
 
 export default function DomainsTable() {
   const { user } = useAuthStore();
   const theme = useTheme();
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
-    pageSize: 9,
+    pageSize: 10,
   });
   const openModal = useDomainModalStore((state) => state.openModal);
+  const openNotification = useNotificationStore(
+    (state) => state.openNotification
+  );
 
   const { t } = useTranslation();
 
@@ -58,6 +66,44 @@ export default function DomainsTable() {
   );
 
   const defaultData = useMemo(() => [] as Domain[], []);
+
+  const verifyDomainMutation = useNotifiedMutation({
+    mutationFn: verifyDomain,
+    onSuccess: async (response) => {
+      const body = await response.data;
+      if (body.success) {
+        openNotification({
+          isError: false,
+          primaryText: t("util.success"),
+          secondaryText: t("util.persistSuccess"),
+        });
+        invalidateAllQueries(queryClient, "domains");
+      } else {
+        openNotification({
+          isError: true,
+          primaryText: t("util.errorOccurred"),
+        });
+      }
+    },
+    showSuccessNotification: false,
+  });
+
+  const verifyDomainButton = (item: Domain) =>
+    item.status !== "ACTIVE" ? (
+      <Tooltip arrow title={t("domain.verify")} key={item.id}>
+        <IconButton
+          color="warning"
+          onClick={(e) => {
+            e.stopPropagation();
+            verifyDomainMutation.mutate(item?.id);
+          }}
+        >
+          <DomainVerificationIcon />
+        </IconButton>
+      </Tooltip>
+    ) : (
+      <IconDiscountCheckFilled color="success" />
+    );
 
   const table = useMaterialReactTable({
     columns,
@@ -104,6 +150,11 @@ export default function DomainsTable() {
         ? MRT_Localization_EN
         : MRT_Localization_SR_LATN_RS,
     enableHiding: false,
+    enableRowActions: true,
+    positionActionsColumn: "last",
+    renderRowActions: ({ row }) => (
+      <Box>{verifyDomainButton(row.original as Domain)}</Box>
+    ),
   });
 
   return (

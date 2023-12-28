@@ -1,4 +1,11 @@
-import { Page, PageRequest, addPaginationParams, get } from "../utils";
+import { MRT_ColumnFiltersState } from "material-react-table";
+import {
+  Page,
+  PageRequest,
+  addFilterParams,
+  addPaginationParams,
+  get,
+} from "../utils";
 
 const baseUrl = new URL("user/", import.meta.env.VITE_API_URL);
 
@@ -67,6 +74,43 @@ export type Referral = {
   status: string;
 };
 
+export type Order = {
+  id: number;
+  time: string;
+  status: "REQUESTED" | "IN_TRANSPORT" | "REJECTED" | "DONE";
+  name: string;
+  country: string;
+  address: string;
+  phoneNumber: string;
+  note: string;
+  quantity: number;
+  totalPrice: number;
+  productId: number;
+  preLandingPage: string;
+  landingPage: string;
+  productName: string;
+};
+
+export type BalanceOrder = {
+  orderId: number;
+  offerName: string;
+  payout: number;
+};
+
+export type Report = {
+  total: number;
+  hold: number;
+  conversions: number;
+  conversionRate: number;
+  trash: number;
+  cancelled: number;
+  totalHoldRevenue: number;
+  holdRevenue: number;
+  revenue: number;
+  totalTrashRevenue: number;
+  totalCancelledRevenue: number;
+};
+
 export function getLoginHistory(
   pagination: PageRequest,
   id?: number
@@ -98,5 +142,44 @@ export function getReferrals(
 ): Promise<Page<Referral>> {
   return get(
     addPaginationParams(new URL(id + "/referral", baseUrl), pagination)
+  );
+}
+
+export function getOrders(
+  filter: MRT_ColumnFiltersState,
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<Order>> {
+  return get(
+    addPaginationParams(
+      addFilterParams(new URL(id + "/order", baseUrl), filter),
+      pagination
+    )
+  );
+}
+
+export function getBalanceOrders(
+  filter: MRT_ColumnFiltersState,
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<BalanceOrder>> {
+  return get(
+    addPaginationParams(
+      addFilterParams(new URL(id + "/balance_orders", baseUrl), filter),
+      pagination
+    )
+  );
+}
+
+export function getReports(
+  filter: MRT_ColumnFiltersState,
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<Report>> {
+  return get(
+    addPaginationParams(
+      addFilterParams(new URL(id + "/report", baseUrl), filter),
+      pagination
+    )
   );
 }

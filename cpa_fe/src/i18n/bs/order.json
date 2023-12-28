@@ -1,6 +1,15 @@
 {
-    "note": "Beleška",
-    "quantity": "Količina",
-    "totalPrice": "Ukupna cena"
-  }
-  
+  "note": "Beleška",
+  "quantity": "Količina",
+  "totalPrice": "Ukupna cena",
+  "productName": "Naziv proizvoda",
+  "time": "Vreme",
+  "prelandingPage": "Prelanding stranica",
+  "landingPage": "Landing stranica",
+  "title": "Narudžbine",
+  "dateTime": "Datum i vrijeme",
+  "orderId": "ID narudžbine",
+  "offerName": "Ime ponude",
+  "payout": "Isplata",
+  "balanceTitle" : "Saldo"
+}

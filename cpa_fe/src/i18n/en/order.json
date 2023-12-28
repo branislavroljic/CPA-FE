@@ -1,5 +1,15 @@
 {
   "note": "Note",
   "quantity": "Quantity",
-  "totalPrice": "Total price"
+  "totalPrice": "Total price",
+  "productName" : "Product name",
+  "time" : "Time",
+  "prelandingPage" : "Prelanding page",
+  "landingPage" : "Landing page",
+  "title" : "Orders",
+  "dateTime" : "Date and time",
+  "orderId" : "Order ID",
+  "offerName" : "Offer name",
+  "payout" : "Payout",
+  "balanceTitle" : "Balance"
 }

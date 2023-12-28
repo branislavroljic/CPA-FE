@@ -1,0 +1,14 @@
+{
+  "title": "Izvještaji",
+  "total": "Ukupno",
+  "hold": "Zadržano",
+  "conversions": "Konverzije",
+  "conversionRate": "Stopa konverzije",
+  "trash": "Odbačeno",
+  "cancelled": "Otkazano",
+  "totalHoldRevenue": "Ukupan prihod zadržan",
+  "holdRevenue": "Prihod zadržan",
+  "revenue": "Prihod",
+  "totalTrashRevenue": "Ukupan prihod odbačen",
+  "totalCancelledRevenue": "Ukupan prihod otkazan"
+}

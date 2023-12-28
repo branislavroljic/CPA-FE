@@ -1,0 +1,14 @@
+{
+  "title": "Reports",
+  "total": "Total",
+  "hold": "Hold",
+  "conversions": "Conversions",
+  "conversionRate": "Conversion rate",
+  "trash": "Trash",
+  "cancelled": "Cancelled",
+  "totalHoldRevenue": "Total hold revenue",
+  "holdRevenue": "Hold revenue",
+  "revenue": "Revenue",
+  "totalTrashRevenue": "Total trash revenue",
+  "totalCancelledRevenue": "Total cancelled revenue"
+}

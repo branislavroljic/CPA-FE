@@ -12,6 +12,7 @@ import domainTrans from "./domain.json";
 import linksTrans from "./links.json";
 import companyTrans from "./company.json";
 import orderTrans from "./order.json";
+import reportsTrans from "./reports.json";
 
 const enResources = {
   translation: {
@@ -29,6 +30,7 @@ const enResources = {
     links: linksTrans,
     company: companyTrans,
     order: orderTrans,
+    reports: reportsTrans,
   },
 };
 

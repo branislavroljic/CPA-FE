@@ -135,37 +135,31 @@ export function addPaginationParams(baseUrl: URL, ...filters: object[]): URL {
   return baseUrl;
 }
 
-export function addListFilterParams(
-  baseUrl: URL,
-  ...filters: object[]
-): URL {
+export function addListFilterParams(baseUrl: URL, ...filters: object[]): URL {
+  const modifiedUrl = new URL(baseUrl);
   filters.forEach((f) => {
     if (!f) return;
     for (const [k, v] of Object.entries(f)) {
       if (v != null && !(typeof v == "string" && v.trim().length == 0)) {
-        baseUrl.searchParams.set(k, v);
+        modifiedUrl.searchParams.set(k, v);
       }
     }
   });
-  return baseUrl;
+  return modifiedUrl;
 }
 
 export function addFilterParams(baseUrl: URL, filters: MRT_ColumnFiltersState) {
-  // baseUrl.searchParams.delete('name');
-  // baseUrl.searchParams.delete('typeId');
-  console.log("filteri su: " + JSON.stringify(filters));
-  console.log("baseUrl prije dodavanja je: " + baseUrl);
+  const modifiedUrl = new URL(baseUrl);
   filters.forEach((f) => {
     if (
       f.value != null &&
       !(typeof f.value == "string" && f.value.trim().length == 0)
     ) {
-      baseUrl.searchParams.set(f.id, f.value as string);
+      modifiedUrl.searchParams.set(f.id, f.value as string);
     }
   });
 
-  console.log("baseURL nakon filtera je:  " + baseUrl);
-  return baseUrl;
+  return modifiedUrl;
 }
 
 export type Page<T> = {

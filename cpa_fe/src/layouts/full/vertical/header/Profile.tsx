@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Menu,
@@ -10,17 +10,16 @@ import {
   IconButton,
   Stack,
   Tooltip,
-} from '@mui/material';
+} from "@mui/material";
 
-import { IconMail } from '@tabler/icons-react';
+import { IconMail } from "@tabler/icons-react";
 
-import ProfileImg from '/src/assets/images/profile/user-1.jpg';
-import unlimitedImg from '/src/assets/images/backgrounds/unlimited-bg.png';
-import { USER_KEY, getUserFromStorage } from '@api/auth';
-import accountIcon from '/src/assets/images/svgs/icon-account.svg';
-import i18n from '../../../../i18n';
-import { useTranslation } from 'react-i18next';
-import useAuthStore from '@stores/authStore';
+import ProfileImg from "/src/assets/images/profile/user-1.jpg";
+import { USER_KEY } from "@api/auth";
+import accountIcon from "/src/assets/images/svgs/icon-account.svg";
+import i18n from "../../../../i18n";
+import { useTranslation } from "react-i18next";
+import useAuthStore from "@stores/authStore";
 
 interface ProfileType {
   href: string;
@@ -30,23 +29,11 @@ interface ProfileType {
 }
 const profileDropdownData: ProfileType[] = [
   {
-    href: '/user-profile',
-    title: i18n.t('ui.myProfile'),
-    subtitle: i18n.t('ui.accountSettings'),
+    href: "/user-profile",
+    title: i18n.t("ui.myProfile"),
+    subtitle: i18n.t("ui.accountSettings"),
     icon: accountIcon,
   },
-  // {
-  //   href: '/apps/email',
-  //   title: 'My Inbox',
-  //   subtitle: 'Messages & Emails',
-  //   icon: icon2,
-  // },
-  // {
-  //   href: '/apps/notes',
-  //   title: 'My Tasks',
-  //   subtitle: 'To-do and Daily Tasks',
-  //   icon: icon3,
-  // },
 ];
 
 const Profile = () => {
@@ -86,18 +73,14 @@ const Profile = () => {
         aria-controls="msgs-menu"
         aria-haspopup="true"
         sx={{
-          ...(typeof anchorEl2 === 'object' && {
-            color: 'primary.main',
+          ...(typeof anchorEl2 === "object" && {
+            color: "primary.main",
           }),
         }}
         onClick={handleClick2}
       >
         <Avatar
-          src={
-            user?.imageBytes
-              ? `data:image/${user?.imageType};base64,${user?.imageBytes}`
-              : ProfileImg
-          }
+          src={ProfileImg}
           alt={ProfileImg}
           sx={{
             width: 35,
@@ -114,24 +97,20 @@ const Profile = () => {
         keepMounted
         open={Boolean(anchorEl2)}
         onClose={handleClose2}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
         sx={{
-          '& .MuiMenu-paper': {
-            width: '360px',
+          "& .MuiMenu-paper": {
+            width: "360px",
             p: 4,
           },
         }}
       >
-        <Typography variant="h5">{t('ui.userProfile')}</Typography>
+        <Typography variant="h5">{t("ui.userProfile")}</Typography>
         <Stack direction="row" py={3} spacing={2} alignItems="center">
           <Avatar
-            src={
-              user?.imageBytes
-                ? `data:image/${user?.imageType};base64,${user?.imageBytes}`
-                : ProfileImg
-            }
-            alt={user?.firstname}
+            src={ProfileImg}
+            alt={user?.username}
             sx={{ width: 95, height: 95 }}
           />
           <Box>
@@ -140,7 +119,9 @@ const Profile = () => {
               color="textPrimary"
               fontWeight={600}
             >
-              {`${user?.firstname} ${user?.lastname}`}
+              {user?.accountManager
+                ? `${user?.accountManager?.name} ${user?.accountManager?.surname}`
+                : user?.username}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
               {user?.username}
@@ -152,7 +133,7 @@ const Profile = () => {
                 display="flex"
                 alignItems="center"
                 gap={1}
-                style={{ wordWrap: 'break-word' }}
+                style={{ wordWrap: "break-word" }}
                 // sx={{
                 //   '&:hover': {
                 //     display: 'inline-block',
@@ -197,7 +178,7 @@ const Profile = () => {
                       className="text-hover"
                       noWrap
                       sx={{
-                        width: '240px',
+                        width: "240px",
                       }}
                     >
                       {profile.title}
@@ -206,7 +187,7 @@ const Profile = () => {
                       color="textSecondary"
                       variant="subtitle2"
                       sx={{
-                        width: '240px',
+                        width: "240px",
                       }}
                       noWrap
                     >
@@ -249,7 +230,7 @@ const Profile = () => {
             onClick={handleLogout}
             fullWidth
           >
-            {t('login.logout')}
+            {t("login.logout")}
           </Button>
         </Box>
       </Menu>

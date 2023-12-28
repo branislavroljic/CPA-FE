@@ -10,6 +10,11 @@ import ProductsPage from "@pages/products/ProductsPage";
 import { productLoader } from "@pages/productDetails/ProductDetailsPage";
 import ProductDetailsPage from "@pages/productDetails/ProductDetailsPage";
 import ReferralPage from "@pages/referral/ReferralPage";
+import queryClient from "../query-client";
+import { getCategories, getCountries } from "@api/product/product";
+import OrderPage from "@pages/orders/OrderPage";
+import BalanceOrderPage from "@pages/balance/BalanceOrderPage";
+import ReportsPage from "@pages/reports/ReportsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -52,6 +57,11 @@ const browserConfig = createBrowserRouter([
             index: true,
             element: <ProductsPage />,
             errorElement: <ErrorPage />,
+            loader: () =>
+              queryClient.fetchQuery({
+                queryKey: ["countries_and_categories"],
+                queryFn: () => Promise.all([getCountries(), getCategories()]),
+              }),
           },
           {
             id: "product",
@@ -102,6 +112,39 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <ReferralPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "orders",
+        path: "/orders",
+        children: [
+          {
+            index: true,
+            element: <OrderPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "balance",
+        path: "/balance",
+        children: [
+          {
+            index: true,
+            element: <BalanceOrderPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "reports",
+        path: "/reports",
+        children: [
+          {
+            index: true,
+            element: <ReportsPage />,
             errorElement: <ErrorPage />,
           },
         ],

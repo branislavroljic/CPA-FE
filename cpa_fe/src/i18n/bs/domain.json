@@ -3,5 +3,6 @@
   "domain": "Domen",
   "type": "Tip",
   "status": "Status",
-  "addDomain": "Dodaj domen"
+  "addDomain": "Dodaj domen",
+  "verify" : "Verifikuj domen"
 }

@@ -1,15 +1,26 @@
-import { Page, PageRequest, addListFilterParams, get, post } from "@api/utils";
+import {
+  Page,
+  PageRequest,
+  addListFilterParams,
+  addPaginationParams,
+  get,
+  post,
+} from "@api/utils";
 
 const baseProductUrl = new URL("product", import.meta.env.VITE_API_URL);
 const baseProductUrlWithSlash = new URL(
   "product/",
   import.meta.env.VITE_API_URL
 );
-const baseOrderUrl = new URL("order", import.meta.env.VITE_API_URL);
+const baseOrderUrl = new URL("orders", import.meta.env.VITE_API_URL);
+
+const baseCountryUrl = new URL("country", import.meta.env.VITE_API_URL);
+const baseCategoryUrl = new URL("category", import.meta.env.VITE_API_URL);
 
 export interface Category {
   id: number;
   name: string;
+  color: string;
 }
 
 export interface Product {
@@ -63,7 +74,7 @@ export interface FilterProduct {
   categories?: string[];
 }
 
-export interface Order {
+export interface InputOrder {
   name: string;
   country: string;
   address: string;
@@ -75,12 +86,21 @@ export interface Order {
   userId: number;
 }
 
+export interface Country {
+  name: string;
+  code: string;
+  currency: string;
+}
+
 export function getProducts(
   pagination: PageRequest,
   filter?: FilterProduct
 ): Promise<Page<Product>> {
   return get(
-    addListFilterParams(baseProductUrl, pagination, filter ?? (null as any))
+    addPaginationParams(
+      addListFilterParams(baseProductUrl, filter ?? (null as any)),
+      pagination
+    )
   );
 }
 
@@ -88,6 +108,14 @@ export function getProductDetails(productId: string): Promise<ProductDetails> {
   return get(new URL(productId, baseProductUrlWithSlash));
 }
 
-export function orderProduct(order: Order) {
+export function orderProduct(order: InputOrder) {
   return post(baseOrderUrl, JSON.stringify(order));
+}
+
+export function getCountries(): Promise<Country> {
+  return get(baseCountryUrl);
+}
+
+export function getCategories(): Promise<Category> {
+  return get(baseCategoryUrl);
 }

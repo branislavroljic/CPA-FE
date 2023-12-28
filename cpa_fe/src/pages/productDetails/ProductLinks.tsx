@@ -16,6 +16,7 @@ import { LandingPage, ProductDetails } from "@api/product/product";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import { DefaultCopyField } from "@eisberg-labs/mui-copy-field";
 import { IconExternalLink } from "@tabler/icons-react";
+import OrderForm from "./OrderForm";
 
 const a11yProps = (index: number) => {
   return {
@@ -131,12 +132,13 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
         {/* ------------------------------------------- */}
         <TabPanel value={value} index={0}>
           <Grid container>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={12}>
               <CardContent>
                 <Typography variant="h5" mb={3}>
                   {"ORDER"}
                 </Typography>
                 <Divider />
+                <OrderForm product={product} />
               </CardContent>
             </Grid>
           </Grid>

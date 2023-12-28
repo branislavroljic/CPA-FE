@@ -58,11 +58,7 @@ const orderSchema = z.object({
     )
     .optional(),
   note: z
-    .string({
-      required_error: i18n.t("util.required.male", {
-        field: i18n.t("order.note"),
-      }),
-    })
+    .string()
     .min(1, {
       message: i18n.t("util.length", {
         field: i18n.t("order.note"),
@@ -74,7 +70,8 @@ const orderSchema = z.object({
         field: i18n.t("order.note"),
         num: standardMaxLength,
       }),
-    }),
+    })
+    .optional(),
   quantity: z.coerce.number(),
   totalPrice: z.coerce.number(),
   productId: z.coerce.number(),

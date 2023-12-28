@@ -20,6 +20,8 @@ import {
 import { IconPremiumRights } from "@tabler/icons-react";
 import { useProductFilterStore } from "@stores/productStore";
 import { CircleFlag } from "react-circle-flags";
+import { useLoaderData } from "react-router-dom";
+import { Category, Country } from "@api/product/product";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -34,6 +36,10 @@ const MenuProps = {
 
 const ProductFilter = () => {
   const theme = useTheme();
+  const loaderData = useLoaderData() as any[];
+  const countries = loaderData[0] as Country[];
+  const categories = loaderData[1] as Category[];
+  const productTypes = ["BASIC", "REGULAR", "VIP"];
 
   const {
     filter,
@@ -42,12 +48,6 @@ const ProductFilter = () => {
     updateFilterProductType,
     resetFilter,
   } = useProductFilterStore();
-
-  const countries = ["BA", "RS"];
-
-  const productTypes = ["BASIC", "REGULAR", "VIP"];
-
-  const categories = ["ljepota", "zdravlje"];
 
   const handleCategoryChange = (
     event: SelectChangeEvent<typeof filter.categories>
@@ -123,13 +123,13 @@ const ProductFilter = () => {
               )}
               MenuProps={MenuProps}
             >
-              {categories.map((category) => (
+              {categories.map((category: Category) => (
                 <MenuItem
-                  key={category}
-                  value={category}
+                  key={category.id}
+                  value={category.name}
                   style={{ fontWeight: theme.typography.fontWeightMedium }}
                 >
-                  {category}
+                  {category.name}
                 </MenuItem>
               ))}
             </Select>
@@ -144,14 +144,13 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box p={3} pt={0}>
           <Stack direction={"row"} flexWrap="wrap" gap={1}>
-            {countries.map((country: any) => {
+            {countries.map((country: Country) => {
               return (
                 <CircleFlag
-                
-                  countryCode={country.toLowerCase()}
+                  countryCode={country.code.toLowerCase()}
                   height="25"
-                  key={country}
-                  onClick={() => updateFilterCountryCode(country)}
+                  key={country.name}
+                  onClick={() => updateFilterCountryCode(country.code)}
                 ></CircleFlag>
               );
             })}

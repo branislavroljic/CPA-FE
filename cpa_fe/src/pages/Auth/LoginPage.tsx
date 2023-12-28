@@ -121,8 +121,6 @@ export default function LoginPage() {
       localStorage.setItem(USER_KEY, JSON.stringify(loginResponse));
     }
     sessionStorage.setItem(USER_KEY, JSON.stringify(loginResponse));
-
-    // console.log(getApiToken(loginResponse.token));
     setUser(loginResponse);
     navigate("/");
     return;

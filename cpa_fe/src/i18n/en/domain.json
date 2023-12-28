@@ -3,5 +3,6 @@
   "domain": "Domain",
   "type": "Type",
   "status": "Status",
-  "addDomain": "Add domain"
+  "addDomain": "Add domain",
+  "verify" : "Verify domain"
 }

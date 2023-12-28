@@ -1,4 +1,5 @@
 import { uniqueId } from "lodash";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 interface MenuitemsType {
   [x: string]: any;
@@ -19,17 +20,14 @@ import i18n from "../../../../i18n";
 import {
   IconBasket,
   IconBug,
-  IconBuildingCommunity,
-  IconBuildingStore,
   IconCoin,
   IconHistoryToggle,
   IconLink,
+  IconScale,
+  IconShoppingCart,
 } from "@tabler/icons-react";
 import { TFunction } from "i18next";
-import {
-  ConnectWithoutContact,
-  ConnectWithoutContactOutlined,
-} from "@mui/icons-material";
+import { ConnectWithoutContactOutlined } from "@mui/icons-material";
 
 const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
   [
@@ -66,6 +64,24 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
       title: "Referral",
       icon: ConnectWithoutContactOutlined,
       href: "/referrals",
+    },
+    {
+      id: uniqueId(),
+      title: t("order.title"),
+      icon: IconShoppingCart,
+      href: "/orders",
+    },
+    {
+      id: uniqueId(),
+      title: t("order.balanceTitle"),
+      icon: IconScale,
+      href: "/balance",
+    },
+    {
+      id: uniqueId(),
+      title: t("reports.title"),
+      icon: QueryStatsIcon,
+      href: "/reports",
     },
     {
       navlabel: true,

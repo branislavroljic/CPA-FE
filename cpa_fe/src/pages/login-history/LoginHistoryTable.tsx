@@ -29,7 +29,7 @@ export default function LoginHistoryTable() {
   const theme = useTheme();
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
-    pageSize: 9,
+    pageSize: 10,
   });
 
   const { t } = useTranslation();

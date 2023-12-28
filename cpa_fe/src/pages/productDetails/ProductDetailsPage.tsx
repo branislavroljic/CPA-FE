@@ -63,20 +63,20 @@ const ProductDetailsPage = () => {
         spacing={3}
         sx={{ maxWidth: { lg: "1055px", xl: "1200px" } }}
       >
-        <Grid item xs={12} sm={12} lg={12}>
+        <Grid item xs={12} sm={12} lg={6}>
           <ChildCard>
             {/* ------------------------------------------- */}
             {/* Carousel */}
             {/* ------------------------------------------- */}
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={12} lg={6}>
+            <Grid container spacing={3} xs={12} sm={12} lg={12}>
+              <Grid item xs={12} sm={12} lg={12}>
                 <img
                   src={`http://localhost:9001/api/product/images/${productDetails.image}`}
                   alt="img"
                   width="100%"
                 />
               </Grid>
-              <Grid item xs={12} sm={12} lg={6}>
+              <Grid item xs={12} sm={12} lg={12}>
                 <Box p={2}>
                   {productDetails ? (
                     <>
@@ -119,7 +119,7 @@ const ProductDetailsPage = () => {
             </Grid>
           </ChildCard>
         </Grid>
-        <Grid item xs={12} sm={12} lg={12}>
+        <Grid item xs={12} sm={6} lg={6}>
           <ProductInfo product={productDetails} />
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>

@@ -1,4 +1,4 @@
-import { Grid, Button, Stack, Autocomplete, TextField } from "@mui/material";
+import { Grid, Button, Stack } from "@mui/material";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import CustomTextField from "@ui/forms/theme-elements/CustomTextField";
 import { useTranslation } from "react-i18next";
@@ -6,21 +6,12 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
 import useAuthStore from "@stores/authStore";
-import { useQuery } from "@tanstack/react-query";
-import { getRestCountriesEurope } from "@api/external/restCounties";
-import { Order, orderProduct } from "@api/product/product";
+import { InputOrder, ProductDetails, orderProduct } from "@api/product/product";
 import orderSchema from "./orderSchema";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-const OrderForm = () => {
+const OrderForm = ({ product }: { product: ProductDetails }) => {
   const { user } = useAuthStore((state) => state);
-  const params = useParams();
-
-  const { data: restCountiesData, isLoading: isLoadingRestCountries } =
-    useQuery({
-      queryKey: ["rest_countries"],
-      queryFn: () => getRestCountriesEurope(),
-    });
 
   const {
     handleSubmit,
@@ -28,9 +19,20 @@ const OrderForm = () => {
     control,
     register,
     formState: { errors, isValid },
-  } = useForm<Order>({
+    setValue,
+    watch,
+  } = useForm<InputOrder>({
     resolver: zodResolver(orderSchema),
   });
+
+  const quantity = watch("quantity");
+
+  useEffect(() => {
+    if (quantity !== undefined) {
+      const totalPrice = quantity * product.price;
+      setValue("totalPrice", totalPrice);
+    }
+  }, [quantity, product.price, setValue]);
 
   const handleCancelOrderUpdate = () => {
     reset();
@@ -43,7 +45,7 @@ const OrderForm = () => {
 
   const { t } = useTranslation();
 
-  const submitUpdateOrder = (newItem: Order) => {
+  const submitUpdateOrder = (newItem: InputOrder) => {
     if (isValid) {
       orderMutation.mutate(newItem);
     }
@@ -51,7 +53,7 @@ const OrderForm = () => {
 
   return (
     <Grid container justifyContent={"center"}>
-      <Grid item xs={12} lg={10}>
+      <Grid item xs={12} lg={12} padding={2}>
         <form>
           <Grid container spacing={3} paddingLeft={3}>
             <input
@@ -65,210 +67,213 @@ const OrderForm = () => {
               type="hidden"
               {...register("productId", {
                 required: true,
-                value: params.productId,
+                value: product.id,
               })}
             />
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="name"
-            >
-              {t("user.name")}
-            </CustomFormLabel>
-            <Controller
-              name="name"
-              control={control}
-              defaultValue={""}
-              render={({ field }) => (
-                <CustomTextField
-                  id="name"
-                  required
-                  disabled={orderMutation.isLoading}
-                  error={errors.name !== undefined}
-                  helperText={errors.name?.message}
-                  placeholder={t("user.name")}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            />
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="country"
-            >
-              {t("company.country")}
-            </CustomFormLabel>
-            <Controller
-              control={control}
-              name="country"
-              rules={{ required: true }}
-              defaultValue={undefined}
-              render={({ field: { onChange, value } }) => (
-                <Autocomplete
-                  fullWidth
-                  onChange={(event, item) => {
-                    onChange(item);
-                  }}
-                  value={restCountiesData?.find((c) => c === value)}
-                  options={restCountiesData ?? []}
-                  getOptionLabel={(option) => `${option}`}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      margin="normal"
-                      variant="outlined"
-                      error={errors.country !== undefined}
-                      helperText={errors.country?.message}
-                      required
-                    />
-                  )}
-                />
-              )}
-            />
+            <Grid item xs={12} sm={6}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="name"
+              >
+                {t("user.firstname")}
+              </CustomFormLabel>
+              <Controller
+                name="name"
+                control={control}
+                defaultValue={""}
+                render={({ field }) => (
+                  <CustomTextField
+                    id="name"
+                    required
+                    disabled={orderMutation.isLoading}
+                    error={errors.name !== undefined}
+                    helperText={errors.name?.message}
+                    placeholder={t("user.firstname")}
+                    variant="outlined"
+                    fullWidth
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="country"
+              >
+                {t("company.country")}
+              </CustomFormLabel>
+              <Controller
+                name="country"
+                control={control}
+                defaultValue={product.country_code}
+                render={({ field }) => (
+                  <CustomTextField
+                    id="country"
+                    required
+                    disabled={true}
+                    error={errors.name !== undefined}
+                    helperText={errors.name?.message}
+                    placeholder={t("company.country")}
+                    variant="outlined"
+                    fullWidth
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
 
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="address"
-            >
-              {t("company.address")}
-            </CustomFormLabel>
-            <Controller
-              name="address"
-              control={control}
-              defaultValue={undefined}
-              render={({ field }) => (
-                <CustomTextField
-                  id="address"
-                  required
-                  disabled={orderMutation.isLoading}
-                  error={errors.address !== undefined}
-                  helperText={errors.address?.message}
-                  placeholder={t("company.address")}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            />
+            <Grid item xs={12} sm={6}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="address"
+              >
+                {t("company.address")}
+              </CustomFormLabel>
+              <Controller
+                name="address"
+                control={control}
+                defaultValue={undefined}
+                render={({ field }) => (
+                  <CustomTextField
+                    id="address"
+                    required
+                    disabled={orderMutation.isLoading}
+                    error={errors.address !== undefined}
+                    helperText={errors.address?.message}
+                    placeholder={t("company.address")}
+                    variant="outlined"
+                    fullWidth
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
 
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="phoneNumber"
-            >
-              {t("user.phoneNumber")}
-            </CustomFormLabel>
-            <Controller
-              name="phoneNumber"
-              control={control}
-              defaultValue={undefined}
-              render={({ field }) => (
-                <CustomTextField
-                  id="phoneNumber"
-                  required
-                  disabled={orderMutation.isLoading}
-                  error={errors.phoneNumber !== undefined}
-                  helperText={errors.phoneNumber?.message}
-                  placeholder={t("user.phoneNumber")}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            />
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="note"
-            >
-              {t("order.note")}
-            </CustomFormLabel>
-            <Controller
-              name="note"
-              control={control}
-              defaultValue={undefined}
-              render={({ field }) => (
-                <CustomTextField
-                  id="note"
-                  required
-                  disabled={orderMutation.isLoading}
-                  error={errors.note !== undefined}
-                  helperText={errors.note?.message}
-                  placeholder={t("order.note")}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            />
+            <Grid item xs={12} sm={6}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="phoneNumber"
+              >
+                {t("user.phoneNumber")}
+              </CustomFormLabel>
+              <Controller
+                name="phoneNumber"
+                control={control}
+                defaultValue={undefined}
+                render={({ field }) => (
+                  <CustomTextField
+                    id="phoneNumber"
+                    required
+                    disabled={orderMutation.isLoading}
+                    error={errors.phoneNumber !== undefined}
+                    helperText={errors.phoneNumber?.message}
+                    placeholder={t("user.phoneNumber")}
+                    variant="outlined"
+                    fullWidth
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
 
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="note"
-            >
-              {t("order.quantity")}
-            </CustomFormLabel>
-            <Controller
-              name="quantity"
-              control={control}
-              defaultValue={undefined}
-              render={({ field }) => (
-                <TextField
-                  label={t("order.quantity")}
-                  type="number"
-                  required
-                  fullWidth
-                  error={errors.quantity !== undefined}
-                  helperText={errors.quantity?.message}
-                  placeholder={t("order.quantity")}
-                  margin="normal"
-                  id="amount"
-                  autoFocus
-                  //   InputProps={{
-                  //     startAdornment: (
-                  //       <InputAdornment position="start">$</InputAdornment>
-                  //     ),
-                  //   }}
-                  {...field}
-                />
-              )}
-            />
-            <CustomFormLabel
-              sx={{
-                mt: 2,
-              }}
-              htmlFor="totalPrice"
-            >
-              {t("order.totalPrice")}
-            </CustomFormLabel>
-            <Controller
-              name="totalPrice"
-              control={control}
-              defaultValue={undefined}
-              render={({ field }) => (
-                <CustomTextField
-                  id="totalPrice"
-                  required
-                  disabled={true}
-                  error={errors.totalPrice !== undefined}
-                  helperText={errors.totalPrice?.message}
-                  placeholder={t("order.totalPrice")}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            />
+            <Grid item xs={12} sm={6}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="note"
+              >
+                {t("order.note")}
+              </CustomFormLabel>
+              <Controller
+                name="note"
+                control={control}
+                defaultValue={undefined}
+                render={({ field }) => (
+                  <CustomTextField
+                    id="note"
+                    required
+                    disabled={orderMutation.isLoading}
+                    error={errors.note !== undefined}
+                    helperText={errors.note?.message}
+                    placeholder={t("order.note")}
+                    variant="outlined"
+                    fullWidth
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={3}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="note"
+              >
+                {t("order.quantity")}
+              </CustomFormLabel>
+              <Controller
+                name="quantity"
+                control={control}
+                defaultValue={undefined}
+                render={({ field }) => (
+                  <CustomTextField
+                    type="number"
+                    fullWidth
+                    InputProps={{
+                      inputProps: { min: 1, max: product.limit_per_day },
+                    }}
+                    error={errors.quantity !== undefined}
+                    helperText={errors.quantity?.message}
+                    placeholder={t("order.quantity")}
+                    margin="normal"
+                    id="amount"
+                    style={{ marginTop: 0 }}
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={3}>
+              <CustomFormLabel
+                sx={{
+                  mt: 2,
+                }}
+                htmlFor="totalPrice"
+              >
+                {t("order.totalPrice")}
+              </CustomFormLabel>
+              <Controller
+                name="totalPrice"
+                control={control}
+                defaultValue={undefined}
+                render={({ field }) => (
+                  <CustomTextField
+                    id="totalPrice"
+                    required
+                    disabled={true}
+                    error={errors.totalPrice !== undefined}
+                    helperText={errors.totalPrice?.message}
+                    placeholder={t("order.totalPrice")}
+                    variant="outlined"
+                    fullWidth
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
           </Grid>
         </form>
         <Stack

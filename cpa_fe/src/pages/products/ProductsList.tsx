@@ -49,7 +49,6 @@ const ProductList = ({ onClick }: Props) => {
     },
     {
       getNextPageParam: (lastPage) => {
-        console.log(lastPage.data);
         if (lastPage.data.rows.length == 0) return undefined;
 
         return lastPage.pageParam + 1;
@@ -91,7 +90,23 @@ const ProductList = ({ onClick }: Props) => {
           </Box>
           <Stack mt={1} direction="row" alignItems="center">
             {product.categories.map((category) => (
-              <Chip label={category.name} size="small" />
+              <Chip
+                label={category.name}
+                size="small"
+                color={
+                  category.color && category.color.length
+                    ? (category.color as
+                        | "default"
+                        | "primary"
+                        | "secondary"
+                        | "error"
+                        | "success"
+                        | "info"
+                        | "warning"
+                        | undefined)
+                    : "primary"
+                }
+              />
             ))}
           </Stack>
           <Stack direction="row" alignItems="center" gap={2}>
@@ -110,6 +125,8 @@ const ProductList = ({ onClick }: Props) => {
           </Stack>
           <Divider />
           <Stack
+            display={"flex"}
+            flexWrap={"wrap-reverse"}
             direction="row"
             alignItems="center"
             justifyContent="space-between"
