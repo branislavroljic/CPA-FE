@@ -1,0 +1,14 @@
+{
+  "searchPageLinks": "Pretraži stranice",
+  "myProfile": "Moj nalog",
+  "accountSettings": "Podešavanja naloga",
+  "userProfile": "Korisnički nalog",
+  "changeProfile": "Izmijeni profil",
+  "chageProfilePicture": "Izmijeni sliku profila odavde",
+  "changePassword": "Izmijeni lozinku",
+  "changePasswordDescription": "Da biste promijenili lozinku, potvrdite ovdje",
+  "personalDetails": "Lični podaci",
+  "personalDetailsDescription": "Da biste promijenili svoje lične podatke, uredite ih i sačuvajte odavde",
+  "settings" : "Podešavanja",
+  "themeOption" : "Izbor teme"
+}

@@ -9,16 +9,31 @@ import {
   Theme,
   Chip,
   Divider,
+  useTheme,
+  IconButton,
 } from "@mui/material";
-import { IconMenu2 } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
+import { IconEdit, IconMenu2, IconPlus, IconTrash } from "@tabler/icons-react";
 import BlankCard from "@ui/shared/BlankCard";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { PageRequest } from "@api/utils";
-import { Product, getProducts } from "@api/product/product";
-import { useProductFilterStore } from "@stores/productStore";
-
+import {
+  Product,
+  createProduct,
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from "@api/product/product";
+import {
+  useProductFilterStore,
+  useProductModalStore,
+} from "@stores/productStore";
 import FlatList from "flatlist-react";
 import { CircleFlag } from "react-circle-flags";
+import { useState } from "react";
+import queryClient, { invalidateAllQueries } from "../../query-client";
+import { ConfirmModal } from "@ui/modal/ConfirmModal";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -26,6 +41,18 @@ interface Props {
 
 const ProductList = ({ onClick }: Props) => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
+  const theme = useTheme();
+  const { t } = useTranslation();
+
+  const openProductModal = useProductModalStore((state) => state.openModal);
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState<number>();
+
+  function handleAddProductClick() {
+    openProductModal({} as Product, createProduct, true);
+  }
+
   const { filter } = useProductFilterStore();
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
     ["products", filter],
@@ -50,6 +77,11 @@ const ProductList = ({ onClick }: Props) => {
     }
   );
 
+  const deleteMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => invalidateAllQueries(queryClient, "products"),
+  });
+
   const renderItem = (product: Product) => (
     <Grid
       item
@@ -62,7 +94,7 @@ const ProductList = ({ onClick }: Props) => {
       key={product.id}
     >
       <BlankCard className="hoverCard">
-        <Typography>
+        <Typography component={Link} to={`${product.id}`}>
           <img
             src={`http://localhost:9001/api/product/images/${product.image}`}
             alt="img"
@@ -155,6 +187,34 @@ const ProductList = ({ onClick }: Props) => {
             </Stack>
           </Stack>
         </CardContent>
+        <Divider />
+        <Box
+          p={2}
+          py={1}
+          textAlign={"center"}
+          sx={{
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? "rgba(0, 0, 0, 0.05)"
+                : "grey.100",
+          }}
+        >
+          <IconButton
+            onClick={() => {
+              openProductModal(product, updateProduct, true);
+            }}
+          >
+            <IconEdit size="18" color="#1C9CEA" />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              setDeleteId(product.id);
+              setIsDeleteOpen(true);
+            }}
+          >
+            <IconTrash size="18" color="red" />
+          </IconButton>
+        </Box>
       </BlankCard>
     </Grid>
   );
@@ -163,50 +223,73 @@ const ProductList = ({ onClick }: Props) => {
     <Grid item xs={12} lg={12} md={12} sm={12}>
       <Box textAlign="center" mt={6}>
         {/* <img src={emptyCart} alt="cart" width="200px" /> */}
-        <Typography variant="h2">There is no Product</Typography>
+        <Typography variant="h2">Nema proizvoda</Typography>
         <Typography variant="h6" mb={3}>
-          The Product you are searching is no longer available.
+          Proizvod koji ste tražili nije više dostupan
         </Typography>
       </Box>
     </Grid>
   );
 
   return (
-    <Box>
-      {/* ------------------------------------------- */}
-      {/* Header Detail page */}
-      {/* ------------------------------------------- */}
-      <Stack direction="row" justifyContent="space-between" pb={3}>
-        {lgUp ? (
-          <Typography variant="h5">Products</Typography>
-        ) : (
-          <Fab onClick={onClick} color="primary" size="small">
-            <IconMenu2 width="16" />
-          </Fab>
-        )}
-        {/* <Box>
-          <ProductSearch />
-        </Box> */}
-      </Stack>
+    <>
+      <Box>
+        {/* ------------------------------------------- */}
+        {/* Header Detail page */}
+        {/* ------------------------------------------- */}
+        <Stack direction="row" justifyContent="space-between" pb={3}>
+          {lgUp ? (
+            <Typography variant="h5">Proizvodi</Typography>
+          ) : (
+            <Fab onClick={onClick} color="primary" size="small">
+              <IconMenu2 width="16" />
+            </Fab>
+          )}
+          {/* <Box>
+      <ProductSearch />
+    </Box> */}
+        </Stack>
 
-      {/* ------------------------------------------- */}
-      {/* Page Listing product */}
-      {/* ------------------------------------------- */}
-      <Grid container spacing={3}>
-        <>
-          <FlatList
-            list={data?.pages?.flatMap((page) => page.data.rows) ?? []}
-            renderItem={renderItem}
-            renderWhenEmpty={renderEmptyList}
-            hasMoreItems={hasNextPage}
-            loadMoreItems={fetchNextPage}
-            paginationLoadingIndicator={
-              <div style={{ background: "#090" }}>Getting more items...</div>
-            }
-          />
-        </>
-      </Grid>
-    </Box>
+        {/* ------------------------------------------- */}
+        {/* Page Listing product */}
+        {/* ------------------------------------------- */}
+        <Grid container spacing={3}>
+          <>
+            <FlatList
+              list={data?.pages?.flatMap((page) => page.data.rows) ?? []}
+              renderItem={renderItem}
+              renderWhenEmpty={renderEmptyList}
+              hasMoreItems={hasNextPage}
+              loadMoreItems={fetchNextPage}
+              paginationLoadingIndicator={
+                <div style={{ background: "#090" }}>Getting more items...</div>
+              }
+            />
+          </>
+        </Grid>
+      </Box>
+      <Fab
+        aria-label=""
+        color="primary"
+        sx={{ position: "absolute", bottom: 20, right: 20 }}
+        onClick={handleAddProductClick}
+      >
+        <IconPlus />
+      </Fab>
+      <ConfirmModal
+        title={t("util.delete")}
+        content={t("util.sureDelete")}
+        Icon={IconTrash}
+        isOpen={isDeleteOpen}
+        setIsOpen={setIsDeleteOpen}
+        primaryAction={() => {
+          if (!deleteId) return;
+          deleteMutation.mutate(deleteId);
+          setDeleteId(undefined);
+          setIsDeleteOpen(false);
+        }}
+      />
+    </>
   );
 };
 
