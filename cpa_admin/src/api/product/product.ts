@@ -21,7 +21,9 @@ const baseCategoryUrl = new URL("category", import.meta.env.VITE_API_URL);
 export type Product = {
   id: number;
   name: string;
+  nameEng?: string;
   description: string;
+  descriptionEng?: string;
   price: number;
   currency: string;
   payout: number;
@@ -30,8 +32,11 @@ export type Product = {
   limit_per_day: number;
   country_code: string;
   categories: Category[];
+  categoriesIDs?: string[];
   approve_rate: number;
   earn_per_click: number;
+  landingPagesString?: string;
+  prelandingPagesString?: string;
 };
 
 export interface Country {

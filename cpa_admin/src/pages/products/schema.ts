@@ -1,7 +1,6 @@
 import { z } from "zod";
 import i18n from "../../i18n";
 
-const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 const longerMaxLength = import.meta.env.VITE_LONGER_FILED_MAX_LENGHT;
 const maxFileSize = import.meta.env.VITE_MAX_FILE_SIZE;
 const acceptedImageTypes = ["image/jpeg", "image/jpg", "image/png"];
@@ -15,7 +14,7 @@ const specialOfferSchema = z.object({
     )
     .refine(
       (file) => acceptedImageTypes.includes(file.type),
-      i18n.t("specialOffer.allowedFileTypes")
+      "Dozvoljeni tipovi fajlova"
     )
     .optional(),
   body: z.object({
@@ -96,14 +95,44 @@ const specialOfferSchema = z.object({
           num: 0,
         }),
       }),
-    startDateTime: z.coerce.date({
+    type: z
+      .string({
+        required_error: i18n.t("util.required.male", {
+          field: "Tip",
+        }),
+      }),
+    limit_per_day: z
+      .string({
+        required_error: i18n.t("util.required.male", {
+          field: "Dnevni limit",
+        }),
+      })
+      .max(longerMaxLength, {
+        message: i18n.t("util.maxLength", {
+          field: "Dnevni limit",
+          num: longerMaxLength,
+        }),
+      }),
+    country_code: z.string({
       required_error: i18n.t("util.required.male", {
-        field: i18n.t("specialOffer.startDateTime"),
+        field: "Kod države",
       }),
     }),
-    endDateTime: z.coerce.date({
+    categoriesIDs: z.array(
+      z.string({
+        required_error: i18n.t("util.required.male", {
+          field: "Tip",
+        }),
+      })
+    ),
+    landingPagesString: z.string({
       required_error: i18n.t("util.required.male", {
-        field: i18n.t("specialOffer.endDateTime"),
+        field: "Landing stranice",
+      }),
+    }),
+    prelandingPagesString: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Prelanding stranice",
       }),
     }),
   }),

@@ -34,6 +34,7 @@ import { useState } from "react";
 import queryClient, { invalidateAllQueries } from "../../query-client";
 import { ConfirmModal } from "@ui/modal/ConfirmModal";
 import { useTranslation } from "react-i18next";
+import ProductModal from "./ProductModal";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -289,6 +290,7 @@ const ProductList = ({ onClick }: Props) => {
           setIsDeleteOpen(false);
         }}
       />
+      <ProductModal />
     </>
   );
 };

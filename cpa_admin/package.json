@@ -29,6 +29,7 @@
     "react": "^18.2.0",
     "react-circle-flags": "^0.0.19",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-helmet-async": "^1.3.0",
     "react-i18next": "^13.2.2",
     "react-router-dom": "^6.16.0",
