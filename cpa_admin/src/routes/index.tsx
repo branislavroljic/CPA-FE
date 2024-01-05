@@ -8,6 +8,7 @@ import ProductsPage from "@pages/products/ProductsPage";
 import queryClient from "../query-client";
 import { getCategories } from "@api/category/category";
 import { getCountries } from "@api/product/product";
+import PaymentsPage from "@pages/payments/PaymentsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -46,6 +47,17 @@ const browserConfig = createBrowserRouter([
                 queryKey: ["countries_and_categories"],
                 queryFn: () => Promise.all([getCountries(), getCategories()]),
               }),
+          },
+        ],
+      },
+      {
+        id: "payments",
+        path: "/payments",
+        children: [
+          {
+            index: true,
+            element: <PaymentsPage />,
+            errorElement: <ErrorPage />,
           },
         ],
       },

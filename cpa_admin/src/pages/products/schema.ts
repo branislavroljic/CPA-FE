@@ -95,46 +95,30 @@ const specialOfferSchema = z.object({
           num: 0,
         }),
       }),
-    type: z
-      .string({
-        required_error: i18n.t("util.required.male", {
-          field: "Tip",
-        }),
+    type: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Tip",
       }),
-    limit_per_day: z
-      .string({
-        required_error: i18n.t("util.required.male", {
-          field: "Dnevni limit",
-        }),
-      })
-      .max(longerMaxLength, {
-        message: i18n.t("util.maxLength", {
-          field: "Dnevni limit",
-          num: longerMaxLength,
-        }),
+    }),
+    limit_per_day: z.number({
+      required_error: i18n.t("util.required.male", {
+        field: "Dnevni limit",
       }),
+    }),
     country_code: z.string({
       required_error: i18n.t("util.required.male", {
         field: "Kod države",
       }),
     }),
     categoriesIDs: z.array(
-      z.string({
+      z.number({
         required_error: i18n.t("util.required.male", {
           field: "Tip",
         }),
       })
     ),
-    landingPagesString: z.string({
-      required_error: i18n.t("util.required.male", {
-        field: "Landing stranice",
-      }),
-    }),
-    prelandingPagesString: z.string({
-      required_error: i18n.t("util.required.male", {
-        field: "Prelanding stranice",
-      }),
-    }),
+    landingPagesString: z.string().optional(),
+    prelandingPagesString: z.string().optional(),
   }),
 });
 

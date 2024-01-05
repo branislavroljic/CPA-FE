@@ -15,8 +15,7 @@ interface MenuitemsType {
   external?: boolean;
 }
 
-import { IconBasket, IconBug, IconCategory } from "@tabler/icons-react";
-import { TFunction } from "i18next";
+import { IconBasket, IconCategory, IconCoin } from "@tabler/icons-react";
 
 const Menuitems = () =>
   [
@@ -38,11 +37,10 @@ const Menuitems = () =>
     },
     {
       id: uniqueId(),
-      title: "Prijava grešaka",
-      icon: IconBug,
-      href: "/issue-tickets",
+      title: "Plaćanja",
+      icon: IconCoin,
+      href: "/payments",
     },
-    
   ] as MenuitemsType[];
 
 export default Menuitems;

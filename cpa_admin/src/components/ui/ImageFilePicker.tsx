@@ -96,7 +96,7 @@ const ImageFilePicker: React.FC<ImageFilePickerProps> = ({
           )
         ) : (
           <Typography variant="body2" color="text.secondary">
-            {t('specialOffer.addImageInstructions')}
+            {'Dodaj fotografiju'}
           </Typography>
         )}
         <IconButton color="primary" onClick={open} component="label">

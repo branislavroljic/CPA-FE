@@ -62,6 +62,13 @@ export default function ProductModal() {
     formState: { errors, isValid },
   } = useForm<InputFormData<Product>>({
     resolver: zodResolver(ProductSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+    // defaultValues: {
+    //   body: {
+    //     categoriesIDs: item?.categories.map((c) => c.id + "") ?? [],
+    //   },
+    // },
   });
 
   const setDefaultImageValue = async () => {
@@ -80,7 +87,7 @@ export default function ProductModal() {
     setDefaultImageValue();
   }, []);
 
-  useEffect(() => reset(), [isOpen]);
+  useEffect(() => reset(), [isOpen, reset]);
 
   const handleCloseModal = (hasChanged: boolean) => {
     if (hasChanged) {
@@ -104,8 +111,11 @@ export default function ProductModal() {
   const { t } = useTranslation();
 
   const saveProduct = (newItem: InputFormData<Product>) => {
+    console.log(newItem);
     if (isValid) {
       mutation.mutate(newItem);
+    } else {
+      console.log(errors);
     }
   };
 
@@ -115,7 +125,7 @@ export default function ProductModal() {
       <DialogContent>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Box component="form" sx={{ mt: 1 }}>
-            <Grid direction={"row"} container spacing={1}>
+            <Grid container direction={"row"} spacing={1}>
               <input
                 type="hidden"
                 {...register("body.id", {
@@ -194,10 +204,8 @@ export default function ProductModal() {
                   render={({ field }) => (
                     <TextField
                       label={"Opis"}
-                      required
                       fullWidth
                       multiline
-                      rows={2}
                       maxRows={"infinity"}
                       disabled={mutation.isLoading}
                       error={!!errors.body?.description}
@@ -220,15 +228,13 @@ export default function ProductModal() {
                   render={({ field }) => (
                     <TextField
                       label={"Opis na engleskom "}
-                      required
                       fullWidth
                       multiline
-                      rows={2}
                       maxRows={"infinity"}
                       disabled={mutation.isLoading}
                       error={!!errors.body?.descriptionEng}
                       helperText={errors.body?.descriptionEng?.message}
-                      placeholder={"Opis"}
+                      placeholder={"Opis na engleskom"}
                       margin="normal"
                       id="descriptionEng"
                       autoFocus
@@ -245,13 +251,13 @@ export default function ProductModal() {
                   defaultValue={item?.price ?? undefined}
                   render={({ field }) => (
                     <TextField
-                      label={"Popust"}
+                      label={"Cijena"}
                       required
                       fullWidth
                       disabled={mutation.isLoading}
                       error={!!errors.body?.price}
                       helperText={errors.body?.price?.message}
-                      placeholder={"Popust"}
+                      placeholder={"Cijena"}
                       margin="normal"
                       id="discount"
                       {...field}
@@ -338,7 +344,7 @@ export default function ProductModal() {
                 <Controller
                   name="body.limit_per_day"
                   control={control}
-                  defaultValue={undefined}
+                  defaultValue={item?.limit_per_day ?? undefined}
                   render={({ field }) => (
                     <TextField
                       label={"Dnevni limit"}
@@ -381,13 +387,14 @@ export default function ProductModal() {
                 />
               </Grid>
 
-              {/* <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12}>
                 <Controller
                   name="body.categoriesIDs"
                   control={control}
+                  // defaultValue={item?.categories.map((c) => c.id + "") ?? []}
                   defaultValue={[]}
                   render={({ field }) => (
-                    <FormControl sx={{ minWidth: 200 }}>
+                    <FormControl sx={{ minWidth: 540 }}>
                       <InputLabel id="demo-multiple-chip-label">
                         Kategorije
                       </InputLabel>
@@ -417,19 +424,19 @@ export default function ProductModal() {
                         {categories.map((category: Category) => (
                           <MenuItem
                             key={category.id}
-                            value={category.name}
+                            value={category.id}
                             style={{
                               fontWeight: theme.typography.fontWeightMedium,
                             }}
                           >
-                            {category.name}
+                            {`(${category.id}) ${category.name}`}
                           </MenuItem>
                         ))}
                       </Select>
                     </FormControl>
                   )}
                 />
-              </Grid> */}
+              </Grid>
 
               <Grid item xs={12} sm={12}>
                 <Controller
@@ -490,7 +497,11 @@ export default function ProductModal() {
         <Button
           color="primary"
           variant="contained"
-          onClick={handleSubmit(saveProduct)}
+          onClick={() => {
+            console.log(errors);
+            console.log(isValid);
+            handleSubmit(saveProduct);
+          }}
         >
           {t("util.save")}
         </Button>
