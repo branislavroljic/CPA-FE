@@ -18,7 +18,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { User } from "@api/user/user";
+import { AuthUser } from "@api/user/user";
 import PageContainer from "@ui/container/PageContainer";
 import Logo from "@layout/full/shared/logo/Logo";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
@@ -116,7 +116,7 @@ export default function LoginPage() {
       return;
     }
 
-    const loginResponse = (await result.json()) as User;
+    const loginResponse = (await result.json()) as AuthUser;
     if (input.rememberMe) {
       localStorage.setItem(USER_KEY, JSON.stringify(loginResponse));
     }

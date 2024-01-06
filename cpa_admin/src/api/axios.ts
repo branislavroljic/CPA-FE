@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestHeaders } from "axios";
 import i18n from "../i18n";
 import { USER_KEY, getUserFromStorage } from "./auth";
-import { User } from "./user/user";
+import { AuthUser } from "./user/user";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -83,7 +83,7 @@ const axiosClient = () => {
             const user = getUserFromStorage();
             sessionStorage.setItem(
               USER_KEY,
-              JSON.stringify({ ...user, token: token } as User)
+              JSON.stringify({ ...user, token: token } as AuthUser)
             );
             originalConfig.headers.authorization = `Bearer ${token}`;
 

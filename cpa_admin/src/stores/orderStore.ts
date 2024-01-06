@@ -1,26 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { UpdatePaymentStatus } from "@api/payment/payment";
+import { UpdateOrderStatus } from "@api/order/order";
 import { AxiosResponse } from "axios";
 import { create } from "zustand";
 
-export interface PaymentModalState {
-  item?: UpdatePaymentStatus;
+export interface OrderModalState {
+  item?: UpdateOrderStatus;
   isOpen: boolean;
   shouldClose: boolean;
-  submitAction?: (
-    item: UpdatePaymentStatus
-  ) => Promise<AxiosResponse<any, any>>;
+  submitAction?: (item: UpdateOrderStatus) => Promise<AxiosResponse<any, any>>;
   openModal: (
-    item: UpdatePaymentStatus,
-    submitAction: (
-      item: UpdatePaymentStatus
-    ) => Promise<AxiosResponse<any, any>>,
+    item: UpdateOrderStatus,
+    submitAction: (item: UpdateOrderStatus) => Promise<AxiosResponse<any, any>>,
     shouldClose: boolean
   ) => void;
   closeModal: () => void;
 }
 
-export const usePaymentModalStore = create<PaymentModalState>((set) => ({
+export const useOrderModalStore = create<OrderModalState>((set) => ({
   item: undefined,
   isOpen: false,
   shouldClose: false,

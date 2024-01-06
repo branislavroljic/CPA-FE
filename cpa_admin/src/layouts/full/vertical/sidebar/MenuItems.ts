@@ -15,7 +15,7 @@ interface MenuitemsType {
   external?: boolean;
 }
 
-import { IconBasket, IconCategory, IconCoin } from "@tabler/icons-react";
+import { IconBasket, IconCategory, IconCoin, IconShoppingCart, IconUsersGroup } from "@tabler/icons-react";
 
 const Menuitems = () =>
   [
@@ -37,9 +37,21 @@ const Menuitems = () =>
     },
     {
       id: uniqueId(),
+      title: "Narudžbine",
+      icon: IconShoppingCart,
+      href: "/orders",
+    },
+    {
+      id: uniqueId(),
       title: "Plaćanja",
       icon: IconCoin,
       href: "/payments",
+    },
+    {
+      id: uniqueId(),
+      title: "Korisnici",
+      icon: IconUsersGroup,
+      href: "/users",
     },
   ] as MenuitemsType[];
 

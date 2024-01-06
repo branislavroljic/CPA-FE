@@ -24,18 +24,17 @@ import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
 import { enUS, srRS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { TextWithTitle } from "@ui/table/TextWithTitle";
-import PaymentModal from "./PaymentModal";
-import { usePaymentModalStore } from "@stores/paymentStore";
 import {
-  Payment,
-  UpdatePaymentStatus,
-  getPayments,
-  updatePaymentStatus,
-} from "@api/payment/payment";
+  Order,
+  UpdateOrderStatus,
+  getOrders,
+  updateOrderStatus,
+} from "@api/order/order";
+import OrderModal from "./OrderModal";
+import { useOrderModalStore } from "@stores/orderStore";
 import { IconSwitch } from "@tabler/icons-react";
 
-export default function PaymentsTable() {
+export default function OrderTable() {
   const { user } = useAuthStore();
   const theme = useTheme();
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
@@ -45,21 +44,25 @@ export default function PaymentsTable() {
     pageIndex: 0,
     pageSize: 10,
   });
-  const openModal = usePaymentModalStore((state) => state.openModal);
+  const openModal = useOrderModalStore((state) => state.openModal);
 
-  const paymentStatuses = useMemo(
+  const orderStatuses = useMemo(
     () => [
       {
         text: "REQUESTED",
         value: "REQUESTED",
       },
       {
-        text: "APPROVED",
-        value: "APPROVED",
+        text: "TRASH",
+        value: "TRASH",
       },
       {
-        text: "REJECTED",
-        value: "REJECTED",
+        text: "CANCELLED",
+        value: "CANCELLED",
+      },
+      {
+        text: "DONE",
+        value: "DONE",
       },
     ],
     []
@@ -69,7 +72,7 @@ export default function PaymentsTable() {
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: [
-      "payments",
+      "orders",
       pagination.pageIndex,
       pagination.pageSize,
       user?.id,
@@ -81,16 +84,16 @@ export default function PaymentsTable() {
         size: pagination.pageSize,
       } as PageRequest;
 
-      return getPayments(pageRequest, columnFilters);
+      return getOrders(pageRequest, columnFilters);
     },
   });
 
-  const changeStatusButton = (item: Payment, key: string) => (
+  const changeStatusButton = (item: Order, key: string) => (
     <Tooltip arrow title={"Promijeni status"} key={key}>
       <IconButton
         color="warning"
         onClick={(e) => {
-          openModal(item as UpdatePaymentStatus, updatePaymentStatus, true);
+          openModal(item as UpdateOrderStatus, updateOrderStatus, true);
           e.stopPropagation();
         }}
       >
@@ -99,12 +102,12 @@ export default function PaymentsTable() {
     </Tooltip>
   );
 
-  const columns = useMemo<MRT_ColumnDef<Payment>[]>(
-    () => defaultColumns(paymentStatuses, t),
-    [paymentStatuses, t]
+  const columns = useMemo<MRT_ColumnDef<Order>[]>(
+    () => defaultColumns(orderStatuses, t),
+    [orderStatuses, t]
   );
 
-  const defaultData = useMemo(() => [] as Payment[], []);
+  const defaultData = useMemo(() => [] as Order[], []);
 
   const table = useMaterialReactTable({
     columns,
@@ -112,9 +115,10 @@ export default function PaymentsTable() {
     enableSorting: false,
     manualPagination: true,
     manualFiltering: true,
-    enableFilters: true,
     enableColumnActions: false,
-    enableRowActions: true,
+    enableGlobalFilter: false,
+    enableFilters: true,
+    enableRowActions : true,
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -123,9 +127,6 @@ export default function PaymentsTable() {
       : undefined,
     onPaginationChange: setPagination,
     onColumnFiltersChange: setColumnFilters,
-    renderDetailPanel: ({ row }) => (
-      <TextWithTitle title={"Komentar"} text={row.original.rejectComment} />
-    ),
     renderTopToolbarCustomActions: () => (
       <Box sx={{ display: "flex", gap: "1rem", p: "4px" }}>
         <Tooltip arrow title="Refresh Data">
@@ -138,8 +139,8 @@ export default function PaymentsTable() {
     renderRowActions: ({ row }) => (
       <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "8px" }}>
         {changeStatusButton(
-          row.original as Payment,
-          (row.original as Payment).id + "_" + "payment"
+          row.original as Order,
+          (row.original as Order).id + "_" + "order"
         )}
       </Box>
     ),
@@ -170,7 +171,7 @@ export default function PaymentsTable() {
       >
         <MaterialReactTable table={table} />
       </ThemeProvider>
-      <PaymentModal />
+      <OrderModal />
     </>
   );
 }

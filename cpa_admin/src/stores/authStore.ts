@@ -1,12 +1,12 @@
 import getApiToken, { isTokenValid, USER_KEY } from '@api/auth';
-import { User } from '@api/user/user';
+import { AuthUser } from '@api/user/user';
 import { create } from 'zustand';
 
 export interface AuthStore {
   isValid: boolean;
   // permissions: string[];
-  user?: User;
-  setUser: (newUser: User) => void;
+  user?: AuthUser;
+  setUser: (newUser: AuthUser) => void;
   deleteUser: () => void;
 }
 
@@ -21,12 +21,12 @@ const useAuthStore = create<AuthStore>((set) => {
   const user = sessionStorage.getItem(USER_KEY);
 
   const parsedToken = getApiToken(
-    user ? (JSON.parse(user) as User).token : null
+    user ? (JSON.parse(user) as AuthUser).token : null
   );
 
   return {
     isValid: isTokenValid(parsedToken),
-    user: user ? (JSON.parse(user) as User) : undefined,
+    user: user ? (JSON.parse(user) as AuthUser) : undefined,
     // permissions: getTokenPermissions(parsedToken),
     setUser: (newUser) => {
       sessionStorage.setItem(USER_KEY, JSON.stringify(newUser));

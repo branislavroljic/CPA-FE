@@ -36,10 +36,10 @@ export type UpdatePaymentStatus = {
   rejectCommentEng?: string;
 };
 
-export type FilterPayment = {
-  userId?: number;
-  status?: string;
-};
+// export type FilterPayment = {
+//   userId?: number;
+//   status?: string;
+// };
 
 export function getPayments(
   pagination: PageRequest,

@@ -17,7 +17,7 @@ import {
 import queryClient, { invalidateAllQueries } from "../../query-client";
 import { usePaymentModalStore } from "@stores/paymentStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import paymentSchema from "./paymentSchema";
+import paymentSchema from "./schema";
 import { Controller, useForm } from "react-hook-form";
 import { UpdatePaymentStatus } from "@api/payment/payment";
 
@@ -110,7 +110,7 @@ export default function PaymentModal() {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label={"Tip"}
+                      label={"Status"}
                       margin="normal"
                       variant="outlined"
                       error={errors.status !== undefined}

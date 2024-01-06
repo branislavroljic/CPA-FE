@@ -9,6 +9,8 @@ import queryClient from "../query-client";
 import { getCategories } from "@api/category/category";
 import { getCountries } from "@api/product/product";
 import PaymentsPage from "@pages/payments/PaymentsPage";
+import OrderPage from "@pages/orders/OrderPage";
+import UserPage from "@pages/users/UserPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -57,6 +59,28 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <PaymentsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "orders",
+        path: "/orders",
+        children: [
+          {
+            index: true,
+            element: <OrderPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "users",
+        path: "/users",
+        children: [
+          {
+            index: true,
+            element: <UserPage />,
             errorElement: <ErrorPage />,
           },
         ],

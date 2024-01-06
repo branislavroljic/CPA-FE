@@ -1,4 +1,4 @@
-import { User } from './user/user';
+import { AuthUser } from './user/user';
 import { post } from './utils';
 
 export const USER_KEY = 'user';
@@ -70,7 +70,7 @@ export function isTokenValid(token?: any) {
 
 export function getUserFromStorage() {
   const user = sessionStorage.getItem(USER_KEY);
-  return user ? (JSON.parse(user) as User) : null;
+  return user ? (JSON.parse(user) as AuthUser) : null;
 }
 
 // export function getTokenPermissions(token?: any) {
