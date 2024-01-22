@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts';
 import { useTheme } from '@mui/material/styles';
 import Breadcrumb from '../../../layouts/full/shared/breadcrumb/Breadcrumb';
 import { Props } from 'react-apexcharts';
-import { AreaChartProps } from '../../../pages/Statistic/StatisticPage';
+import { AreaChartProps } from '../../../pages/statistic/StatisticPage';
 import ParentCard from '@ui/shared/ParentCard';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../../i18n';

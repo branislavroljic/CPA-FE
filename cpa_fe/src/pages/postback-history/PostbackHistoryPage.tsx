@@ -1,19 +1,13 @@
 import { enUS, srRS } from "@mui/material/locale";
 import i18n from "../../i18n";
-import {
-  ThemeProvider,
-  createTheme,
-  useTheme,
-} from "@mui/material";
+import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
-import LoginHistoryTable from "./LoginHistoryTable";
-import StatisticsCard from "@ui/shared/StatisticsCard";
-import AdsClickIcon from "@mui/icons-material/AdsClick";
+import PostbackHistoryTable from "./PostbackHistoryTable";
 
-export default function LoginHistoryPage() {
+export default function PostbackHistoryPage() {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -21,23 +15,18 @@ export default function LoginHistoryPage() {
     () => [
       {
         to: "/",
-        title: t("loginHistory.title"),
+        title: t("postback.title"),
       },
     ],
     [t]
   );
   return (
     <PageContainer title="" description="this is innerpage">
-      <Breadcrumb items={BCrumb} title={t("loginHistory.title")} />
+      <Breadcrumb items={BCrumb} title={t("postback.title")} />
       <ThemeProvider
         theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
       >
-        <StatisticsCard
-          title={"naslov"}
-          item={{ today: 0.3, yesterday: 0.2, thisWeek: 0.2, thisMonth: 0.6 }}
-          icon={<AdsClickIcon />}
-        ></StatisticsCard>
-        <LoginHistoryTable />
+        <PostbackHistoryTable />
       </ThemeProvider>
     </PageContainer>
   );

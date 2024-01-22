@@ -13,6 +13,7 @@ import linksTrans from "./links.json";
 import companyTrans from "./company.json";
 import orderTrans from "./order.json";
 import reportsTrans from "./reports.json";
+import postbackTrans from "./postback.json";
 
 const enResources = {
   translation: {
@@ -31,6 +32,7 @@ const enResources = {
     company: companyTrans,
     order: orderTrans,
     reports: reportsTrans,
+    postback: postbackTrans,
   },
 };
 

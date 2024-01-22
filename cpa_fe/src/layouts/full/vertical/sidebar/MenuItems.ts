@@ -20,9 +20,11 @@ import i18n from "../../../../i18n";
 import {
   IconBasket,
   IconBug,
+  IconChartAreaLine,
   IconCoin,
   IconHistoryToggle,
   IconLink,
+  IconPoint,
   IconScale,
   IconShoppingCart,
 } from "@tabler/icons-react";
@@ -82,6 +84,26 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
       title: t("reports.title"),
       icon: QueryStatsIcon,
       href: "/reports",
+    },
+    {
+      id: uniqueId(),
+      title: "Postback",
+      icon: IconChartAreaLine,
+      href: "/postback/rule",
+      children: [
+        {
+          id: uniqueId(),
+          title: t("postback.title"),
+          icon: IconPoint,
+          href: "/postback/rule",
+        },
+        {
+          id: uniqueId(),
+          title: t("postback.history"),
+          icon: IconPoint,
+          href: "/postback/history",
+        },
+      ],
     },
     {
       navlabel: true,

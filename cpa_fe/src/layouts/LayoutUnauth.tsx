@@ -1,7 +1,7 @@
-import useAuthStore from '@stores/authStore';
-import { useNotificationStore } from '@stores/notificationStore';
-import Notification from '@ui/Notification';
-import { Navigate, Outlet } from 'react-router-dom';
+import useAuthStore from "@stores/authStore";
+import { useNotificationStore } from "@stores/notificationStore";
+import Notification from "@ui/Notification";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function LayoutUnauth() {
   const valid = useAuthStore((state) => state.isValid);
@@ -9,11 +9,19 @@ export default function LayoutUnauth() {
   const { isOpen, data, closeNotification } = useNotificationStore();
 
   if (valid) {
-    return <Navigate to={'/'} replace={true} />;
+    return <Navigate to={"/"} replace={true} />;
   }
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-blue-50">
+    <div
+      className="flex w-full items-center justify-center"
+      style={{
+        minHeight: "100vh",
+        backgroundImage: 'url("/src/assets/images/backgrounds/background.png")',
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+      }}
+    >
       <Outlet />
       <Notification
         isShowing={isOpen}

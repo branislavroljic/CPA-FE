@@ -11,10 +11,22 @@ import { productLoader } from "@pages/productDetails/ProductDetailsPage";
 import ProductDetailsPage from "@pages/productDetails/ProductDetailsPage";
 import ReferralPage from "@pages/referral/ReferralPage";
 import queryClient from "../query-client";
-import { getCategories, getCountries } from "@api/product/product";
+import {
+  getCategories,
+  getCountries,
+  getProductsShortResponse,
+} from "@api/product/product";
 import OrderPage from "@pages/orders/OrderPage";
 import BalanceOrderPage from "@pages/balance/BalanceOrderPage";
 import ReportsPage from "@pages/reports/ReportsPage";
+import RegisterPage from "@pages/Auth/RegisterPage";
+import PostbackPage from "@pages/postback/PostbackPage";
+import {
+  getPostbackLevels,
+  getPostbackMethods,
+  getPostbackStatuses,
+} from "@api/enum/enum";
+import PostbackHistoryPage from "@pages/postback-history/PostbackHistoryPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -150,6 +162,33 @@ const browserConfig = createBrowserRouter([
         ],
       },
       {
+        id: "postback",
+        path: "/postback/rule",
+        children: [
+          {
+            index: true,
+            element: <PostbackPage />,
+            errorElement: <ErrorPage />,
+            loader: () =>
+              queryClient.fetchQuery({
+                queryKey: ["countries_and_categories"],
+                queryFn: () =>
+                  Promise.all([
+                    getPostbackStatuses(),
+                    getPostbackMethods(),
+                    getPostbackLevels(),
+                    getProductsShortResponse(),
+                  ]),
+              }),
+          },
+        ],
+      },
+      {
+        id: "postback-history",
+        path: "/postback/history",
+        element: <PostbackHistoryPage />,
+      },
+      {
         id: "notFound",
         path: "*",
         element: <NotFoundPage />,
@@ -164,6 +203,11 @@ const browserConfig = createBrowserRouter([
         id: "login",
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        id: "register",
+        path: "/register",
+        element: <RegisterPage />,
       },
       {
         id: "forgot-password",

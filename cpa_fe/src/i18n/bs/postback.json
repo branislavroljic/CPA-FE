@@ -1,0 +1,20 @@
+{
+  "title": "Postback",
+  "name": "Ime",
+  "method": "Metod",
+  "url": "URL",
+  "finalUrl": "Konačni URL",
+  "event": "Događaj",
+  "level": "Nivo",
+  "product": "Proizvod",
+  "status": "Status",
+  "userId": "ID korisnika",
+  "productName": "Naziv proizvoda",
+  "value": "Vrijednost",
+  "urlParams": "URL parametri",
+  "addParam": "Dodaj parametar",
+  "addPostback": "Dodaj postback",
+  "history": "Istorija",
+  "requestUrl": "Zahtevani url",
+  "timestamp": "Vreme"
+}

@@ -119,3 +119,7 @@ export function getCountries(): Promise<Country> {
 export function getCategories(): Promise<Category> {
   return get(baseCategoryUrl);
 }
+
+export function getProductsShortResponse() {
+  return get(new URL("short_response", baseProductUrlWithSlash));
+}

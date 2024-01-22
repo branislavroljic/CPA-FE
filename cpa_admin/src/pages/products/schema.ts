@@ -5,15 +5,15 @@ const longerMaxLength = import.meta.env.VITE_LONGER_FILED_MAX_LENGHT;
 const maxFileSize = import.meta.env.VITE_MAX_FILE_SIZE;
 const acceptedImageTypes = ["image/jpeg", "image/jpg", "image/png"];
 
-const specialOfferSchema = z.object({
+const productSchema = z.object({
   image: z
     .custom<File>()
     .refine(
-      (file) => file.size < maxFileSize,
+      (file) => !file || file.size < maxFileSize,
       i18n.t("util.maxFileSize", { num: 5 })
     )
     .refine(
-      (file) => acceptedImageTypes.includes(file.type),
+      (file) => !file || acceptedImageTypes.includes(file.type),
       "Dozvoljeni tipovi fajlova"
     )
     .optional(),
@@ -100,7 +100,7 @@ const specialOfferSchema = z.object({
         field: "Tip",
       }),
     }),
-    limit_per_day: z.number({
+    limit_per_day: z.coerce.number({
       required_error: i18n.t("util.required.male", {
         field: "Dnevni limit",
       }),
@@ -111,15 +111,17 @@ const specialOfferSchema = z.object({
       }),
     }),
     categoriesIDs: z.array(
-      z.number({
-        required_error: i18n.t("util.required.male", {
-          field: "Tip",
-        }),
-      })
+      z.coerce
+        .number({
+          required_error: i18n.t("util.required.male", {
+            field: "Tip",
+          }),
+        })
+        .optional()
     ),
     landingPagesString: z.string().optional(),
     prelandingPagesString: z.string().optional(),
   }),
 });
 
-export default specialOfferSchema;
+export default productSchema;

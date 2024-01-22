@@ -1,0 +1,20 @@
+{
+  "title": "Postback",
+  "name": "Name",
+  "method": "Method",
+  "url": "URL",
+  "finalUrl": "Final URL",
+  "event": "Event",
+  "level": "Level",
+  "product": "Product",
+  "status": "Status",
+  "userId": "User ID",
+  "productName": "Product name",
+  "value": "Value",
+  "urlParams": "URL params",
+  "addParam": "Add param",
+  "addPostback": "Add postback",
+  "history": "History",
+  "requestUrl": "Request url",
+  "timestamp": "Timestamp"
+}

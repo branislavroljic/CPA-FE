@@ -111,6 +111,34 @@ export type Report = {
   totalCancelledRevenue: number;
 };
 
+export type Postback = {
+  id: number;
+  name: string;
+  method: string;
+  url: string;
+  finalUrl: string;
+  event: string;
+  level: string;
+  productId?: number;
+  status: string;
+  userId: number;
+};
+
+export type PostbackHistory = {
+  id: number;
+  requestUrl: string;
+  status: string;
+  time: Date;
+  productId: number;
+};
+
+export type StatisticsCardType = {
+  today: number;
+  yesterday: number;
+  thisWeek: number;
+  thisMonth: number;
+};
+
 export function getLoginHistory(
   pagination: PageRequest,
   id?: number
@@ -181,5 +209,23 @@ export function getReports(
       addFilterParams(new URL(id + "/report", baseUrl), filter),
       pagination
     )
+  );
+}
+
+export function getPostbacks(
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<Postback>> {
+  return get(
+    addPaginationParams(new URL(id + "/postback_rule", baseUrl), pagination)
+  );
+}
+
+export function getPostbackHistory(
+  pagination: PageRequest,
+  id?: number
+): Promise<Page<PostbackHistory>> {
+  return get(
+    addPaginationParams(new URL(id + "/postback_history", baseUrl), pagination)
   );
 }
