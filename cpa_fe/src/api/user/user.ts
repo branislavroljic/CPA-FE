@@ -132,11 +132,28 @@ export type PostbackHistory = {
   productId: number;
 };
 
-export type StatisticsCardType = {
-  today: number;
-  yesterday: number;
-  thisWeek: number;
-  thisMonth: number;
+export type DasboardData = {
+  conversionsToday: number;
+  conversionsYesterday: number;
+  conversionsThisWeek: number;
+  conversionsThisMonth: number;
+  conversionRateToday: number;
+  conversionRateYesterday: number;
+  conversionRateThisWeek: number;
+  conversionRateThisMonth: number;
+  requestedToday: number;
+  requestedYesterday: number;
+  requestedThisWeek: number;
+  requestedThisMonth: number;
+  revenueToday: number;
+  revenueYesterday: number;
+  revenueThisWeek: number;
+  revenueThisMonth: number;
+};
+
+export type StatisticsReport = {
+  xvalue: string;
+  yvalue: number;
 };
 
 export function getLoginHistory(
@@ -228,4 +245,28 @@ export function getPostbackHistory(
   return get(
     addPaginationParams(new URL(id + "/postback_history", baseUrl), pagination)
   );
+}
+
+export function getDashboardData(id?: number): Promise<DasboardData> {
+  return get(new URL(id + "/dashboard", baseUrl));
+}
+
+export function getRevenueStatistics(id?: number): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/revenue", baseUrl));
+}
+
+export function getHoldStatistics(id?: number): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/hold", baseUrl));
+}
+
+export function getConversionRateStatistics(
+  id?: number
+): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/conversion_rate", baseUrl));
+}
+
+export function getConversionStatistics(
+  id?: number
+): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/conversion", baseUrl));
 }

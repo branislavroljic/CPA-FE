@@ -1,29 +1,28 @@
-import { StatisticsCardType } from "@api/user/user";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  Divider,
-  Stack,
-  Typography,
-  Chip,
-} from "@mui/material";
+import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import { useCustomizerStore } from "@stores/customizerStore";
-import { IconArrowBack } from "@tabler/icons-react";
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
-type Props = {
+export type StatisticsCardType = {
+  today: string;
+  yesterday: string;
+  thisWeek: string;
+  thisMonth: string;
+};
+
+export type StatisticsCardProps = {
   title: string;
   item: StatisticsCardType;
   icon: ReactNode;
 };
 
-const StatisticsCard = ({ title, item, icon }: Props) => {
+const StatisticsCard = ({ title, item, icon }: StatisticsCardProps) => {
+  const { t } = useTranslation();
   const isCardShadow = useCustomizerStore((state) => state.isCardShadow);
 
   return (
     <Card
-      sx={{ padding: "20px", width: "30%", borderRadius: "5px" }}
+      sx={{ padding: "20px", borderRadius: "5px" }}
       elevation={isCardShadow ? 9 : 0}
       variant={!isCardShadow ? "outlined" : undefined}
     >
@@ -49,7 +48,6 @@ const StatisticsCard = ({ title, item, icon }: Props) => {
             {title}
           </Typography>
         </Stack>
-        {/* <Chip label="kakoe"></Chip> */}
       </Stack>
       <Divider variant="middle" />
       <CardContent sx={{ padding: "0px !important", marginTop: "12px" }}>
@@ -61,7 +59,7 @@ const StatisticsCard = ({ title, item, icon }: Props) => {
               fontWeight={400}
               fontSize={"15px"}
             >
-              Today
+              {t("statistics.today")}
             </Typography>
             <Typography
               variant="body1"
@@ -74,14 +72,14 @@ const StatisticsCard = ({ title, item, icon }: Props) => {
             </Typography>
           </Stack>
           <Stack>
-            <Stack direction={"row"} gap={5}>
+            <Stack direction={"row"} gap={5} justifyContent={"space-between"}>
               <Typography
                 variant="body1"
                 color={"#475f7b80"}
                 fontWeight={400}
                 fontSize={"15px"}
               >
-                Today
+                {t("statistics.yesterday")}
               </Typography>
               <Typography
                 variant="body1"
@@ -92,14 +90,14 @@ const StatisticsCard = ({ title, item, icon }: Props) => {
                 {item.yesterday}
               </Typography>
             </Stack>
-            <Stack direction={"row"} gap={5}>
+            <Stack direction={"row"} gap={5} justifyContent={"space-between"}>
               <Typography
                 variant="body1"
                 color={"#475f7b80"}
                 fontWeight={400}
                 fontSize={"15px"}
               >
-                Today
+                {t("statistics.thisWeek")}
               </Typography>
               <Typography
                 variant="body1"
@@ -110,14 +108,14 @@ const StatisticsCard = ({ title, item, icon }: Props) => {
                 {item.thisWeek}
               </Typography>
             </Stack>
-            <Stack direction={"row"} gap={5}>
+            <Stack direction={"row"} gap={5} justifyContent={"space-between"}>
               <Typography
                 variant="body1"
                 color={"#475f7b80"}
                 fontWeight={400}
                 fontSize={"15px"}
               >
-                Today
+                {t("statistics.thisMonth")}
               </Typography>
               <Typography
                 variant="body1"

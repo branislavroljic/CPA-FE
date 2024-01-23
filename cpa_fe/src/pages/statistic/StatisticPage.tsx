@@ -1,43 +1,25 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
+import { Box, CircularProgress, Grid, useTheme } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import useAuthStore from "@stores/authStore";
+import PageContainer from "@ui/container/PageContainer";
+import TopCards from "@ui/dashboard/TopCards";
+import { useTranslation } from "react-i18next";
 import {
-  Box,
-  Card,
-  CardContent,
-  CircularProgress,
-  Grid,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material';
-import {
-  Report,
-  getOverallStatisticForCompany,
-  getReportsFromCompanyWorkersByDay,
-  getReportsWithinCompanyByDayForMonth,
-  getReportsWithinCompanyByMonth,
-} from '@api/statistic/statistics';
-import { useQuery } from '@tanstack/react-query';
-import useAuthStore from '@stores/authStore';
-import PageContainer from '@ui/container/PageContainer';
-import TopCards from '@ui/dashboard/TopCards';
-import employeeIcon from '/src/assets/images/svgs/icon-user-male.svg';
-import clientsIcon from '/src/assets/images/svgs/icon-briefcase.svg';
-import totalIncomeIcon from '/src/assets/images/svgs/icon-master-card-2.svg';
-import totalDicountSavingsIcon from '/src/assets/images/svgs/icon-pie.svg';
-import pointsIcon from '/src/assets/images/svgs/icon-master-card.svg';
-import numberOfAddressesIcon from '/src/assets/images/svgs/icon-mailbox.svg';
-import AreaChart from '../../components/ui/dashboard/AreaChart';
-import { useTranslation } from 'react-i18next';
-import PointsList from '@pages/points/PointsList';
-import BarChart from '@ui/dashboard/BarChart';
-import WelcomeCard from './WelcomeCard';
+  getConversionRateStatistics,
+  getConversionStatistics,
+  getDashboardData,
+  getHoldStatistics,
+  getRevenueStatistics,
+} from "@api/user/user";
 
-export interface AreaChartProps {
-  title: string;
-  data: Report[];
-  labelName?: string;
-  color: string;
-}
+import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
+import PercentIcon from "@mui/icons-material/Percent";
+import { StatisticsCardProps } from "@ui/shared/StatisticsCard";
+import WelcomeCard from "./WelcomeCard";
+import AreaChart, { AreaChartProp } from "@ui/dashboard/AreaChart";
 
 export interface BarChartProps {
   title: string;
@@ -56,100 +38,118 @@ export default function StatisticsPage() {
   const theme = useTheme();
   const primary = theme.palette.primary.main;
   const secondary = theme.palette.secondary.main;
+  const success = theme.palette.success.main;
+  const info = theme.palette.info.main;
 
-  const currentMonth = useMemo(() => {
-    return new Date().getMonth();
-  }, []);
-
-  const reportsFromCompanyWorkersQuery = useQuery({
-    queryKey: ['statistics_by_user', user?.companyId],
-    queryFn: () => getReportsFromCompanyWorkersByDay(user?.companyId),
+  const { data: dashboardData, isLoading: isDashboardDataLoading } = useQuery({
+    queryKey: ["dashboard", user?.id],
+    queryFn: () => getDashboardData(user?.id),
   });
 
-  const reportsWithinCompanyByMonthQuery = useQuery({
-    queryKey: ['statistics_within_company_by_month', user?.companyId],
-    queryFn: () => getReportsWithinCompanyByMonth(user?.companyId),
+  const { data: revenueData, isLoading: isRevenueLoading } = useQuery({
+    queryKey: ["revenue_statistics", user?.id],
+    queryFn: () => getRevenueStatistics(user?.id),
   });
 
-  const reportsWithinCompanyByDayForMonthQuery = useQuery({
-    queryKey: [
-      'statistics_within_company_by_day_for_month',
-      user?.companyId,
-      currentMonth,
-    ],
-    queryFn: () =>
-      getReportsWithinCompanyByDayForMonth(user?.companyId, currentMonth),
+  const { data: holdData, isLoading: isHoldLoading } = useQuery({
+    queryKey: ["hold_statistics", user?.id],
+    queryFn: () => getHoldStatistics(user?.id),
   });
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['overall_statistics', user?.companyId],
-    queryFn: () => getOverallStatisticForCompany(user?.companyId),
+  const { data: conversionRateData, isLoading: isConversionRateLoading } =
+    useQuery({
+      queryKey: ["conversion_rate_statistics", user?.id],
+      queryFn: () => getConversionRateStatistics(user?.id),
+    });
+
+  const { data: conversionData, isLoading: isConversionLoading } = useQuery({
+    queryKey: ["conversion_statistics", user?.id],
+    queryFn: () => getConversionStatistics(user?.id),
   });
 
-  const overallStatisticsData = useMemo(() => {
+  const dashboardStatisticsData = useMemo(() => {
     return [
       {
-        icon: employeeIcon,
-        title: t('statistic.employees'),
-        digits: data?.numberOfWorkers?.toString() ?? 'N/A',
-        bgcolor: 'primary',
+        icon: <RefreshRoundedIcon />,
+        title: t("statistics.conversion"),
+        item: {
+          today: `${dashboardData?.conversionsToday}`,
+          yesterday: `${dashboardData?.conversionsYesterday}`,
+          thisWeek: `${dashboardData?.conversionsThisWeek}`,
+          thisMonth: `${dashboardData?.conversionsThisMonth}`,
+        },
       },
       {
-        icon: clientsIcon,
-        title: t('statistic.clients'),
-        digits: data?.totalUsers?.toString() ?? 'N/A',
-        bgcolor: 'warning',
+        icon: <PercentIcon />,
+        title: t("statistics.conversionRate"),
+        item: {
+          today: `${dashboardData?.conversionRateToday}%`,
+          yesterday: `${dashboardData?.conversionRateYesterday}%`,
+          thisWeek: `${dashboardData?.conversionRateThisWeek}%`,
+          thisMonth: `${dashboardData?.conversionRateThisMonth}%`,
+        },
       },
       {
-        icon: totalIncomeIcon,
-        title: t('statistic.totalIncome'),
-        digits: t('statistic.currency', {
-          value: data?.totalIncome?.toFixed(2).toString() ?? '0.00',
-          currency: user?.currency,
-        }),
-        bgcolor: 'primary',
+        icon: <PauseRoundedIcon />,
+        title: t("statistics.requested"),
+        item: {
+          today: dashboardData?.requestedToday,
+          yesterday: dashboardData?.requestedYesterday,
+          thisWeek: dashboardData?.requestedThisWeek,
+          thisMonth: dashboardData?.requestedThisMonth,
+        },
       },
       {
-        icon: totalDicountSavingsIcon,
-        title: t('statistic.totalDiscountSavings'),
-        digits: t('statistic.currency', {
-          value: data?.totalDiscountSavings?.toFixed(2).toString() ?? '0.00 ',
-          currency: user?.currency,
-        }),
-        bgcolor: 'error',
+        icon: <LocalAtmOutlinedIcon />,
+        title: t("statistics.revenue"),
+        item: {
+          today: `$${dashboardData?.revenueToday}`,
+          yesterday: `$${dashboardData?.revenueYesterday}`,
+          thisWeek: `$${dashboardData?.revenueThisWeek}`,
+          thisMonth: `$${dashboardData?.revenueThisMonth}`,
+        },
+      },
+    ] as StatisticsCardProps[];
+  }, [dashboardData, t]);
+
+  const areaChartData = useMemo(() => {
+    return [
+      {
+        values: isRevenueLoading ? [] : revenueData,
+        labelName: t("statistics.revenue"),
+        color: primary,
       },
       {
-        icon: pointsIcon,
-        title: t('statistic.points'),
-        digits: data?.points?.toString() ?? '0',
-        bgcolor: 'warning',
+        values: isHoldLoading ? [] : holdData,
+        labelName: t("statistics.hold"),
+        color: secondary,
       },
       {
-        icon: numberOfAddressesIcon,
-        title: t('statistic.numberOfAddresses'),
-        digits: data?.numberOfAddresses?.toString() ?? 'N/A',
-        bgcolor: 'success',
+        values: isConversionLoading ? [] : conversionData,
+        labelName: t("statistics.conversion"),
+        color: success,
       },
-      // {
-      //   icon: totalDicountSavingsIcon,
-      //   title: t('statistic.totalDiscountSavings'),
-      //   digits: t('statistic.currency', {
-      //     value: data?.totalSpentByWorkers?.toFixed(2).toString() ?? '0.00 ',
-      //   }),
-      //   bgcolor: 'error',
-      // },
-      // {
-      //   icon: totalDicountSavingsIcon,
-      //   title: t('statistic.totalDiscountSavings'),
-      //   digits: t('statistic.currency', {
-      //     value:
-      //       data?.totalDiscountSavingsByWorkers?.toFixed(2).toString() ??
-      //       '0.00 ',
-      //   }),
-      //   bgcolor: 'error',
-      // },
-    ];
-  }, [data, t]);
+      {
+        values: isConversionRateLoading ? [] : conversionRateData,
+        labelName: t("statistics.conversionRate"),
+        color: info,
+      },
+    ] as AreaChartProp[];
+  }, [
+    conversionData,
+    conversionRateData,
+    holdData,
+    info,
+    isConversionLoading,
+    isConversionRateLoading,
+    isHoldLoading,
+    isRevenueLoading,
+    primary,
+    revenueData,
+    secondary,
+    success,
+    t,
+  ]);
 
   return (
     <PageContainer description="this is statistics page">
@@ -157,152 +157,25 @@ export default function StatisticsPage() {
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>
             <WelcomeCard
-              totalSpentByWorkers={t('statistic.currency', {
-                value:
-                  data?.totalSpentByWorkers?.toFixed(2).toString() ?? '0.00',
-                currency: user?.currency,
-              })}
-              totalDiscountSavingsByWorkers={t('statistic.currency', {
-                value:
-                  data?.totalDiscountSavingsByWorkers?.toFixed(2).toString() ??
-                  '0.00 ',
-                currency: user?.currency,
-              })}
+              conversionToday={dashboardData?.conversionsToday ?? 0}
+              conversionRateToday={dashboardData?.conversionRateToday ?? 0}
             />
           </Grid>
 
           {/* column */}
           <Grid item xs={12} lg={12}>
-            {isLoading ? (
+            {isDashboardDataLoading ? (
               <CircularProgress />
             ) : (
-              <TopCards data={overallStatisticsData} />
+              <TopCards data={dashboardStatisticsData} />
             )}
           </Grid>
 
-          <Grid item xs={12} lg={8}>
-            <AreaChart
-              title={t('statistic.workerTransactions')}
-              labelName={t('statistic.totalAmount')}
-              data={reportsFromCompanyWorkersQuery.data}
-              color={primary}
-            />
-          </Grid>
-          <Grid item xs={12} lg={4}>
-            {/* Point transactions */}
-            <Card
-              sx={{
-                padding: 0,
-                border: 'none',
-                height: '420px',
-              }}
-            >
-              <CardContent sx={{ pb: '50px', height: '100%' }}>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  justifyContent="space-between"
-                  alignItems={'center'}
-                >
-                  <Box pb={2}>
-                    <Typography variant="h5">
-                      {t('statistic.pointTransactions')}
-                    </Typography>
-                  </Box>
-                </Stack>
-                <PointsList />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} lg={4}>
-            <BarChart
-              title={t('statistic.companyTransactions')}
-              subtitle={t('statistic.monthlyTransactions')}
-              dataLabel1={t('statistic.totalAmount')}
-              dataItem1={t('statistic.currency', {
-                value: data?.totalIncome?.toFixed(2).toString() ?? '0.00',
-                currency: user?.currency,
-              })}
-              dataLabel2={t('statistic.totalDiscountSavings')}
-              dataItem2={t('statistic.currency', {
-                value:
-                  data?.totalDiscountSavings?.toFixed(2).toString() ?? '0.00 ',
-                currency: user?.currency,
-              })}
-              data={reportsWithinCompanyByMonthQuery.data}
-            />
-          </Grid>
-          <Grid item xs={12} lg={8}>
-            <AreaChart
-              title={t('statistic.dailyByMonthCompanyTransactions')}
-              labelName={t('statistic.totalAmount')}
-              data={reportsWithinCompanyByDayForMonthQuery.data}
-              color={secondary}
-            />
+          <Grid item xs={12} lg={12}>
+            <AreaChart props={areaChartData} />
           </Grid>
         </Grid>
       </Box>
     </PageContainer>
   );
-  // return (
-  //   <>
-  //     <Grid
-  //       container
-  //       spacing={4}
-  //       alignItems="center"
-  //       justifyContent="center"
-  //       style={{ minHeight: '100vh' }}
-  //     >
-  //       <Grid item xs={12} md={8} lg={10}>
-  //         <Paper
-  //           sx={{
-  //             p: 2,
-  //             display: 'flex',
-  //             flexDirection: 'column',
-  //             height: 240,
-  //             width: '100%',
-  //           }}
-  //         >
-  //           <Chart
-  //             data={reportsFromCompanyWorkersQuery.data}
-  //             title="Transakcije radnika"
-  //             xAxisTooltipName="Datum"
-  //             yAxisTooltipName="Iznos"
-  //           />
-  //         </Paper>
-  //       </Grid>
-  //       <Grid container direction={'row'} spacing={2}>
-  //         <Grid item xs={8} md={8} lg={8}>
-  //           <Paper
-  //             sx={{
-  //               p: 2,
-  //               display: 'flex',
-  //               flexDirection: 'column',
-  //               height: 240,
-  //             }}
-  //           >
-  //             <Chart
-  //               data={reportsWithinCompanyQuery.data}
-  //               title="Transakcije kompanije"
-  //               xAxisTooltipName="Datum"
-  //               yAxisTooltipName="Iznos"
-  //             />
-  //           </Paper>
-  //         </Grid>
-  //         {/* <Grid item xs={4} md={4} lg={4}>
-  //           <Paper
-  //             sx={{
-  //               height: 400,
-  //             }}
-  //           >
-  //             <CustomPieChart
-  //               title={'Promet iz drugih kompanija'}
-  //               data={numOfUsersPerCompanyBuyingQuery.data}
-  //             />
-  //           </Paper>
-  //         </Grid> */}
-  //       </Grid>
-  //     </Grid>
-  //   </>
-  // );
 }

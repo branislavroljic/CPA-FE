@@ -1,27 +1,45 @@
-import React from 'react';
-import Chart from 'react-apexcharts';
-import { useTheme } from '@mui/material/styles';
-import Breadcrumb from '../../../layouts/full/shared/breadcrumb/Breadcrumb';
-import { Props } from 'react-apexcharts';
-import { AreaChartProps } from '../../../pages/statistic/StatisticPage';
-import ParentCard from '@ui/shared/ParentCard';
-import { useTranslation } from 'react-i18next';
-import i18n from '../../../i18n';
+import React from "react";
+import Chart from "react-apexcharts";
+import { Props } from "react-apexcharts";
+import ParentCard from "@ui/shared/ParentCard";
+import { StatisticsReport } from "@api/user/user";
+import { useTranslation } from "react-i18next";
 
-const AreaChart = ({ title, labelName, data, color }: AreaChartProps) => {
+export interface AreaChartProp {
+  values?: StatisticsReport[];
+  labelName?: string;
+  color: string;
+}
+
+export interface AreaChartProps {
+  props: AreaChartProp[];
+}
+
+const AreaChart = ({ props }: AreaChartProps) => {
   // chart color
+  const { t } = useTranslation();
 
-  const [xvalues, yvalues] = React.useMemo(() => {
-    const xvalues = data?.map((report) => report.xvalue);
-    const yvalues = data?.map((report) => report.yvalue.toFixed(2));
-    return [xvalues, yvalues];
-  }, [data]);
-
+  const [xvalues, seriesareacharts, colors] = React.useMemo(() => {
+    const xvalues = [
+      ...new Set(
+        props.reduce((acc: string[], d) => {
+          return acc.concat(d.values?.map((v) => v.xvalue) ?? []);
+        }, [])
+      ),
+    ];
+    const seriesareacharts = props?.map((d, i) => ({
+      name: props[i].labelName ?? "",
+      data: d.values?.map((v) => v.yvalue) ?? [],
+    }));
+    const colors = props?.map((d) => d.color);
+    return [xvalues, seriesareacharts, colors];
+  }, [props]);
+  
   const optionsareachart: Props = {
     chart: {
-      id: 'area-chart',
+      id: "area-chart",
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      foreColor: '#adb0bb',
+      foreColor: "#adb0bb",
       zoom: {
         enabled: true,
       },
@@ -42,9 +60,9 @@ const AreaChart = ({ title, labelName, data, color }: AreaChartProps) => {
         export: {
           csv: {
             filename: undefined,
-            columnDelimiter: ',',
-            headerCategory: 'Date',
-            headerValue: 'value',
+            columnDelimiter: ",",
+            headerCategory: "Date",
+            headerValue: "value",
             // dateFormatter() {
             //   return new Date().toDateString();
             // },
@@ -56,20 +74,20 @@ const AreaChart = ({ title, labelName, data, color }: AreaChartProps) => {
             filename: undefined,
           },
         },
-        autoSelected: 'zoom',
+        autoSelected: "zoom",
       },
     },
     dataLabels: {
       enabled: false,
     },
     stroke: {
-      width: '3',
-      curve: 'smooth',
+      width: "3",
+      curve: "smooth",
     },
-    colors: [color],
+    colors: [...colors],
     xaxis: {
-      type: 'datetime',
-      categories: xvalues,
+      type: "datetime",
+      categories: [...xvalues],
     },
     yaxis: {
       opposite: false,
@@ -79,26 +97,21 @@ const AreaChart = ({ title, labelName, data, color }: AreaChartProps) => {
     },
     legend: {
       show: true,
-      position: 'bottom',
-      width: '50px',
+      position: "bottom",
+      width: "50px",
     },
     grid: {
       show: false,
     },
     tooltip: {
-      theme: 'dark',
+      theme: "dark",
       fillSeriesColor: false,
     },
   };
-  const seriesareachart = [
-    {
-      name: labelName,
-      data: yvalues,
-    },
-  ];
+  const seriesareachart = [...seriesareacharts];
 
   return (
-    <ParentCard title={title}>
+    <ParentCard title={t("statistics.statistics")}>
       <Chart
         options={optionsareachart}
         series={seriesareachart}

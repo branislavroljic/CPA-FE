@@ -41,7 +41,6 @@ export default function PostbackModal() {
   const urlValues = useMemo(
     () => [
       "{event}",
-      "{click_id}",
       "{sub_1}",
       "{sub_2}",
       "{sub_3}",

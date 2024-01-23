@@ -1,0 +1,16 @@
+{
+  "title": "Dashboard",
+  "welcomeBack": "Welcome back {{name}}!",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "thisWeek": "This week",
+  "thisMonth": "This month",
+  "revenue": "Revenue",
+  "hold": "Hold",
+  "conversionRate": "Conversion rate",
+  "conversion": "Conversion",
+  "requested": "Requested",
+  "conversionRateToday": "Conversion rate today",
+  "conversionToday": "Conversion today",
+  "statistics" : "Statistics"
+}

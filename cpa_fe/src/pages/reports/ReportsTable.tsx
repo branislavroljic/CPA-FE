@@ -21,7 +21,7 @@ import i18n from "../../i18n";
 import { MRT_Localization_SR_LATN_RS } from "material-react-table/locales/sr-Latn-RS";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { useTranslation } from "react-i18next";
-import { Report, getReports } from "@api/user/user";
+import { StatisticsReport, getReports } from "@api/user/user";
 import useAuthStore from "@stores/authStore";
 import { enUS, srRS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -61,12 +61,12 @@ export default function ReportsTable() {
     },
   });
 
-  const columns = useMemo<MRT_ColumnDef<Report>[]>(
+  const columns = useMemo<MRT_ColumnDef<StatisticsReport>[]>(
     () => defaultColumns(t),
     [t]
   );
 
-  const defaultData = useMemo(() => [] as Report[], []);
+  const defaultData = useMemo(() => [] as StatisticsReport[], []);
 
   const table = useMaterialReactTable({
     columns,

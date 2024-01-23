@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Typography,
@@ -7,21 +7,21 @@ import {
   Grid,
   Stack,
   Divider,
-} from '@mui/material';
+} from "@mui/material";
 
-import welcomeImg from '/src/assets/images/backgrounds/welcome-bg2.png';
-import { useTranslation } from 'react-i18next';
-import useAuthStore from '@stores/authStore';
-import { IconArrowUpRight } from '@tabler/icons-react';
+import welcomeImg from "/src/assets/images/backgrounds/welcome-bg2.png";
+import { useTranslation } from "react-i18next";
+import useAuthStore from "@stores/authStore";
+import { IconArrowUpRight } from "@tabler/icons-react";
 
 export interface WelcomeCardProps {
-  totalSpentByWorkers: string;
-  totalDiscountSavingsByWorkers: string;
+  conversionToday: number;
+  conversionRateToday: number;
 }
 
 const WelcomeCard = ({
-  totalSpentByWorkers: totalIncome,
-  totalDiscountSavingsByWorkers: totalDiscountSavings,
+  conversionToday,
+  conversionRateToday,
 }: WelcomeCardProps) => {
   const user = useAuthStore((state) => state.user);
   const { t } = useTranslation();
@@ -37,34 +37,34 @@ const WelcomeCard = ({
             <Box
               sx={{
                 textAlign: {
-                  xs: 'center',
-                  sm: 'left',
+                  xs: "center",
+                  sm: "left",
                 },
               }}
             >
               <Typography variant="h5">
-                {t('statistic.welcomeBack', {
-                  name: `${user?.firstname} ${user?.lastname}`,
+                {t("statistics.welcomeBack", {
+                  name: `${user?.username}`,
                 })}
               </Typography>
-              <Stack direction={'row'} gap={2} pt={3}>
+              <Stack direction={"row"} gap={2} pt={3}>
                 <Box>
-                  <Stack direction={'row'} gap={1}>
-                    <Typography variant="h2">{totalIncome}</Typography>
+                  <Stack direction={"row"} gap={1}>
+                    <Typography variant="h2">{conversionToday}</Typography>
                     <IconArrowUpRight color="#39B69A" />
                   </Stack>
                   <Typography variant="caption" color="GrayText">
-                    {t('statistic.totalSpentByWorkers')}
+                    {t("statistics.conversionToday")}
                   </Typography>
                 </Box>
-                <Divider orientation="vertical" sx={{ color: 'black' }} />
+                <Divider orientation="vertical" sx={{ color: "black" }} />
                 <Box>
-                  <Stack direction={'row'} gap={1}>
-                    <Typography variant="h2">{totalDiscountSavings}</Typography>
+                  <Stack direction={"row"} gap={1}>
+                    <Typography variant="h2">{conversionRateToday}</Typography>
                     <IconArrowUpRight color="#39B69A" />
                   </Stack>
                   <Typography variant="caption" color="GrayText">
-                    {t('statistic.totalDiscountSavingsByWorkers')}
+                    {t("statistics.conversionRateToday")}
                   </Typography>
                 </Box>
               </Stack>
@@ -72,7 +72,7 @@ const WelcomeCard = ({
           </Grid>
           <Grid item sm={5}>
             <Box mb="-90px">
-              <img src={welcomeImg} alt={welcomeImg} width={'300px'} />
+              <img src={welcomeImg} alt={welcomeImg} width={"300px"} />
             </Box>
           </Grid>
         </Grid>

@@ -27,7 +27,6 @@ export const useProductFilterStore = create<ProductFilterState>((set) => ({
   resetFilter: () =>
     set((state) => ({
       filter: {
-        ...state.filter,
         country_code: undefined,
         type: undefined,
         category: undefined,

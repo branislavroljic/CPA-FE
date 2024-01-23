@@ -66,7 +66,7 @@ const Customizer: FC = () => {
     {
       id: 1,
       bgColor: '#5D87FF',
-      disp: 'BLUE_THEME',
+      disp: 'ORANGE_THEME',
     },
   ];
 

@@ -1,0 +1,16 @@
+{
+  "title": "Statistika",
+  "welcomeBack": "Dobrodošli nazad {{name}}!",
+  "today": "Danas",
+  "yesterday": "Juče",
+  "thisWeek": "Ove nedelje",
+  "thisMonth": "Ovog meseca",
+  "revenue": "Prihod",
+  "hold": "Zadržavanje",
+  "conversionRate": "Stopa konverzije",
+  "conversion": "Konverzija",
+  "requested": "Zahtevano",
+  "conversionRateToday": "Današnja stopa konverzije",
+  "conversionToday": "Današnja konverzija",
+  "statistics" : "Statistika"
+}

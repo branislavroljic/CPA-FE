@@ -14,6 +14,8 @@ import companyTrans from "./company.json";
 import orderTrans from "./order.json";
 import reportsTrans from "./reports.json";
 import postbackTrans from "./postback.json";
+import statisticsTrans from "./statistics.json";
+import productTrans from "./product.json";
 
 const bsResources = {
   translation: {
@@ -33,6 +35,8 @@ const bsResources = {
     order: orderTrans,
     reports: reportsTrans,
     postback: postbackTrans,
+    statistics: statisticsTrans,
+    products: productTrans,
   },
 };
 

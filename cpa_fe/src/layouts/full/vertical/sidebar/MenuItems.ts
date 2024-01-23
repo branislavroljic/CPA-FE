@@ -30,6 +30,7 @@ import {
 } from "@tabler/icons-react";
 import { TFunction } from "i18next";
 import { ConnectWithoutContactOutlined } from "@mui/icons-material";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 
 const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
   [
@@ -39,9 +40,15 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
     },
     {
       id: uniqueId(),
+      title: i18n.t("statistics.title"),
+      icon: DashboardCustomizeOutlinedIcon,
+      href: "/",
+    },
+    {
+      id: uniqueId(),
       title: i18n.t("loginHistory.title"),
       icon: IconHistoryToggle,
-      href: "/",
+      href: "/login-history",
     },
     {
       id: uniqueId(),

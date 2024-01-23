@@ -27,6 +27,7 @@ import {
   getPostbackStatuses,
 } from "@api/enum/enum";
 import PostbackHistoryPage from "@pages/postback-history/PostbackHistoryPage";
+import StatisticsPage from "@pages/statistic/StatisticPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -51,8 +52,19 @@ const browserConfig = createBrowserRouter([
     element: <FullLayout />,
     children: [
       {
-        id: "login_history",
+        id: "dashboard",
         path: "/",
+        children: [
+          {
+            index: true,
+            element: <StatisticsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "login_history",
+        path: "/login-history",
         children: [
           {
             index: true,

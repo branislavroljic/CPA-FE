@@ -22,6 +22,7 @@ import { useProductFilterStore } from "@stores/productStore";
 import { CircleFlag } from "react-circle-flags";
 import { useLoaderData } from "react-router-dom";
 import { Category, Country } from "@api/product/product";
+import { useTranslation } from "react-i18next";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -36,6 +37,7 @@ const MenuProps = {
 
 const ProductFilter = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const loaderData = useLoaderData() as any[];
   const countries = loaderData[0] as Country[];
   const categories = loaderData[1] as Category[];
@@ -69,7 +71,7 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box pl={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-            By category
+            {t("product.byType")}
           </Typography>
           <br />
           {productTypes.map((type, index) => {
@@ -102,7 +104,7 @@ const ProductFilter = () => {
         <Divider></Divider>
         <Box p={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-            By category
+            {t("product.byCategory")}
           </Typography>
           <br />
           <FormControl sx={{ minWidth: 200 }}>
@@ -137,7 +139,7 @@ const ProductFilter = () => {
         </Box>
         <Divider></Divider>
         <Typography variant="h6" px={3} mt={3} pb={2}>
-          By Country
+          {t("product.byCountry")}
         </Typography>
         {/* ------------------------------------------- */}
         {/* Filter By colors */}
@@ -162,7 +164,7 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box p={3}>
           <Button variant="contained" onClick={() => resetFilter()} fullWidth>
-            Reset Filters
+            {t("product.resetFilters")}
           </Button>
         </Box>
       </List>

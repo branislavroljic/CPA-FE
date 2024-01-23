@@ -19,6 +19,7 @@ import { useProductFilterStore } from "@stores/productStore";
 
 import FlatList from "flatlist-react";
 import { CircleFlag } from "react-circle-flags";
+import { Link } from "react-router-dom";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -62,7 +63,7 @@ const ProductList = ({ onClick }: Props) => {
       key={product.id}
     >
       <BlankCard className="hoverCard">
-        <Typography>
+        <Typography component={Link} to={`${product.id}`}>
           <img
             src={`http://localhost:9001/api/product/images/${product.image}`}
             alt="img"
@@ -80,7 +81,7 @@ const ProductList = ({ onClick }: Props) => {
             </Typography>
             <Chip label={product.type} size="small" color="success" />
           </Box>
-          <Stack mt={1} direction="row" alignItems="center">
+          <Stack mt={1} direction="row" alignItems="center" gap={1}>
             {product.categories.map((category) => (
               <Chip
                 label={category.name}
