@@ -174,6 +174,11 @@ const registerCompanySchema = z.object({
       field: "Chat service",
     }),
   }),
+  chatServiceUsername: z.string({
+    required_error: i18n.t("util.required.male", {
+      field: "Chat service username",
+    }),
+  }),
   referralUserId: z.coerce.number().optional(),
 });
 
@@ -442,7 +447,6 @@ const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
                         marginTop: "0px",
                         marginBottom: "0px",
                       }}
-                      label={"Chat service"}
                       margin="normal"
                       variant="outlined"
                       error={errors.chatService !== undefined}
@@ -450,6 +454,27 @@ const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
                       required
                     />
                   )}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={6}>
+            <CustomFormLabel htmlFor="chatServiceUsername">
+              {t("login.usernameLabel")}
+            </CustomFormLabel>
+            <Controller
+              control={control}
+              name="chatServiceUsername"
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  error={errors.chatServiceUsername !== undefined}
+                  helperText={errors.chatServiceUsername?.message}
+                  required
+                  variant="outlined"
+                  fullWidth
+                  id="chatServiceUsername"
+                  {...field}
                 />
               )}
             />

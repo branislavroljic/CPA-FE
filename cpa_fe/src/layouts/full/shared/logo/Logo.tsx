@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import LogoDark from "/src/assets/images/logos/dark-logo.svg?react";
-import LogoLight from "/src/assets/images/logos/light-logo.svg?react";
+import LogoDark from "/src/assets/images/logos/klixlead_logo  .svg?react";
+import LogoLight from "/src/assets/images/logos/klixlead_logo.svg?react";
 import { styled } from "@mui/material";
 import { useCustomizerStore } from "@stores/customizerStore";
 

@@ -128,6 +128,11 @@ const registerSchema = z.object({
       field: "Chat service",
     }),
   }),
+  chatServiceUsername: z.string({
+    required_error: i18n.t("util.required.male", {
+      field: "Chat service username",
+    }),
+  }),
   referralUserId: z.coerce.number().optional(),
 });
 
@@ -229,7 +234,7 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
               )}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={6}>
+          <Grid item xs={12} sm={12} lg={12}>
             <CustomFormLabel htmlFor="country" sx={{ marginTop: "0px" }}>
               {t("company.country")}
             </CustomFormLabel>
@@ -285,10 +290,10 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
                     <TextField
                       {...params}
                       sx={{
-                        marginTop: "0px",
+                        marginTop: "0px !important",
                         marginBottom: "0px",
+                        padding: "0px !important",
                       }}
-                      label={"Chat service"}
                       margin="normal"
                       variant="outlined"
                       error={errors.chatService !== undefined}
@@ -300,6 +305,29 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
               )}
             />
           </Grid>
+
+          <Grid item xs={12} sm={6} lg={6}>
+            <CustomFormLabel htmlFor="chatServiceUsername">
+              {t("login.usernameLabel")}
+            </CustomFormLabel>
+            <Controller
+              control={control}
+              name="chatServiceUsername"
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  error={errors.chatServiceUsername !== undefined}
+                  helperText={errors.chatServiceUsername?.message}
+                  required
+                  variant="outlined"
+                  fullWidth
+                  id="chatServiceUsername"
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+
           <Grid item xs={12} sm={12} lg={12}>
             <CustomFormLabel htmlFor="email">{t("user.email")}</CustomFormLabel>
             <Controller

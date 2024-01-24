@@ -78,7 +78,7 @@ export default function PostbackTable() {
     return getEditIcon<Postback>((item) => {
       openModal(Object.assign(item), updatePostback, true);
     });
-  }, []);
+  }, [openModal]);
 
   const deleteButton = useMemo(() => {
     return getDeleteIcon<Postback>((id) => {

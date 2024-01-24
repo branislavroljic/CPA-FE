@@ -39,8 +39,8 @@ const ProductFilter = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const loaderData = useLoaderData() as any[];
-  const countries = loaderData[0] as Country[];
-  const categories = loaderData[1] as Category[];
+  const countries = (loaderData[0] as Country[]) ?? [];
+  const categories = (loaderData[1] as Category[]) ?? [];
   const productTypes = ["BASIC", "REGULAR", "VIP"];
 
   const {
@@ -153,6 +153,7 @@ const ProductFilter = () => {
                   height="25"
                   key={country.name}
                   onClick={() => updateFilterCountryCode(country.code)}
+                  style={{ ...(country.code.toLowerCase() == filter.country_code ? {borderRadius: "30px", border: "3px solid orange" } : {})}
                 ></CircleFlag>
               );
             })}

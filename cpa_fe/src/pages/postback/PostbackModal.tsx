@@ -34,8 +34,8 @@ export default function PostbackModal() {
   const loaderData = useLoaderData() as unknown[];
   const statuses = loaderData[0] as string[];
   const methods = loaderData[1] as string[];
-  const levels = loaderData[2] as string[];
-  const products = loaderData[3] as { id: number; name: string }[];
+  const levels = (loaderData[2] as string[]) ?? [];
+  const products = (loaderData[3] as { id: number; name: string }[]) ?? [];
 
   const events = useMemo(() => ["REQUESTED", "TRASH", "CANCELLED", "DONE"], []);
   const urlValues = useMemo(
@@ -387,8 +387,8 @@ export default function PostbackModal() {
                 onChange={(event, item) => {
                   onChange(item);
                 }}
-                value={levels.find((m) => m === value)}
-                options={levels}
+                value={levels?.find((m) => m === value)}
+                options={levels ?? []}
                 getOptionLabel={(option) => option}
                 renderInput={(params) => (
                   <TextField
