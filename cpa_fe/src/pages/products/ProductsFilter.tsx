@@ -149,11 +149,16 @@ const ProductFilter = () => {
             {countries.map((country: Country) => {
               return (
                 <CircleFlag
-                  countryCode={country.code.toLowerCase()}
+                  countryCode={country?.code?.toLowerCase()}
                   height="25"
                   key={country.name}
-                  onClick={() => updateFilterCountryCode(country.code)}
-                  style={{ ...(country.code.toLowerCase() == filter.country_code ? {borderRadius: "30px", border: "3px solid orange" } : {})}
+                  onClick={() => updateFilterCountryCode(country?.code)}
+                  style={{
+                    ...(country?.code?.toLowerCase() ==
+                    filter.country_code?.toLocaleLowerCase()
+                      ? { borderRadius: "30px", border: "3px solid orange" }
+                      : {}),
+                  }}
                 ></CircleFlag>
               );
             })}

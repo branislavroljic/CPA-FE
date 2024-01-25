@@ -1,7 +1,16 @@
-import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Chip,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useCustomizerStore } from "@stores/customizerStore";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import { TrendingDown } from "@mui/icons-material";
 
 export type StatisticsCardType = {
   today: string;
@@ -14,9 +23,15 @@ export type StatisticsCardProps = {
   title: string;
   item: StatisticsCardType;
   icon: ReactNode;
+  percentage: number;
 };
 
-const StatisticsCard = ({ title, item, icon }: StatisticsCardProps) => {
+const StatisticsCard = ({
+  title,
+  item,
+  icon,
+  percentage,
+}: StatisticsCardProps) => {
   const { t } = useTranslation();
   const isCardShadow = useCustomizerStore((state) => state.isCardShadow);
 
@@ -48,6 +63,21 @@ const StatisticsCard = ({ title, item, icon }: StatisticsCardProps) => {
             {title}
           </Typography>
         </Stack>
+        {percentage > 0 ? (
+          <Chip
+            label={`${percentage}%`}
+            color="success"
+            icon={<TrendingUpIcon />}
+          ></Chip>
+        ) : percentage < 0 ? (
+          <Chip
+            label={`${percentage}%`}
+            color="error"
+            icon={<TrendingDown />}
+          ></Chip>
+        ) : (
+          <Chip label={`${percentage}%`} color="warning"></Chip>
+        )}
       </Stack>
       <Divider variant="middle" />
       <CardContent sx={{ padding: "0px !important", marginTop: "12px" }}>

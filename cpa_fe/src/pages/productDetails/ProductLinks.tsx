@@ -10,6 +10,8 @@ import {
   IconButton,
   TextField,
   Button,
+  Stack,
+  Chip,
 } from "@mui/material";
 import ChildCard from "@ui/shared/ChildCard";
 import { LandingPage, ProductDetails } from "@api/product/product";
@@ -17,6 +19,7 @@ import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import { DefaultCopyField } from "@eisberg-labs/mui-copy-field";
 import { IconExternalLink } from "@tabler/icons-react";
 import OrderForm from "./OrderForm";
+import useAuthStore from "@stores/authStore";
 
 const a11yProps = (index: number) => {
   return {
@@ -55,6 +58,7 @@ interface SubValues {
 
 const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const [value, setValue] = React.useState(0);
+  const { user } = useAuthStore();
   product.offerURL = "https://www.google.com/";
   const initialOfferURL = useMemo(
     () => (product.offerURL ? new URL(product.offerURL) : null),
@@ -263,6 +267,152 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                         </Button>
                       ))}
                     </Box>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Grid>
+          </Grid>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <CardContent>
+                <Typography variant="h5" mb={3}>
+                  {"API REQUEST"}
+                </Typography>
+                <Divider />
+
+                <Grid container spacing={3} mt={1}>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Typography>REQUEST BODY PARAMS</Typography>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {`"apiKey": "${user?.apiKey}", 
+                      "name":STRING ("Donald"),
+                      "phoneNumber": STRING || NUMBER ("479-200-8330" || 4792008330), 
+                      "productId": "653",
+                      "countryCode": STRING ("US"), 
+                      "baseUrl": STRING ("https || http"://domain.com), 
+                      "referrer": STRING ("https ||http"://domain.com?page=order), 
+                      "userIp": STRING ("20.174.42.73")`}
+                    </pre>
+                  </Grid>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Stack direction={"row"} justifyContent={"space-between"}>
+                      <Typography>REQUEST EXAMPLE</Typography>
+                      <Chip label="HTTP" color="primary" />
+                    </Stack>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {` POST /api/v1/orders/create/ HTTP/1.1
+                          Host: https://api.monadlead.com
+                          Content-Type: application/json
+                          {
+                          "apiKey": "54a42b948d9c93bcc638eaa4ff550836",
+                          "name": "INSERT_NAME_FROM_FORM",
+                          "phoneNumber": "INSERT_PHONE_FROM_FORM",
+                          "offerId": "653",
+                          "countryCode": "INSERT_COUNTRY_CODE_FROM_LP",
+                          "baseUrl": "INSERT_YOUR_DOMAIN",
+                          "referrer": "INSERT_YOUR_REFERRER_DOMAIN",
+                          "userIp": "INSERT_CLIENT_IP_FROM_LP"
+                          }`}
+                    </pre>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <CardContent>
+                <Typography variant="h5" mb={3}>
+                  {"API RESPONSE"}
+                </Typography>
+                <Divider />
+                <Grid container spacing={3} mt={1}>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Typography>RESPONSE CODE 200</Typography>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {`{
+                          "type": "success",
+                          "orderId": RETURNED_ORDER_ID
+                        }`}
+                    </pre>
+                  </Grid>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Typography>RESPONSE CODE 400</Typography>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {`{
+                      "type": "error",
+                      "field": "FIRST_FOUND_INVALID_FIELD",
+                      "reason": "the field is incorrect||empty||wrong format||not found"
+                    }`}
+                    </pre>
+                  </Grid>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Typography>RESPONSE CODE 405</Typography>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {`Only POST method allowed`}
+                    </pre>
+                  </Grid>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Typography>RESPONSE CODE 406</Typography>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {`Wrong request body (form data, binary...). Only JSON body allowed`}
+                    </pre>
+                  </Grid>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Typography>RESPONSE CODE 500</Typography>
+                    <pre
+                      style={{
+                        backgroundColor: "rgb(242, 244, 244)",
+                        whiteSpace: "pre-line",
+                        padding: "20px",
+                        fontSize: "small",
+                      }}
+                    >
+                      {`Something went very wrong!!!`}
+                    </pre>
                   </Grid>
                 </Grid>
               </CardContent>

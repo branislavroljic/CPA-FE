@@ -54,7 +54,7 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
             indicatorColor="primary"
           >
             <Tab label="Info" {...a11yProps(0)} />
-            <Tab label="Countries" {...a11yProps(1)} />
+            <Tab label="Country" {...a11yProps(1)} />
           </Tabs>
         </Box>
         {/* ------------------------------------------- */}

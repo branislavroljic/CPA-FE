@@ -14,11 +14,12 @@ const TopCards = ({ data }: TopCardsProps) => {
       justifyContent={"center"}
     >
       {data.map((topcard, i) => (
-        <Grid item xs={12} sm={6} lg={6} key={i}>
+        <Grid item xs={12} sm={4} lg={4} key={i}>
           <StatisticsCard
             title={topcard.title}
             item={topcard.item}
             icon={topcard.icon}
+            percentage={topcard.percentage}
           />
         </Grid>
       ))}

@@ -96,7 +96,7 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
       id: uniqueId(),
       title: "Postback",
       icon: IconChartAreaLine,
-      href: "/postback/rule",
+      href: "/postback/",
       children: [
         {
           id: uniqueId(),
@@ -112,16 +112,16 @@ const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
         },
       ],
     },
-    {
-      navlabel: true,
-      subheader: t("util.info").toUpperCase(),
-    },
-    {
-      id: uniqueId(),
-      title: "Prijava grešaka",
-      icon: IconBug,
-      href: "/issue-tickets",
-    },
+    // {
+    //   navlabel: true,
+    //   subheader: t("util.info").toUpperCase(),
+    // },
+    // {
+    //   id: uniqueId(),
+    //   title: "Prijava grešaka",
+    //   icon: IconBug,
+    //   href: "/issue-tickets",
+    // },
   ] as MenuitemsType[];
 
 export default Menuitems;

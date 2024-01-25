@@ -12,5 +12,7 @@
   "requested": "Zahtevano",
   "conversionRateToday": "Današnja stopa konverzije",
   "conversionToday": "Današnja konverzija",
-  "statistics" : "Statistika"
+  "statistics" : "Statistika",
+  "cancelled" : "Otkazano",
+  "trash" : "Otpad"
 }

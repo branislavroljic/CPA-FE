@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 // MUI Elements
-import { Box, Typography, Chip, Grid, Divider } from "@mui/material";
+import { Box, Typography, Chip, Grid, Divider, Stack } from "@mui/material";
 
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import PageContainer from "@ui/container/PageContainer";
@@ -98,7 +98,13 @@ const ProductDetailsPage = () => {
                       {/* ------------------------------------------- */}
                       {/* Categories */}
                       {/* ------------------------------------------- */}
-                      <Box display="flex" alignItems="center" mt={1} mb={1}>
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        mt={1}
+                        mb={1}
+                        gap={1}
+                      >
                         {productDetails.categories.map((category) => (
                           <Chip label={category.name} size="small" />
                         ))}
@@ -123,7 +129,25 @@ const ProductDetailsPage = () => {
           <ProductInfo product={productDetails} />
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>
-          <ProductLinks product={productDetails} />
+          {productDetails.type == "VIP" ? (
+            <Stack spacing={2}>
+              <Divider >
+                <Typography variant="h4">Request VIP access</Typography>
+              </Divider>
+
+              <Typography
+                variant="body2"
+                fontSize={"medium"}
+                fontStyle={"oblique"}
+                color={"gray"}
+              >
+                This is a VIP offer and you need to have access in order to
+                advertise it. Please contact your account manager.
+              </Typography>
+            </Stack>
+          ) : (
+            <ProductLinks product={productDetails} />
+          )}
         </Grid>
       </Grid>
     </PageContainer>

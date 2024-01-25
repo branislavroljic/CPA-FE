@@ -21,6 +21,7 @@ export type AccountManager = {
 
 export type User = {
   id: number;
+  apiKey: string;
   username: string;
   email?: string;
   roles: string[];
@@ -77,7 +78,7 @@ export type Referral = {
 export type Order = {
   id: number;
   time: string;
-  status: "REQUESTED" | "IN_TRANSPORT" | "REJECTED" | "DONE";
+  status: "REQUESTED" | "TRASH" | "CANCELLED" | "DONE";
   name: string;
   country: string;
   address: string;
@@ -138,17 +139,31 @@ export type DasboardData = {
   conversionsThisWeek: number;
   conversionsThisMonth: number;
   conversionRateToday: number;
+  conversionsPercentage: number;
   conversionRateYesterday: number;
   conversionRateThisWeek: number;
   conversionRateThisMonth: number;
+  conversionRatePercentage: number;
   requestedToday: number;
   requestedYesterday: number;
   requestedThisWeek: number;
   requestedThisMonth: number;
+  requestedPercentage: number;
   revenueToday: number;
   revenueYesterday: number;
   revenueThisWeek: number;
   revenueThisMonth: number;
+  revenuePercentage: number;
+  cancelledToday: number;
+  cancelledYesterday: number;
+  cancelledThisWeek: number;
+  cancelledThisMonth: number;
+  cancelledPercentage: number;
+  trashToday: number;
+  trashYesterday: number;
+  trashThisWeek: number;
+  trashThisMonth: number;
+  trashPercentage: number;
 };
 
 export type StatisticsReport = {

@@ -35,11 +35,15 @@ const defaultColumns = (
       accessorKey: "status",
       header: t("postback.status"),
       Cell: ({ renderedCellValue, row }) =>
-        row.original.status === "ACTIVE" ? (
+        row.original.status === "200" ? (
           <Chip label={renderedCellValue} color="success" />
         ) : (
           <Chip label={renderedCellValue} color="error" />
         ),
+    },
+    {
+      accessorKey: "productName",
+      header: t("postback.productName"),
     },
     {
       accessorKey: "time",

@@ -5,11 +5,13 @@ const baselightTheme = {
       main: "#EE9D05",
       light: "#e8ca92",
       dark: "#b07507",
+      contrastText: "#ffffff",
     },
     secondary: {
       main: "#2B4187",
       light: "#88a3f7",
       dark: "#061c61",
+      contrastText: "#ffffff",
     },
     success: {
       main: "#13DEB9",
@@ -71,11 +73,13 @@ const baseDarkTheme = {
       main: "#5D87FF",
       light: "#ECF2FF",
       dark: "#4570EA",
+      contrastText: "#ffffff",
     },
     secondary: {
       main: "#777e89",
       light: "#1C455D",
       dark: "#173f98",
+      contrastText: "#ffffff",
     },
     success: {
       main: "#13DEB9",

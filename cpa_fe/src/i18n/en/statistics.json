@@ -12,5 +12,7 @@
   "requested": "Requested",
   "conversionRateToday": "Conversion rate today",
   "conversionToday": "Conversion today",
-  "statistics" : "Statistics"
+  "statistics" : "Statistics",
+  "cancelled" : "Cancelled",
+  "trash" : "Trash"
 }

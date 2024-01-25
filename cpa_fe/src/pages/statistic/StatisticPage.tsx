@@ -17,6 +17,8 @@ import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 import PercentIcon from "@mui/icons-material/Percent";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { StatisticsCardProps } from "@ui/shared/StatisticsCard";
 import WelcomeCard from "./WelcomeCard";
 import AreaChart, { AreaChartProp } from "@ui/dashboard/AreaChart";
@@ -78,16 +80,18 @@ export default function StatisticsPage() {
           thisWeek: `${dashboardData?.conversionsThisWeek}`,
           thisMonth: `${dashboardData?.conversionsThisMonth}`,
         },
+        percentage: dashboardData?.conversionsPercentage,
       },
       {
         icon: <PercentIcon />,
         title: t("statistics.conversionRate"),
         item: {
-          today: `${dashboardData?.conversionRateToday}%`,
-          yesterday: `${dashboardData?.conversionRateYesterday}%`,
-          thisWeek: `${dashboardData?.conversionRateThisWeek}%`,
-          thisMonth: `${dashboardData?.conversionRateThisMonth}%`,
+          today: `${dashboardData?.conversionRateToday.toFixed(2)}%`,
+          yesterday: `${dashboardData?.conversionRateYesterday.toFixed(2)}%`,
+          thisWeek: `${dashboardData?.conversionRateThisWeek.toFixed(2)}%`,
+          thisMonth: `${dashboardData?.conversionRateThisMonth.toFixed(2)}%`,
         },
+        percentage: dashboardData?.conversionRatePercentage,
       },
       {
         icon: <PauseRoundedIcon />,
@@ -98,6 +102,7 @@ export default function StatisticsPage() {
           thisWeek: dashboardData?.requestedThisWeek,
           thisMonth: dashboardData?.requestedThisMonth,
         },
+        percentage: dashboardData?.requestedPercentage,
       },
       {
         icon: <LocalAtmOutlinedIcon />,
@@ -108,6 +113,29 @@ export default function StatisticsPage() {
           thisWeek: `$${dashboardData?.revenueThisWeek}`,
           thisMonth: `$${dashboardData?.revenueThisMonth}`,
         },
+        percentage: dashboardData?.revenuePercentage,
+      },
+      {
+        icon: <CloseIcon />,
+        title: t("statistics.cancelled"),
+        item: {
+          today: `${dashboardData?.cancelledToday}`,
+          yesterday: `${dashboardData?.cancelledYesterday}`,
+          thisWeek: `${dashboardData?.cancelledThisWeek}`,
+          thisMonth: `${dashboardData?.cancelledThisMonth}`,
+        },
+        percentage: dashboardData?.cancelledPercentage,
+      },
+      {
+        icon: <DeleteOutlineIcon />,
+        title: t("statistics.trash"),
+        item: {
+          today: `${dashboardData?.trashToday}`,
+          yesterday: `${dashboardData?.trashYesterday}`,
+          thisWeek: `${dashboardData?.trashThisWeek}`,
+          thisMonth: `${dashboardData?.trashThisMonth}`,
+        },
+        percentage: dashboardData?.trashPercentage,
       },
     ] as StatisticsCardProps[];
   }, [dashboardData, t]);
