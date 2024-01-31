@@ -28,6 +28,7 @@ export type User = {
   token: string;
   refreshToken: string;
   accountManager?: AccountManager;
+  referrerLink?: string;
 };
 
 export type LoginHistory = {

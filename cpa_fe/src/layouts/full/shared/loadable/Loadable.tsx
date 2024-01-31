@@ -1,5 +1,5 @@
-import Spinner from '@ui/view/spinner/Spinner';
-import React, { Suspense } from 'react';
+import Spinner from "@ui/view/spinner/Spinner";
+import { Suspense } from "react";
 
 // project imports
 

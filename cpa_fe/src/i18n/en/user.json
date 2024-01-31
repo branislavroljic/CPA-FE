@@ -25,5 +25,9 @@
   "confirmPassword": "Confirm Password",
   "sameAsOldPasswordError": "New password must be different from the old one",
   "passwordsDidNotMatchError": "Passwords do not match",
-  "country": "Country"
+  "country": "Country",
+  "account": "Account",
+  "links": "Links",
+  "companySettings": "Company settings",
+  "referralLink" : "Referral link"
 }

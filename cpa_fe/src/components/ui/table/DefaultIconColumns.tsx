@@ -9,8 +9,8 @@ export interface IconItem {
 export function getEditIcon<T extends IconItem>(onClick: (item: T) => void) {
   const editIcon = (
     item: T,
-    key: string,
-    t: TFunction<"translation", undefined, "translation">
+    _key: string,
+    t: TFunction<"translation", "translation">
   ) => {
     return (
       <>
@@ -36,8 +36,8 @@ export function getDeleteIcon<T extends IconItem>(
 ) {
   const deleteIcon = (
     item: T,
-    key: string,
-    t: TFunction<"translation", undefined, "translation">
+    _key: string,
+    t: TFunction<"translation", "translation">
   ) => {
     return (
       <>

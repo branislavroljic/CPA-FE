@@ -5,25 +5,23 @@ import {
   IconButton,
   Tooltip,
   useMediaQuery,
-} from '@mui/material';
+} from "@mui/material";
 
-import ProfileImg from '/src/assets/images/profile/user-1.jpg';
-import { IconPower } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
-import { AppState, useSelector } from '../../../../../store/Store';
-import useAuthStore from '@stores/authStore';
-import { USER_KEY } from '@api/auth';
-import { t } from 'i18next';
-import { useCustomizerStore } from '@stores/customizerStore';
+import ProfileImg from "/src/assets/images/profile/user-1.jpg";
+import { IconPower } from "@tabler/icons-react";
+import useAuthStore from "@stores/authStore";
+import { USER_KEY } from "@api/auth";
+import { t } from "i18next";
+import { useCustomizerStore } from "@stores/customizerStore";
 
 export const Profile = () => {
   const { user, deleteUser } = useAuthStore((state) => state);
 
   const customizer = useCustomizerStore((state) => state);
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
   const hideMenu = lgUp
     ? customizer.isCollapse && !customizer.isSidebarHover
-    : '';
+    : "";
 
   const handleLogout = () => {
     {
@@ -42,28 +40,20 @@ export const Profile = () => {
 
   return (
     <Box
-      display={'flex'}
+      display={"flex"}
       alignItems="center"
       gap={2}
-      sx={{ m: 3, p: 2, bgcolor: `${'secondary.light'}` }}
+      sx={{ m: 3, p: 2, bgcolor: `${"secondary.light"}` }}
     >
       {!hideMenu ? (
         <>
-          <Avatar
-            src={
-              user?.imageBytes
-                ? `data:image/${user?.imageType};base64,${user?.imageBytes}`
-                : ProfileImg
-            }
-            alt={ProfileImg}
-          />
+          <Avatar src={ProfileImg} alt={ProfileImg} />
 
           <Box>
-            <Typography variant="h6">{user?.firstname} </Typography>
-            <Typography variant="caption">{user?.username}</Typography>
+            <Typography variant="h6">{user?.username} </Typography>
           </Box>
-          <Box sx={{ ml: 'auto' }}>
-            <Tooltip title={t('login.logout')} placement="top">
+          <Box sx={{ ml: "auto" }}>
+            <Tooltip title={t("login.logout")} placement="top">
               <IconButton
                 color="primary"
                 onClick={handleLogout}
@@ -76,7 +66,7 @@ export const Profile = () => {
           </Box>
         </>
       ) : (
-        ''
+        ""
       )}
     </Box>
   );

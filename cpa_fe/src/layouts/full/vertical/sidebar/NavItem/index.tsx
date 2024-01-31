@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { NavLink } from 'react-router-dom';
 
 // mui imports
@@ -13,7 +13,6 @@ import {
   ListItemButton,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { AppState, useSelector } from '../../../../../store/Store';
 import { useCustomizerStore } from '@stores/customizerStore';
 
 type NavGroup = {

@@ -1,7 +1,6 @@
-import React from 'react';
+
 
 import { Card } from '@mui/material';
-import { AppState, useSelector } from '../../../store/Store';
 import { useCustomizerStore } from '@stores/customizerStore';
 
 type Props = {

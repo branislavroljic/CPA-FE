@@ -2,9 +2,7 @@ import { MRT_ColumnDef } from "material-react-table";
 import { TFunction } from "i18next";
 import { BalanceOrder } from "@api/user/user";
 
-const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
-) =>
+const defaultColumns = (t: TFunction<"translation", "translation">) =>
   [
     {
       accessorKey: "orderId",

@@ -6,35 +6,34 @@ import {
   Toolbar,
   styled,
   Stack,
-} from '@mui/material';
+} from "@mui/material";
 
-import { IconMenu2 } from '@tabler/icons-react';
-import Profile from './Profile';
-import Search from './Search';
-import Language from './Language';
-import { useCustomizerStore } from '@stores/customizerStore';
-import Notifications from './UserNotification';
-import Customizer from '@layout/full/shared/customizer/Customizer';
+import { IconMenu2 } from "@tabler/icons-react";
+import Profile from "./Profile";
+import Search from "./Search";
+import Language from "./Language";
+import { useCustomizerStore } from "@stores/customizerStore";
+import Customizer from "@layout/full/shared/customizer/Customizer";
+import Navigation from "./Navigation";
 
 const Header = () => {
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
-  const lgDown = useMediaQuery((theme: any) => theme.breakpoints.down('lg'));
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
 
   // drawer
   const customizer = useCustomizerStore();
   // const dispatch = useDispatch();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
-    boxShadow: 'none',
+    boxShadow: "none",
     background: theme.palette.background.paper,
-    justifyContent: 'center',
-    backdropFilter: 'blur(4px)',
-    [theme.breakpoints.up('lg')]: {
+    justifyContent: "center",
+    backdropFilter: "blur(4px)",
+    [theme.breakpoints.up("lg")]: {
       minHeight: customizer.TopbarHeight,
     },
   }));
   const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
-    width: '100%',
+    width: "100%",
     color: theme.palette.text.secondary,
   }));
 
@@ -60,7 +59,11 @@ const Header = () => {
         {/* Search Dropdown */}
         {/* ------------------------------------------- */}
         <Search />
-        {lgUp ? <>{/* <Navigation /> */}</> : null}
+        {lgUp ? (
+          <>
+            <Navigation />
+          </>
+        ) : null}
 
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
@@ -79,7 +82,7 @@ const Header = () => {
 
           {/* {lgDown ? <MobileRightSidebar /> : null} */}
           <Profile />
-          <Customizer/>
+          <Customizer />
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

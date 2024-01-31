@@ -71,7 +71,7 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box pl={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-            {t("product.byType")}
+            {t("products.byType")}
           </Typography>
           <br />
           {productTypes.map((type, index) => {
@@ -104,7 +104,7 @@ const ProductFilter = () => {
         <Divider></Divider>
         <Box p={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-            {t("product.byCategory")}
+            {t("products.byCategory")}
           </Typography>
           <br />
           <FormControl sx={{ minWidth: 200 }}>
@@ -139,7 +139,7 @@ const ProductFilter = () => {
         </Box>
         <Divider></Divider>
         <Typography variant="h6" px={3} mt={3} pb={2}>
-          {t("product.byCountry")}
+          {t("products.byCountry")}
         </Typography>
         {/* ------------------------------------------- */}
         {/* Filter By colors */}
@@ -170,7 +170,7 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box p={3}>
           <Button variant="contained" onClick={() => resetFilter()} fullWidth>
-            {t("product.resetFilters")}
+            {t("products.resetFilters")}
           </Button>
         </Box>
       </List>

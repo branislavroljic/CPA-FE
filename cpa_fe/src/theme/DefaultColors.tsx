@@ -3,13 +3,13 @@ const baselightTheme = {
   palette: {
     primary: {
       main: "#EE9D05",
-      light: "#e8ca92",
+      light: "#ffd991",
       dark: "#b07507",
       contrastText: "#ffffff",
     },
     secondary: {
       main: "#2B4187",
-      light: "#88a3f7",
+      light: "#77befc",
       dark: "#061c61",
       contrastText: "#ffffff",
     },

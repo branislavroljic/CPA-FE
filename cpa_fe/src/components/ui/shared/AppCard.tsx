@@ -1,8 +1,6 @@
-import React from 'react';
 
-import { Card } from '@mui/material';
-import { AppState, useSelector } from '../../../store/Store';
-import { useCustomizerStore } from '@stores/customizerStore';
+import { Card } from "@mui/material";
+import { useCustomizerStore } from "@stores/customizerStore";
 
 type Props = {
   children: JSX.Element | JSX.Element[];
@@ -13,9 +11,9 @@ const AppCard = ({ children }: Props) => {
   const isCardShadow = useCustomizerStore((state) => state.isCardShadow);
   return (
     <Card
-      sx={{ display: 'flex', p: 0 }}
+      sx={{ display: "flex", p: 0 }}
       elevation={isCardShadow ? 9 : 0}
-      variant={!isCardShadow ? 'outlined' : undefined}
+      variant={!isCardShadow ? "outlined" : undefined}
     >
       {children}
     </Card>

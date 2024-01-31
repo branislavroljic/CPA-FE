@@ -19,7 +19,6 @@ import i18n from "../../../../i18n";
 
 import {
   IconBasket,
-  IconBug,
   IconChartAreaLine,
   IconCoin,
   IconHistoryToggle,
@@ -32,7 +31,7 @@ import { TFunction } from "i18next";
 import { ConnectWithoutContactOutlined } from "@mui/icons-material";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 
-const Menuitems = (t: TFunction<"translation", undefined, "translation">) =>
+const Menuitems = (t: TFunction<"translation", "translation">) =>
   [
     {
       navlabel: true,

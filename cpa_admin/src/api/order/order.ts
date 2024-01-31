@@ -39,7 +39,6 @@ export function getOrders(
 ): Promise<Page<Order>> {
   return get(
     addPaginationParams(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       addFilterParams(baseUrl, filter ?? (null as any)),
       pagination
     )

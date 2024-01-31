@@ -335,7 +335,7 @@ const LinkForms = () => {
                   }}
                   htmlFor="whatsappLink"
                 >
-                  {t("links.skypeLink")}
+                  {t("links.whatsappLink")}
                 </CustomFormLabel>
                 <Controller
                   control={controlMessagingLinks}

@@ -1,10 +1,10 @@
-import React from "react";
 import { Box } from "@mui/material";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import PageContainer from "@ui/container/PageContainer";
 import AppCard from "@ui/shared/AppCard";
 import ProductsSidebar from "./ProductsSidebar";
 import ProductsList from "./ProductsList";
+import { useState } from "react";
 const BCrumb = [
   {
     to: "/",
@@ -15,7 +15,7 @@ const BCrumb = [
   },
 ];
 const ProductsPage = () => {
-  const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
+  const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
     <PageContainer title="Shop List" description="this is Shop List page">

@@ -59,7 +59,6 @@ const axiosClient = () => {
   instance.interceptors.request.use(function (config) {
     const user = getUserFromStorage();
 
-    console.log(user);
     config.headers.Authorization = user ? `Bearer ${user.token}` : "";
 
     return config;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { UpdateOrderStatus } from "@api/order/order";
 import { AxiosResponse } from "axios";
 import { create } from "zustand";

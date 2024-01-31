@@ -320,7 +320,7 @@ const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
               render={({ field: { onChange, value } }) => (
                 <Autocomplete
                   fullWidth
-                  onChange={(event, item) => {
+                  onChange={(_event, item) => {
                     onChange(item);
                   }}
                   value={restCountiesData?.find((c) => c === value)}
@@ -434,7 +434,7 @@ const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
                 <Autocomplete
-                  onChange={(event, item) => {
+                  onChange={(_event, item) => {
                     onChange(item);
                   }}
                   value={chatServices.find((m) => m === value)}

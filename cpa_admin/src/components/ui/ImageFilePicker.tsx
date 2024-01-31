@@ -1,11 +1,8 @@
-import * as React from 'react';
+
 import { useController, Control } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { Box, IconButton, Typography } from '@mui/material';
 import { DeleteForever, PhotoCamera } from '@mui/icons-material';
-import { useTranslation } from 'react-i18next';
-import { InputHTMLAttributes } from 'react';
-
 interface ImageFilePickerProps {
   control: Control<any>;
   name: string;
@@ -31,7 +28,6 @@ const ImageFilePicker: React.FC<ImageFilePickerProps> = ({
     control,
   });
 
-  const { t } = useTranslation();
   const isMultiple = maxFiles > 1;
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
@@ -114,103 +110,3 @@ const ImageFilePicker: React.FC<ImageFilePickerProps> = ({
 };
 
 export default ImageFilePicker;
-
-// interface ImageFilePickerProps extends InputHTMLAttributes<HTMLInputElement> {
-//   // accept: string;
-//   disabled?: boolean;
-//   error?: boolean;
-//   helperText?: string;
-// }
-
-// const ImageFilePicker = React.forwardRef<
-//   HTMLInputElement,
-//   ImageFilePickerProps
-// >(
-//   (
-//     {
-//       // name = '',
-//       disabled = false,
-//       onChange,
-//       value,
-//       error,
-//       helperText,
-//       ...rest
-//     },
-//     ref
-//   ) => {
-//     // const {
-//     //   field: { onChange, value },
-//     //   fieldState: { invalid },
-//     // } = useController({
-//     //   name,
-//     // });
-//     const { t } = useTranslation();
-
-//     const { getRootProps, getInputProps, isDragActive } = useDropzone({
-//       disabled,
-//       accept: {
-//         'image/png': ['.png'],
-//         'image/jpg': ['jpg'],
-//         'image/jpeg': ['jpeg'],
-//       },
-//       onDrop: (acceptedFiles) => {
-//         onChange ? onChange(acceptedFiles[0]) : undefined;
-//       },
-//     });
-
-//     // const handleRemove = () => {
-//     //   onChange(null);
-//     // };
-
-//     return (
-//       <Box>
-//         {/* <Box display="flex" alignItems="center" mb={1}> */}
-//         {/* <Typography variant="body1">{label}</Typography> */}
-//         {/* {value && (
-//           <IconButton size="small" onClick={handleRemove}>
-//             <DeleteForever />
-//           </IconButton>
-//         )} */}
-//         {/* </Box> */}
-//         <Box
-//           sx={{
-//             borderRadius: 1,
-//             border: '1px dashed',
-//             borderColor: 'text.disabled',
-//             p: 1,
-//             textAlign: 'center',
-//             ...(isDragActive && {
-//               borderColor: 'primary.main',
-//               backgroundColor: 'action.hover',
-//             }),
-//             ...(error && {
-//               borderColor: 'error.main',
-//             }),
-//           }}
-//           {...getRootProps()}
-//         >
-//           <input {...getInputProps()} ref={ref} />
-//           {value ? (
-//             <Typography variant="body2">{'nesto'}</Typography>
-//           ) : (
-//             <Typography variant="body2" color="text.secondary">
-//               {t('specialOffer.addImageInstructions')}
-//             </Typography>
-//           )}
-//         </Box>
-//         {helperText && (
-//           <Typography
-//             variant="body2"
-//             color={error ? 'error' : 'text.secondary'}
-//           >
-//             {helperText}
-//           </Typography>
-//         )}
-//       </Box>
-//     );
-//   }
-// );
-
-// ImageFilePicker.displayName = 'ImageFilePicker';
-
-// export default ImageFilePicker;

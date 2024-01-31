@@ -14,7 +14,7 @@ import {
 import * as dropdownData from './data';
 
 import { IconChecks, IconClock, IconMessageDots } from '@tabler/icons';
-import React from 'react';
+
 
 const Message = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);

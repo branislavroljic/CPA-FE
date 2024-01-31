@@ -148,10 +148,10 @@ const ProductFilter = () => {
             {countries.map((country: Country) => {
               return (
                 <CircleFlag
-                  countryCode={country.code.toLowerCase()}
+                  countryCode={country?.code?.toLowerCase()}
                   height="25"
                   key={country.name}
-                  onClick={() => updateFilterCountryCode(country.code)}
+                  onClick={() => updateFilterCountryCode(country?.code)}
                 ></CircleFlag>
               );
             })}

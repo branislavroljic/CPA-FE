@@ -28,7 +28,6 @@ export function restore(baseUrl: string | URL, id: number) {
 }
 export function appendFormDataFromObject(
   formData: FormData,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   obj: any
 ): FormData {
   for (const [key, value] of Object.entries(obj)) {

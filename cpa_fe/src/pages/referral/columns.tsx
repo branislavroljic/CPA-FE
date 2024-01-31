@@ -4,7 +4,7 @@ import { Referral } from "@api/user/user";
 import { Chip } from "@mui/material";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {

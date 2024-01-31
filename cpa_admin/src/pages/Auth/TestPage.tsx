@@ -14,8 +14,6 @@ export default function TestPage() {
     });
 
     if (result.status === 200) {
-      const res = await result.text();
-      console.log(res);
       return;
     }
   }

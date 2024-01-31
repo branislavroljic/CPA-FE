@@ -105,7 +105,7 @@ export default function BalanceBalanceOrderTable() {
                   {
                     id: "dateTime",
                     value: [
-                      newValue[0].$d,
+                      newValue[0] ? newValue[0].$d : new Date().toString(),
                       newValue[1] ? newValue[1].$d : new Date().toString(),
                     ],
                   },

@@ -36,7 +36,7 @@ const enResources = {
     reports: reportsTrans,
     postback: postbackTrans,
     statistics: statisticsTrans,
-    product: productTrans,
+    products: productTrans,
   },
 };
 

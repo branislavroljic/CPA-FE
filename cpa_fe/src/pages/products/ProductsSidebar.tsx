@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Drawer, Theme, useMediaQuery } from "@mui/material";
 import ProductsFilter from "./ProductsFilter";
 

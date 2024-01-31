@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { CardContent, Typography, Button, Box } from '@mui/material';
 import starBg from '/src/assets/images/backgrounds/gold.png';
 import BlankCard from '@ui/shared/BlankCard';

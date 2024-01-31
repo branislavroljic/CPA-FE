@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -10,6 +10,7 @@ import {
   IconButton,
   Stack,
   Tooltip,
+  Snackbar,
 } from "@mui/material";
 
 import { IconMail } from "@tabler/icons-react";
@@ -17,28 +18,54 @@ import { IconMail } from "@tabler/icons-react";
 import ProfileImg from "/src/assets/images/profile/user-1.jpg";
 import { USER_KEY } from "@api/auth";
 import accountIcon from "/src/assets/images/svgs/icon-account.svg";
-import i18n from "../../../../i18n";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
+import { ContentCopy } from "@mui/icons-material";
 
-interface ProfileType {
-  href: string;
-  title: string;
-  subtitle: string;
-  icon: any;
+interface CopyToClipboardButtonProps {
+  textToCopy: string;
 }
-const profileDropdownData: ProfileType[] = [
-  {
-    href: "/user-profile",
-    title: i18n.t("ui.myProfile"),
-    subtitle: i18n.t("ui.accountSettings"),
-    icon: accountIcon,
-  },
-];
+
+const CopyToClipboardButton: React.FC<CopyToClipboardButtonProps> = ({
+  textToCopy,
+}) => {
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(true);
+    navigator.clipboard.writeText(textToCopy);
+  };
+
+  return (
+    <>
+      <IconButton onClick={handleClick}>
+        <ContentCopy color="primary" />
+      </IconButton>
+      <Snackbar
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={2000}
+        message="Copied to clipboard"
+      />
+    </>
+  );
+};
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
   const { user, deleteUser } = useAuthStore((state) => state);
+  const { t } = useTranslation();
+
+  const profileDropdownData = useMemo(
+    () => [
+      {
+        href: "/user-profile",
+        title: t("ui.myProfile"),
+        subtitle: t("ui.accountSettings"),
+        icon: accountIcon,
+      },
+    ],
+    [t]
+  );
 
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
@@ -46,8 +73,6 @@ const Profile = () => {
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
-
-  const { t } = useTranslation();
 
   const handleLogout = () => {
     {
@@ -199,6 +224,45 @@ const Profile = () => {
             </Box>
           </Box>
         ))}
+        <Box key={t("user.referralLink")}>
+          <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
+            <Stack direction="row" spacing={2}>
+              <Box
+                width="45px"
+                height="45px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <CopyToClipboardButton textToCopy={user?.referrerLink ?? ""} />
+              </Box>
+              <Box>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={600}
+                  color="textPrimary"
+                  className="text-hover"
+                  noWrap
+                  sx={{
+                    width: "240px",
+                  }}
+                >
+                  {t("user.referralLink")}
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  variant="subtitle2"
+                  sx={{
+                    width: "240px",
+                  }}
+                  noWrap
+                >
+                  {user?.referrerLink}
+                </Typography>
+              </Box>
+            </Stack>
+          </Box>
+        </Box>
         <Box mt={2}>
           {/* <Box
             bgcolor="primary.light"

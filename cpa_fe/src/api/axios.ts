@@ -58,8 +58,6 @@ const axiosClient = () => {
   // Set the AUTH token for any request
   instance.interceptors.request.use(function (config) {
     const user = getUserFromStorage();
-
-    console.log(user);
     config.headers.Authorization = user ? `Bearer ${user.token}` : "";
 
     return config;

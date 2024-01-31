@@ -4,8 +4,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-} from '@mui/material';
-import { useTranslation } from 'react-i18next';
+} from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export interface ModalProps {
   title?: string;
@@ -27,13 +27,8 @@ export default function FormModal({
   isOpen,
   closeModal,
   children,
-  primaryAction,
-  primaryText,
-  hasSave,
   hasCancel,
   title,
-  //   icon,
-  form,
   isLoading,
   secondaryText,
 }: ModalProps) {
@@ -52,10 +47,9 @@ export default function FormModal({
       <DialogActions>
         {hasCancel && (
           <Button onClick={handleCloseModal} disabled={isLoading}>
-            {secondaryText ? secondaryText : t('util.cancel')}
+            {secondaryText ? secondaryText : t("util.cancel")}
           </Button>
         )}
-        
       </DialogActions>
     </Dialog>
   );

@@ -65,21 +65,6 @@ export default function ProductModal() {
 
   useEffect(() => reset(), [isOpen, reset]);
 
-  // const setDefaultImageValue = useCallback(async () => {
-  //   if (item?.image) {
-  //     const response = await fetch(
-  //       `http://localhost:9001/api/product/images/${item.image}`
-  //     );
-  //     const blob = await response.blob();
-  //     const file = new File([blob], "image.jpg", { type: "image/jpeg" });
-  //     setValue("image", file);
-  //   }
-  // }, [item, setValue]);
-
-  // useEffect(() => {
-  //   setDefaultImageValue();
-  // }, [setDefaultImageValue]);
-
   useEffect(() => reset(), [isOpen, reset]);
 
   const handleCloseModal = (hasChanged: boolean) => {
@@ -104,7 +89,6 @@ export default function ProductModal() {
   const { t } = useTranslation();
 
   const saveProduct = (newItem: InputFormData<Product>) => {
-    console.log(newItem);
     if (isValid) {
       mutation.mutate(newItem);
     } else {
@@ -491,9 +475,6 @@ export default function ProductModal() {
           color="primary"
           variant="contained"
           onClick={() => {
-            console.log(errors);
-            console.log(isValid);
-            console.log(errors.body);
             handleSubmit(saveProduct);
           }}
         >

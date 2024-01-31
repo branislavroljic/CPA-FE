@@ -38,7 +38,7 @@ export default function PaymentModal() {
     resolver: zodResolver(paymentSchema),
   });
 
-  useEffect(() => reset(), [isOpen]);
+  useEffect(() => reset(), [isOpen, reset]);
 
   const handleCloseModal = (hasChanged: boolean) => {
     if (hasChanged) {
@@ -127,7 +127,7 @@ export default function PaymentModal() {
             defaultValue={item?.method ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
-                onChange={(event, item) => {
+                onChange={(_event, item) => {
                   onChange(item);
                 }}
                 value={methods.find((m) => m === value)}

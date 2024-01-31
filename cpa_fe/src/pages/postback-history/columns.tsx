@@ -4,7 +4,7 @@ import { PostbackHistory } from "@api/user/user";
 import { Chip, Tooltip, Typography } from "@mui/material";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {
@@ -35,7 +35,7 @@ const defaultColumns = (
       accessorKey: "status",
       header: t("postback.status"),
       Cell: ({ renderedCellValue, row }) =>
-        row.original.status === "200" ? (
+        row.original.status === "200 OK" ? (
           <Chip label={renderedCellValue} color="success" />
         ) : (
           <Chip label={renderedCellValue} color="error" />

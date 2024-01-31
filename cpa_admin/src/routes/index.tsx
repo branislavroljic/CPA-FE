@@ -1,6 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import React from "react";
-
 import NotFoundPage from "@pages/Error/NotFoundPage";
 import CategoryPage from "@pages/categories/CategoryPage";
 import ErrorPage from "@pages/Error/ErrorPage";
@@ -11,6 +9,7 @@ import { getCountries } from "@api/product/product";
 import PaymentsPage from "@pages/payments/PaymentsPage";
 import OrderPage from "@pages/orders/OrderPage";
 import UserPage from "@pages/users/UserPage";
+import React from "react";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));

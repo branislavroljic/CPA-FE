@@ -264,7 +264,7 @@ export default function LoginPage() {
                       >
                         {t('login.forgotPassword')}
                       </Link> */}
-                      <Typography
+                      {/* <Typography
                         component={Link}
                         to="/forgot-password"
                         fontWeight="500"
@@ -274,7 +274,7 @@ export default function LoginPage() {
                         }}
                       >
                         {t("login.forgotPassword")}
-                      </Typography>
+                      </Typography> */}
                     </Stack>
                   </Stack>
                   <Box>

@@ -1,26 +1,30 @@
-import React from "react";
 import { Box } from "@mui/material";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import PageContainer from "@ui/container/PageContainer";
 import AppCard from "@ui/shared/AppCard";
 import ProductsSidebar from "./ProductsSidebar";
 import ProductsList from "./ProductsList";
-const BCrumb = [
-  {
-    to: "/",
-    title: "Home",
-  },
-  {
-    title: "Shop",
-  },
-];
+import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 const ProductsPage = () => {
-  const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
+  const { t } = useTranslation();
+  const BCrumb = useMemo(
+    () => [
+      {
+        to: "/",
+        title: t("products.title"),
+      },
+    ],
+    [t]
+  );
+
+  const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
     <PageContainer title="Shop List" description="this is Shop List page">
       {/* breadcrumb */}
-      <Breadcrumb title="Ecom-Shop" items={BCrumb} />
+      <Breadcrumb title={t("products.title")} items={BCrumb} />
       <AppCard>
         {/* ------------------------------------------- */}
         {/* Left part */}

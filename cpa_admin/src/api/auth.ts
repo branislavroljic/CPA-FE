@@ -55,7 +55,6 @@ export default function getApiToken(token: string | null) {
 }
 
 export function isTokenValid(token?: any) {
-  console.log('------------------- token valid called');
   if (token === null) {
     return false;
   }

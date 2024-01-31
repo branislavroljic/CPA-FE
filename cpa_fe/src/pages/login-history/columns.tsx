@@ -5,7 +5,7 @@ import { CircleFlag } from "react-circle-flags";
 import { Box, Chip } from "@mui/material";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {
@@ -24,7 +24,7 @@ const defaultColumns = (
           }}
         >
           <CircleFlag
-            countryCode={row.original.country.toLowerCase()}
+            countryCode={row.original.country?.toLowerCase()}
             height="25"
           />
           {/* using renderedCellValue instead of cell.getValue() preserves filter match highlighting */}

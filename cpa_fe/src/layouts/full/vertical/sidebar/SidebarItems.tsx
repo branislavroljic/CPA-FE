@@ -1,25 +1,22 @@
-import React from 'react';
-import Menuitems from './MenuItems';
-import { useLocation } from 'react-router';
-import { Box, List, useMediaQuery } from '@mui/material';
-import NavItem from './NavItem';
-import NavCollapse from './NavCollapse';
-import NavGroup from './NavGroup/NavGroup';
-import { AppState, useDispatch, useSelector } from '../../../../store/Store';
-import { toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
-import { useCustomizerStore } from '@stores/customizerStore';
-import { useTranslation } from 'react-i18next';
+import Menuitems from "./MenuItems";
+import { useLocation } from "react-router";
+import { Box, List, useMediaQuery } from "@mui/material";
+import NavItem from "./NavItem";
+import NavCollapse from "./NavCollapse";
+import NavGroup from "./NavGroup/NavGroup";
+import { useCustomizerStore } from "@stores/customizerStore";
+import { useTranslation } from "react-i18next";
 
 const SidebarItems = () => {
   const { pathname } = useLocation();
   const { t } = useTranslation();
   const pathDirect = pathname;
-  const pathWithoutLastPart = pathname.slice(0, pathname.lastIndexOf('/'));
+  const pathWithoutLastPart = pathname.slice(0, pathname.lastIndexOf("/"));
   const customizer = useCustomizerStore();
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
   const hideMenu: any = lgUp
     ? customizer.isCollapse && !customizer.isSidebarHover
-    : '';
+    : "";
   // const dispatch = useDispatch();
 
   return (

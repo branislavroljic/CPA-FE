@@ -306,7 +306,7 @@ const BasicInfoForms = () => {
                       defaultValue={userBasicInfo?.country ?? undefined}
                       render={({ field: { onChange, value } }) => (
                         <Autocomplete
-                          onChange={(event, item) => {
+                          onChange={(_event, item) => {
                             onChange(item);
                           }}
                           value={restCountiesData?.find((c) => c === value)}

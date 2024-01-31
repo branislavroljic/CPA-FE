@@ -1,16 +1,11 @@
 import { MRT_ColumnDef } from "material-react-table";
-import { TFunction } from "i18next";
 import { Box, Chip } from "@mui/material";
 import { SelectInput } from "@api/utils";
 import { User } from "@api/user/user";
 import { CircleFlag } from "react-circle-flags";
 import VerifiedIcon from "@mui/icons-material/VerifiedTwoTone";
-import BlockIcon from "@mui/icons-material/Block";
 
-const defaultColumns = (
-  accountStatuses: SelectInput[],
-  t: TFunction<"translation", undefined, "translation">
-) =>
+const defaultColumns = (accountStatuses: SelectInput[]) =>
   [
     {
       accessorKey: "id",
@@ -79,7 +74,7 @@ const defaultColumns = (
       muiTableBodyCellProps: {
         align: "center",
       },
-      Cell: ({ renderedCellValue, row }) =>
+      Cell: ({ row }) =>
         row.original.enabledVipProducts ? (
           <VerifiedIcon color="warning" />
         ) : (

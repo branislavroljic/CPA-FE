@@ -4,7 +4,7 @@ import { Chip } from "@mui/material";
 import { Payment } from "@api/user/user";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {
@@ -12,7 +12,8 @@ const defaultColumns = (
       header: "ID",
     },
     {
-      accessorKey: "amount",
+      id: "amount",
+      accessorFn: (row) => `${row.amount} $`,
       header: t("payments.amount"),
     },
     {

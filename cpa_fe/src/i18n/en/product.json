@@ -3,5 +3,13 @@
   "byCategory": "By category",
   "byCountry": "By country",
   "title": "Products",
-  "resetFilters" : "Reset filters"
+  "resetFilters": "Reset filters",
+  "country": "Country",
+  "price": "Price",
+  "payout": "Payout",
+  "limit": "Limit",
+  "approveRate": "Approve rate",
+  "earnPerClick": "Earn per click",
+  "conversionRate": "Conversion rate",
+  "flow": "Flow"
 }

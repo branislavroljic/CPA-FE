@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   Box,
   Menu,
@@ -16,25 +15,8 @@ import { IconMail } from "@tabler/icons-react";
 
 import ProfileImg from "/src/assets/images/profile/user-1.jpg";
 import { USER_KEY } from "@api/auth";
-import accountIcon from "/src/assets/images/svgs/icon-account.svg";
-import i18n from "../../../../i18n";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
-
-interface ProfileType {
-  href: string;
-  title: string;
-  subtitle: string;
-  icon: any;
-}
-const profileDropdownData: ProfileType[] = [
-  {
-    href: "/user-profile",
-    title: i18n.t("ui.myProfile"),
-    subtitle: i18n.t("ui.accountSettings"),
-    icon: accountIcon,
-  },
-];
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);

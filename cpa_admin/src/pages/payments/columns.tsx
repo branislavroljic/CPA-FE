@@ -1,12 +1,10 @@
 import { MRT_ColumnDef } from "material-react-table";
-import { TFunction } from "i18next";
 import { Chip } from "@mui/material";
 import { Payment } from "@api/payment/payment";
 import { SelectInput } from "@api/utils";
 
 const defaultColumns = (
   paymentStatuses : SelectInput[],
-  t: TFunction<"translation", undefined, "translation">
 ) =>
   [
     {

@@ -4,7 +4,7 @@ import { Postback } from "@api/user/user";
 import { Chip, Tooltip, Typography } from "@mui/material";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     // {

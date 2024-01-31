@@ -1,6 +1,6 @@
 import { enUS, srRS } from "@mui/material/locale";
 import i18n from "../../i18n";
-import { Box, Button, ThemeProvider, createTheme, useTheme } from "@mui/material";
+import { Box, ThemeProvider, createTheme, useTheme } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";

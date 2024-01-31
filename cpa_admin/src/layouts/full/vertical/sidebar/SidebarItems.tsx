@@ -1,12 +1,10 @@
-import React from 'react';
+
 import Menuitems from './MenuItems';
 import { useLocation } from 'react-router';
 import { Box, List, useMediaQuery } from '@mui/material';
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
 import NavGroup from './NavGroup/NavGroup';
-import { AppState, useDispatch, useSelector } from '../../../../store/Store';
-import { toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
 import { useCustomizerStore } from '@stores/customizerStore';
 import { useTranslation } from 'react-i18next';
 

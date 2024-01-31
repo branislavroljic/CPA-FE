@@ -2,7 +2,7 @@ import { MRT_ColumnDef } from "material-react-table";
 import { TFunction } from "i18next";
 import { StatisticsReport } from "@api/user/user";
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {

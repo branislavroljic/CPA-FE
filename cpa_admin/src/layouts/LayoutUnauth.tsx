@@ -15,7 +15,12 @@ export default function LayoutUnauth() {
   return (
     <div
       className="flex h-screen w-full items-center justify-center bg-blue-50"
-      style={{ backgroundImage: 'url("/src/assets/images/backgrounds/background.png")' }}
+      style={{
+        minHeight: "100vh",
+        backgroundImage: 'url("/assets/backgrounds/background.png")',
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+      }}
     >
       <Outlet />
       <Notification

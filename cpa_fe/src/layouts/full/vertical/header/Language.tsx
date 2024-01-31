@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Avatar,
   IconButton,
@@ -6,24 +5,24 @@ import {
   MenuItem,
   Typography,
   Stack,
-} from '@mui/material';
-import FlagEn from '/src/assets/images/flag/icon-flag-en.svg';
-import FlagBs from '/src/assets/images/flag/icon-flag-bs.svg';
-import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
-import { setLanguage } from '../../../../store/customizer/CustomizerSlice';
-import { useCustomizerStore } from '@stores/customizerStore';
+} from "@mui/material";
+import FlagEn from "/src/assets/images/flag/icon-flag-en.svg";
+import FlagBs from "/src/assets/images/flag/icon-flag-bs.svg";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { useCustomizerStore } from "@stores/customizerStore";
+import React from "react";
 
 const Languages = [
   {
-    flagname: 'English (UK)',
+    flagname: "English (UK)",
     icon: FlagEn,
-    value: 'en',
+    value: "en",
   },
   {
-    flagname: 'Srpski',
+    flagname: "Srpski",
     icon: FlagBs,
-    value: 'bs',
+    value: "bs",
   },
 ];
 
@@ -44,15 +43,15 @@ const Language = () => {
   };
   useEffect(() => {
     i18n.changeLanguage(customizer.isLanguage);
-  }, []);
+  }, [customizer.isLanguage, i18n]);
 
   return (
     <>
       <IconButton
         aria-label="more"
         id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -68,8 +67,8 @@ const Language = () => {
         open={open}
         onClose={handleClose}
         sx={{
-          '& .MuiMenu-paper': {
-            width: '200px',
+          "& .MuiMenu-paper": {
+            width: "200px",
           },
         }}
       >

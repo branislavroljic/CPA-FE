@@ -7,16 +7,15 @@ import {
   CardMedia,
   Tooltip,
   styled,
-  Box,
-} from '@mui/material';
-import i18n from '../../i18n';
+} from "@mui/material";
+import i18n from "../../i18n";
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  cursor: 'pointer',
-  '&:hover': {
+  cursor: "pointer",
+  "&:hover": {
     backgroundColor: theme.palette.action.hover, // Change the background color on hover if desired
   },
   maxWidth: 345,
@@ -44,13 +43,13 @@ function ImageCard<T>({
   onCardClick,
 }: ImageCardProps<T>) {
   return (
-    <StyledCard onClick={(e) => (onCardClick ? onCardClick(item) : undefined)}>
+    <StyledCard onClick={() => (onCardClick ? onCardClick(item) : undefined)}>
       <CardMedia
         component="img"
         alt="green iguana"
         height="140"
         image={image}
-        sx={{ objectFit: 'contain' }}
+        sx={{ objectFit: "contain" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -60,8 +59,8 @@ function ImageCard<T>({
           {secondaryText}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing sx={{ justifyContent: 'center' }}>
-        <Tooltip arrow title={i18n.t('util.edit')}>
+      <CardActions disableSpacing sx={{ justifyContent: "center" }}>
+        <Tooltip arrow title={i18n.t("util.edit")}>
           <IconButton
             color="primary"
             onClick={(e) => {
@@ -72,7 +71,7 @@ function ImageCard<T>({
             <EditIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip arrow title={i18n.t('util.delete')}>
+        <Tooltip arrow title={i18n.t("util.delete")}>
           <IconButton
             color="error"
             onClick={(e) => {

@@ -53,7 +53,7 @@ const AccountSetting = () => {
 
   const [value, setValue] = useState<string>("account");
 
-  const handleChange = (event: SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
@@ -80,7 +80,7 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <AccountCircleOutlined />
-                  <TabName>Account</TabName>
+                  <TabName>{t("user.account")}</TabName>
                 </Box>
               }
             />
@@ -89,7 +89,7 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <ConnectWithoutContactIcon />
-                  <TabName>Links</TabName>
+                  <TabName>{t("user.links")}</TabName>
                 </Box>
               }
             />
@@ -98,7 +98,7 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <ApartmentOutlinedIcon />
-                  <TabName>Company settings</TabName>
+                  <TabName>{t("u.companySettings")}</TabName>
                 </Box>
               }
             />

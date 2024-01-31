@@ -27,13 +27,8 @@ export default function FormModal({
   isOpen,
   closeModal,
   children,
-  primaryAction,
-  primaryText,
-  hasSave,
   hasCancel,
   title,
-  //   icon,
-  form,
   isLoading,
   secondaryText,
 }: ModalProps) {

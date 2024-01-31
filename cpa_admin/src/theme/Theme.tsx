@@ -9,7 +9,6 @@ import { baseDarkTheme, baselightTheme } from './DefaultColors';
 import * as locales from '@mui/material/locale';
 import { useCustomizerStore } from '@stores/customizerStore';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const BuildTheme = (config: any = {}) => {
   const themeOptions = LightThemeColors.find(
     (theme) => theme.name === config.theme

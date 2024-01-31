@@ -29,7 +29,7 @@ export const useCustomizerStore = create<StateType>()(
     (set) => ({
       activeDir: 'ltr',
       activeMode: localStorage.getItem('my_benefit_theme') ?? 'light',
-      activeTheme: 'BLUE_THEME',
+      activeTheme: 'ORANGE_THEME',
       SidebarWidth: 270,
       MiniSidebarWidth: 87,
       TopbarHeight: 70,
@@ -43,18 +43,18 @@ export const useCustomizerStore = create<StateType>()(
       borderRadius: 7,
       setDarkMode: (mode: string) => {
         localStorage.setItem('my_benefit_theme', mode);
-        set((state) => ({ activeMode: mode }));
+        set(() => ({ activeMode: mode }));
       },
       setLanguage: (language: string) => {
         localStorage.setItem('my_benefit_lang', language);
-        set((state) => ({ isLanguage: language }));
+        set(() => ({ isLanguage: language }));
       },
       toggleSidebar: () => set((state) => ({ isCollapse: !state.isCollapse })),
       hoverSidebar: (value: boolean) =>
-        set((state) => ({ isSidebarHover: value })),
+        set(() => ({ isSidebarHover: value })),
       toggleMobileSidebar: () =>
         set((state) => ({ isMobileSidebar: !state.isMobileSidebar })),
-      toggleLayout: (layout: string) => set((state) => ({ isLayout: layout })),
+      toggleLayout: (layout: string) => set(() => ({ isLayout: layout })),
     }),
     { name: 'customizer-storage' }
   )

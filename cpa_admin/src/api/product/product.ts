@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Category } from "@api/category/category";
 import {
   InputFormData,

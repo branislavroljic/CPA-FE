@@ -1,7 +1,5 @@
-import React from 'react';
-
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 // mui imports
 import {
@@ -11,15 +9,16 @@ import {
   styled,
   ListItemText,
   useTheme,
-} from '@mui/material';
+} from "@mui/material";
 
 // custom imports
-import NavItem from '../NavItem';
+import NavItem from "../NavItem";
 
 // plugins
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
-import { useTranslation } from 'react-i18next';
-import { useCustomizerStore } from '@stores/customizerStore';
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
+import { useCustomizerStore } from "@stores/customizerStore";
+import React from "react";
 
 type NavGroupProps = {
   [x: string]: any;
@@ -48,7 +47,7 @@ const NavCollapse = ({
   hideMenu,
   onClick,
 }: NavCollapseProps) => {
-  const customizer =useCustomizerStore()
+  const customizer = useCustomizerStore();
   const Icon = menu?.icon;
   const theme = useTheme();
   const { pathname } = useLocation();
@@ -76,24 +75,24 @@ const NavCollapse = ({
   }, [pathname, menu.children]);
 
   const ListItemStyled = styled(ListItemButton)(() => ({
-    marginBottom: '2px',
-    padding: '8px 10px',
-    paddingLeft: hideMenu ? '10px' : level > 2 ? `${level * 15}px` : '10px',
-    backgroundColor: open && level < 2 ? theme.palette.primary.main : '',
-    whiteSpace: 'nowrap',
-    '&:hover': {
+    marginBottom: "2px",
+    padding: "8px 10px",
+    paddingLeft: hideMenu ? "10px" : level > 2 ? `${level * 15}px` : "10px",
+    backgroundColor: open && level < 2 ? theme.palette.primary.main : "",
+    whiteSpace: "nowrap",
+    "&:hover": {
       backgroundColor:
         pathname.includes(menu.href) || open
           ? theme.palette.primary.main
           : theme.palette.primary.light,
       color:
         pathname.includes(menu.href) || open
-          ? 'white'
+          ? "white"
           : theme.palette.primary.main,
     },
     color:
       open && level < 2
-        ? 'white'
+        ? "white"
         : `inherit` && level > 1 && open
         ? theme.palette.primary.main
         : theme.palette.text.secondary,
@@ -137,15 +136,15 @@ const NavCollapse = ({
       >
         <ListItemIcon
           sx={{
-            minWidth: '36px',
-            p: '3px 0',
-            color: 'inherit',
+            minWidth: "36px",
+            p: "3px 0",
+            color: "inherit",
           }}
         >
           {menuIcon}
         </ListItemIcon>
         <ListItemText color="inherit">
-          {hideMenu ? '' : <>{t(`${menu.title}`)}</>}
+          {hideMenu ? "" : <>{t(`${menu.title}`)}</>}
         </ListItemText>
         {!open ? (
           <IconChevronDown size="1rem" />

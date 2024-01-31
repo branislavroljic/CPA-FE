@@ -47,7 +47,6 @@ export function getPayments(
 ): Promise<Page<Payment>> {
   return get(
     addPaginationParams(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       addFilterParams(baseUrl, filter ?? (null as any)),
       pagination
     )

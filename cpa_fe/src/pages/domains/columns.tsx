@@ -4,7 +4,7 @@ import { Chip } from "@mui/material";
 import { Domain } from "@api/user/user";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {

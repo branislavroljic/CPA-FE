@@ -11,15 +11,11 @@ import {
 import { IconMenu2 } from "@tabler/icons-react";
 import Profile from "./Profile";
 import Search from "./Search";
-import Language from "./Language";
 import { useCustomizerStore } from "@stores/customizerStore";
-import Notifications from "./UserNotification";
 import Customizer from "@layout/full/shared/customizer/Customizer";
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
-  const lgDown = useMediaQuery((theme: any) => theme.breakpoints.down("lg"));
-
   // drawer
   const customizer = useCustomizerStore();
   // const dispatch = useDispatch();

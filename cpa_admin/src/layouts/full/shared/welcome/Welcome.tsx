@@ -1,4 +1,4 @@
-import * as React from 'react';
+ ;
 import { Snackbar, Alert, AlertTitle } from '@mui/material';
 
 const Welcome = () => {

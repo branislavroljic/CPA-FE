@@ -6,6 +6,7 @@ import PageContainer from "@ui/container/PageContainer";
 import TopCards from "@ui/dashboard/TopCards";
 import { useTranslation } from "react-i18next";
 import {
+  StatisticsReport,
   getConversionRateStatistics,
   getConversionStatistics,
   getDashboardData,
@@ -30,7 +31,7 @@ export interface BarChartProps {
   dataLabel2: string;
   dataItem1: string;
   dataItem2: string;
-  data: Report[];
+  data: StatisticsReport[];
 }
 
 export default function StatisticsPage() {

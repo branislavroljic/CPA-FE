@@ -6,7 +6,7 @@ import { SelectInput } from "@api/utils";
 
 const defaultColumns = (
   orderStatuses: SelectInput[],
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {

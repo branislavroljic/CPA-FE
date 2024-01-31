@@ -20,10 +20,14 @@
   "statusDeleted": "Izbrisan",
   "users": "Korisnici",
   "accountSettings": "Podešavanja naloga",
-  "currentPassword" : "Trenutna lozinka",
-  "newPassword" : "Nova lozinka",
-  "confirmPassword" : "Potvrdi lozniku",
-  "sameAsOldPasswordError" : "Nova lozinka se mora razlikovati od stare",
-  "passwordsDidNotMatchError" : "Lozinke se ne podudaraju",
-  "country" : "Država"
+  "currentPassword": "Trenutna lozinka",
+  "newPassword": "Nova lozinka",
+  "confirmPassword": "Potvrdi lozniku",
+  "sameAsOldPasswordError": "Nova lozinka se mora razlikovati od stare",
+  "passwordsDidNotMatchError": "Lozinke se ne podudaraju",
+  "country": "Država",
+  "account": "Nalog",
+  "links": "Linkovi",
+  "companySettings": "Kompanijska podešavanja",
+  "referralLink" : "Referal link"
 }

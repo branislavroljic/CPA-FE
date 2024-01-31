@@ -2,10 +2,9 @@ import { MRT_ColumnDef } from "material-react-table";
 import { TFunction } from "i18next";
 import { Order } from "@api/user/user";
 import { Chip } from "@mui/material";
-import dayjs, { Dayjs } from "dayjs";
 
 const defaultColumns = (
-  t: TFunction<"translation", undefined, "translation">
+  t: TFunction<"translation", "translation">
 ) =>
   [
     {
@@ -29,7 +28,7 @@ const defaultColumns = (
       header: t("order.quantity"),
     },
     {
-      accessorKey: "totalPrice",
+      accessorFn: (row) =>  `${row.totalPrice} $`,
       header: t("order.totalPrice"),
     },
     {

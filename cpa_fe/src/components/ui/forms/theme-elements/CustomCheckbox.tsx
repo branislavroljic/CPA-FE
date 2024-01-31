@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { styled } from '@mui/material';
 import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 

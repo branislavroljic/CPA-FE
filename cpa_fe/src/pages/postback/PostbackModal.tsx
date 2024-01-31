@@ -211,7 +211,7 @@ export default function PostbackModal() {
             defaultValue={item?.method ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
-                onChange={(event, item) => {
+                onChange={(_event, item) => {
                   onChange(item);
                 }}
                 value={methods.find((m) => m === value)}
@@ -356,7 +356,7 @@ export default function PostbackModal() {
             defaultValue={item?.event ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
-                onChange={(event, item) => {
+                onChange={(_event, item) => {
                   onChange(item);
                 }}
                 value={events.find((m) => m === value)}
@@ -384,7 +384,7 @@ export default function PostbackModal() {
             defaultValue={item?.level ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
-                onChange={(event, item) => {
+                onChange={(_event, item) => {
                   onChange(item);
                 }}
                 value={levels?.find((m) => m === value)}
@@ -413,7 +413,7 @@ export default function PostbackModal() {
               defaultValue={item?.productId ?? undefined}
               render={({ field: { onChange, value } }) => (
                 <Autocomplete
-                  onChange={(event, item) => {
+                  onChange={(_event, item) => {
                     onChange(item?.id);
                   }}
                   value={products.find((p) => p.id === value)}
@@ -442,7 +442,7 @@ export default function PostbackModal() {
             defaultValue={item?.status ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
-                onChange={(event, item) => {
+                onChange={(_event, item) => {
                   onChange(item);
                 }}
                 value={statuses.find((m) => m === value)}

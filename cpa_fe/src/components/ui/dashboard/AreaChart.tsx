@@ -1,9 +1,10 @@
-import React from "react";
+
 import Chart from "react-apexcharts";
 import { Props } from "react-apexcharts";
 import ParentCard from "@ui/shared/ParentCard";
 import { StatisticsReport } from "@api/user/user";
 import { useTranslation } from "react-i18next";
+import React from "react";
 
 export interface AreaChartProp {
   values?: StatisticsReport[];

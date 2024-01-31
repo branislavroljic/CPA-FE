@@ -76,7 +76,7 @@ const CompanyInfoForm = () => {
       {isLoading || isLoadingRestCountries ? (
         <Spinner></Spinner>
       ) : (
-        <Grid item xs={12} lg={10}>
+        <Grid item xs={12} lg={8}>
           <BlankCard>
             <CardContent>
               <Typography variant="h5" mb={1}>
@@ -130,7 +130,7 @@ const CompanyInfoForm = () => {
                     render={({ field: { onChange, value } }) => (
                       <Autocomplete
                         fullWidth
-                        onChange={(event, item) => {
+                        onChange={(_event, item) => {
                           onChange(item);
                         }}
                         value={restCountiesData?.find((c) => c === value)}

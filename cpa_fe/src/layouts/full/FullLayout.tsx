@@ -32,9 +32,9 @@ const FullLayout: FC = () => {
 
   const theme = useTheme();
 
-  const { isOpen, data, closeNotification } = useNotificationStore();
+  const { isOpen, activeNotification: data, closeNotification } = useNotificationStore();
 
-  const { isValid, deleteUser } = useAuthStore((state) => state);
+  const { isValid } = useAuthStore((state) => state);
 
   // const [open, setOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const FullLayout: FC = () => {
     if (isOpen) {
       setTimeout(() => closeNotification(), 3000);
     }
-  }, [isOpen]);
+  }, [closeNotification, isOpen]);
 
   if (!isValid) {
     return <Navigate to={"/login"} replace={true} />;

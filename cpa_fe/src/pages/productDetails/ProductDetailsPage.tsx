@@ -71,7 +71,7 @@ const ProductDetailsPage = () => {
             <Grid container spacing={3} xs={12} sm={12} lg={12}>
               <Grid item xs={12} sm={12} lg={12}>
                 <img
-                  src={`http://localhost:9001/api/product/images/${productDetails.image}`}
+                  src={`https://api.klixlead.com/api/product/images/${productDetails.image}`}
                   alt="img"
                   width="100%"
                 />

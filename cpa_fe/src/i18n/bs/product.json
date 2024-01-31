@@ -3,5 +3,13 @@
   "byCategory": "Po kategoriji",
   "byCountry": "Po zemlji",
   "title": "Proizvodi",
-  "resetFilters": "Resetuj filtere"
+  "resetFilters": "Resetuj filtere",
+  "country": "Država",
+  "price": "Cijena",
+  "payout": "Isplata",
+  "limit": "Limit",
+  "approveRate": "Approve rate",
+  "earnPerClick": "Earn per click",
+  "conversionRate": "Conversion rate",
+  "flow": "Flow"
 }

@@ -20,6 +20,7 @@ import { useProductFilterStore } from "@stores/productStore";
 import FlatList from "flatlist-react";
 import { CircleFlag } from "react-circle-flags";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -28,6 +29,7 @@ interface Props {
 const ProductList = ({ onClick }: Props) => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
   const { filter } = useProductFilterStore();
+  const { t } = useTranslation();
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
     ["products", filter],
     async ({ pageParam = 0 }) => {
@@ -65,7 +67,7 @@ const ProductList = ({ onClick }: Props) => {
       <BlankCard className="hoverCard">
         <Typography component={Link} to={`${product.id}`}>
           <img
-            src={`http://localhost:9001/api/product/images/${product.image}`}
+            src={`https://api.klixlead.com/api/product/images/${product.image}`}
             alt="img"
             width="100%"
           />
@@ -104,13 +106,17 @@ const ProductList = ({ onClick }: Props) => {
           </Stack>
           <Stack direction="row" alignItems="center" gap={2}>
             <Stack gap={0}>
-              <Typography variant="overline">APPROVE RATE</Typography>
+              <Typography variant="overline">
+                {t("products.approveRate")}
+              </Typography>
               <Typography color="textPrimary" mt={-0.5}>
                 {`${product.approve_rate ?? 0} %`}
               </Typography>
             </Stack>
             <Stack>
-              <Typography variant="overline">EARN PER CLICK</Typography>
+              <Typography variant="overline">
+                {t("products.earnPerClick")}
+              </Typography>
               <Typography color="textPrimary" mt={-0.5}>
                 {`${product.earn_per_click ?? 0} ${product.currency}`}
               </Typography>
@@ -127,7 +133,7 @@ const ProductList = ({ onClick }: Props) => {
           >
             <Stack>
               <Typography variant="overline" color={"lightgray"}>
-                COUNTRY
+                {t("products.country")}
               </Typography>
               <CircleFlag
                 countryCode={product.country_code.toLowerCase()}
@@ -137,19 +143,19 @@ const ProductList = ({ onClick }: Props) => {
             <Stack direction="row" alignItems="center" gap={4}>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>
-                  PRICE
+                  {t("products.price")}
                 </Typography>
                 <Typography variant="h6">{`${product.price} ${product.currency}`}</Typography>
               </Stack>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>
-                  PAYOUT
+                  {t("products.payout")}
                 </Typography>
                 <Typography variant="h6">{`${product.payout} ${product.currency}`}</Typography>
               </Stack>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>
-                  LIMIT
+                  {t("products.limit")}
                 </Typography>
                 <Typography variant="h6">{`${product.limit_per_day}/day`}</Typography>
               </Stack>
@@ -179,7 +185,7 @@ const ProductList = ({ onClick }: Props) => {
       {/* ------------------------------------------- */}
       <Stack direction="row" justifyContent="space-between" pb={3}>
         {lgUp ? (
-          <Typography variant="h5">Products</Typography>
+          <Typography variant="h5">{t("products.title")}</Typography>
         ) : (
           <Fab onClick={onClick} color="primary" size="small">
             <IconMenu2 width="16" />

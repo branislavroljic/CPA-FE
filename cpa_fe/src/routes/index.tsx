@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 // import { getCompanyTypes } from '@api/company/companyTypes';
 // import queryClient from "../query-client";
-import React from "react";
 
 import LoginHistoryPage from "@pages/login-history/LoginHistoryPage";
 import PaymentsPage from "@pages/payments/PaymentsPage";
@@ -28,6 +27,8 @@ import {
 } from "@api/enum/enum";
 import PostbackHistoryPage from "@pages/postback-history/PostbackHistoryPage";
 import StatisticsPage from "@pages/statistic/StatisticPage";
+import React from "react";
+import Notifications from "@pages/notifications/Notifications";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -199,6 +200,11 @@ const browserConfig = createBrowserRouter([
         id: "postback-history",
         path: "/postback/history",
         element: <PostbackHistoryPage />,
+      },
+      {
+        id: "notifications",
+        path: "/notifications",
+        element: <Notifications />,
       },
       {
         id: "notFound",

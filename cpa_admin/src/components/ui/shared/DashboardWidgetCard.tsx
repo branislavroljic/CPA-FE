@@ -1,8 +1,7 @@
-import React from 'react';
+
 import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, Typography, Box, Stack } from '@mui/material';
 import { IconGridDots } from '@tabler/icons-react';
-import { AppState, useSelector } from '../../../store/Store';
 import { useCustomizerStore } from '@stores/customizerStore';
 
 type Props = {

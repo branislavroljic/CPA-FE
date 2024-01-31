@@ -12,7 +12,6 @@ import {
   useTheme,
   IconButton,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import { IconEdit, IconMenu2, IconPlus, IconTrash } from "@tabler/icons-react";
 import BlankCard from "@ui/shared/BlankCard";
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
@@ -95,9 +94,9 @@ const ProductList = ({ onClick }: Props) => {
       key={product.id}
     >
       <BlankCard className="hoverCard">
-        <Typography component={Link} to={`${product.id}`}>
+        <Typography>
           <img
-            src={`http://localhost:9001/api/product/images/${product.image}`}
+            src={`https://api.klixlead.com/api/product/images/${product.image}`}
             alt="img"
             width="100%"
           />
@@ -272,7 +271,7 @@ const ProductList = ({ onClick }: Props) => {
       <Fab
         aria-label=""
         color="primary"
-        sx={{ position: "absolute", bottom: 20, right: 20 }}
+        sx={{ position: "fixed", bottom: 20, right: 20}}
         onClick={handleAddProductClick}
       >
         <IconPlus />

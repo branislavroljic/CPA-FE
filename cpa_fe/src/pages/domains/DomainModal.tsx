@@ -37,7 +37,7 @@ export default function DomainModal() {
     resolver: zodResolver(domainSchema),
   });
 
-  useEffect(() => reset(), [isOpen]);
+  useEffect(() => reset(), [isOpen, reset]);
 
   const handleCloseModal = (hasChanged: boolean) => {
     if (hasChanged) {
@@ -118,7 +118,7 @@ export default function DomainModal() {
             defaultValue={item?.type ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
-                onChange={(event, item) => {
+                onChange={(_event, item) => {
                   onChange(item);
                 }}
                 value={methods.find((m) => m === value)}

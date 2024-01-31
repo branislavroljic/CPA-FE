@@ -9,20 +9,16 @@ import { Box } from "@mui/system";
 import {
   Button,
   Card,
-  Checkbox,
-  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { AuthUser } from "@api/user/user";
 import PageContainer from "@ui/container/PageContainer";
 import Logo from "@layout/full/shared/logo/Logo";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
-import { Link } from "react-router-dom";
 import { useNotificationStore } from "@stores/notificationStore";
 
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -63,7 +59,6 @@ const loginSchema = z.object({
         num: standardMaxLength,
       }),
     }),
-  rememberMe: z.boolean(),
 });
 
 type LoginInput = z.infer<typeof loginSchema>;
@@ -80,7 +75,6 @@ export default function LoginPage() {
     setError,
     handleSubmit,
     control,
-    register,
     formState: { errors },
   } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
 
@@ -89,6 +83,7 @@ export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
 
   const loginUser = async (input: LoginInput) => {
+    console.log("laga");
     const baseUrl = new URL("auth/signin", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
@@ -238,46 +233,8 @@ export default function LoginPage() {
                         )}
                       />
                     </Box>
-                    <Stack
-                      justifyContent="space-between"
-                      direction="row"
-                      alignItems="center"
-                      my={2}
-                    >
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            value="remember"
-                            color="primary"
-                            {...register("rememberMe")}
-                          />
-                        }
-                        label={t("login.rememberMe")}
-                      />
-                      {/* <Link
-                        href="#"
-                        fontWeight="500"
-                        sx={{
-                          textDecoration: 'none',
-                          color: 'primary.main',
-                        }}
-                      >
-                        {t('login.forgotPassword')}
-                      </Link> */}
-                      <Typography
-                        component={Link}
-                        to="/forgot-password"
-                        fontWeight="500"
-                        sx={{
-                          textDecoration: "none",
-                          color: "primary.main",
-                        }}
-                      >
-                        {t("login.forgotPassword")}
-                      </Typography>
-                    </Stack>
                   </Stack>
-                  <Box>
+                  <Box marginTop={4}>
                     <Button
                       color="primary"
                       variant="contained"
@@ -288,42 +245,6 @@ export default function LoginPage() {
                       {t("login.login")}
                     </Button>
                   </Box>
-
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    justifyContent="center"
-                    mt={3}
-                  >
-                    <Typography
-                      color="textSecondary"
-                      variant="h6"
-                      fontWeight="500"
-                    >
-                      {t("login.newToBenefit")}
-                    </Typography>
-                    {/* <Link
-                      href="/register"
-                      fontWeight="500"
-                      sx={{
-                        textDecoration: 'none',
-                        color: 'primary.main',
-                      }}
-                    >
-                      {t('login.createAccount')}
-                    </Link> */}
-                    <Typography
-                      component={Link}
-                      to="/register"
-                      fontWeight="500"
-                      sx={{
-                        textDecoration: "none",
-                        color: "primary.main",
-                      }}
-                    >
-                      {t("login.createAccount")}
-                    </Typography>
-                  </Stack>
                 </Box>
               </Box>
             </Card>

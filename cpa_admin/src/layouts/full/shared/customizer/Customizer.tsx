@@ -1,37 +1,22 @@
-import { FC, useState } from 'react';
+import { FC, useState } from "react";
 import {
-  Fab,
   Drawer,
-  Grid,
   Divider,
   styled,
   IconButton,
   Typography,
-  Tooltip,
   Stack,
-} from '@mui/material';
-import Box, { BoxProps } from '@mui/material/Box';
-import { IconX, IconSettings, IconCheck } from '@tabler/icons-react';
-import WbSunnyTwoToneIcon from '@mui/icons-material/WbSunnyTwoTone';
-import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
-import ViewSidebarTwoToneIcon from '@mui/icons-material/ViewSidebarTwoTone';
-import WebAssetTwoToneIcon from '@mui/icons-material/WebAssetTwoTone';
-import { AppState, useDispatch, useSelector } from '../../../../store/Store';
-import {
-  setDarkMode,
-  // setTheme,
-  toggleSidebar,
-} from '../../../../store/customizer/CustomizerSlice';
-import Scrollbar from '@ui/custom-scroll/Scrollbar';
-import { useCustomizerStore } from '@stores/customizerStore';
-import { useTranslation } from 'react-i18next';
+} from "@mui/material";
+import Box, { BoxProps } from "@mui/material/Box";
+import { IconX, IconSettings } from "@tabler/icons-react";
+import WbSunnyTwoToneIcon from "@mui/icons-material/WbSunnyTwoTone";
+import DarkModeTwoToneIcon from "@mui/icons-material/DarkModeTwoTone";
+import Scrollbar from "@ui/custom-scroll/Scrollbar";
+import { useCustomizerStore } from "@stores/customizerStore";
+import { useTranslation } from "react-i18next";
 
-const SidebarWidth = '320px';
-interface colors {
-  id: number;
-  bgColor: string;
-  disp?: string;
-}
+const SidebarWidth = "320px";
+
 const Customizer: FC = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const customizer = useCustomizerStore();
@@ -39,7 +24,8 @@ const Customizer: FC = () => {
   // const dispatch = useDispatch();
   // const open = Boolean(anchorEl);
 
-  const handleClick = (event: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleClick = (_event: any) => {
     setShowDrawer(true);
   };
 
@@ -51,24 +37,16 @@ const Customizer: FC = () => {
 
   const StyledBox = styled(Box)<BoxProps>(({ theme }) => ({
     boxShadow: theme.shadows[8],
-    padding: '20px',
-    cursor: 'pointer',
-    justifyContent: 'center',
-    display: 'flex',
-    transition: '0.1s ease-in',
-    border: '1px solid rgba(145, 158, 171, 0.12)',
-    '&:hover': {
-      transform: 'scale(1.05)',
+    padding: "20px",
+    cursor: "pointer",
+    justifyContent: "center",
+    display: "flex",
+    transition: "0.1s ease-in",
+    border: "1px solid rgba(145, 158, 171, 0.12)",
+    "&:hover": {
+      transform: "scale(1.05)",
     },
   }));
-
-  const thColors: colors[] = [
-    {
-      id: 1,
-      bgColor: '#5D87FF',
-      disp: 'BLUE_THEME',
-    },
-  ];
 
   return (
     <div>
@@ -88,8 +66,8 @@ const Customizer: FC = () => {
       <IconButton
         aria-label="more"
         id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -108,14 +86,14 @@ const Customizer: FC = () => {
         {/* ------------------------------------------- */}
         {/* ------------ Customizer Sidebar ------------- */}
         {/* ------------------------------------------- */}
-        <Scrollbar sx={{ height: 'calc(100vh - 5px)' }}>
+        <Scrollbar sx={{ height: "calc(100vh - 5px)" }}>
           <Box
             p={2}
             display="flex"
-            justifyContent={'space-between'}
+            justifyContent={"space-between"}
             alignItems="center"
           >
-            <Typography variant="h4">{t('ui.settings')}</Typography>
+            <Typography variant="h4">{t("ui.settings")}</Typography>
 
             <IconButton color="inherit" onClick={() => setShowDrawer(false)}>
               <IconX />
@@ -127,29 +105,29 @@ const Customizer: FC = () => {
             {/* ------------ Dark light theme setting ------------- */}
             {/* ------------------------------------------- */}
             <Typography variant="h6" gutterBottom>
-              {t('ui.themeOption')}
+              {t("ui.themeOption")}
             </Typography>
-            <Stack direction={'row'} gap={2} my={2}>
+            <Stack direction={"row"} gap={2} my={2}>
               <StyledBox
-                onClick={() => customizer.setDarkMode('light')}
+                onClick={() => customizer.setDarkMode("light")}
                 display="flex"
                 gap={1}
               >
                 <WbSunnyTwoToneIcon
                   color={
-                    customizer.activeMode === 'light' ? 'primary' : 'inherit'
+                    customizer.activeMode === "light" ? "primary" : "inherit"
                   }
                 />
                 Light
               </StyledBox>
               <StyledBox
-                onClick={() => customizer.setDarkMode('dark')}
+                onClick={() => customizer.setDarkMode("dark")}
                 display="flex"
                 gap={1}
               >
                 <DarkModeTwoToneIcon
                   color={
-                    customizer.activeMode === 'dark' ? 'primary' : 'inherit'
+                    customizer.activeMode === "dark" ? "primary" : "inherit"
                   }
                 />
                 Dark

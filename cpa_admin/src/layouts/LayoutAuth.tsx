@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
@@ -121,8 +120,6 @@ export default function LayoutAuth() {
   const [open, setOpen] = useState(false);
 
   const pages = useMemo(() => navigation, []);
-
-  const { t } = useTranslation();
 
   const handleDrawerOpen = () => {
     setOpen(true);

@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { Snackbar, Alert, AlertTitle } from '@mui/material';
+import { Snackbar, Alert, AlertTitle } from "@mui/material";
+import React from "react";
+import { useState } from "react";
 
 const Welcome = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
   };
 
   const handleClose = (reason: any) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpen(false);
@@ -27,7 +28,7 @@ const Welcome = () => {
     <React.Fragment>
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         autoHideDuration={6000}
         onClose={handleClose}
       >
@@ -35,7 +36,7 @@ const Welcome = () => {
           onClose={handleClose}
           severity="info"
           variant="filled"
-          sx={{ width: '100%', color: 'white' }}
+          sx={{ width: "100%", color: "white" }}
         >
           <AlertTitle>Welcome To Modernize</AlertTitle>
           Easy to customize the Template!!!
