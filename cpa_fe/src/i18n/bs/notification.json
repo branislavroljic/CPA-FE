@@ -1,4 +1,6 @@
 {
-    "sendNotification" : "Pošalji obavještenje",
-    "message" : "Poruka"
+    "title": "Notifikacije",
+    "allNotes" : "Sve notifikacije",
+    "noNotesFound" : "Nema novih notifikacija",
+    "selectANote" : "Izaberi notifikaciju"
 }

@@ -29,5 +29,8 @@
   "account": "Account",
   "links": "Links",
   "companySettings": "Company settings",
-  "referralLink" : "Referral link"
+  "referralLink": "Referral link",
+  "balance": "Balance",
+  "paid": "Paid",
+  "manager": "Manager"
 }

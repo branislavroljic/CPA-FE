@@ -167,9 +167,24 @@ export type DasboardData = {
   trashPercentage: number;
 };
 
+export type Manager = {
+  id: number;
+  name: string;
+  surname: string;
+  email: string;
+  skypeLink: string;
+  telegramLink: string;
+  whatsappLink: string;
+};
+
 export type StatisticsReport = {
   xvalue: string;
   yvalue: number;
+};
+
+export type Balance = {
+  balance: number;
+  paid: number;
 };
 
 export function getLoginHistory(
@@ -285,4 +300,8 @@ export function getConversionStatistics(
   id?: number
 ): Promise<StatisticsReport[]> {
   return get(new URL(id + "/statistic/conversion", baseUrl));
+}
+
+export function getBalance(id?: number): Promise<Balance> {
+  return get(new URL(id + "/short_balance", baseUrl));
 }

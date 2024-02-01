@@ -1,4 +1,7 @@
 {
-    "sendNotification" : "Send notification",
-    "message" : "Message"
+    
+    "title": "Notifications",
+    "allNotes" : "All notes",
+    "noNotesFound" : "No new notifications",
+    "selectANote" : "Select a notification"
 }

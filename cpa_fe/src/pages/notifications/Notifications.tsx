@@ -1,26 +1,29 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Box } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import AppCard from "@ui/shared/AppCard";
-import NoteSidebar from "@ui/notes/NoteSidebar";
-import NoteContent from "@ui/notes/NoteContent";
-const BCrumb = [
-  {
-    to: "/",
-    title: "Home",
-  },
-  {
-    title: "Notes",
-  },
-];
+import NoteSidebar from "@ui/notifications/NoteSidebar";
+import NoteContent from "@ui/notifications/NoteContent";
+import { useTranslation } from "react-i18next";
 
 const Notifications = () => {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(true);
+  const { t } = useTranslation();
+
+  const BCrumb = useMemo(
+    () => [
+      {
+        to: "/",
+        title: t("notification.title"),
+      },
+    ],
+    [t]
+  );
 
   return (
     <PageContainer title="Notes ui" description="this is Note page">
-      <Breadcrumb title="Note app" items={BCrumb} />
+      <Breadcrumb title={t("notification.title")} items={BCrumb} />
       <AppCard>
         {isMobileSidebarOpen ? (
           <NoteSidebar

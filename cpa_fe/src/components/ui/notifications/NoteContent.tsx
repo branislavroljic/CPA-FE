@@ -1,20 +1,15 @@
 import React from "react";
-import {
-  Box,
-  Divider,
-  TextField,
-  IconButton,
-  Typography,
-  Stack,
-} from "@mui/material";
+import { Box, Divider, IconButton, Typography, Stack } from "@mui/material";
 import { IconMenu2 } from "@tabler/icons-react";
 import { useNotificationStore } from "@stores/notificationStore";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   toggleNoteSidebar: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const NoteContent = ({ toggleNoteSidebar }: Props) => {
+  const { t } = useTranslation();
   const { activeNotification } = useNotificationStore();
   return (
     <Box
@@ -89,7 +84,7 @@ const NoteContent = ({ toggleNoteSidebar }: Props) => {
         </Box>
       ) : (
         <Box sx={{ textAlign: "center", fontSize: "24px", mt: 2 }}>
-          Select a Note
+          {t("notification.selectANote")}
         </Box>
       )}
     </Box>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Stack,
@@ -12,16 +12,22 @@ import { useQuery } from "@tanstack/react-query";
 import Scrollbar from "@ui/custom-scroll/Scrollbar";
 import Spinner from "@ui/view/spinner/Spinner";
 import { useNotificationStore } from "@stores/notificationStore";
+import { useTranslation } from "react-i18next";
 
 const NoteList = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const { activeNotification, setNotification } = useNotificationStore();
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["notifications"],
+    queryKey: ["notifications", t],
     queryFn: () => getNotifications(),
   });
+
+  useEffect(() => {
+    if (data && data.length) setNotification(data[0]);
+  }, [data, setNotification]);
 
   return (
     <>
@@ -38,7 +44,7 @@ const NoteList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <Typography variant="h6" mb={0} mt={4} pl={1}>
-          All Notes
+          {t("notification.allNotes")}
         </Typography>
       </Box>
       <Box>
@@ -99,7 +105,7 @@ const NoteList = () => {
                   variant="filled"
                   sx={{ color: "white" }}
                 >
-                  No Notes Found!
+                  {t("notification.noNotesFound")}
                 </Alert>
               </Box>
             )}

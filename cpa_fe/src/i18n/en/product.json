@@ -11,5 +11,7 @@
   "approveRate": "Approve rate",
   "earnPerClick": "Earn per click",
   "conversionRate": "Conversion rate",
-  "flow": "Flow"
+  "flow": "Flow",
+  "requestVIPAccess": "Request VIP access",
+  "vipAccessDesc": "This is a VIP offer and you need to have access in order to advertise it. Please contact your account manager."
 }

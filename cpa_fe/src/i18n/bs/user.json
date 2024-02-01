@@ -29,5 +29,8 @@
   "account": "Nalog",
   "links": "Linkovi",
   "companySettings": "Kompanijska podešavanja",
-  "referralLink" : "Referal link"
+  "referralLink" : "Referal link",
+  "balance": "Stanje",
+  "paid": "Plaćeno",
+  "manager": "Menadžer"
 }

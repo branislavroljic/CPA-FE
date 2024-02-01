@@ -98,7 +98,7 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <ApartmentOutlinedIcon />
-                  <TabName>{t("u.companySettings")}</TabName>
+                  <TabName>{t("user.companySettings")}</TabName>
                 </Box>
               }
             />
