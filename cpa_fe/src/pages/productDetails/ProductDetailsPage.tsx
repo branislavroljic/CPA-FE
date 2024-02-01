@@ -16,6 +16,7 @@ import ProductInfo from "./ProductInfo";
 import { ProductDetails, getProductDetails } from "@api/product/product";
 import queryClient from "../../query-client";
 import ProductLinks from "./ProductLinks";
+import { useTranslation } from "react-i18next";
 
 const PathNames = {
   product: "/products/:productId",
@@ -49,6 +50,7 @@ const BCrumb = [
 ];
 
 const ProductDetailsPage = () => {
+  const { t } = useTranslation();
   const productDetails = useLoaderData() as ProductDetails;
 
   return (
@@ -63,7 +65,7 @@ const ProductDetailsPage = () => {
         spacing={3}
         sx={{ maxWidth: { lg: "1055px", xl: "1200px" } }}
       >
-        <Grid item xs={12} sm={12} lg={6}>
+        <Grid item xs={12} sm={12} lg={5}>
           <ChildCard>
             {/* ------------------------------------------- */}
             {/* Carousel */}
@@ -125,14 +127,16 @@ const ProductDetailsPage = () => {
             </Grid>
           </ChildCard>
         </Grid>
-        <Grid item xs={12} sm={6} lg={6}>
+        <Grid item xs={12} sm={6} lg={7}>
           <ProductInfo product={productDetails} />
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>
           {productDetails.type == "VIP" ? (
             <Stack spacing={2}>
-              <Divider >
-                <Typography variant="h4">Request VIP access</Typography>
+              <Divider>
+                <Typography variant="h4">
+                  {t("products.requestVIPAccess")}
+                </Typography>
               </Divider>
 
               <Typography
@@ -141,8 +145,7 @@ const ProductDetailsPage = () => {
                 fontStyle={"oblique"}
                 color={"gray"}
               >
-                This is a VIP offer and you need to have access in order to
-                advertise it. Please contact your account manager.
+                {t("products.vipAccessDesc")}
               </Typography>
             </Stack>
           ) : (

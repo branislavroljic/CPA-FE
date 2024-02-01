@@ -8,10 +8,10 @@
   "price": "Cijena",
   "payout": "Isplata",
   "limit": "Limit",
-  "approveRate": "Approve rate",
-  "earnPerClick": "Earn per click",
-  "conversionRate": "Conversion rate",
-  "flow": "Flow",
-  "requestVIPAccess": "Request VIP access",
-  "vipAccessDesc": "This is a VIP offer and you need to have access in order to advertise it. Please contact your account manager."
+  "approveRate": "Stopa odobrenja",
+  "earnPerClick": "Zarada po kliku",
+  "conversionRate": "Stopa konverzije",
+  "flow": "Protok",
+  "requestVIPAccess": "Zahtevaj VIP pristup",
+  "vipAccessDesc": "Ovo je VIP ponuda i morate imati pristup kako biste je reklamirali. Molimo kontaktirajte svog menadžera naloga."
 }
