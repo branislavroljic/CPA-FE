@@ -70,7 +70,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
                 value: product.id,
               })}
             />
-            <Grid item xs={12} sm={6} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={6} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,
@@ -98,7 +98,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={6} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,
@@ -127,7 +127,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={6} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,
@@ -156,7 +156,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={6} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,
@@ -185,7 +185,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={6} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,
@@ -214,7 +214,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={3} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={3} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,
@@ -246,7 +246,7 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={3} paddingTop={'0px !important'}>
+            <Grid item xs={12} sm={3} paddingTop={"0px !important"}>
               <CustomFormLabel
                 sx={{
                   mt: 2,

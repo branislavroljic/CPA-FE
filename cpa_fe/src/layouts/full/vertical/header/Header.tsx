@@ -15,6 +15,7 @@ import Language from "./Language";
 import { useCustomizerStore } from "@stores/customizerStore";
 import Customizer from "@layout/full/shared/customizer/Customizer";
 import Navigation from "./Navigation";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
@@ -59,14 +60,11 @@ const Header = () => {
         {/* Search Dropdown */}
         {/* ------------------------------------------- */}
         <Search />
-        {lgUp ? (
-          <>
-            <Navigation />
-          </>
-        ) : null}
 
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
+          {lgUp ? <Navigation /> : null}
+          <SocialMediaLinks />
           <Language />
           {/* ------------------------------------------- */}
           {/* Ecommerce Dropdown */}

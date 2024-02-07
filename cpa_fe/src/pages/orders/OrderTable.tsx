@@ -67,12 +67,28 @@ export default function OrderTable() {
 
   const table = useMaterialReactTable({
     columns,
+    initialState: {
+      columnVisibility: {
+        baseUrl: false,
+        referrer: false,
+        ip: false,
+        operatingSystem: false,
+        browser: false,
+        device: false,
+        sub1: false,
+        sub2: false,
+        sub3: false,
+        sub4: false,
+      },
+    },
     data: data?.rows ?? defaultData,
     enableSorting: false,
     manualPagination: true,
     enableColumnActions: false,
     enableGlobalFilter: false,
     enableFilters: false,
+    enableColumnResizing: true,
+    layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -124,11 +140,11 @@ export default function OrderTable() {
       i18n.language === "en"
         ? MRT_Localization_EN
         : MRT_Localization_SR_LATN_RS,
-    enableHiding: false,
+    enableHiding: true,
     defaultColumn: {
       minSize: 10,
       maxSize: 1000,
-      size: 120,
+      size: 80,
     },
   });
 

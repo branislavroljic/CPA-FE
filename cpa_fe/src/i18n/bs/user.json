@@ -27,10 +27,15 @@
   "passwordsDidNotMatchError": "Lozinke se ne podudaraju",
   "country": "Država",
   "account": "Nalog",
+  "general": "Opšte",
+  "security": "Sigurnost",
   "links": "Linkovi",
   "companySettings": "Kompanijska podešavanja",
-  "referralLink" : "Referal link",
+  "referralLink": "Referal link",
   "balance": "Stanje",
   "paid": "Plaćeno",
-  "manager": "Menadžer"
+  "manager": "Menadžer",
+  "referralTitle": "Provizije za preporuke:",
+  "referralDesc": "Donesite preporuke i dobijte:",
+  "referralFees": "provizije za preporuke"
 }

@@ -4,9 +4,7 @@ import { LoginHistory } from "@api/user/user";
 import { CircleFlag } from "react-circle-flags";
 import { Box, Chip } from "@mui/material";
 
-const defaultColumns = (
-  t: TFunction<"translation", "translation">
-) =>
+const defaultColumns = (t: TFunction<"translation", "translation">) =>
   [
     {
       accessorKey: "ip",
@@ -63,10 +61,10 @@ const defaultColumns = (
       accessorKey: "createdTime",
       header: t("loginHistory.createdTime"),
     },
-    {
-      accessorKey: "userUsername",
-      header: t("loginHistory.username"),
-    },
+    // {
+    //   accessorKey: "userUsername",
+    //   header: t("loginHistory.username"),
+    // },
   ] as MRT_ColumnDef<LoginHistory>[];
 
 export default defaultColumns;

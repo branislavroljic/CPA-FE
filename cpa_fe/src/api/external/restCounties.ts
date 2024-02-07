@@ -6,8 +6,8 @@ export type RestCountry = {
   name: string;
 };
 
-export function getRestCountriesEurope() {
-  return get(new URL("region/europe", baseUrl)).then((response) => {
+export function getRestCountries() {
+  return get(new URL("all", baseUrl)).then((response) => {
     const countries: {
       name: { common: string };
     }[] = response;

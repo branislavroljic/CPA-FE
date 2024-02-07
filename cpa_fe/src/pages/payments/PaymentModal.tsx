@@ -114,6 +114,9 @@ export default function PaymentModal() {
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: {
+                    min: 100,
+                  },
                 }}
                 {...field}
               />

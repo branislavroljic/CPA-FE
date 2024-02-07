@@ -16,19 +16,16 @@ import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
-import passwordSchema from "./passwordSchema";
 import useAuthStore from "@stores/authStore";
 import { useQuery } from "@tanstack/react-query";
 import {
   BasicInfo,
-  ChangePassword,
-  changePassword,
   getBasicInfo,
   updateBasicInfo,
 } from "@api/user/userSettings";
 import basicInfoSchema from "./basicInfoSchema";
 import Spinner from "@ui/view/spinner/Spinner";
-import { getRestCountriesEurope } from "@api/external/restCounties";
+import { getRestCountries } from "@api/external/restCounties";
 
 const BasicInfoForms = () => {
   const { user } = useAuthStore((state) => state);
@@ -45,7 +42,7 @@ const BasicInfoForms = () => {
   const { data: restCountiesData, isLoading: isLoadingRestCountries } =
     useQuery({
       queryKey: ["rest_countries"],
-      queryFn: () => getRestCountriesEurope(),
+      queryFn: () => getRestCountries(),
     });
 
   const {
@@ -57,21 +54,8 @@ const BasicInfoForms = () => {
     resolver: zodResolver(basicInfoSchema),
   });
 
-  const {
-    handleSubmit: handleSubmitPasswordForm,
-    reset: resetPasswordForm,
-    control: controlPasswordForm,
-    formState: { errors: errorsPasswordForm, isValid: isValidPasswordForm },
-  } = useForm<ChangePassword>({
-    resolver: zodResolver(passwordSchema),
-  });
-
   const handleCancelUserProfileUpdate = () => {
     reset();
-  };
-
-  const handleCancelPasswordUpdate = () => {
-    resetPasswordForm();
   };
 
   const basicInfoMutation = useNotifiedMutation({
@@ -79,15 +63,6 @@ const BasicInfoForms = () => {
       updateBasicInfo(params.basicInfo, params.id),
     onSuccess: () => {
       refetchBasicInfo();
-    },
-    showSuccessNotification: true,
-  });
-
-  const passwordMutation = useNotifiedMutation({
-    mutationFn: (params: { changePassword: ChangePassword; id?: number }) =>
-      changePassword(params.changePassword, params.id),
-    onSuccess: () => {
-      resetPasswordForm();
     },
     showSuccessNotification: true,
   });
@@ -100,131 +75,8 @@ const BasicInfoForms = () => {
     }
   };
 
-  const submitUpdatePassword = (newItem: ChangePassword) => {
-    if (isValidPasswordForm) {
-      passwordMutation.mutate({ changePassword: newItem, id: user?.id });
-    }
-  };
-
   return (
-    <Grid container spacing={3}>
-      {/*  Change Password */}
-      <Grid item xs={12} lg={6}>
-        <BlankCard>
-          <CardContent>
-            <Typography variant="h5" mb={1}>
-              {t("ui.changePassword")}
-            </Typography>
-            <Typography color="textSecondary" mb={3}>
-              {t("ui.changePasswordDescription")}
-            </Typography>
-            <form>
-              <CustomFormLabel
-                sx={{
-                  mt: 4,
-                }}
-                htmlFor="currentPassword"
-              >
-                {t("user.currentPassword")}
-              </CustomFormLabel>
-              <Controller
-                control={controlPasswordForm}
-                name="oldPassword"
-                defaultValue=""
-                render={({ field }) => (
-                  <CustomTextField
-                    error={errorsPasswordForm.oldPassword !== undefined}
-                    helperText={errorsPasswordForm.oldPassword?.message}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    type="password"
-                    id="oldPassword"
-                    {...field}
-                  />
-                )}
-              />
-
-              {/* 2 */}
-              <CustomFormLabel
-                sx={{
-                  mt: 2,
-                }}
-                htmlFor="newPassword"
-              >
-                {t("user.newPassword")}
-              </CustomFormLabel>
-              <Controller
-                control={controlPasswordForm}
-                name="newPassword"
-                defaultValue=""
-                render={({ field }) => (
-                  <CustomTextField
-                    error={errorsPasswordForm.newPassword !== undefined}
-                    helperText={errorsPasswordForm.newPassword?.message}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    type="password"
-                    id="newPassword"
-                    {...field}
-                  />
-                )}
-              />
-              {/* 3 */}
-              <CustomFormLabel
-                sx={{
-                  mt: 2,
-                }}
-                htmlFor="confirmPassword"
-              >
-                {t("user.confirmPassword")}
-              </CustomFormLabel>
-              <Controller
-                control={controlPasswordForm}
-                name="newPasswordConfirm"
-                defaultValue=""
-                render={({ field }) => (
-                  <CustomTextField
-                    error={errorsPasswordForm.newPasswordConfirm !== undefined}
-                    helperText={errorsPasswordForm.newPasswordConfirm?.message}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    type="password"
-                    id="newPasswordConfirm"
-                    {...field}
-                  />
-                )}
-              />
-            </form>
-          </CardContent>
-        </BlankCard>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ justifyContent: "end" }}
-          mt={2}
-        >
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            onClick={handleSubmitPasswordForm(submitUpdatePassword)}
-          >
-            {t("util.save")}
-          </Button>
-          <Button
-            size="large"
-            variant="text"
-            color="error"
-            onClick={handleCancelPasswordUpdate}
-          >
-            {t("util.cancel")}
-          </Button>
-        </Stack>
-      </Grid>
-
+    <Grid container justifyContent={'center'} paddingTop={5}>
       {/* Edit Details */}
       {isLoading || isLoadingRestCountries ? (
         <Grid item xs={12} lg={6}>

@@ -78,7 +78,12 @@ const ProductList = ({ onClick }: Props) => {
             flexDirection={"row"}
             display={"flex"}
           >
-            <Typography variant="h6" display={"inline"}>
+            <Typography
+              variant="h6"
+              display={"inline"}
+              component={Link}
+              to={`${product.id}`}
+            >
               {product.name}
             </Typography>
             <Chip label={product.type} size="small" color="success" />

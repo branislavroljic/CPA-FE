@@ -16,6 +16,7 @@ import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 import LinkForms from "./social-links/LinkForms";
 import CompanyInfoForm from "./company-info/CompanyInfoForm";
+import SecurityInfoForm from "./security/SecurityForm";
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -80,7 +81,16 @@ const AccountSetting = () => {
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <AccountCircleOutlined />
-                  <TabName>{t("user.account")}</TabName>
+                  <TabName>{t("user.general")}</TabName>
+                </Box>
+              }
+            />
+            <Tab
+              value="links"
+              label={
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <ConnectWithoutContactIcon />
+                  <TabName>{t("user.links")}</TabName>
                 </Box>
               }
             />
@@ -88,8 +98,8 @@ const AccountSetting = () => {
               value="security"
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <ConnectWithoutContactIcon />
-                  <TabName>{t("user.links")}</TabName>
+                  <AccountCircleOutlined />
+                  <TabName>{t("user.security")}</TabName>
                 </Box>
               }
             />
@@ -107,8 +117,11 @@ const AccountSetting = () => {
           <TabPanel sx={{ p: 0 }} value="account">
             <BasicInfoForms />
           </TabPanel>
-          <TabPanel sx={{ p: 0 }} value="security">
+          <TabPanel sx={{ p: 0 }} value="links">
             <LinkForms />
+          </TabPanel>
+          <TabPanel sx={{ p: 0 }} value="security">
+            <SecurityInfoForm />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="info">
             <CompanyInfoForm />

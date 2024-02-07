@@ -24,7 +24,7 @@ import {
   updateCompanyInfo,
 } from "@api/user/userSettings";
 import Spinner from "@ui/view/spinner/Spinner";
-import { getRestCountriesEurope } from "@api/external/restCounties";
+import { getRestCountries } from "@api/external/restCounties";
 import companyInfoSchema from "./companyInfoSchema";
 
 const CompanyInfoForm = () => {
@@ -38,7 +38,7 @@ const CompanyInfoForm = () => {
   const { data: restCountiesData, isLoading: isLoadingRestCountries } =
     useQuery({
       queryKey: ["rest_countries"],
-      queryFn: () => getRestCountriesEurope(),
+      queryFn: () => getRestCountries(),
     });
 
   const {
@@ -72,11 +72,11 @@ const CompanyInfoForm = () => {
   };
 
   return (
-    <Grid container justifyContent={"center"}>
+    <Grid container justifyContent={"center"} paddingTop={5}>
       {isLoading || isLoadingRestCountries ? (
         <Spinner></Spinner>
       ) : (
-        <Grid item xs={12} lg={8}>
+        <Grid item xs={12} lg={7}>
           <BlankCard>
             <CardContent>
               <Typography variant="h5" mb={1}>

@@ -45,13 +45,7 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
     },
     {
       id: uniqueId(),
-      title: i18n.t("loginHistory.title"),
-      icon: IconHistoryToggle,
-      href: "/login-history",
-    },
-    {
-      id: uniqueId(),
-      title: "Products",
+      title: i18n.t("products.title"),
       icon: IconBasket,
       href: "/products",
     },
@@ -61,36 +55,14 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
       icon: IconCoin,
       href: "/payments",
     },
-    {
-      id: uniqueId(),
-      title: i18n.t("domain.title"),
-      icon: IconLink,
-      href: "/domains",
-    },
+
     {
       id: uniqueId(),
       title: "Referral",
       icon: ConnectWithoutContactOutlined,
       href: "/referrals",
     },
-    {
-      id: uniqueId(),
-      title: t("order.title"),
-      icon: IconShoppingCart,
-      href: "/orders",
-    },
-    {
-      id: uniqueId(),
-      title: t("order.balanceTitle"),
-      icon: IconScale,
-      href: "/balance",
-    },
-    {
-      id: uniqueId(),
-      title: t("reports.title"),
-      icon: QueryStatsIcon,
-      href: "/reports",
-    },
+
     {
       id: uniqueId(),
       title: "Postback",
@@ -111,6 +83,40 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
         },
       ],
     },
+
+    {
+      id: uniqueId(),
+      title: t("order.title"),
+      icon: IconShoppingCart,
+      href: "/orders",
+    },
+
+    {
+      id: uniqueId(),
+      title: i18n.t("domain.title"),
+      icon: IconLink,
+      href: "/domains",
+    },
+
+    {
+      id: uniqueId(),
+      title: t("order.balanceTitle"),
+      icon: IconScale,
+      href: "/balance",
+    },
+    {
+      id: uniqueId(),
+      title: t("reports.title"),
+      icon: QueryStatsIcon,
+      href: "/reports",
+    },
+    {
+      id: uniqueId(),
+      title: i18n.t("loginHistory.title"),
+      icon: IconHistoryToggle,
+      href: "/login-history",
+    },
+
     // {
     //   navlabel: true,
     //   subheader: t("util.info").toUpperCase(),

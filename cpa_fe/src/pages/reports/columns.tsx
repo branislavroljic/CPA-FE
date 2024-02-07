@@ -29,10 +29,10 @@ const defaultColumns = (
       accessorKey: "cancelled",
       header: t("reports.cancelled"),
     },
-    {
-      accessorKey: "totalHoldRevenue",
-      header: t("reports.totalHoldRevenue"),
-    },
+    // {
+    //   accessorKey: "totalHoldRevenue",
+    //   header: t("reports.totalHoldRevenue"),
+    // },
     {
       accessorKey: "holdRevenue",
       header: t("reports.holdRevenue"),
@@ -41,14 +41,14 @@ const defaultColumns = (
       accessorKey: "revenue",
       header: t("reports.revenue"),
     },
-    {
-      accessorKey: "totalTrashRevenue",
-      header: t("reports.totalTrashRevenue"),
-    },
-    {
-      accessorKey: "totalCancelledRevenue",
-      header: t("reports.totalCancelledRevenue"),
-    },
+    // {
+    //   accessorKey: "totalTrashRevenue",
+    //   header: t("reports.totalTrashRevenue"),
+    // },
+    // {
+    //   accessorKey: "totalCancelledRevenue",
+    //   header: t("reports.totalCancelledRevenue"),
+    // },
   ] as MRT_ColumnDef<StatisticsReport>[];
 
 export default defaultColumns;

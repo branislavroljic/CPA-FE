@@ -8,6 +8,7 @@ import { getBalance } from "@api/user/user";
 import useAuthStore from "@stores/authStore";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "@ui/view/spinner/Spinner";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const MenuItem = ({ label, value }: any) => (
   <Stack>
@@ -67,7 +68,12 @@ const AppDD = () => {
   };
 
   return (
-    <>
+    <Stack
+      direction={"row"}
+      gap={1}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
       <Button
         color="inherit"
         sx={{ color: (theme) => theme.palette.text.secondary }}
@@ -80,7 +86,7 @@ const AppDD = () => {
       <Box>
         <Button
           color="inherit"
-          variant="text"
+          variant="contained"
           aria-controls="msgs-menu"
           aria-haspopup="true"
           sx={{
@@ -88,11 +94,19 @@ const AppDD = () => {
             color: anchorEl2
               ? "primary.main"
               : (theme) => theme.palette.text.secondary,
+            borderRadius: 8,
           }}
           onClick={handleClick2}
           startIcon={<PaidOutlinedIcon />}
+          endIcon={<KeyboardArrowDownIcon />}
         >
-          {t("user.balance")}
+          <Stack>
+            <Typography> {t("user.balance")}</Typography>
+            <Typography sx={{ fontWeight: 700 }}>
+              {" "}
+              {`$${balance?.balance ?? ""}`}
+            </Typography>
+          </Stack>
         </Button>
         <Menu
           id="msgs-menu"
@@ -128,7 +142,7 @@ const AppDD = () => {
       <Box>
         <Button
           color="inherit"
-          variant="text"
+          variant="contained"
           aria-controls="msgs-menu"
           aria-haspopup="true"
           sx={{
@@ -136,9 +150,11 @@ const AppDD = () => {
             color: anchorEl3
               ? "primary.main"
               : (theme) => theme.palette.text.secondary,
+            borderRadius: 8,
           }}
           onClick={handleClick3}
           startIcon={<AccountCircleOutlinedIcon />}
+          endIcon={<KeyboardArrowDownIcon />}
         >
           {t("user.manager")}
         </Button>
@@ -159,40 +175,33 @@ const AppDD = () => {
             },
           }}
         >
-          {isBalanceLoading ? (
-            <Spinner />
-          ) : (
-            <Stack direction={"column"} spacing={2}>
-              <MenuItem
-                label={t("user.firstname")}
-                value={user?.accountManager?.name}
-              />
-              <Divider />
-              <MenuItem
-                label={t("user.email")}
-                value={user?.accountManager?.email}
-              />
-              <Divider />
-              <MenuItem
-                label={"Skype"}
-                value={user?.accountManager?.skypeLink}
-              />
-              <Divider />
-              <MenuItem
-                label={"Telegram"}
-                value={user?.accountManager?.telegramLink}
-              />
-              <Divider />
-              <MenuItem
-                label={"Whatsapp"}
-                value={user?.accountManager?.whatsappLink}
-              />
-              <Divider />
-            </Stack>
-          )}
+          <Stack direction={"column"} spacing={2}>
+            <MenuItem
+              label={t("user.firstname")}
+              value={user?.accountManager?.name}
+            />
+            <Divider />
+            <MenuItem
+              label={t("user.email")}
+              value={user?.accountManager?.email}
+            />
+            <Divider />
+            <MenuItem label={"Skype"} value={user?.accountManager?.skypeLink} />
+            <Divider />
+            <MenuItem
+              label={"Telegram"}
+              value={user?.accountManager?.telegramLink}
+            />
+            <Divider />
+            <MenuItem
+              label={"Whatsapp"}
+              value={user?.accountManager?.whatsappLink}
+            />
+            <Divider />
+          </Stack>
         </Menu>
       </Box>
-    </>
+    </Stack>
   );
 };
 

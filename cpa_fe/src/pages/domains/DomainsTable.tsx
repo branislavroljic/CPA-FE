@@ -33,6 +33,8 @@ import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
 import { useNotificationStore } from "@stores/notificationStore";
 import queryClient, { invalidateAllQueries } from "../../query-client";
 import { IconDiscountCheckFilled } from "@tabler/icons-react";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import ClickPopover from "./ClickPopover";
 
 export default function DomainsTable() {
   const { user } = useAuthStore();
@@ -112,6 +114,8 @@ export default function DomainsTable() {
     manualPagination: true,
     enableFilters: false,
     enableColumnActions: false,
+    enableColumnResizing: true,
+    layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -120,7 +124,15 @@ export default function DomainsTable() {
       : undefined,
     onPaginationChange: setPagination,
     renderTopToolbarCustomActions: () => (
-      <Box sx={{ display: "flex", gap: "1rem", p: "4px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "1rem",
+          p: "4px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Tooltip arrow title="Refresh Data">
           <IconButton onClick={() => refetch()}>
             <RefreshIcon />
@@ -135,6 +147,7 @@ export default function DomainsTable() {
         >
           {t("domain.addDomain")}
         </Button>
+        <ClickPopover />
       </Box>
     ),
 
@@ -149,7 +162,7 @@ export default function DomainsTable() {
       i18n.language === "en"
         ? MRT_Localization_EN
         : MRT_Localization_SR_LATN_RS,
-    enableHiding: false,
+    enableHiding: true,
     enableRowActions: true,
     positionActionsColumn: "last",
     renderRowActions: ({ row }) => (

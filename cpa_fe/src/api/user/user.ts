@@ -24,6 +24,8 @@ export type User = {
   apiKey: string;
   username: string;
   email?: string;
+  name: string;
+  surname: string;
   roles: string[];
   token: string;
   refreshToken: string;
@@ -88,9 +90,11 @@ export type Order = {
   quantity: number;
   totalPrice: number;
   productId: number;
+  productName: string;
   preLandingPage: string;
   landingPage: string;
-  productName: string;
+  userId : number;
+  userUsername : string;
 };
 
 export type BalanceOrder = {

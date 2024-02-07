@@ -27,10 +27,15 @@
   "passwordsDidNotMatchError": "Passwords do not match",
   "country": "Country",
   "account": "Account",
+  "general": "General",
+  "security": "Security",
   "links": "Links",
   "companySettings": "Company settings",
   "referralLink": "Referral link",
   "balance": "Balance",
   "paid": "Paid",
-  "manager": "Manager"
+  "manager": "Manager",
+  "referralTitle": "Referral fees:",
+  "referralDesc": "Bring referrals and get:",
+  "referralFees": "referral fees"
 }

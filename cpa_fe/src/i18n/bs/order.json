@@ -11,5 +11,6 @@
   "orderId": "ID narudžbine",
   "offerName": "Ime ponude",
   "payout": "Isplata",
-  "balanceTitle" : "Saldo"
+  "balanceTitle" : "Saldo",
+  "baseUrl": "Osnovni URL"
 }

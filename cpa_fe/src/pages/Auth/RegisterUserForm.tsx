@@ -24,7 +24,7 @@ import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import { useNotificationStore } from "@stores/notificationStore";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { getRestCountriesEurope } from "@api/external/restCounties";
+import { getRestCountries } from "@api/external/restCounties";
 import { useQuery } from "@tanstack/react-query";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
@@ -147,7 +147,7 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
 
   const { data: restCountiesData } = useQuery({
     queryKey: ["rest_countries"],
-    queryFn: () => getRestCountriesEurope(),
+    queryFn: () => getRestCountries(),
   });
 
   const chatServices = useMemo(() => ["SKYPE", "WHATSAPP", "TELEGRAM"], []);

@@ -144,9 +144,7 @@ const Profile = () => {
               color="textPrimary"
               fontWeight={600}
             >
-              {user?.accountManager
-                ? `${user?.accountManager?.name} ${user?.accountManager?.surname}`
-                : user?.username}
+              {`${user?.name} ${user?.surname}`}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
               {user?.username}
@@ -159,11 +157,6 @@ const Profile = () => {
                 alignItems="center"
                 gap={1}
                 style={{ wordWrap: "break-word" }}
-                // sx={{
-                //   '&:hover': {
-                //     display: 'inline-block',
-                //   },
-                // }}
               >
                 <IconMail />
                 {user?.email}
@@ -174,6 +167,81 @@ const Profile = () => {
         <Divider />
         {profileDropdownData.map((profile) => (
           <Box key={profile.title}>
+            <Box key={"referral_text"}>
+              <Box>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={600}
+                  color="textPrimary"
+                  className="text-hover"
+                  noWrap
+                  sx={{
+                    width: "240px",
+                  }}
+                >
+                  {t("user.referralTitle")}
+                </Typography>
+                <Typography
+                  component={"div"}
+                  color="textSecondary"
+                  variant="subtitle2"
+                  sx={{
+                    flex: 1,
+                  }}
+                  noWrap
+                >
+                  {t("user.referralDesc")}
+
+                  <Box fontWeight="900" display="inline">
+                    {` 5% `}
+                  </Box>
+
+                  {t("user.referralFees")}
+                </Typography>
+              </Box>
+            </Box>
+            <Box key={t("user.referralLink")}>
+              <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
+                <Stack direction="row" spacing={2}>
+                  <Box
+                    width="45px"
+                    height="45px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <CopyToClipboardButton
+                      textToCopy={user?.referrerLink ?? ""}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography
+                      variant="subtitle2"
+                      fontWeight={600}
+                      color="textPrimary"
+                      className="text-hover"
+                      noWrap
+                      sx={{
+                        width: "240px",
+                      }}
+                    >
+                      {t("user.referralLink")}
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="subtitle2"
+                      sx={{
+                        width: "240px",
+                      }}
+                      noWrap
+                    >
+                      {user?.referrerLink}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Box>
+            </Box>
+            <Divider />
             <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
               <Link to={profile.href}>
                 <Stack direction="row" spacing={2}>
@@ -224,70 +292,8 @@ const Profile = () => {
             </Box>
           </Box>
         ))}
-        <Box key={t("user.referralLink")}>
-          <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
-            <Stack direction="row" spacing={2}>
-              <Box
-                width="45px"
-                height="45px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <CopyToClipboardButton textToCopy={user?.referrerLink ?? ""} />
-              </Box>
-              <Box>
-                <Typography
-                  variant="subtitle2"
-                  fontWeight={600}
-                  color="textPrimary"
-                  className="text-hover"
-                  noWrap
-                  sx={{
-                    width: "240px",
-                  }}
-                >
-                  {t("user.referralLink")}
-                </Typography>
-                <Typography
-                  color="textSecondary"
-                  variant="subtitle2"
-                  sx={{
-                    width: "240px",
-                  }}
-                  noWrap
-                >
-                  {user?.referrerLink}
-                </Typography>
-              </Box>
-            </Stack>
-          </Box>
-        </Box>
+
         <Box mt={2}>
-          {/* <Box
-            bgcolor="primary.light"
-            p={3}
-            mb={3}
-            overflow="hidden"
-            position="relative"
-          >
-            <Box display="flex" justifyContent="space-between">
-              <Box>
-                <Typography variant="h5" mb={2}>
-                  Unlimited <br />
-                  Access
-                </Typography>
-                <Button variant="contained" color="primary">
-                  Upgrade
-                </Button>
-              </Box>
-              <img
-                src={unlimitedImg}
-                alt="unlimited"
-                className="signup-bg"
-              ></img>
-            </Box>
-          </Box> */}
           <Button
             variant="outlined"
             color="primary"

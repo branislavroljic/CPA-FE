@@ -147,7 +147,7 @@ export default function PostbackTable() {
       i18n.language === "en"
         ? MRT_Localization_EN
         : MRT_Localization_SR_LATN_RS,
-    enableHiding: false,
+    enableHiding: true,
     defaultColumn: {
       minSize: 10,
       maxSize: 1000,

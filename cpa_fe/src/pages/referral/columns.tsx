@@ -3,9 +3,7 @@ import { TFunction } from "i18next";
 import { Referral } from "@api/user/user";
 import { Chip } from "@mui/material";
 
-const defaultColumns = (
-  t: TFunction<"translation", "translation">
-) =>
+const defaultColumns = (t: TFunction<"translation", "translation">) =>
   [
     {
       accessorKey: "id",
@@ -37,12 +35,12 @@ const defaultColumns = (
         align: "center",
       },
       Cell: ({ renderedCellValue, row }) =>
-        row.original.status === "SUCCESS" ? (
+        row.original.status === "APPROVED" ? (
           <Chip label={renderedCellValue} color="success" />
         ) : row.original.status === "BLOCKED" ? (
           <Chip label={renderedCellValue} color="error" />
         ) : (
-          <Chip label={renderedCellValue} color="warning" />
+          <Chip label={"ON HOLD"} color="warning" />
         ),
     },
   ] as MRT_ColumnDef<Referral>[];

@@ -14,6 +14,8 @@ import DarkModeTwoToneIcon from "@mui/icons-material/DarkModeTwoTone";
 import Scrollbar from "@ui/custom-scroll/Scrollbar";
 import { useCustomizerStore } from "@stores/customizerStore";
 import { useTranslation } from "react-i18next";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 
 const SidebarWidth = "320px";
 const Customizer: FC = () => {
@@ -69,7 +71,11 @@ const Customizer: FC = () => {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <IconSettings />
+        {customizer.activeMode === "light" ? (
+          <DarkModeIcon />
+        ) : (
+          <LightModeOutlinedIcon />
+        )}
       </IconButton>
       <Drawer
         anchor="right"

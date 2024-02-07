@@ -20,7 +20,7 @@ import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import { useNotificationStore } from "@stores/notificationStore";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { getRestCountriesEurope } from "@api/external/restCounties";
+import { getRestCountries } from "@api/external/restCounties";
 import { useQuery } from "@tanstack/react-query";
 import CustomTextField from "@ui/forms/theme-elements/CustomTextField";
 
@@ -193,7 +193,7 @@ const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
 
   const { data: restCountiesData } = useQuery({
     queryKey: ["rest_countries"],
-    queryFn: () => getRestCountriesEurope(),
+    queryFn: () => getRestCountries(),
   });
 
   const chatServices = useMemo(() => ["SKYPE", "WHATSAPP", "TELEGRAM"], []);

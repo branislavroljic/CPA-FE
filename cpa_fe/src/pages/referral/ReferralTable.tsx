@@ -60,6 +60,8 @@ export default function Referraltable() {
     manualPagination: true,
     enableFilters: false,
     enableColumnActions: false,
+    enableColumnResizing: true,
+    layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -85,7 +87,7 @@ export default function Referraltable() {
       i18n.language === "en"
         ? MRT_Localization_EN
         : MRT_Localization_SR_LATN_RS,
-    enableHiding: false,
+    enableHiding: true,
     defaultColumn: {
       minSize: 10,
       maxSize: 1000,

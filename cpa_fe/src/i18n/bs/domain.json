@@ -4,5 +4,6 @@
   "type": "Tip",
   "status": "Status",
   "addDomain": "Dodaj domen",
-  "verify" : "Verifikuj domen"
+  "verify": "Verifikuj domen",
+  "howToParkDomain": "Kako parkirati domen?"
 }
