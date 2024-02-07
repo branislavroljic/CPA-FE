@@ -36,6 +36,7 @@ export type Product = {
   earn_per_click: number;
   landingPagesString?: string;
   prelandingPagesString?: string;
+  status: string;
 };
 
 export interface Country {

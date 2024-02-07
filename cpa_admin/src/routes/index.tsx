@@ -10,6 +10,7 @@ import PaymentsPage from "@pages/payments/PaymentsPage";
 import OrderPage from "@pages/orders/OrderPage";
 import UserPage from "@pages/users/UserPage";
 import React from "react";
+import Notifications from "@pages/notifications/Notifications";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -83,6 +84,11 @@ const browserConfig = createBrowserRouter([
             errorElement: <ErrorPage />,
           },
         ],
+      },
+      {
+        id: "notifications",
+        path: "/notifications",
+        element: <Notifications />,
       },
       {
         id: "notFound",

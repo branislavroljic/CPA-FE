@@ -6,6 +6,7 @@ import {
   Toolbar,
   styled,
   Stack,
+  Button,
 } from "@mui/material";
 
 import { IconMenu2 } from "@tabler/icons-react";
@@ -13,6 +14,7 @@ import Profile from "./Profile";
 import Search from "./Search";
 import { useCustomizerStore } from "@stores/customizerStore";
 import Customizer from "@layout/full/shared/customizer/Customizer";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
@@ -60,6 +62,15 @@ const Header = () => {
 
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
+          <Button
+            color="inherit"
+            sx={{ color: (theme: any) => theme.palette.text.secondary }}
+            variant="text"
+            to="/notifications"
+            component={Link}
+          >
+            News
+          </Button>
           {/* <Language /> */}
           {/* ------------------------------------------- */}
           {/* Ecommerce Dropdown */}

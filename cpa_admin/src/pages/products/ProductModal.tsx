@@ -48,6 +48,7 @@ export default function ProductModal() {
     useProductModalStore();
   const [hasChanged, setHasChanged] = useState(false);
   const types = useMemo(() => ["BASIC", "REGULAR", "VIP"], []);
+  const statuses = useMemo(() => ["ACTIVE", "PAUSED", "PENDING"], []);
 
   const loaderData = useLoaderData() as unknown[];
   const categories = loaderData[1] as Category[];
@@ -221,7 +222,7 @@ export default function ProductModal() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="body.price"
                 control={control}
@@ -244,7 +245,7 @@ export default function ProductModal() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="body.currency"
                 control={control}
@@ -260,6 +261,29 @@ export default function ProductModal() {
                     placeholder={"Valuta"}
                     margin="normal"
                     id="currency"
+                    autoFocus
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <Controller
+                name="body.country_code"
+                control={control}
+                defaultValue={item?.country_code ?? undefined}
+                render={({ field }) => (
+                  <TextField
+                    label={"Kod države"}
+                    fullWidth
+                    required
+                    disabled={mutation.isLoading}
+                    error={!!errors.body?.country_code}
+                    helperText={errors.body?.country_code?.message}
+                    placeholder={"Kod države"}
+                    margin="normal"
+                    id="country_code"
                     autoFocus
                     {...field}
                   />
@@ -283,6 +307,30 @@ export default function ProductModal() {
                     placeholder={"Isplata"}
                     margin="normal"
                     id="payout"
+                    autoFocus
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="body.limit_per_day"
+                control={control}
+                defaultValue={item?.limit_per_day ?? undefined}
+                render={({ field }) => (
+                  <TextField
+                    label={"Dnevni limit"}
+                    type="number"
+                    fullWidth
+                    required
+                    disabled={mutation.isLoading}
+                    error={errors.body?.limit_per_day !== undefined}
+                    helperText={errors.body?.limit_per_day?.message}
+                    placeholder={"Dnevni limit"}
+                    margin="normal"
+                    id="amount"
                     autoFocus
                     {...field}
                   />
@@ -319,50 +367,32 @@ export default function ProductModal() {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="body.limit_per_day"
                 control={control}
-                defaultValue={item?.limit_per_day ?? undefined}
-                render={({ field }) => (
-                  <TextField
-                    label={"Dnevni limit"}
-                    type="number"
-                    fullWidth
-                    required
-                    disabled={mutation.isLoading}
-                    error={errors.body?.limit_per_day !== undefined}
-                    helperText={errors.body?.limit_per_day?.message}
-                    placeholder={"Dnevni limit"}
-                    margin="normal"
-                    id="amount"
-                    autoFocus
-                    {...field}
+                name="body.status"
+                defaultValue={item?.status ?? undefined}
+                render={({ field: { onChange, value } }) => (
+                  <Autocomplete
+                    onChange={(event, item) => {
+                      onChange(item);
+                    }}
+                    value={statuses.find((m) => m === value)}
+                    options={statuses}
+                    getOptionLabel={(option) => option}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label={"Status"}
+                        margin="normal"
+                        variant="outlined"
+                        error={errors.body?.status !== undefined}
+                      />
+                    )}
                   />
                 )}
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="body.country_code"
-                control={control}
-                defaultValue={item?.country_code ?? undefined}
-                render={({ field }) => (
-                  <TextField
-                    label={"Kod države"}
-                    fullWidth
-                    required
-                    disabled={mutation.isLoading}
-                    error={!!errors.body?.country_code}
-                    helperText={errors.body?.country_code?.message}
-                    placeholder={"Kod države"}
-                    margin="normal"
-                    id="country_code"
-                    autoFocus
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
+            
 
             <Grid item xs={12} sm={12}>
               <Controller

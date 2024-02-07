@@ -83,6 +83,13 @@ export type User = {
   };
 };
 
+export interface Notification {
+  id: number;
+  title: string;
+  text: string;
+  timeCreated: string;
+}
+
 export function getUsers(
   pagination: PageRequest,
   filter?: MRT_ColumnFiltersState
@@ -111,4 +118,8 @@ export function updateVIP(id: number, status: boolean) {
       status: status,
     })
   );
+}
+
+export function getNotifications(id: number): Promise<Notification[]> {
+  return get(new URL(id + "/notification", baseUrlWithSlash));
 }

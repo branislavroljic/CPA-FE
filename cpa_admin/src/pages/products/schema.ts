@@ -100,6 +100,11 @@ const productSchema = z.object({
         field: "Tip",
       }),
     }),
+    status: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Status",
+      }),
+    }),
     limit_per_day: z.coerce.number({
       required_error: i18n.t("util.required.male", {
         field: "Dnevni limit",
