@@ -93,8 +93,8 @@ export type Order = {
   productName: string;
   preLandingPage: string;
   landingPage: string;
-  userId : number;
-  userUsername : string;
+  userId: number;
+  userUsername: string;
 };
 
 export type BalanceOrder = {

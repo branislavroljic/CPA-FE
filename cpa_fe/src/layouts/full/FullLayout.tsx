@@ -3,11 +3,11 @@ import { styled, Container, Box, useTheme } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
 import Header from "./vertical/header/Header";
 import Sidebar from "./vertical/sidebar/Sidebar";
-import { useNotificationStore } from "@stores/notificationStore";
 import useAuthStore from "@stores/authStore";
 import ScrollToTop from "@ui/shared/ScrollToTop";
 import Notification from "@ui/Notification";
 import { useCustomizerStore } from "@stores/customizerStore";
+import { useNotificationStore } from "@stores/notificationStore";
 
 const MainWrapper = styled("div")(() => ({
   display: "flex",
@@ -32,7 +32,7 @@ const FullLayout: FC = () => {
 
   const theme = useTheme();
 
-  const { isOpen, activeNotification: data, closeNotification } = useNotificationStore();
+  const { isOpen, data, closeNotification } = useNotificationStore();
 
   const { isValid } = useAuthStore((state) => state);
 

@@ -13,17 +13,15 @@ export default function CategoryPage() {
     () => [
       {
         to: "/",
-        title: "Kategorije",
+        title: "Categories",
       },
     ],
     []
   );
   return (
     <PageContainer title="" description="this is innerpage">
-      <Breadcrumb items={BCrumb} title={"Kategorije"} />
-      <ThemeProvider
-        theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-      >
+      <Breadcrumb items={BCrumb} title={"Categories"} />
+      <ThemeProvider theme={createTheme(theme, enUS)}>
         <CategoryTable />
       </ThemeProvider>
     </PageContainer>

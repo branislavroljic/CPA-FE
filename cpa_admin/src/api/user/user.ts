@@ -83,6 +83,50 @@ export type User = {
   };
 };
 
+export type DasboardData = {
+  conversionsToday: number;
+  conversionsYesterday: number;
+  conversionsThisWeek: number;
+  conversionsThisMonth: number;
+  conversionRateToday: number;
+  conversionsPercentage: number;
+  conversionRateYesterday: number;
+  conversionRateThisWeek: number;
+  conversionRateThisMonth: number;
+  conversionRatePercentage: number;
+  requestedToday: number;
+  requestedYesterday: number;
+  requestedThisWeek: number;
+  requestedThisMonth: number;
+  requestedPercentage: number;
+  revenueToday: number;
+  revenueYesterday: number;
+  revenueThisWeek: number;
+  revenueThisMonth: number;
+  revenuePercentage: number;
+  cancelledToday: number;
+  cancelledYesterday: number;
+  cancelledThisWeek: number;
+  cancelledThisMonth: number;
+  cancelledPercentage: number;
+  trashToday: number;
+  trashYesterday: number;
+  trashThisWeek: number;
+  trashThisMonth: number;
+  trashPercentage: number;
+};
+
+export type AdminDashboardData = DasboardData & {
+  numApprovedUsers: number;
+  numHoldUsers: number;
+  numRejectedUsers: number;
+  numTotalUsers: number;
+  numActiveProducts: number;
+  numPendingProducts: number;
+  numPausedProducts: number;
+  numTotalProducts: number;
+};
+
 export interface Notification {
   id: number;
   title: string;
@@ -122,4 +166,8 @@ export function updateVIP(id: number, status: boolean) {
 
 export function getNotifications(id: number): Promise<Notification[]> {
   return get(new URL(id + "/notification", baseUrlWithSlash));
+}
+
+export function getAdminDashboardData(): Promise<AdminDashboardData> {
+  return get(new URL("admin_dashboard", baseUrlWithSlash));
 }

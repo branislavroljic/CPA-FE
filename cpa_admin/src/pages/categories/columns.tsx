@@ -9,15 +9,15 @@ const defaultColumns = () =>
     },
     {
       accessorKey: "name",
-      header: "Naziv",
+      header: "Name",
     },
     {
       accessorKey: "nameEng",
-      header: "Naziv na engleskom",
+      header: "Name in english",
     },
     {
       accessorKey: "color",
-      header: "Boja",
+      header: "Color",
     },
   ] as MRT_ColumnDef<Category>[];
 

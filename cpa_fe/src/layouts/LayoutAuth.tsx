@@ -33,9 +33,9 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import useAuthStore from "@stores/authStore";
 import { AccountCircle } from "@mui/icons-material";
-import { useNotificationStore } from "@stores/notificationStore";
 import Notification from "@ui/Notification";
 import { USER_KEY } from "@api/auth";
+import { useNotificationStore } from "@stores/notificationStore";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -109,7 +109,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function LayoutAuth() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { isOpen, activeNotification: data, closeNotification } = useNotificationStore();
+  const { isOpen, data, closeNotification } = useNotificationStore();
 
   const location = useLocation();
 

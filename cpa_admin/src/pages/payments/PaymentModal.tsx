@@ -74,9 +74,7 @@ export default function PaymentModal() {
       maxWidth="sm"
     >
       <DialogTitle display={"flex"} gap={1}>
-        <Typography variant="subtitle1">
-          {t("payments.requestPayment")}
-        </Typography>
+        <Typography variant="subtitle1">Request payment</Typography>
       </DialogTitle>
 
       <Divider />
@@ -129,7 +127,7 @@ export default function PaymentModal() {
               defaultValue={item?.description ?? undefined}
               render={({ field }) => (
                 <TextField
-                  label={"Opis"}
+                  label={"Description"}
                   fullWidth
                   multiline
                   maxRows={"infinity"}
@@ -153,14 +151,14 @@ export default function PaymentModal() {
               defaultValue={item?.descriptionEng ?? undefined}
               render={({ field }) => (
                 <TextField
-                  label={"Opis"}
+                  label={"Description in English"}
                   fullWidth
                   multiline
                   maxRows={"infinity"}
                   disabled={mutation.isLoading}
                   error={!!errors.descriptionEng}
                   helperText={errors.descriptionEng?.message}
-                  placeholder={"Opis na engleskom"}
+                  placeholder={"Description in English"}
                   margin="normal"
                   id="descriptionEng"
                   autoFocus
@@ -177,14 +175,14 @@ export default function PaymentModal() {
               defaultValue={item?.rejectComment ?? undefined}
               render={({ field }) => (
                 <TextField
-                  label={"Razlog odbijanja"}
+                  label={"Reject comment"}
                   fullWidth
                   multiline
                   maxRows={"infinity"}
                   disabled={mutation.isLoading}
                   error={!!errors.rejectComment}
                   helperText={errors.rejectComment?.message}
-                  placeholder={"Razlog odbijanja"}
+                  placeholder={"Reject comment"}
                   margin="normal"
                   id="rejectComment"
                   autoFocus
@@ -201,14 +199,14 @@ export default function PaymentModal() {
               defaultValue={item?.rejectCommentEng ?? undefined}
               render={({ field }) => (
                 <TextField
-                  label={"Opis"}
+                  label={"Reject comment in English"}
                   fullWidth
                   multiline
                   maxRows={"infinity"}
                   disabled={mutation.isLoading}
                   error={!!errors.rejectCommentEng}
                   helperText={errors.rejectCommentEng?.message}
-                  placeholder={"Opis"}
+                  placeholder={"Reject comment in English"}
                   margin="normal"
                   id="rejectCommentEng"
                   {...field}

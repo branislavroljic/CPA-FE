@@ -18,11 +18,10 @@ import { useQuery } from "@tanstack/react-query";
 import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
 import i18n from "../../i18n";
-import { MRT_Localization_SR_LATN_RS } from "material-react-table/locales/sr-Latn-RS";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
-import { enUS, srRS } from "@mui/material/locale";
+import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import {
   Order,
@@ -118,7 +117,7 @@ export default function OrderTable() {
     enableColumnActions: false,
     enableGlobalFilter: false,
     enableFilters: true,
-    enableRowActions : true,
+    enableRowActions: true,
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -152,10 +151,7 @@ export default function OrderTable() {
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
-    localization:
-      i18n.language === "en"
-        ? MRT_Localization_EN
-        : MRT_Localization_SR_LATN_RS,
+    localization: MRT_Localization_EN,
     enableHiding: false,
     defaultColumn: {
       minSize: 10,
@@ -166,9 +162,7 @@ export default function OrderTable() {
 
   return (
     <>
-      <ThemeProvider
-        theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-      >
+      <ThemeProvider theme={createTheme(theme, enUS)}>
         <MaterialReactTable table={table} />
       </ThemeProvider>
       <OrderModal />

@@ -1,7 +1,7 @@
-import { useNotificationStore } from '@stores/notificationStore';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError, AxiosResponse } from 'axios';
-import { useTranslation } from 'react-i18next';
+import { useNotificationStore } from "@stores/notificationStore";
+import { useMutation } from "@tanstack/react-query";
+import {  AxiosResponse } from "axios";
+import { useTranslation } from "react-i18next";
 
 export type ErrorMessage = {
   message: string;
@@ -43,7 +43,7 @@ export default function useNotifiedMutation<T>(
 
         openNotification({
           isError: true,
-          primaryText: t('util.errorOccurred'),
+          primaryText: t("util.errorOccurred"),
           secondaryText: message.message,
         });
 
@@ -53,8 +53,8 @@ export default function useNotifiedMutation<T>(
       if (showSuccessMutation) {
         openNotification({
           isError: false,
-          primaryText: t('util.success'),
-          secondaryText: t('util.persistSuccess'),
+          primaryText: t("util.success"),
+          secondaryText: t("util.persistSuccess"),
         });
       }
 
@@ -62,11 +62,11 @@ export default function useNotifiedMutation<T>(
         onSuccess(response, input);
       }
     },
-    onError: (error: AxiosError) => {
+    onError: (error: any) => {
       openNotification({
         isError: true,
-        primaryText: t('util.errorOccurred'),
-        secondaryText: error.response?.data as string,
+        primaryText: t("util.errorOccurred"),
+        secondaryText: error.response?.data?.message,
       });
     },
   });

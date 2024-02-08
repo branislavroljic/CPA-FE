@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Divider, IconButton, Typography, Stack } from "@mui/material";
 import { IconMenu2 } from "@tabler/icons-react";
-import { useNotificationStore } from "@stores/notificationStore";
+import { useNotificationStore } from "@stores/newsStore";
 import { useTranslation } from "react-i18next";
 
 interface Props {

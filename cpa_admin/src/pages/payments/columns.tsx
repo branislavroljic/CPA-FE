@@ -3,9 +3,7 @@ import { Chip } from "@mui/material";
 import { Payment } from "@api/payment/payment";
 import { SelectInput } from "@api/utils";
 
-const defaultColumns = (
-  paymentStatuses : SelectInput[],
-) =>
+const defaultColumns = (paymentStatuses: SelectInput[]) =>
   [
     {
       accessorKey: "id",
@@ -14,7 +12,7 @@ const defaultColumns = (
     },
     {
       accessorKey: "userId",
-      header: "Id korisnika",
+      header: "User ID",
     },
     {
       accessorKey: "userUsername",
@@ -23,17 +21,17 @@ const defaultColumns = (
     },
     {
       accessorKey: "amount",
-      header: "Iznos",
+      header: "Amount",
       enableColumnFilter: false,
     },
     {
       accessorKey: "balanceBeforeRequest",
-      header: "Stanje prije zahtjeva",
+      header: "Balance before request",
       enableColumnFilter: false,
     },
     {
       accessorKey: "method",
-      header: "Metod",
+      header: "Method",
       enableColumnFilter: false,
     },
     {
@@ -51,22 +49,22 @@ const defaultColumns = (
           }
         />
       ),
-      filterVariant: 'select',
+      filterVariant: "select",
       filterSelectOptions: paymentStatuses,
     },
     {
       accessorKey: "description",
-      header: "Opis",
+      header: "Description",
       enableColumnFilter: false,
     },
     {
       accessorKey: "createdAt",
-      header: "Kreirano",
+      header: "Created at",
       enableColumnFilter: false,
     },
     {
       accessorKey: "editedAt",
-      header: "Editovano",
+      header: "Edited at",
       enableColumnFilter: false,
     },
   ] as MRT_ColumnDef<Payment>[];

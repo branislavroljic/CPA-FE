@@ -68,7 +68,7 @@ export default function CategoryModal() {
       maxWidth="sm"
     >
       <DialogTitle display={"flex"} gap={1}>
-        <Typography variant="subtitle1">{"Kategorija"}</Typography>
+        <Typography variant="subtitle1">{"Category"}</Typography>
       </DialogTitle>
 
       <Divider />
@@ -88,13 +88,13 @@ export default function CategoryModal() {
             defaultValue={item?.name}
             render={({ field }) => (
               <TextField
-                label={"Naziv"}
+                label={"Name"}
                 required
                 fullWidth
                 disabled={mutation.isLoading}
                 error={errors.name !== undefined}
                 helperText={errors.name?.message}
-                placeholder={"Naziv"}
+                placeholder={"Name"}
                 margin="normal"
                 id="name"
                 autoFocus
@@ -108,13 +108,13 @@ export default function CategoryModal() {
             defaultValue={item?.nameEng}
             render={({ field }) => (
               <TextField
-                label={"Naziv na engleskom"}
+                label={"Name in English"}
                 required
                 fullWidth
                 disabled={mutation.isLoading}
                 error={errors.nameEng !== undefined}
                 helperText={errors.nameEng?.message}
-                placeholder={"Naziv na engleskom"}
+                placeholder={"Name in English"}
                 margin="normal"
                 id="nameEng"
                 {...field}
@@ -133,7 +133,7 @@ export default function CategoryModal() {
                 disabled={mutation.isLoading}
                 error={errors.color !== undefined}
                 helperText={errors.color?.message}
-                placeholder={"Boja"}
+                placeholder={"Color"}
                 margin="normal"
                 id="color"
                 {...field}

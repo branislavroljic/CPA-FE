@@ -13,7 +13,7 @@ const defaultColumns = (accountStatuses: SelectInput[]) =>
     },
     {
       accessorKey: "username",
-      header: "Korisničko ime",
+      header: "Username",
     },
     {
       accessorKey: "email",
@@ -22,7 +22,7 @@ const defaultColumns = (accountStatuses: SelectInput[]) =>
     },
     {
       accessorKey: "country",
-      header: "Država",
+      header: "Country",
       Cell: ({ renderedCellValue, row }) => (
         <Box
           sx={{
@@ -41,8 +41,9 @@ const defaultColumns = (accountStatuses: SelectInput[]) =>
       enableColumnFilter: false,
     },
     {
-      accessorKey: "balance",
-      header: "Stanje",
+      id: "balance",
+      accessorFn: (row) => `$${row.balance}`,
+      header: "Balance",
       enableColumnFilter: false,
     },
     {
@@ -67,7 +68,7 @@ const defaultColumns = (accountStatuses: SelectInput[]) =>
     },
     {
       accessorKey: "enabledVipProducts",
-      header: "Omogućeni VIP proizvodi",
+      header: "VIP products enabled",
       muiTableHeadCellProps: {
         align: "center",
       },

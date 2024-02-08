@@ -11,7 +11,7 @@ import { getNotifications } from "@api/notification/notification";
 import { useQuery } from "@tanstack/react-query";
 import Scrollbar from "@ui/custom-scroll/Scrollbar";
 import Spinner from "@ui/view/spinner/Spinner";
-import { useNotificationStore } from "@stores/notificationStore";
+import { useNotificationStore } from "@stores/newsStore";
 import { useTranslation } from "react-i18next";
 
 const NoteList = () => {

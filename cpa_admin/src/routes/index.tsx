@@ -11,6 +11,8 @@ import OrderPage from "@pages/orders/OrderPage";
 import UserPage from "@pages/users/UserPage";
 import React from "react";
 import Notifications from "@pages/notifications/Notifications";
+import StatisticsPage from "@pages/statistic/StatisticPage";
+import ReferralPage from "@pages/referrals/ReferralPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -30,9 +32,19 @@ const browserConfig = createBrowserRouter([
     element: <FullLayout />,
     children: [
       {
-        index: true,
-        id: "categories",
+        id: "dashboard",
         path: "/",
+        children: [
+          {
+            index: true,
+            element: <StatisticsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "categories",
+        path: "/categories",
         element: <CategoryPage />,
         errorElement: <ErrorPage />,
       },
@@ -81,6 +93,17 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <UserPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "referrals",
+        path: "/referrals",
+        children: [
+          {
+            index: true,
+            element: <ReferralPage />,
             errorElement: <ErrorPage />,
           },
         ],

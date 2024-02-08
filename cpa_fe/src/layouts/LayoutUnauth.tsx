@@ -6,7 +6,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export default function LayoutUnauth() {
   const valid = useAuthStore((state) => state.isValid);
 
-  const { isOpen, activeNotification: data, closeNotification } = useNotificationStore();
+  const { isOpen, data, closeNotification } = useNotificationStore();
 
   if (valid) {
     return <Navigate to={"/"} replace={true} />;
@@ -14,7 +14,7 @@ export default function LayoutUnauth() {
 
   return (
     <div
-      className="flex w-full items-center justify-center"
+      className="flex h-screen w-full items-center justify-center bg-blue-50"
       style={{
         minHeight: "100vh",
         backgroundImage: 'url("/assets/backgrounds/background.png")',

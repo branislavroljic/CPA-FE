@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Grid,
   Box,
@@ -7,43 +7,43 @@ import {
   Stack,
   Button,
   TextField,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import PageContainer from '@ui/container/PageContainer';
-import Logo from '@layout/full/shared/logo/Logo';
-import { z } from 'zod';
-import i18n from '../../i18n';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslation } from 'react-i18next';
-import CustomFormLabel from '@ui/forms/theme-elements/CustomFormLabel';
-import Banner from './Banner';
-import { VerifyRecoverPasswordRequest } from '@api/auth';
-import { useNotificationStore } from '@stores/notificationStore';
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import PageContainer from "@ui/container/PageContainer";
+import Logo from "@layout/full/shared/logo/Logo";
+import { z } from "zod";
+import i18n from "../../i18n";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
+import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
+import Banner from "./Banner";
+import { VerifyRecoverPasswordRequest } from "@api/auth";
+import { useNotificationStore } from "@stores/notificationStore";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
 const recoverPasswordSchema = z.object({
   verificationCode: z.string({
-    required_error: i18n.t('util.required.non', {
-      field: i18n.t('login.verificationCodeLabel'),
+    required_error: i18n.t("util.required.non", {
+      field: i18n.t("login.verificationCodeLabel"),
     }),
   }),
   password: z
     .string({
-      required_error: i18n.t('util.required.female', {
-        field: i18n.t('login.passwordLabel'),
+      required_error: i18n.t("util.required.female", {
+        field: i18n.t("login.passwordLabel"),
       }),
     })
     .min(8, {
-      message: i18n.t('util.length', {
-        field: i18n.t('login.passwordLabel'),
+      message: i18n.t("util.length", {
+        field: i18n.t("login.passwordLabel"),
         num: 8,
       }),
     })
     .max(standardMaxLength, {
-      message: i18n.t('util.maxLength', {
-        field: i18n.t('login.passwordLabel'),
+      message: i18n.t("util.maxLength", {
+        field: i18n.t("login.passwordLabel"),
         num: standardMaxLength,
       }),
     }),
@@ -68,30 +68,30 @@ export default function RecoverPasswordPage() {
 
   const registerUser = async (input: VerifyRecoverPasswordRequest) => {
     const baseUrl = new URL(
-      'auth/verify-recover-password',
+      "auth/verify-recover-password",
       import.meta.env.VITE_API_URL
     );
     const result = await fetch(baseUrl, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(input),
       headers: {
-        'Accept-language': i18n.language,
-        'Content-type': 'application/json',
+        "Accept-language": i18n.language,
+        "Content-type": "application/json",
       },
     });
 
     if (!result.ok) {
-      setError('verificationCode', {
-        message: '',
-        type: 'server',
+      setError("verificationCode", {
+        message: "",
+        type: "server",
       });
-      setError('password', {
-        message: '',
-        type: 'server',
+      setError("password", {
+        message: "",
+        type: "server",
       });
       openNotification({
         isError: true,
-        primaryText: i18n.t('util.errorOccurred'),
+        primaryText: i18n.t("util.errorOccurred"),
         secondaryText: await result.text(),
       });
       return;
@@ -107,15 +107,15 @@ export default function RecoverPasswordPage() {
     <PageContainer description="this is recover password page">
       <Box
         sx={{
-          position: 'relative',
-          '&:before': {
+          position: "relative",
+          "&:before": {
             content: '""',
-            backgroundSize: '400% 400%',
-            animation: 'gradient 15s ease infinite',
-            position: 'absolute',
-            height: '100%',
-            width: '100%',
-            opacity: '0.3',
+            backgroundSize: "400% 400%",
+            animation: "gradient 15s ease infinite",
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            opacity: "0.3",
           },
         }}
       >
@@ -123,7 +123,7 @@ export default function RecoverPasswordPage() {
           container
           spacing={0}
           justifyContent="center"
-          sx={{ height: '100vh' }}
+          sx={{ height: "100vh" }}
         >
           <Grid
             item
@@ -138,7 +138,7 @@ export default function RecoverPasswordPage() {
             {!isSuccessful ? (
               <Card
                 elevation={9}
-                sx={{ p: 4, zIndex: 1, width: '100%', maxWidth: '450px' }}
+                sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "450px" }}
               >
                 <Box display="flex" alignItems="center" justifyContent="center">
                   <Logo />
@@ -147,7 +147,7 @@ export default function RecoverPasswordPage() {
                   <Stack mb={3}>
                     <Box>
                       <CustomFormLabel htmlFor="verificationCode">
-                        {t('login.verificationCodeLabel')}
+                        {t("login.verificationCodeLabel")}
                       </CustomFormLabel>
                       <Controller
                         control={control}
@@ -169,7 +169,7 @@ export default function RecoverPasswordPage() {
                     </Box>
                     <Box>
                       <CustomFormLabel htmlFor="password">
-                        {t('login.passwordLabel')}
+                        {t("login.passwordLabel")}
                       </CustomFormLabel>
                       <Controller
                         control={control}
@@ -198,7 +198,7 @@ export default function RecoverPasswordPage() {
                     fullWidth
                     type="submit"
                   >
-                    {t('login.register')}
+                    {t("login.register")}
                   </Button>
                 </Box>
                 <Stack direction="row" spacing={1} mt={3}>
@@ -207,27 +207,27 @@ export default function RecoverPasswordPage() {
                     variant="h6"
                     fontWeight="400"
                   >
-                    {t('login.alreadyHaveAnAccount')}
+                    {t("login.alreadyHaveAnAccount")}
                   </Typography>
                   <Typography
                     component={Link}
                     to="/login"
                     fontWeight="500"
                     sx={{
-                      textDecoration: 'none',
-                      color: 'primary.main',
+                      textDecoration: "none",
+                      color: "primary.main",
                     }}
                   >
-                    {t('login.login')}
+                    {t("login.login")}
                   </Typography>
                 </Stack>
               </Card>
             ) : (
               <Banner
-                title={t('login.successfulVerification')}
-                subtitle={t('login.successfulVerificationSubtitle')}
-                goToText={t('login.goToLogin')}
-                onGoToClick={() => navigate('/')}
+                title={t("login.successfulVerification")}
+                subtitle={t("login.successfulVerificationSubtitle")}
+                goToText={t("login.goToLogin")}
+                onGoToClick={() => navigate("/")}
               />
             )}
           </Grid>

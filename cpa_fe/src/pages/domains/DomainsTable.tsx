@@ -30,11 +30,10 @@ import { InputDomain, addDomain, verifyDomain } from "@api/domain/domain";
 import DomainModal from "./DomainModal";
 import DomainVerificationIcon from "@mui/icons-material/DomainVerification";
 import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
-import { useNotificationStore } from "@stores/notificationStore";
 import queryClient, { invalidateAllQueries } from "../../query-client";
 import { IconDiscountCheckFilled } from "@tabler/icons-react";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ClickPopover from "./ClickPopover";
+import { useNotificationStore } from "@stores/notificationStore";
 
 export default function DomainsTable() {
   const { user } = useAuthStore();

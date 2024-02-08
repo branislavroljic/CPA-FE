@@ -16,33 +16,33 @@ const defaultColumns = (
     },
     {
       accessorKey: "name",
-      header: t("user.firstname"),
+      header: "First name",
       enableColumnFilter: false,
     },
     {
       accessorKey: "phoneNumber",
-      header: t("user.phoneNumber"),
+      header: "Phone number",
       enableColumnFilter: false,
     },
     {
       accessorKey: "productName",
-      header: t("order.productName"),
+      header: "Offer name",
       enableColumnFilter: false,
     },
     {
       accessorKey: "quantity",
-      header: t("order.quantity"),
+      header: "Quantity",
       enableColumnFilter: false,
     },
     {
       accessorKey: "totalPrice",
-      header: t("order.totalPrice"),
+      header: "Total price",
       enableColumnFilter: false,
     },
     {
       accessorFn: (row) => new Date(row.time), //convert to date for sorting and filtering
       id: "dateTime",
-      header: t("order.dateTime"),
+      header: "Date and time",
       Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
       enableColumnFilter: false,
     },

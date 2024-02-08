@@ -22,13 +22,13 @@ import { MRT_Localization_SR_LATN_RS } from "material-react-table/locales/sr-Lat
 import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
-import { enUS, srRS } from "@mui/material/locale";
+import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { User, getUsers, updateStatus, updateVIP } from "@api/user/user";
 import { TextWithTitle } from "@ui/table/TextWithTitle";
 import VerifiedIcon from "@mui/icons-material/VerifiedTwoTone";
 import BlockIcon from "@mui/icons-material/Block";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 export default function UserTable() {
   const { user } = useAuthStore();
@@ -101,7 +101,7 @@ export default function UserTable() {
   const blockOrApproveButton = (item: User, key: string) => (
     <>
       {item.status != "BLOCKED" ? (
-        <Tooltip arrow title={"Blokiraj"} key={key}>
+        <Tooltip arrow title={"Block"} key={key}>
           <IconButton
             color="error"
             onClick={(e) => {
@@ -117,7 +117,7 @@ export default function UserTable() {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip arrow title={"Odobri"} key={key}>
+        <Tooltip arrow title={"Approve"} key={key}>
           <IconButton
             color="success"
             onClick={(e) => {
@@ -139,7 +139,7 @@ export default function UserTable() {
   const enableDisableVIPButton = (item: User, key: string) => (
     <>
       {item.enabledVipProducts ? (
-        <Tooltip arrow title={"Onemogući VIP"} key={key}>
+        <Tooltip arrow title={"Disable VIP"} key={key}>
           <IconButton
             color="error"
             onClick={(e) => {
@@ -155,7 +155,7 @@ export default function UserTable() {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip arrow title={"Omogući VIP"} key={key}>
+        <Tooltip arrow title={"Enable VIP"} key={key}>
           <IconButton
             color="warning"
             onClick={(e) => {
@@ -191,6 +191,8 @@ export default function UserTable() {
     enableGlobalFilter: false,
     enableFilters: true,
     enableRowActions: true,
+    enableColumnResizing: true,
+    layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -201,16 +203,16 @@ export default function UserTable() {
     onColumnFiltersChange: setColumnFilters,
     renderDetailPanel: ({ row }) => (
       <>
-        <TextWithTitle title={"Ime"} text={row.original.name} />
-        <TextWithTitle title={"Prezime"} text={row.original.surname} />
+        <TextWithTitle title={"First name"} text={row.original.name} />
+        <TextWithTitle title={"Last name"} text={row.original.surname} />
         <TextWithTitle
           title={"Role"}
           text={row.original.roles.map((role) => role.name).join(",")}
         />
-        <TextWithTitle title={"Iskustvo"} text={row.original.experience} />
-        <TextWithTitle title={"Chat servis"} text={row.original.chatService} />
+        <TextWithTitle title={"Experience"} text={row.original.experience} />
+        <TextWithTitle title={"Chat service"} text={row.original.chatService} />
         <TextWithTitle
-          title={"Datum registracije"}
+          title={"Registration date"}
           text={row.original.registrationDate}
         />
         <TextWithTitle title={"Facebook"} text={row.original.facebookLink} />
@@ -222,11 +224,11 @@ export default function UserTable() {
         <TextWithTitle title={"Telegram"} text={row.original.telegramLink} />
         <TextWithTitle title={"Whatsapp"} text={row.original.whatsappLink} />
         <TextWithTitle
-          title={"ID Account manager-a"}
+          title={"Account manager ID"}
           text={row.original.accountManager?.id + "" ?? "N/A"}
         />
         <TextWithTitle
-          title={"Username Account manager-a"}
+          title={" Account manager username"}
           text={row.original.accountManager?.username ?? "N/A"}
         />
       </>
@@ -266,7 +268,7 @@ export default function UserTable() {
         : MRT_Localization_SR_LATN_RS,
     enableHiding: false,
     defaultColumn: {
-      minSize: 10,
+      minSize: 100,
       maxSize: 1000,
       size: 120,
     },
@@ -274,9 +276,7 @@ export default function UserTable() {
 
   return (
     <>
-      <ThemeProvider
-        theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-      >
+      <ThemeProvider theme={createTheme(theme, enUS)}>
         <MaterialReactTable table={table} />
       </ThemeProvider>
       {/* <UserModal /> */}

@@ -24,11 +24,10 @@ import PageContainer from "@ui/container/PageContainer";
 import Logo from "@layout/full/shared/logo/Logo";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
 import { Link } from "react-router-dom";
-import { useNotificationStore } from "@stores/notificationStore";
-
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
+import { useNotificationStore } from "@stores/notificationStore";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 

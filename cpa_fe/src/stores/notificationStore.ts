@@ -1,14 +1,23 @@
-import { Notification } from "@api/notification/notification";
-import { create } from "zustand";
+import { create } from 'zustand';
+
+export interface NotificationData {
+  primaryText: string;
+  secondaryText?: string;
+  isError?: boolean;
+}
 
 export interface NotificationState {
-  activeNotification?: Notification;
-  setNotification: (data: Notification) => void;
-  removeNotification: () => void;
+  isOpen: boolean;
+  data: NotificationData;
+  openNotification: (data: NotificationData) => void;
+  closeNotification: () => void;
 }
 
 export const useNotificationStore = create<NotificationState>((set) => ({
-  activeNotification: {} as Notification,
-  setNotification: (data) => set(() => ({ activeNotification: data })),
-  removeNotification: () => set(() => ({ activeNotification: {} as Notification })),
+  isOpen: false,
+  data: {} as NotificationData,
+  openNotification: (data) => set(() => ({ isOpen: true, data })),
+  closeNotification: () =>
+    set(() => ({ isOpen: false, data: {} as NotificationData })),
 }));
+

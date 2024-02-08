@@ -1,5 +1,4 @@
-import { enUS, srRS } from "@mui/material/locale";
-import i18n from "../../i18n";
+import { enUS } from "@mui/material/locale";
 import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import { useMemo } from "react";
@@ -12,17 +11,15 @@ export default function UserPage() {
     () => [
       {
         to: "/",
-        title: "Korisnici",
+        title: "Users",
       },
     ],
     []
   );
   return (
     <PageContainer title="" description="this is innerpage">
-      <Breadcrumb items={BCrumb} title={"Korisnici"} />
-      <ThemeProvider
-        theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-      >
+      <Breadcrumb items={BCrumb} title={"Users"} />
+      <ThemeProvider theme={createTheme(theme, enUS)}>
         <UserTable />
       </ThemeProvider>
     </PageContainer>

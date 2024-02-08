@@ -34,7 +34,7 @@ const FullLayout: FC = () => {
 
   const { isOpen, data, closeNotification } = useNotificationStore();
 
-  const { isValid, deleteUser } = useAuthStore((state) => state);
+  const { isValid } = useAuthStore((state) => state);
 
   // const [open, setOpen] = useState(false);
 

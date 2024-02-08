@@ -18,11 +18,9 @@ import { useQuery } from "@tanstack/react-query";
 import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
 import i18n from "../../i18n";
-import { MRT_Localization_SR_LATN_RS } from "material-react-table/locales/sr-Latn-RS";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
-import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
-import { enUS, srRS } from "@mui/material/locale";
+import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { TextWithTitle } from "@ui/table/TextWithTitle";
 import PaymentModal from "./PaymentModal";
@@ -65,8 +63,6 @@ export default function PaymentsTable() {
     []
   );
 
-  const { t } = useTranslation();
-
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: [
       "payments",
@@ -86,7 +82,7 @@ export default function PaymentsTable() {
   });
 
   const changeStatusButton = (item: Payment, key: string) => (
-    <Tooltip arrow title={"Promijeni status"} key={key}>
+    <Tooltip arrow title={"Change status"} key={key}>
       <IconButton
         color="warning"
         onClick={(e) => {
@@ -100,8 +96,8 @@ export default function PaymentsTable() {
   );
 
   const columns = useMemo<MRT_ColumnDef<Payment>[]>(
-    () => defaultColumns(paymentStatuses, t),
-    [paymentStatuses, t]
+    () => defaultColumns(paymentStatuses),
+    [paymentStatuses]
   );
 
   const defaultData = useMemo(() => [] as Payment[], []);
@@ -115,6 +111,8 @@ export default function PaymentsTable() {
     enableFilters: true,
     enableColumnActions: false,
     enableRowActions: true,
+    enableColumnResizing: true,
+    layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -124,7 +122,7 @@ export default function PaymentsTable() {
     onPaginationChange: setPagination,
     onColumnFiltersChange: setColumnFilters,
     renderDetailPanel: ({ row }) => (
-      <TextWithTitle title={"Komentar"} text={row.original.rejectComment} />
+      <TextWithTitle title={"Comment"} text={row.original.rejectComment} />
     ),
     renderTopToolbarCustomActions: () => (
       <Box sx={{ display: "flex", gap: "1rem", p: "4px" }}>
@@ -151,11 +149,8 @@ export default function PaymentsTable() {
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
-    localization:
-      i18n.language === "en"
-        ? MRT_Localization_EN
-        : MRT_Localization_SR_LATN_RS,
-    enableHiding: false,
+    localization: MRT_Localization_EN,
+    enableHiding: true,
     defaultColumn: {
       minSize: 10,
       maxSize: 1000,
@@ -165,9 +160,7 @@ export default function PaymentsTable() {
 
   return (
     <>
-      <ThemeProvider
-        theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-      >
+      <ThemeProvider theme={createTheme(theme, enUS)}>
         <MaterialReactTable table={table} />
       </ThemeProvider>
       <PaymentModal />

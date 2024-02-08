@@ -15,7 +15,15 @@ interface MenuitemsType {
   external?: boolean;
 }
 
-import { IconBasket, IconCategory, IconCoin, IconShoppingCart, IconUsersGroup } from "@tabler/icons-react";
+import {
+  IconBasket,
+  IconCategory,
+  IconCoin,
+  IconShoppingCart,
+  IconUsersGroup,
+} from "@tabler/icons-react";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import { ConnectWithoutContactOutlined } from "@mui/icons-material";
 
 const Menuitems = () =>
   [
@@ -25,33 +33,45 @@ const Menuitems = () =>
     },
     {
       id: uniqueId(),
-      title: "Kategorije",
-      icon: IconCategory,
+      title: "Dashboard",
+      icon: DashboardCustomizeOutlinedIcon,
       href: "/",
     },
     {
       id: uniqueId(),
-      title: "Proizvodi",
+      title: "Categories",
+      icon: IconCategory,
+      href: "/categories",
+    },
+    {
+      id: uniqueId(),
+      title: "Offers",
       icon: IconBasket,
       href: "/products",
     },
     {
       id: uniqueId(),
-      title: "Narudžbine",
+      title: "Orders",
       icon: IconShoppingCart,
       href: "/orders",
     },
     {
       id: uniqueId(),
-      title: "Plaćanja",
+      title: "Payments",
       icon: IconCoin,
       href: "/payments",
     },
     {
       id: uniqueId(),
-      title: "Korisnici",
+      title: "Users",
       icon: IconUsersGroup,
       href: "/users",
+    },
+    {
+      id: uniqueId(),
+      title: "Referral",
+      icon: ConnectWithoutContactOutlined,
+      href: "/referrals",
     },
   ] as MenuitemsType[];
 

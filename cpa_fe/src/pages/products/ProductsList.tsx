@@ -44,9 +44,9 @@ const ProductList = ({ onClick }: Props) => {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (lastPage.data.rows.length == 0) return undefined;
+        if (lastPage?.data.rows.length == 0) return undefined;
 
-        return lastPage.pageParam + 1;
+        return lastPage?.pageParam + 1;
       },
       onError: (error: Error) => console.log(error),
       staleTime: 1000 * 60 * 60,
