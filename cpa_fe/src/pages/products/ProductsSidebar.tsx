@@ -2,7 +2,7 @@
 import { Drawer, Theme, useMediaQuery } from "@mui/material";
 import ProductsFilter from "./ProductsFilter";
 
-const drawerWidth = 250;
+const drawerWidth = 280;
 
 interface Props {
   isMobileSidebarOpen: boolean;

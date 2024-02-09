@@ -1,4 +1,4 @@
-import { FilterProduct, Product } from "@api/product/product";
+import { FilterProduct, InputProduct, Product } from "@api/product/product";
 import { InputFormData } from "@api/utils";
 import { AxiosResponse } from "axios";
 import { create } from "zustand";
@@ -40,10 +40,14 @@ export interface ProductModalState {
   item?: Product;
   isOpen: boolean;
   shouldClose: boolean;
-  submitAction?: (item: InputFormData<Product>) => Promise<AxiosResponse<any, any>>;
+  submitAction?: (
+    item: InputFormData<InputProduct>
+  ) => Promise<AxiosResponse<any, any>>;
   openModal: (
     item: Product,
-    submitAction: (item: InputFormData<Product>) => Promise<AxiosResponse<any, any>>,
+    submitAction: (
+      item: InputFormData<InputProduct>
+    ) => Promise<AxiosResponse<any, any>>,
     shouldClose: boolean
   ) => void;
   closeModal: () => void;

@@ -74,7 +74,7 @@ const AppDD = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Button
+      {/* <Button
         color="inherit"
         sx={{ color: (theme) => theme.palette.text.secondary }}
         variant="text"
@@ -82,7 +82,7 @@ const AppDD = () => {
         component={Link}
       >
         {t("notification.title")}
-      </Button>
+      </Button> */}
       <Box>
         <Button
           color="inherit"

@@ -4,6 +4,11 @@
   "type": "Type",
   "status": "Status",
   "addDomain": "Add domain",
-  "verify" : "Verify domain",
-  "howToParkDomain": "How to park domain?"
+  "verify": "Verify domain",
+  "howToParkDomain": "How to add domain?",
+  "step1": "Go to DNS settings of your domain",
+  "step2": "Add a TXT record with name 'www' and value 'klixlead.com'",
+  "step3": "Wait for TTL to expire",
+  "step4": "Add a domain in this window",
+  "step5": "Verify domain at any time by clicking the button"
 }

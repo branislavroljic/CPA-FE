@@ -191,6 +191,21 @@ export type Balance = {
   paid: number;
 };
 
+export interface Notification {
+  id: number;
+  title: string;
+  text: string;
+  timeCreated: string;
+  read: boolean;
+}
+
+export interface Notifications {
+  notifications: Notification[];
+  totalNotifications: number;
+  notReadNotifications: number;
+  userId: number;
+}
+
 export function getLoginHistory(
   pagination: PageRequest,
   id?: number
@@ -308,4 +323,12 @@ export function getConversionStatistics(
 
 export function getBalance(id?: number): Promise<Balance> {
   return get(new URL(id + "/short_balance", baseUrl));
+}
+
+export function getUnreadNotifications(id: number) {
+  return get(new URL(id + "/number_not_read_notification", baseUrl));
+}
+
+export function getNotifications(id?: number): Promise<Notifications> {
+  return get(new URL(id + "/notification", baseUrl));
 }

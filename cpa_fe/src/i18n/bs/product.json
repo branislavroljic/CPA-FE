@@ -8,6 +8,7 @@
   "price": "Cijena",
   "payout": "Isplata",
   "limit": "Limit",
+  "paymentModel" : "Model plaćanja",
   "approveRate": "Stopa odobrenja",
   "earnPerClick": "Zarada po kliku",
   "conversionRate": "Stopa konverzije",

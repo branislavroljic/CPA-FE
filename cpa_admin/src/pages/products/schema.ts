@@ -14,112 +14,113 @@ const productSchema = z.object({
     )
     .refine(
       (file) => !file || acceptedImageTypes.includes(file.type),
-      "Dozvoljeni tipovi fajlova"
+      "Allowed file types"
     )
     .optional(),
   body: z.object({
     id: z.coerce.number().optional(),
     name: z.string({
       required_error: i18n.t("util.required.male", {
-        field: "Naziv",
+        field: "Name",
       }),
     }),
     nameEng: z.string({
       required_error: i18n.t("util.required.male", {
-        field: "Naziv na engleskom",
+        field: "Name in English",
       }),
     }),
     description: z
       .string({
         required_error: i18n.t("util.required.male", {
-          field: "Opis",
+          field: "Description",
         }),
       })
       .max(longerMaxLength, {
         message: i18n.t("util.maxLength", {
-          field: "Opis",
+          field: "Description",
           num: longerMaxLength,
         }),
       }),
     descriptionEng: z
       .string({
         required_error: i18n.t("util.required.male", {
-          field: "Opis na engleskom",
+          field: "Description in English",
         }),
       })
       .max(longerMaxLength, {
         message: i18n.t("util.maxLength", {
-          field: "Opis na engleskom",
+          field: "Description in English",
           num: longerMaxLength,
         }),
       }),
+    status: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Status",
+      }),
+    }),
     price: z.coerce
       .number({
         invalid_type_error: i18n.t("util.number", {
-          field: "Cijena",
+          field: "Price",
         }),
         required_error: i18n.t("util.required.female", {
-          field: "Cijena",
+          field: "Price",
         }),
       })
       .min(0, {
         message: i18n.t("util.min", {
-          field: "Cijena",
+          field: "Price",
           num: 0,
         }),
       }),
     currency: z
       .string({
         required_error: i18n.t("util.required.female", {
-          field: "Valuta",
+          field: "Currency",
         }),
       })
       .max(longerMaxLength, {
         message: i18n.t("util.maxLength", {
-          field: "Valuta",
+          field: "Currency",
           num: longerMaxLength,
         }),
       }),
     payout: z.coerce
       .number({
         invalid_type_error: i18n.t("util.number", {
-          field: "Isplata",
+          field: "Payout",
         }),
         required_error: i18n.t("util.required.female", {
-          field: "Isplata",
+          field: "Payout",
         }),
       })
       .min(0, {
         message: i18n.t("util.min", {
-          field: "Isplata",
+          field: "Payout",
           num: 0,
         }),
       }),
     type: z.string({
       required_error: i18n.t("util.required.male", {
-        field: "Tip",
+        field: "Type",
       }),
     }),
-    status: z.string({
-      required_error: i18n.t("util.required.male", {
-        field: "Status",
-      }),
-    }),
+    googleDriveLink: z.string().optional(),
     limit_per_day: z.coerce.number({
       required_error: i18n.t("util.required.male", {
-        field: "Dnevni limit",
+        field: "Limit per day",
       }),
     }),
     country_code: z.string({
       required_error: i18n.t("util.required.male", {
-        field: "Kod države",
+        field: "Country code",
       }),
     }),
     categoriesIDs: z.array(
       z.coerce
         .number({
           required_error: i18n.t("util.required.male", {
-            field: "Tip",
+            field: "Type",
           }),
         })
         .optional()

@@ -70,7 +70,7 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box pl={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-           Po tipu
+            By type
           </Typography>
           <br />
           {productTypes.map((type, index) => {
@@ -103,11 +103,11 @@ const ProductFilter = () => {
         <Divider></Divider>
         <Box p={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-           Po kategoriji
+            By category
           </Typography>
           <br />
           <FormControl sx={{ minWidth: 200 }}>
-            <InputLabel id="demo-multiple-chip-label">Kategorija</InputLabel>
+            <InputLabel id="demo-multiple-chip-label">Category</InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
@@ -138,7 +138,7 @@ const ProductFilter = () => {
         </Box>
         <Divider></Divider>
         <Typography variant="h6" px={3} mt={3} pb={2}>
-         Po državi
+          By country
         </Typography>
         {/* ------------------------------------------- */}
         {/* Filter By colors */}
@@ -163,7 +163,7 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         <Box p={3}>
           <Button variant="contained" onClick={() => resetFilter()} fullWidth>
-            Resetuj filtere
+            Reset filters
           </Button>
         </Box>
       </List>

@@ -23,11 +23,13 @@ export type Product = {
   nameEng?: string;
   description: string;
   descriptionEng?: string;
+  status: string;
   price: number;
   currency: string;
   payout: number;
   type: string;
   image: string;
+  googleDriveLink?: string;
   limit_per_day: number;
   country_code: string;
   categories: Category[];
@@ -36,7 +38,25 @@ export type Product = {
   earn_per_click: number;
   landingPagesString?: string;
   prelandingPagesString?: string;
+};
+
+export type InputProduct = {
+  id?: number;
+  name: string;
+  nameEng: string;
+  description: string;
+  descriptionEng: string;
   status: string;
+  price: number;
+  currency: string;
+  payout: number;
+  type: string;
+  googleDriveLink?: string;
+  limit_per_day: number;
+  country_code: string;
+  categoriesIDs?: string[];
+  landingPagesString?: string;
+  prelandingPagesString?: string;
 };
 
 export interface Country {
@@ -76,11 +96,11 @@ export function getProducts(
   );
 }
 
-export function createProduct(input: InputFormData<Product>) {
+export function createProduct(input: InputFormData<InputProduct>) {
   return postMultipart(baseUrl, input);
 }
 
-export function updateProduct(input: InputFormData<Product>) {
+export function updateProduct(input: InputFormData<InputProduct>) {
   return putMultipart(new URL("" + input.body?.id, baseUrlWithSlash), input);
 }
 

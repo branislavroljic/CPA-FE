@@ -24,15 +24,28 @@ import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
 import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { User, getUsers, updateStatus, updateVIP } from "@api/user/user";
+import {
+  User,
+  approveAccount,
+  getUsers,
+  updateAccountManager,
+  updateStatus,
+  updateVIP,
+} from "@api/user/user";
 import { TextWithTitle } from "@ui/table/TextWithTitle";
 import VerifiedIcon from "@mui/icons-material/VerifiedTwoTone";
 import BlockIcon from "@mui/icons-material/Block";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import { useAccountManagerModalStore } from "@stores/accountManagerStore";
+import AccountManagerModal from "./AccountManagerModal";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import { useNavigate } from "react-router-dom";
 
 export default function UserTable() {
   const { user } = useAuthStore();
   const theme = useTheme();
+  const navigate = useNavigate();
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     []
   );
@@ -40,6 +53,7 @@ export default function UserTable() {
     pageIndex: 0,
     pageSize: 10,
   });
+  const { openModal } = useAccountManagerModalStore();
   // const openModal = useUserModalStore((state) => state.openModal);
 
   const accountStatuses = useMemo(
@@ -84,23 +98,37 @@ export default function UserTable() {
     },
   });
 
-  // const changeStatusButton = (item: User, key: string) => (
-  //   <Tooltip arrow title={"Promijeni status"} key={key}>
-  //     <IconButton
-  //       color="warning"
-  //       onClick={(e) => {
-  //         openModal(item as UpdateUserStatus, updateUserStatus, true);
-  //         e.stopPropagation();
-  //       }}
-  //     >
-  //       <IconSwitch />
-  //     </IconButton>
-  //   </Tooltip>
-  // );
+  const changeAccountManager = (item: User, key: string) => (
+    <Tooltip arrow title={"Change Account Manager"} key={key}>
+      <IconButton
+        color="secondary"
+        onClick={(e) => {
+          openModal(item, updateAccountManager, true);
+          e.stopPropagation();
+        }}
+      >
+        <SupervisorAccountIcon />
+      </IconButton>
+    </Tooltip>
+  );
+
+  const statisticsButton = (item: User, key: string) => (
+    <Tooltip arrow title={t("statistic.name")} key={key}>
+      <IconButton
+        color="info"
+        onClick={(e) => {
+          navigate(item.id + "/statistics", { state: item });
+          e.stopPropagation();
+        }}
+      >
+        <BarChartIcon />
+      </IconButton>
+    </Tooltip>
+  );
 
   const blockOrApproveButton = (item: User, key: string) => (
     <>
-      {item.status != "BLOCKED" ? (
+      {item.status != "BLOCKED" && item.status != "ON_HOLD_MAIL_CONFIRMED" ? (
         <Tooltip arrow title={"Block"} key={key}>
           <IconButton
             color="error"
@@ -116,8 +144,8 @@ export default function UserTable() {
             <BlockIcon />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip arrow title={"Approve"} key={key}>
+      ) : item.status == "BLOCKED" ? (
+        <Tooltip arrow title={"Unblock"} key={key}>
           <IconButton
             color="success"
             onClick={(e) => {
@@ -126,6 +154,18 @@ export default function UserTable() {
                   refetch();
                 }
               });
+              e.stopPropagation();
+            }}
+          >
+            <VerifiedIcon />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip arrow title={"Approve"} key={key}>
+          <IconButton
+            color="success"
+            onClick={(e) => {
+              openModal(item, approveAccount, true);
               e.stopPropagation();
             }}
           >
@@ -175,8 +215,8 @@ export default function UserTable() {
   );
 
   const columns = useMemo<MRT_ColumnDef<User>[]>(
-    () => defaultColumns(accountStatuses, t),
-    [accountStatuses, t]
+    () => defaultColumns(accountStatuses),
+    [accountStatuses]
   );
 
   const defaultData = useMemo(() => [] as User[], []);
@@ -225,12 +265,16 @@ export default function UserTable() {
         <TextWithTitle title={"Whatsapp"} text={row.original.whatsappLink} />
         <TextWithTitle
           title={"Account manager ID"}
-          text={row.original.accountManager?.id + "" ?? "N/A"}
+          text={
+            row.original.accountManagerId
+              ? row.original.accountManagerId + ""
+              : "N/A"
+          }
         />
-        <TextWithTitle
+        {/* <TextWithTitle
           title={" Account manager username"}
           text={row.original.accountManager?.username ?? "N/A"}
-        />
+        /> */}
       </>
     ),
     renderTopToolbarCustomActions: () => (
@@ -252,6 +296,14 @@ export default function UserTable() {
           row.original as User,
           (row.original as User).id + "_" + "VIP"
         )}
+        {changeAccountManager(
+          row.original as User,
+          (row.original as User).id + "_" + "account_manager"
+        )}
+        {statisticsButton(
+          row.original as User,
+          (row.original as User).id + "_" + "statistics"
+        )}
       </Box>
     ),
     rowCount: data?.totalCount ?? 0,
@@ -267,8 +319,13 @@ export default function UserTable() {
         ? MRT_Localization_EN
         : MRT_Localization_SR_LATN_RS,
     enableHiding: false,
+    displayColumnDefOptions: {
+      "mrt-row-actions": {
+        size: 200, //make actions column wider
+      },
+    },
     defaultColumn: {
-      minSize: 100,
+      minSize: 70,
       maxSize: 1000,
       size: 120,
     },
@@ -278,6 +335,7 @@ export default function UserTable() {
     <>
       <ThemeProvider theme={createTheme(theme, enUS)}>
         <MaterialReactTable table={table} />
+        <AccountManagerModal />
       </ThemeProvider>
       {/* <UserModal /> */}
     </>

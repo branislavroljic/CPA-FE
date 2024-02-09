@@ -1,16 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Popover, Typography, Box, IconButton } from "@mui/material";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 
-const parkDomainSteps = [
-  i18n.t("domain.howToParkDomain"),
-  i18n.t("domain.howToParkDomain"),
-  i18n.t("domain.howToParkDomain"),
-  i18n.t("domain.howToParkDomain"),
-  i18n.t("domain.howToParkDomain"),
-];
 const ClickPopover = () => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,6 +14,17 @@ const ClickPopover = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const parkDomainSteps = useMemo(
+    () => [
+      t("domain.step1"),
+      t("domain.step2"),
+      t("domain.step3"),
+      t("domain.step4"),
+      t("domain.step5"),
+    ],
+    [t]
+  );
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -41,7 +44,7 @@ const ClickPopover = () => {
           horizontal: "left",
         }}
       >
-        <Box p={2}>
+        <Box p={3}>
           <Typography variant="h6" mb={1}>
             {t("domain.howToParkDomain")}
           </Typography>

@@ -1,7 +1,7 @@
 {
-    
-    "title": "Notifications",
-    "allNotes" : "All notes",
-    "noNotesFound" : "No new notifications",
-    "selectANote" : "Select a notification"
+  "title": "Notifications",
+  "allNotes": "All notes",
+  "noNotesFound": "No new notifications",
+  "selectANote": "Select a notification",
+  "unreadNotification": "Unread"
 }

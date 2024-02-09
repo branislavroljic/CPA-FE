@@ -5,5 +5,10 @@
   "status": "Status",
   "addDomain": "Dodaj domen",
   "verify": "Verifikuj domen",
-  "howToParkDomain": "Kako parkirati domen?"
+  "howToParkDomain": "Kako dodati domen?",
+  "step1": "Idite na DNS podešavanja vašeg domena",
+  "step2": "Dodavanje TXT zapisa sa imenom 'www' i vrednošću 'klixlead.com'",
+  "step3": "Sačekajte da TTL istekne",
+  "step4": "Dodajte domen u ovaj prozor",
+  "step5": "Verifikujte domen u bilo kom trenutku klikom na dugme"
 }

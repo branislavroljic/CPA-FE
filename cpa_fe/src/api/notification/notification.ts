@@ -1,14 +1,12 @@
-import { get } from "@api/utils";
+import { post } from "@api/utils";
 
-export interface Notification {
-  id: number;
-  title: string;
-  text: string;
-  timeCreated: string;
+export interface ReadNotification {
+  userId?: number;
+  notificationId?: number;
 }
 
-const baseUrl = new URL("notification", import.meta.env.VITE_API_URL);
+const baseUrl = new URL("notification/", import.meta.env.VITE_API_URL);
 
-export function getNotifications(): Promise<Notification[]> {
-  return get(baseUrl);
+export function readNotification(input: ReadNotification) {
+  return post(new URL("read", baseUrl), JSON.stringify(input));
 }

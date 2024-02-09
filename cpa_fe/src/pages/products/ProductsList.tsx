@@ -9,6 +9,7 @@ import {
   Theme,
   Chip,
   Divider,
+  Tooltip,
 } from "@mui/material";
 import { IconMenu2 } from "@tabler/icons-react";
 import BlankCard from "@ui/shared/BlankCard";
@@ -21,6 +22,7 @@ import FlatList from "flatlist-react";
 import { CircleFlag } from "react-circle-flags";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Spinner from "@ui/view/spinner/Spinner";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -57,9 +59,9 @@ const ProductList = ({ onClick }: Props) => {
     <Grid
       item
       xs={12}
-      lg={6}
-      md={6}
-      sm={6}
+      lg={5}
+      md={5}
+      sm={5}
       display="flex"
       alignItems="stretch"
       key={product.id}
@@ -88,7 +90,7 @@ const ProductList = ({ onClick }: Props) => {
             </Typography>
             <Chip label={product.type} size="small" color="success" />
           </Box>
-          <Stack mt={1} direction="row" alignItems="center" gap={1}>
+          <Stack mt={1} direction="row" alignItems="center" gap={1} mb={1}>
             {product.categories.map((category) => (
               <Chip
                 label={category.name}
@@ -109,7 +111,7 @@ const ProductList = ({ onClick }: Props) => {
               />
             ))}
           </Stack>
-          <Stack direction="row" alignItems="center" gap={2}>
+          {/* <Stack direction="row" alignItems="center" gap={2}>
             <Stack gap={0}>
               <Typography variant="overline">
                 {t("products.approveRate")}
@@ -126,7 +128,7 @@ const ProductList = ({ onClick }: Props) => {
                 {`${product.earn_per_click ?? 0} ${product.currency}`}
               </Typography>
             </Stack>
-          </Stack>
+          </Stack> */}
           <Divider />
           <Stack
             display={"flex"}
@@ -140,10 +142,12 @@ const ProductList = ({ onClick }: Props) => {
               <Typography variant="overline" color={"lightgray"}>
                 {t("products.country")}
               </Typography>
-              <CircleFlag
-                countryCode={product.country_code.toLowerCase()}
-                height="25"
-              />
+              <Tooltip title={product.country_code.toLowerCase()}>
+                <CircleFlag
+                  countryCode={product.country_code.toLowerCase()}
+                  height="25"
+                />
+              </Tooltip>
             </Stack>
             <Stack direction="row" alignItems="center" gap={4}>
               <Stack>
@@ -160,9 +164,9 @@ const ProductList = ({ onClick }: Props) => {
               </Stack>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>
-                  {t("products.limit")}
+                  {t("products.paymentModel")}
                 </Typography>
-                <Typography variant="h6">{`${product.limit_per_day}/day`}</Typography>
+                <Typography variant="h6">CPA</Typography>
               </Stack>
             </Stack>
           </Stack>
@@ -204,7 +208,7 @@ const ProductList = ({ onClick }: Props) => {
       {/* ------------------------------------------- */}
       {/* Page Listing product */}
       {/* ------------------------------------------- */}
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent={"space-around"}>
         <>
           <FlatList
             list={data?.pages?.flatMap((page) => page.data.rows) ?? []}
@@ -212,9 +216,7 @@ const ProductList = ({ onClick }: Props) => {
             renderWhenEmpty={renderEmptyList}
             hasMoreItems={hasNextPage}
             loadMoreItems={fetchNextPage}
-            paginationLoadingIndicator={
-              <div style={{ background: "#090" }}>Getting more items...</div>
-            }
+            paginationLoadingIndicator={<Spinner />}
           />
         </>
       </Grid>

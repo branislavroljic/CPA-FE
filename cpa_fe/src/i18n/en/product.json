@@ -8,6 +8,7 @@
   "price": "Price",
   "payout": "Payout",
   "limit": "Limit",
+  "paymentModel" : "Payment model",
   "approveRate": "Approve rate",
   "earnPerClick": "Earn per click",
   "conversionRate": "Conversion rate",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Box,
   Stack,
@@ -6,28 +6,55 @@ import {
   TextField,
   Alert,
   useTheme,
+  Chip,
 } from "@mui/material";
-import { getNotifications } from "@api/notification/notification";
 import { useQuery } from "@tanstack/react-query";
 import Scrollbar from "@ui/custom-scroll/Scrollbar";
 import Spinner from "@ui/view/spinner/Spinner";
 import { useNotificationStore } from "@stores/newsStore";
 import { useTranslation } from "react-i18next";
+import useAuthStore from "@stores/authStore";
+import { Notification, getNotifications } from "@api/user/user";
+import { readNotification } from "@api/notification/notification";
+import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
+import queryClient, { invalidateAllQueries } from "../../../query-client";
 
 const NoteList = () => {
   const theme = useTheme();
+  const { user } = useAuthStore();
   const { t } = useTranslation();
   const { activeNotification, setNotification } = useNotificationStore();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["notifications", t],
-    queryFn: () => getNotifications(),
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["notifications", t, user?.id],
+    queryFn: () => getNotifications(user?.id),
   });
 
+  const mutation = useNotifiedMutation({
+    mutationFn: readNotification,
+    onSuccess: () => {
+      refetch();
+      invalidateAllQueries(queryClient, "unread_notifications");
+    },
+    showSuccessNotification: false,
+  });
+
+  const handleNotificationClicked = useCallback(
+    (n: Notification) => {
+      mutation.mutate({ userId: data?.userId, notificationId: n.id });
+      setNotification(n);
+    },
+    [data?.userId, mutation, setNotification]
+  );
+
   useEffect(() => {
-    if (data && data.length) setNotification(data[0]);
-  }, [data, setNotification]);
+    if (data && data.totalNotifications) {
+      const notification = data.notifications[0];
+      if (!notification.read) handleNotificationClicked(notification);
+      else setNotification(data.notifications[0]);
+    }
+  }, []);
 
   return (
     <>
@@ -57,8 +84,8 @@ const NoteList = () => {
               maxHeight: "700px",
             }}
           >
-            {data && data.length ? (
-              data
+            {data && data?.totalNotifications ? (
+              data?.notifications
                 .filter((n) => n.title.toLocaleLowerCase().includes(searchTerm))
                 .map((notification) => (
                   <Box key={notification.id} px={2}>
@@ -75,7 +102,10 @@ const NoteList = () => {
                             : "scale(0.95)",
                         backgroundColor: theme.palette.primary.light,
                       }}
-                      onClick={() => setNotification(notification)}
+                      onClick={() => handleNotificationClicked(notification)}
+                      gap={2}
+                      display={"flex"}
+                      flexDirection={"column"}
                     >
                       <Typography
                         variant="h6"
@@ -94,6 +124,12 @@ const NoteList = () => {
                             notification.timeCreated
                           ).toLocaleDateString()}
                         </Typography>
+                        {!notification.read && (
+                          <Chip
+                            label={t("notification.unreadNotification")}
+                            color="error"
+                          />
+                        )}
                       </Stack>
                     </Box>
                   </Box>

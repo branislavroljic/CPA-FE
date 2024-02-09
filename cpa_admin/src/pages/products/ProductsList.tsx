@@ -223,9 +223,9 @@ const ProductList = ({ onClick }: Props) => {
     <Grid item xs={12} lg={12} md={12} sm={12}>
       <Box textAlign="center" mt={6}>
         {/* <img src={emptyCart} alt="cart" width="200px" /> */}
-        <Typography variant="h2">Nema proizvoda</Typography>
+        <Typography variant="h2">No offers</Typography>
         <Typography variant="h6" mb={3}>
-          Proizvod koji ste tražili nije više dostupan
+          The offer is not available
         </Typography>
       </Box>
     </Grid>
@@ -239,7 +239,7 @@ const ProductList = ({ onClick }: Props) => {
         {/* ------------------------------------------- */}
         <Stack direction="row" justifyContent="space-between" pb={3}>
           {lgUp ? (
-            <Typography variant="h5">Proizvodi</Typography>
+            <Typography variant="h5">Offers</Typography>
           ) : (
             <Fab onClick={onClick} color="primary" size="small">
               <IconMenu2 width="16" />
@@ -271,7 +271,7 @@ const ProductList = ({ onClick }: Props) => {
       <Fab
         aria-label=""
         color="primary"
-        sx={{ position: "fixed", bottom: 20, right: 20}}
+        sx={{ position: "fixed", bottom: 20, right: 20 }}
         onClick={handleAddProductClick}
       >
         <IconPlus />

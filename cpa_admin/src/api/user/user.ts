@@ -51,36 +51,7 @@ export type User = {
   skypeLink: string;
   telegramLink: string;
   whatsappLink: string;
-  accountManager: {
-    id: number;
-    username: string;
-    password: string;
-    apikey: string;
-    name: string;
-    surname: string;
-    email: string;
-    roles: UserRole[];
-    country: string;
-    experience: "NO_EXPERIENCE";
-    chatService: "SKYPE";
-    status:
-      | "BLOCKED"
-      | "APPROVED"
-      | "ON_HOLD_MAIL_CONFIRMED"
-      | "ON_HOLD_MAIL_NOT_CONFIRMED";
-    registrationDate: string;
-    enabledVipProducts: boolean;
-    balance: number;
-    facebookLink: string;
-    googleLink: string;
-    twitterLink: string;
-    linkedinLink: string;
-    instagramLink: string;
-    skypeLink: string;
-    telegramLink: string;
-    whatsappLink: string;
-    accountManager: string;
-  };
+  accountManagerId: number;
 };
 
 export type DasboardData = {
@@ -134,6 +105,21 @@ export interface Notification {
   timeCreated: string;
 }
 
+export interface AccountManager {
+  id: number;
+  name: string;
+  surname: string;
+  email: string;
+  skypeLink: string;
+  telegramLink: string;
+  whatsappLink: string;
+}
+
+export type StatisticsReport = {
+  xvalue: string;
+  yvalue: number;
+};
+
 export function getUsers(
   pagination: PageRequest,
   filter?: MRT_ColumnFiltersState
@@ -170,4 +156,51 @@ export function getNotifications(id: number): Promise<Notification[]> {
 
 export function getAdminDashboardData(): Promise<AdminDashboardData> {
   return get(new URL("admin_dashboard", baseUrlWithSlash));
+}
+
+export function getAccountManagers(): Promise<AccountManager[]> {
+  return get(new URL("account_managers", baseUrlWithSlash));
+}
+
+export function updateAccountManager(id: number, accountManagerId: number) {
+  return put(
+    new URL(id + "/account_manager", baseUrlWithSlash),
+    JSON.stringify({
+      accountManagerId: accountManagerId,
+    })
+  );
+}
+
+export function approveAccount(id: number, accountManagerId: number) {
+  return put(
+    new URL(id + "/approve_status", baseUrlWithSlash),
+    JSON.stringify({
+      status: "APPROVED",
+      accountManagerId: accountManagerId,
+    })
+  );
+}
+
+export function getDashboardData(id?: number): Promise<DasboardData> {
+  return get(new URL(id + "/dashboard", baseUrlWithSlash));
+}
+
+export function getRevenueStatistics(id?: number): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/revenue", baseUrlWithSlash));
+}
+
+export function getHoldStatistics(id?: number): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/hold", baseUrlWithSlash));
+}
+
+export function getConversionRateStatistics(
+  id?: number
+): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/conversion_rate", baseUrlWithSlash));
+}
+
+export function getConversionStatistics(
+  id?: number
+): Promise<StatisticsReport[]> {
+  return get(new URL(id + "/statistic/conversion", baseUrlWithSlash));
 }

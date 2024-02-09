@@ -27,7 +27,7 @@ import ImageFilePicker from "@ui/ImageFilePicker";
 import { InputFormData } from "@api/utils";
 import { useProductModalStore } from "@stores/productStore";
 import { Category } from "@api/category/category";
-import { Product } from "@api/product/product";
+import { InputProduct } from "@api/product/product";
 import { useLoaderData } from "react-router-dom";
 import productSchema from "./schema";
 
@@ -60,11 +60,9 @@ export default function ProductModal() {
     control,
     // setValue,
     formState: { errors, isValid },
-  } = useForm<InputFormData<Product>>({
+  } = useForm<InputFormData<InputProduct>>({
     resolver: zodResolver(productSchema),
   });
-
-  useEffect(() => reset(), [isOpen, reset]);
 
   useEffect(() => reset(), [isOpen, reset]);
 
@@ -89,11 +87,9 @@ export default function ProductModal() {
 
   const { t } = useTranslation();
 
-  const saveProduct = (newItem: InputFormData<Product>) => {
+  const saveProduct = (newItem: InputFormData<InputProduct>) => {
     if (isValid) {
       mutation.mutate(newItem);
-    } else {
-      console.log(errors);
     }
   };
 
@@ -106,6 +102,7 @@ export default function ProductModal() {
             <input
               type="hidden"
               {...register("body.id", {
+                required: false,
                 value: item?.id ?? undefined,
               })}
             />
@@ -153,7 +150,7 @@ export default function ProductModal() {
               <Controller
                 name="body.nameEng"
                 control={control}
-                defaultValue={item?.name ?? undefined}
+                defaultValue={item?.nameEng ?? undefined}
                 render={({ field }) => (
                   <TextField
                     label={"Naziv na engleskom"}
@@ -165,7 +162,6 @@ export default function ProductModal() {
                     placeholder={"Naziv"}
                     margin="normal"
                     id="nameEng"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -190,7 +186,6 @@ export default function ProductModal() {
                     placeholder={"Opis"}
                     margin="normal"
                     id="description"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -215,7 +210,6 @@ export default function ProductModal() {
                     placeholder={"Opis na engleskom"}
                     margin="normal"
                     id="descriptionEng"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -238,7 +232,6 @@ export default function ProductModal() {
                     placeholder={"Cijena"}
                     margin="normal"
                     id="discount"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -261,7 +254,6 @@ export default function ProductModal() {
                     placeholder={"Valuta"}
                     margin="normal"
                     id="currency"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -284,7 +276,6 @@ export default function ProductModal() {
                     placeholder={"Kod države"}
                     margin="normal"
                     id="country_code"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -307,7 +298,6 @@ export default function ProductModal() {
                     placeholder={"Isplata"}
                     margin="normal"
                     id="payout"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -331,7 +321,6 @@ export default function ProductModal() {
                     placeholder={"Dnevni limit"}
                     margin="normal"
                     id="amount"
-                    autoFocus
                     {...field}
                   />
                 )}
@@ -392,8 +381,6 @@ export default function ProductModal() {
               />
             </Grid>
 
-            
-
             <Grid item xs={12} sm={12}>
               <Controller
                 name="body.categoriesIDs"
@@ -403,7 +390,7 @@ export default function ProductModal() {
                 render={({ field }) => (
                   <FormControl sx={{ minWidth: 540 }}>
                     <InputLabel id="demo-multiple-chip-label">
-                      Kategorije
+                      Categories
                     </InputLabel>
                     <Select
                       labelId="demo-multiple-chip-label"
@@ -504,9 +491,7 @@ export default function ProductModal() {
         <Button
           color="primary"
           variant="contained"
-          onClick={() => {
-            handleSubmit(saveProduct);
-          }}
+          onClick={handleSubmit(saveProduct)}
         >
           {t("util.save")}
         </Button>

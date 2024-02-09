@@ -16,6 +16,7 @@ import { useCustomizerStore } from "@stores/customizerStore";
 import Customizer from "@layout/full/shared/customizer/Customizer";
 import Navigation from "./Navigation";
 import SocialMediaLinks from "./SocialMediaLinks";
+import Notifications from "./Notification";
 
 const Header = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
@@ -73,7 +74,7 @@ const Header = () => {
           {/* ------------------------------------------- */}
           {/* End Ecommerce Dropdown */}
           {/* ------------------------------------------- */}
-          {/* <Notifications /> */}
+          <Notifications />
           {/* ------------------------------------------- */}
           {/* Toggle Right Sidebar for mobile */}
           {/* ------------------------------------------- */}

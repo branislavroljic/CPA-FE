@@ -26,7 +26,7 @@ export default function DomainModal() {
   const [hasChanged, setHasChanged] = useState(false);
   const { user } = useAuthStore((state) => state);
 
-  const methods = useMemo(() => ["TRACKING"], []);
+  const methods = useMemo(() => ["TRACKING", "PRELANDING", "LANDING"], []);
   const {
     register,
     handleSubmit,

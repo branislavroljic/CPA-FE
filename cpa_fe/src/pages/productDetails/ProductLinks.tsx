@@ -126,15 +126,15 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
             scrollButtons
             indicatorColor="primary"
           >
-            <Tab label="Order" {...a11yProps(0)} />
-            <Tab label="Link builder" {...a11yProps(1)} />
-            <Tab label="Api request" {...a11yProps(2)} />
+            <Tab label="Link builder" {...a11yProps(0)} />
+            <Tab label="Api request" {...a11yProps(1)} />
+            <Tab label="Order" {...a11yProps(2)} />
           </Tabs>
         </Box>
         {/* ------------------------------------------- */}
         {/* Reviews Tab */}
         {/* ------------------------------------------- */}
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={2}>
           <Grid container>
             <Grid item xs={12} sm={12}>
               <CardContent>
@@ -147,7 +147,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
             </Grid>
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={0}>
           <Grid container>
             <Grid item xs={12} sm={7}>
               <CardContent>
@@ -273,7 +273,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
             </Grid>
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={1}>
           <Grid container>
             <Grid item xs={12} sm={6}>
               <CardContent>
