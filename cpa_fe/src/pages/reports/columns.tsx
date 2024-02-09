@@ -1,9 +1,7 @@
 import { MRT_ColumnDef } from "material-react-table";
 import { TFunction } from "i18next";
-import { StatisticsReport } from "@api/user/user";
-const defaultColumns = (
-  t: TFunction<"translation", "translation">
-) =>
+import { Report } from "@api/user/user";
+const defaultColumns = (t: TFunction<"translation", "translation">) =>
   [
     {
       accessorKey: "total",
@@ -49,6 +47,6 @@ const defaultColumns = (
     //   accessorKey: "totalCancelledRevenue",
     //   header: t("reports.totalCancelledRevenue"),
     // },
-  ] as MRT_ColumnDef<StatisticsReport>[];
+  ] as MRT_ColumnDef<Report>[];
 
 export default defaultColumns;

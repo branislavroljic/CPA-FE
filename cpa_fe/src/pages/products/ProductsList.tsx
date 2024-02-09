@@ -23,6 +23,7 @@ import { CircleFlag } from "react-circle-flags";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Spinner from "@ui/view/spinner/Spinner";
+import ProductSearch from "./ProductSearch";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -138,18 +139,18 @@ const ProductList = ({ onClick }: Props) => {
             justifyContent="space-between"
             mt={1}
           >
-            <Stack>
-              <Typography variant="overline" color={"lightgray"}>
-                {t("products.country")}
-              </Typography>
-              <Tooltip title={product.country_code.toLowerCase()}>
-                <CircleFlag
-                  countryCode={product.country_code.toLowerCase()}
-                  height="25"
-                />
-              </Tooltip>
-            </Stack>
-            <Stack direction="row" alignItems="center" gap={4}>
+            <Stack direction="row" alignItems="baseline" gap={4}>
+              <Stack>
+                <Typography variant="overline" color={"lightgray"}>
+                  {t("products.country")}
+                </Typography>
+                <Tooltip title={product.country_code.toLowerCase()}>
+                  <CircleFlag
+                    countryCode={product.country_code.toLowerCase()}
+                    height="25"
+                  />
+                </Tooltip>
+              </Stack>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>
                   {t("products.price")}
@@ -200,9 +201,9 @@ const ProductList = ({ onClick }: Props) => {
             <IconMenu2 width="16" />
           </Fab>
         )}
-        {/* <Box>
+        <Box>
           <ProductSearch />
-        </Box> */}
+        </Box>
       </Stack>
 
       {/* ------------------------------------------- */}

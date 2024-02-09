@@ -6,6 +6,7 @@ import {
   get,
   post,
 } from "@api/utils";
+import i18n from "../../i18n";
 
 const baseProductUrl = new URL("product", import.meta.env.VITE_API_URL);
 const baseProductUrlWithSlash = new URL(
@@ -69,9 +70,11 @@ export interface ProductDetails {
 }
 
 export interface FilterProduct {
+  nameSearch?: string;
   country_code?: string;
   type?: string;
   categories?: string[];
+  paymentModel?: string;
 }
 
 export interface InputOrder {
@@ -91,14 +94,38 @@ export interface Country {
   code: string;
   currency: string;
 }
-
 export function getProducts(
   pagination: PageRequest,
   filter?: FilterProduct
 ): Promise<Page<Product>> {
+  let localizedFilter;
+
+  if (filter) {
+    const commonProps = {
+      country_code: filter.country_code,
+      type: filter.type,
+      categories: filter.categories,
+      paymentModel: filter.paymentModel,
+    };
+
+    if (i18n.language === "en")
+      localizedFilter = {
+        ...commonProps,
+        name_eng: filter.nameSearch,
+      };
+    else
+      localizedFilter = {
+        ...commonProps,
+        name: filter.nameSearch,
+      };
+  }
+
   return get(
     addPaginationParams(
-      addListFilterParams(baseProductUrl, filter ?? (null as any)),
+      addListFilterParams(
+        baseProductUrl,
+        filter ? localizedFilter : (null as any)
+      ),
       pagination
     )
   );

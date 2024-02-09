@@ -33,6 +33,20 @@ export type UpdateOrderStatus = {
   status: string;
 };
 
+export type Report = {
+  total: number;
+  hold: number;
+  conversions: number;
+  conversionRate: number;
+  trash: number;
+  cancelled: number;
+  totalHoldRevenue: number;
+  holdRevenue: number;
+  revenue: number;
+  totalTrashRevenue: number;
+  totalCancelledRevenue: number;
+};
+
 export function getOrders(
   pagination: PageRequest,
   filter?: MRT_ColumnFiltersState
@@ -47,4 +61,16 @@ export function getOrders(
 
 export function updateOrderStatus(input: UpdateOrderStatus) {
   return put(new URL("" + input.id, baseUrlWithSlash), JSON.stringify(input));
+}
+
+export function getReports(
+  filter: MRT_ColumnFiltersState,
+  pagination: PageRequest
+): Promise<Page<Report>> {
+  return get(
+    addPaginationParams(
+      addFilterParams(new URL("admin_report", baseUrlWithSlash), filter),
+      pagination
+    )
+  );
 }

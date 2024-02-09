@@ -1,8 +1,8 @@
 {
-  "defaultMessage": "Ups, nešto nije u redu.",
-  "defaultExplanation": "Pokušajte ponovo kasnije.",
-  "notFoundMessage": "Stranica nije pronađena.",
-  "notFoundExplanation": "Provjerite URL adresu i pokušajte ponovo.",
-  "excelError": "Desila se greška prilikom generisanja Excel izvještaja",
-  "tableDataError" : "Nije moguce dohvatiti podatke."
+  "defaultMessage": "Oops, something went wrong.",
+  "defaultExplanation": "Please try again later.",
+  "notFoundMessage": "Page not found.",
+  "notFoundExplanation": "Check the URL address and try again.",
+  "excelError": "An error occurred while generating the Excel report.",
+  "tableDataError": "Unable to fetch data."
 }

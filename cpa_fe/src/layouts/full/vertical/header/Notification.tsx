@@ -39,7 +39,6 @@ const Notifications = () => {
         component={Link}
       >
         <Badge
-          variant="dot"
           color="primary"
           badgeContent={data?.notReadNotifications}
         >

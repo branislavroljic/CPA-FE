@@ -18,17 +18,15 @@ import { useQuery } from "@tanstack/react-query";
 import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
 import i18n from "../../i18n";
-import { MRT_Localization_SR_LATN_RS } from "material-react-table/locales/sr-Latn-RS";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
-import { useTranslation } from "react-i18next";
-import { Report, getReports } from "@api/user/user";
 import useAuthStore from "@stores/authStore";
-import { enUS, srRS } from "@mui/material/locale";
+import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
+import { Report, getReports } from "@api/order/order";
 
 export default function ReportsTable() {
   const { user } = useAuthStore();
@@ -40,8 +38,6 @@ export default function ReportsTable() {
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([
     { id: "dateTime", value: [new Date().toString(), new Date().toString()] },
   ]);
-
-  const { t } = useTranslation();
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: [
@@ -57,14 +53,11 @@ export default function ReportsTable() {
         size: pagination.pageSize,
       } as PageRequest;
 
-      return getReports(columnFilters, pageRequest, user?.id);
+      return getReports(columnFilters, pageRequest);
     },
   });
 
-  const columns = useMemo<MRT_ColumnDef<Report>[]>(
-    () => defaultColumns(t),
-    [t]
-  );
+  const columns = useMemo<MRT_ColumnDef<Report>[]>(() => defaultColumns(), []);
 
   const defaultData = useMemo(() => [] as Report[], []);
 
@@ -125,10 +118,7 @@ export default function ReportsTable() {
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
-    localization:
-      i18n.language === "en"
-        ? MRT_Localization_EN
-        : MRT_Localization_SR_LATN_RS,
+    localization: MRT_Localization_EN,
     enableHiding: true,
     defaultColumn: {
       minSize: 10,
@@ -138,9 +128,7 @@ export default function ReportsTable() {
   });
 
   return (
-    <ThemeProvider
-      theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-    >
+    <ThemeProvider theme={createTheme(theme, enUS)}>
       <MaterialReactTable table={table} />
     </ThemeProvider>
   );

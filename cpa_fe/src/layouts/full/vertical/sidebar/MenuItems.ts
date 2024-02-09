@@ -101,7 +101,7 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
     {
       id: uniqueId(),
       title: t("order.balanceTitle"),
-      icon: IconScale,
+    icon: IconScale,
       href: "/balance",
     },
     {

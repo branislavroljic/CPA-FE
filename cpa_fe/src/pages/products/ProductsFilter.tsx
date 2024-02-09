@@ -16,6 +16,8 @@ import {
   MenuItem,
   OutlinedInput,
   InputLabel,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 import { IconPremiumRights } from "@tabler/icons-react";
 import { useProductFilterStore } from "@stores/productStore";
@@ -23,6 +25,7 @@ import { CircleFlag } from "react-circle-flags";
 import { useLoaderData } from "react-router-dom";
 import { Category, Country } from "@api/product/product";
 import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -41,13 +44,15 @@ const ProductFilter = () => {
   const loaderData = useLoaderData() as any[];
   const countries = (loaderData[0] as Country[]) ?? [];
   const categories = (loaderData[1] as Category[]) ?? [];
-  const productTypes = ["BASIC", "REGULAR", "VIP"];
+  const productTypes = useMemo(() => ["BASIC", "REGULAR", "VIP"], []);
+  const paymentModels = useMemo(() => ["CPA"], []);
 
   const {
     filter,
     updateFilterCategories,
     updateFilterCountryCode,
     updateFilterProductType,
+    updateFilterPaymentModel,
     resetFilter,
   } = useProductFilterStore();
 
@@ -69,8 +74,13 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         {/* Type filter */}
         {/* ------------------------------------------- */}
-        <Box pl={3}>
-          <Typography variant="subtitle2" fontWeight={600}>
+        <Box>
+          <Typography
+            variant="subtitle2"
+            fontWeight={600}
+            paddingLeft={3}
+            paddingTop={1}
+          >
             {t("products.byType")}
           </Typography>
           <br />
@@ -138,7 +148,7 @@ const ProductFilter = () => {
           </FormControl>
         </Box>
         <Divider></Divider>
-        <Typography variant="h6" px={3} mt={3} pb={2}>
+        <Typography variant="subtitle2" fontWeight={600} px={3} mt={3} pb={2}>
           {t("products.byCountry")}
         </Typography>
         {/* ------------------------------------------- */}
@@ -163,6 +173,31 @@ const ProductFilter = () => {
               );
             })}
           </Stack>
+        </Box>
+        <Divider></Divider>
+        <Typography variant="subtitle2" fontWeight={600} px={3} mt={3} pb={2}>
+          {t("products.byPaymentModel")}
+        </Typography>
+        {/* ------------------------------------------- */}
+        {/* Filter By colors */}
+        {/* ------------------------------------------- */}
+        <Box p={3} pt={0}>
+          <Autocomplete
+            onChange={(_event, item) => {
+              updateFilterPaymentModel(item ?? undefined);
+            }}
+            value={filter.paymentModel}
+            options={paymentModels}
+            getOptionLabel={(option) => option}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label={t("payments.method")}
+                margin="normal"
+                variant="outlined"
+              />
+            )}
+          />
         </Box>
         <Divider></Divider>
         {/* ------------------------------------------- */}

@@ -1,5 +1,6 @@
 import { uniqueId } from "lodash";
 
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 interface MenuitemsType {
   [x: string]: any;
   id?: string;
@@ -66,6 +67,12 @@ const Menuitems = () =>
       title: "Users",
       icon: IconUsersGroup,
       href: "/users",
+    },
+    {
+      id: uniqueId(),
+      title: "Statistics",
+      icon: QueryStatsIcon,
+      href: "/reports",
     },
     {
       id: uniqueId(),

@@ -1,7 +1,6 @@
-
-import { CardContent, Typography, Button, Box } from '@mui/material';
-import starBg from '/src/assets/images/backgrounds/gold.png';
-import BlankCard from '@ui/shared/BlankCard';
+import { CardContent, Typography, Button, Box } from "@mui/material";
+import starBg from "/src/assets/images/backgrounds/gold.png";
+import BlankCard from "@ui/shared/BlankCard";
 
 export interface BannerProps {
   title: string;
@@ -13,16 +12,7 @@ export interface BannerProps {
 const Banner = ({ title, subtitle, goToText, onGoToClick }: BannerProps) => {
   return (
     <BlankCard>
-      <CardContent sx={{ p: '30px' }}>
-        {/* <Typography
-          variant="subtitle1"
-          textAlign="center"
-          mb={2}
-          textTransform="uppercase"
-          color="textSecondary"
-        >
-          Level Up
-        </Typography> */}
+      <CardContent sx={{ p: "30px" }}>
         <Box textAlign="center">
           <img src={starBg} alt="star" width={150} />
 

@@ -3,7 +3,6 @@ import errorTrans from "./error.json";
 import loginTrans from "./login.json";
 import userTrans from "./user.json";
 import uiTrans from "./ui.json";
-import faqTrans from "./faq.json";
 import notificationTrans from "./notification.json";
 import linksTrans from "./links.json";
 
@@ -14,7 +13,6 @@ const enResources = {
     login: loginTrans,
     user: userTrans,
     ui: uiTrans,
-    faq: faqTrans,
     notification: notificationTrans,
     links: linksTrans,
   },

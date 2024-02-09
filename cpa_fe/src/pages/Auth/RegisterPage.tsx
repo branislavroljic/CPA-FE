@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { Grid, Box, Card, styled } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import PageContainer from "@ui/container/PageContainer";
 import Logo from "@layout/full/shared/logo/Logo";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,6 @@ import TabList from "@mui/lab/TabList";
 import { AccountCircleOutlined } from "@mui/icons-material";
 import MuiTab, { TabProps } from "@mui/material/Tab";
 import RegisterCompanyForm from "./RegisterCompanyForm";
-
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -35,11 +34,13 @@ const TabName = styled("span")(({ theme }) => ({
 export default function RegisterPage() {
   const [value, setValue] = useState<string>("registerUser");
 
+  const [searchParams] = useSearchParams();
+
   const handleChange = (_event: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-  const [isSuccessful] = useState(false);
+  const isSuccessful = searchParams.get("successful") ?? false;
 
   const navigate = useNavigate();
 
@@ -47,30 +48,29 @@ export default function RegisterPage() {
 
   return (
     <PageContainer description="this is Register page">
-      <Box
-        sx={{
-          backgroundImage:
-            'url("/assets/backgrounds/background.png")',
-          minHeight: "120vh",
-          position: "relative",
-          "&:before": {
-            content: '""',
-            backgroundSize: "400% 400%",
-            animation: "gradient 15s ease infinite",
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-            opacity: "0.3",
-          },
-        }}
-      >
-        <Grid
-          container
-          spacing={0}
-          justifyContent="center"
-          sx={{ height: "100vh" }}
+      {!isSuccessful ? (
+        <Box
+          sx={{
+            backgroundImage: 'url("/assets/backgrounds/background.png")',
+            minHeight: "120vh",
+            position: "relative",
+            "&:before": {
+              content: '""',
+              backgroundSize: "400% 400%",
+              animation: "gradient 15s ease infinite",
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+              opacity: "0.3",
+            },
+          }}
         >
-          {!isSuccessful ? (
+          <Grid
+            container
+            spacing={0}
+            justifyContent="center"
+            sx={{ height: "100vh" }}
+          >
             <Card
               elevation={9}
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "550px" }}
@@ -116,16 +116,35 @@ export default function RegisterPage() {
                 </TabPanel>
               </TabContext>
             </Card>
-          ) : (
-            <Banner
-              title={t("login.successfulVerification")}
-              subtitle={t("login.successfulVerificationSubtitle")}
-              goToText={t("login.goToLogin")}
-              onGoToClick={() => navigate("/")}
-            />
-          )}
-        </Grid>
-      </Box>
+          </Grid>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            backgroundImage: 'url("/assets/backgrounds/background.png")',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+            "&:before": {
+              content: '""',
+              backgroundSize: "400% 400%",
+              animation: "gradient 15s ease infinite",
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+              opacity: "0.3",
+            },
+          }}
+        >
+          <Banner
+            title={t("login.successfulVerification")}
+            subtitle={t("login.successfulVerificationSubtitle")}
+            goToText={t("login.goToLogin")}
+            onGoToClick={() => navigate("/")}
+          />
+        </Box>
+      )}
     </PageContainer>
   );
 }
