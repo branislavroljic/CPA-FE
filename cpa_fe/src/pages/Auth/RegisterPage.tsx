@@ -48,29 +48,29 @@ export default function RegisterPage() {
 
   return (
     <PageContainer description="this is Register page">
-      {!isSuccessful ? (
-        <Box
-          sx={{
-            backgroundImage: 'url("/assets/backgrounds/background.png")',
-            minHeight: "120vh",
-            position: "relative",
-            "&:before": {
-              content: '""',
-              backgroundSize: "400% 400%",
-              animation: "gradient 15s ease infinite",
-              position: "absolute",
-              height: "100%",
-              width: "100%",
-              opacity: "0.3",
-            },
-          }}
+      <Box
+        sx={{
+          backgroundImage: 'url("/assets/backgrounds/background.png")',
+          minHeight: "120vh",
+          position: "relative",
+          "&:before": {
+            content: '""',
+            backgroundSize: "400% 400%",
+            animation: "gradient 15s ease infinite",
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            opacity: "0.3",
+          },
+        }}
+      >
+        <Grid
+          container
+          spacing={0}
+          justifyContent="center"
+          sx={{ height: "100vh" }}
         >
-          <Grid
-            container
-            spacing={0}
-            justifyContent="center"
-            sx={{ height: "100vh" }}
-          >
+          {!isSuccessful ? (
             <Card
               elevation={9}
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "550px" }}
@@ -116,35 +116,23 @@ export default function RegisterPage() {
                 </TabPanel>
               </TabContext>
             </Card>
-          </Grid>
-        </Box>
-      ) : (
-        <Box
-          sx={{
-            backgroundImage: 'url("/assets/backgrounds/background.png")',
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "relative",
-            "&:before": {
-              content: '""',
-              backgroundSize: "400% 400%",
-              animation: "gradient 15s ease infinite",
-              position: "absolute",
-              height: "100%",
-              width: "100%",
-              opacity: "0.3",
-            },
-          }}
-        >
-          <Banner
-            title={t("login.successfulVerification")}
-            subtitle={t("login.successfulVerificationSubtitle")}
-            goToText={t("login.goToLogin")}
-            onGoToClick={() => navigate("/")}
-          />
-        </Box>
-      )}
+          ) : (
+            <Box
+              sx={{
+                backgroundImage: 'url("/assets/backgrounds/background.png")',
+              }}
+              margin={"0 auto"}
+            >
+              <Banner
+                title={t("login.successfulVerification")}
+                subtitle={t("login.successfulVerificationSubtitle")}
+                goToText={t("login.goToLogin")}
+                onGoToClick={() => navigate("/")}
+              />
+            </Box>
+          )}
+        </Grid>
+      </Box>
     </PageContainer>
   );
 }
