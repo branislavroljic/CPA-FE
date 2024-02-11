@@ -15,5 +15,8 @@
   "conversionRate": "Conversion rate",
   "flow": "Flow",
   "requestVIPAccess": "Request VIP access",
-  "vipAccessDesc": "This is a VIP offer and you need to have access in order to advertise it. Please contact your account manager."
+  "vipAccessDesc": "This is a VIP offer and you need to have access in order to advertise it. Send request:",
+  "description": "Description",
+  "VIPAccessRequested": "VIP access requested",
+  "VIPAccessRequestDesc" : "Your VIP access request is being processed..."
 }

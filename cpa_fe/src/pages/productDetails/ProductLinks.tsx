@@ -59,10 +59,9 @@ interface SubValues {
 const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const [value, setValue] = React.useState(0);
   const { user } = useAuthStore();
-  product.offerURL = "https://www.google.com/";
   const initialOfferURL = useMemo(
-    () => (product.offerURL ? new URL(product.offerURL) : null),
-    [product.offerURL]
+    () => (product.offerUrl ? new URL(product.offerUrl) : null),
+    [product.offerUrl]
   );
   const [offerURL] = useState(initialOfferURL);
 

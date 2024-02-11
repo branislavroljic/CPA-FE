@@ -31,6 +31,7 @@ export type User = {
   refreshToken: string;
   accountManager?: AccountManager;
   referrerLink?: string;
+  enabledVipProducts?: string;
 };
 
 export type LoginHistory = {

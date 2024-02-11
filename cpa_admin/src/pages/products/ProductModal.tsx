@@ -131,13 +131,13 @@ export default function ProductModal() {
                 defaultValue={item?.name ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Naziv"}
+                    label={"Name"}
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={!!errors.body?.name}
                     helperText={errors.body?.name?.message}
-                    placeholder={"Naziv"}
+                    placeholder={"Name"}
                     margin="normal"
                     id="name"
                     autoFocus
@@ -153,13 +153,13 @@ export default function ProductModal() {
                 defaultValue={item?.nameEng ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Naziv na engleskom"}
+                    label={"Name in English"}
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={!!errors.body?.nameEng}
                     helperText={errors.body?.nameEng?.message}
-                    placeholder={"Naziv"}
+                    placeholder={"Name in English"}
                     margin="normal"
                     id="nameEng"
                     {...field}
@@ -175,7 +175,7 @@ export default function ProductModal() {
                 defaultValue={item?.description ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Opis"}
+                    label={"Description"}
                     fullWidth
                     multiline
                     required
@@ -183,7 +183,7 @@ export default function ProductModal() {
                     disabled={mutation.isLoading}
                     error={!!errors.body?.description}
                     helperText={errors.body?.description?.message}
-                    placeholder={"Opis"}
+                    placeholder={"Description"}
                     margin="normal"
                     id="description"
                     {...field}
@@ -199,7 +199,7 @@ export default function ProductModal() {
                 defaultValue={item?.descriptionEng ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Opis na engleskom "}
+                    label={"Description in English"}
                     fullWidth
                     multiline
                     required
@@ -207,7 +207,7 @@ export default function ProductModal() {
                     disabled={mutation.isLoading}
                     error={!!errors.body?.descriptionEng}
                     helperText={errors.body?.descriptionEng?.message}
-                    placeholder={"Opis na engleskom"}
+                    placeholder={"Description in English"}
                     margin="normal"
                     id="descriptionEng"
                     {...field}
@@ -223,13 +223,13 @@ export default function ProductModal() {
                 defaultValue={item?.price ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Cijena"}
+                    label={"Price"}
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={!!errors.body?.price}
                     helperText={errors.body?.price?.message}
-                    placeholder={"Cijena"}
+                    placeholder={"Price"}
                     margin="normal"
                     id="discount"
                     {...field}
@@ -245,13 +245,13 @@ export default function ProductModal() {
                 defaultValue={item?.currency ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Valuta"}
+                    label={"Currency"}
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={!!errors.body?.currency}
                     helperText={errors.body?.currency?.message}
-                    placeholder={"Valuta"}
+                    placeholder={"Currency"}
                     margin="normal"
                     id="currency"
                     {...field}
@@ -267,15 +267,15 @@ export default function ProductModal() {
                 defaultValue={item?.country_code ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Kod države"}
+                    label={"Country code"}
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={!!errors.body?.country_code}
                     helperText={errors.body?.country_code?.message}
-                    placeholder={"Kod države"}
+                    placeholder={"Country code"}
                     margin="normal"
-                    id="country_code"
+                    id="Country code"
                     {...field}
                   />
                 )}
@@ -289,13 +289,13 @@ export default function ProductModal() {
                 defaultValue={item?.payout ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Isplata"}
+                    label={"Payout"}
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={!!errors.body?.payout}
                     helperText={errors.body?.payout?.message}
-                    placeholder={"Isplata"}
+                    placeholder={"Payout"}
                     margin="normal"
                     id="payout"
                     {...field}
@@ -311,14 +311,14 @@ export default function ProductModal() {
                 defaultValue={item?.limit_per_day ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Dnevni limit"}
+                    label={"Limit per day"}
                     type="number"
                     fullWidth
                     required
                     disabled={mutation.isLoading}
                     error={errors.body?.limit_per_day !== undefined}
                     helperText={errors.body?.limit_per_day?.message}
-                    placeholder={"Dnevni limit"}
+                    placeholder={"Limit per day"}
                     margin="normal"
                     id="amount"
                     {...field}
@@ -343,7 +343,7 @@ export default function ProductModal() {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        label={"Tip"}
+                        label={"Type"}
                         margin="normal"
                         variant="outlined"
                         error={errors.body?.type !== undefined}
@@ -442,12 +442,12 @@ export default function ProductModal() {
                 defaultValue={item?.landingPagesString ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Landing stranice"}
+                    label={"Landing pages"}
                     fullWidth
                     disabled={mutation.isLoading}
                     error={!!errors.body?.landingPagesString}
                     helperText={errors.body?.landingPagesString?.message}
-                    placeholder={"Landing stranice(odvojene ; )"}
+                    placeholder={"Landing pages(separated by ; )"}
                     margin="normal"
                     id="landingPagesString"
                     {...field}
@@ -463,12 +463,12 @@ export default function ProductModal() {
                 defaultValue={item?.prelandingPagesString ?? undefined}
                 render={({ field }) => (
                   <TextField
-                    label={"Prelanding stranice"}
+                    label={"Prelanding pages"}
                     fullWidth
                     disabled={mutation.isLoading}
                     error={!!errors.body?.prelandingPagesString}
                     helperText={errors.body?.prelandingPagesString?.message}
-                    placeholder={"Prelanding stranice(odvojene ; )"}
+                    placeholder={"Prelanding pages(separated by ; )"}
                     margin="normal"
                     id="prelandingPagesString"
                     {...field}

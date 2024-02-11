@@ -18,7 +18,6 @@ import { useQuery } from "@tanstack/react-query";
 import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
 import i18n from "../../i18n";
-import { MRT_Localization_SR_LATN_RS } from "material-react-table/locales/sr-Latn-RS";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
@@ -178,12 +177,12 @@ export default function UserTable() {
 
   const enableDisableVIPButton = (item: User, key: string) => (
     <>
-      {item.enabledVipProducts ? (
+      {item.enabledVipProducts == "ENABLED" ? (
         <Tooltip arrow title={"Disable VIP"} key={key}>
           <IconButton
             color="error"
             onClick={(e) => {
-              updateVIP(item.id, !item.enabledVipProducts).then((response) => {
+              updateVIP(item.id, "BLOCKED").then((response) => {
                 if (response.status === 200) {
                   refetch();
                 }
@@ -199,7 +198,7 @@ export default function UserTable() {
           <IconButton
             color="warning"
             onClick={(e) => {
-              updateVIP(item.id, !item.enabledVipProducts).then((response) => {
+              updateVIP(item.id, "ENABLED").then((response) => {
                 if (response.status === 200) {
                   refetch();
                 }
@@ -314,10 +313,7 @@ export default function UserTable() {
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
-    localization:
-      i18n.language === "en"
-        ? MRT_Localization_EN
-        : MRT_Localization_SR_LATN_RS,
+    localization: MRT_Localization_EN,
     enableHiding: false,
     displayColumnDefOptions: {
       "mrt-row-actions": {

@@ -15,5 +15,8 @@
   "conversionRate": "Stopa konverzije",
   "flow": "Protok",
   "requestVIPAccess": "Zahtevaj VIP pristup",
-  "vipAccessDesc": "Ovo je VIP ponuda i morate imati pristup kako biste je reklamirali. Molimo kontaktirajte svog menadžera naloga."
+  "vipAccessDesc": "Ovo je VIP ponuda i morate imati pristup kako biste je reklamirali. Pošaljite zahtjev:",
+  "description": "Opis",
+  "VIPAccessRequested": "Zahtev za VIP pristup",
+  "VIPAccessRequestDesc": "Vaš zahtev za VIP pristup se obrađuje..."
 }

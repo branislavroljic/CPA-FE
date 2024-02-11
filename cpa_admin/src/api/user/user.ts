@@ -41,7 +41,7 @@ export type User = {
     | "ON_HOLD_MAIL_CONFIRMED"
     | "ON_HOLD_MAIL_NOT_CONFIRMED";
   registrationDate: string;
-  enabledVipProducts: boolean;
+  enabledVipProducts: "ENABLED" | "REQUESTED" | "BLOCKED";
   balance: number;
   facebookLink: string;
   googleLink: string;
@@ -141,7 +141,7 @@ export function updateStatus(id: number, status: string) {
   );
 }
 
-export function updateVIP(id: number, status: boolean) {
+export function updateVIP(id: number, status: string) {
   return put(
     new URL(id + "/vip_products", baseUrlWithSlash),
     JSON.stringify({

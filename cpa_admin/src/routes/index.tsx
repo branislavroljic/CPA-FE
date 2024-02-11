@@ -16,6 +16,7 @@ import ReferralPage from "@pages/referrals/ReferralPage";
 import { getAccountManagers } from "@api/user/user";
 import UserStatisticsPage from "@pages/userStatistics/UserStatisticsPage";
 import ReportsPage from "@pages/reports/ReportsPage";
+import VIPRequestsPage from "@pages/vip/VIPRequestsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -129,6 +130,17 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <ReferralPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "vipRequests",
+        path: "/vip_requests",
+        children: [
+          {
+            index: true,
+            element: <VIPRequestsPage />,
             errorElement: <ErrorPage />,
           },
         ],

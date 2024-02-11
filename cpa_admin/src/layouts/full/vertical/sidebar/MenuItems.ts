@@ -22,6 +22,7 @@ import {
   IconCoin,
   IconShoppingCart,
   IconUsersGroup,
+  IconVip,
 } from "@tabler/icons-react";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import { ConnectWithoutContactOutlined } from "@mui/icons-material";
@@ -79,6 +80,12 @@ const Menuitems = () =>
       title: "Referral",
       icon: ConnectWithoutContactOutlined,
       href: "/referrals",
+    },
+    {
+      id: uniqueId(),
+      title: "VIP requests",
+      icon: IconVip,
+      href: "/vip_requests",
     },
   ] as MenuitemsType[];
 

@@ -66,7 +66,7 @@ export interface ProductDetails {
   prelandingPages?: LandingPage[];
   conversion_rate: number;
   flow: string;
-  offerURL?: string;
+  offerUrl?: string;
 }
 
 export interface FilterProduct {

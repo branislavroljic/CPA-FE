@@ -7,7 +7,16 @@ import {
 } from "react-router-dom";
 
 // MUI Elements
-import { Box, Typography, Chip, Grid, Divider, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Chip,
+  Grid,
+  Divider,
+  Stack,
+  TextField,
+  Button,
+} from "@mui/material";
 
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import PageContainer from "@ui/container/PageContainer";
@@ -17,7 +26,12 @@ import { ProductDetails, getProductDetails } from "@api/product/product";
 import queryClient from "../../query-client";
 import ProductLinks from "./ProductLinks";
 import { useTranslation } from "react-i18next";
-
+import useAuthStore from "@stores/authStore";
+import { VIPRequest, requestVIP } from "@api/vip/vip";
+import { zodResolver } from "@hookform/resolvers/zod";
+import vipSchema from "./vipSchema";
+import { Controller, useForm } from "react-hook-form";
+import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
 const PathNames = {
   product: "/products/:productId",
 } as const;
@@ -52,6 +66,32 @@ const BCrumb = [
 const ProductDetailsPage = () => {
   const { t } = useTranslation();
   const productDetails = useLoaderData() as ProductDetails;
+  const { user, setUser } = useAuthStore();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors, isValid },
+  } = useForm<VIPRequest>({
+    resolver: zodResolver(vipSchema),
+  });
+
+  const mutation = useNotifiedMutation({
+    mutationFn: requestVIP,
+    onSuccess: () => {
+      reset();
+      if (user) setUser({ ...user, enabledVipProducts: "REQUESTED" });
+    },
+    showSuccessNotification: true,
+  });
+
+  const requestVIPSubmit = (newItem: VIPRequest) => {
+    if (isValid) {
+      mutation.mutate(newItem);
+    }
+  };
 
   return (
     <PageContainer
@@ -70,7 +110,7 @@ const ProductDetailsPage = () => {
             {/* ------------------------------------------- */}
             {/* Carousel */}
             {/* ------------------------------------------- */}
-            <Grid container spacing={3} xs={12} sm={12} lg={12}>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={12} lg={12}>
                 <img
                   src={`https://api.klixlead.com/api/product/images/${productDetails.image}`}
@@ -107,8 +147,12 @@ const ProductDetailsPage = () => {
                         mb={1}
                         gap={1}
                       >
-                        {productDetails.categories.map((category) => (
-                          <Chip label={category.name} size="small" />
+                        {productDetails.categories.map((category, index) => (
+                          <Chip
+                            label={category.name}
+                            size="small"
+                            key={"cat_" + index}
+                          />
                         ))}
                       </Box>
                       <Divider />
@@ -131,8 +175,9 @@ const ProductDetailsPage = () => {
           <ProductInfo product={productDetails} />
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>
-          {productDetails.type == "VIP" ? (
-            <Stack spacing={2}>
+          {productDetails.type == "VIP" &&
+          user?.enabledVipProducts == "BLOCKED" ? (
+            <Stack spacing={2} alignItems={"center"}>
               <Divider>
                 <Typography variant="h4">
                   {t("products.requestVIPAccess")}
@@ -146,6 +191,69 @@ const ProductDetailsPage = () => {
                 color={"gray"}
               >
                 {t("products.vipAccessDesc")}
+              </Typography>
+              <Box
+                component="form"
+                // onSubmit={handleSubmit(saveCompanyType)}
+                sx={{ mt: 1, width: "100%" }}
+                flex={1}
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"center"}
+              >
+                <input
+                  type="hidden"
+                  {...register("userId", {
+                    required: true,
+                    value: user?.id ?? undefined,
+                  })}
+                />
+                <Controller
+                  name="description"
+                  control={control}
+                  defaultValue={""}
+                  render={({ field }) => (
+                    <TextField
+                      label={t("products.description")}
+                      required
+                      sx={{ width: "50%" }}
+                      multiline
+                      disabled={mutation.isLoading}
+                      error={!!errors?.description}
+                      helperText={errors?.description?.message}
+                      placeholder={t("products.description")}
+                      margin="normal"
+                      id="nameEng"
+                      {...field}
+                    />
+                  )}
+                />
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={handleSubmit(requestVIPSubmit)}
+                >
+                  {t("util.send")}
+                </Button>
+              </Box>
+            </Stack>
+          ) : productDetails.type == "VIP" &&
+            user?.enabledVipProducts == "REQUESTED" ? (
+            <Stack spacing={3}>
+              <Divider>
+                <Typography variant="h4">
+                  {t("products.VIPAccessRequested")}
+                </Typography>
+              </Divider>
+
+              <Typography
+                variant="body2"
+                fontSize={"medium"}
+                fontStyle={"oblique"}
+                color={"gray"}
+                textAlign={"center"}
+              >
+                {t("products.VIPAccessRequestDesc")}
               </Typography>
             </Stack>
           ) : (

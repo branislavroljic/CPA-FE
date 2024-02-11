@@ -1,30 +1,27 @@
-import { enUS, srRS } from "@mui/material/locale";
-import i18n from "../../i18n";
+import { enUS } from "@mui/material/locale";
 import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import { useMemo } from "react";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
-import ReportsTable from "./ReportsTable";
+import VIPRequestsTable from "./VIPRequestsTable";
 
-export default function ReportsPage() {
+export default function VIPRequestsPage() {
   const theme = useTheme();
 
   const BCrumb = useMemo(
     () => [
       {
         to: "/",
-        title: "Reports",
+        title: "VIP requests",
       },
     ],
     []
   );
   return (
     <PageContainer title="" description="this is innerpage">
-      <Breadcrumb items={BCrumb} title={"Reports"} />
-      <ThemeProvider
-        theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}
-      >
-        <ReportsTable />
+      <Breadcrumb items={BCrumb} title={"VIP requests"} />
+      <ThemeProvider theme={createTheme(theme, enUS)}>
+        <VIPRequestsTable />
       </ThemeProvider>
     </PageContainer>
   );

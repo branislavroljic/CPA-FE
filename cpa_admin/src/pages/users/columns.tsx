@@ -76,7 +76,7 @@ const defaultColumns = (accountStatuses: SelectInput[]) =>
         align: "center",
       },
       Cell: ({ row }) =>
-        row.original.enabledVipProducts ? (
+        row.original.enabledVipProducts == "ENABLED" ? (
           <VerifiedIcon color="warning" />
         ) : (
           <VerifiedIcon color="disabled" />
