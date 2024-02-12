@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { Grid, Box, Card, styled } from "@mui/material";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PageContainer from "@ui/container/PageContainer";
 import Logo from "@layout/full/shared/logo/Logo";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,7 @@ import TabList from "@mui/lab/TabList";
 import { AccountCircleOutlined } from "@mui/icons-material";
 import MuiTab, { TabProps } from "@mui/material/Tab";
 import RegisterCompanyForm from "./RegisterCompanyForm";
+import BusinessIcon from '@mui/icons-material/Business';
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -102,7 +103,7 @@ export default function RegisterPage() {
                     value="registerCompany"
                     label={
                       <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <AccountCircleOutlined />
+                        <BusinessIcon />
                         <TabName>Company</TabName>
                       </Box>
                     }

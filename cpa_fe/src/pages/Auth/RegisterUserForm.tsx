@@ -14,7 +14,7 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import i18n from "../../i18n";
 import { Controller, useForm } from "react-hook-form";
@@ -139,6 +139,10 @@ const registerSchema = z.object({
 type RegisterInput = z.infer<typeof registerSchema>;
 
 const RegisterUserForm = ({ setIsSuccessful }: any) => {
+  const [searchParams] = useSearchParams();
+
+  const refId = searchParams.get("refId");
+
   const openNotification = useNotificationStore(
     (state) => state.openNotification
   );
@@ -155,6 +159,7 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
   const {
     handleSubmit,
     control,
+    register,
     formState: { errors },
   } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
 
@@ -190,6 +195,15 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
   return (
     <>
       <Box component="form" onSubmit={handleSubmit(registerUser)}>
+        {refId && (
+          <input
+            type="hidden"
+            {...register("referralUserId", {
+              required: false,
+              value: +refId,
+            })}
+          />
+        )}
         <Grid container direction={"row"} spacing={1}>
           <Grid item xs={12} sm={6} lg={6}>
             <CustomFormLabel htmlFor="name">
@@ -245,10 +259,10 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
               render={({ field: { onChange, value } }) => (
                 <Autocomplete
                   fullWidth
-                  onChange={(event, item) => {
+                  onChange={(_event, item) => {
                     onChange(item);
                   }}
-                  value={restCountiesData?.find((c) => c === value)}
+                  value={restCountiesData?.find((c: any) => c === value)}
                   options={restCountiesData ?? []}
                   getOptionLabel={(option) => `${option}`}
                   renderInput={(params) => (
