@@ -29,6 +29,7 @@ import PostbackHistoryPage from "@pages/postback-history/PostbackHistoryPage";
 import StatisticsPage from "@pages/statistic/StatisticPage";
 import React from "react";
 import Notifications from "@pages/notifications/Notifications";
+import PaymentSettingsPage from "@pages/payment-settings/PaymentSettingsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -115,6 +116,17 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <PaymentsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "payment_settings",
+        path: "/payment_settings",
+        children: [
+          {
+            index: true,
+            element: <PaymentSettingsPage />,
             errorElement: <ErrorPage />,
           },
         ],

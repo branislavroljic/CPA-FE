@@ -4,7 +4,7 @@ const baseUrl = new URL("payment", import.meta.env.VITE_API_URL);
 
 export type InputPayment = {
   amount: number;
-  method: "INVOICE";
+  userPaymentMethodId: number;
   userId: number;
 };
 

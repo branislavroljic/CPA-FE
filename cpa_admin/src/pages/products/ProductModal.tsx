@@ -282,7 +282,7 @@ export default function ProductModal() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="body.payout"
                 control={control}
@@ -304,7 +304,7 @@ export default function ProductModal() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="body.limit_per_day"
                 control={control}
@@ -320,7 +320,28 @@ export default function ProductModal() {
                     helperText={errors.body?.limit_per_day?.message}
                     placeholder={"Limit per day"}
                     margin="normal"
-                    id="amount"
+                    id="limit_per_day"
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Controller
+                name="body.approveRate"
+                control={control}
+                defaultValue={item?.approveRate ?? undefined}
+                render={({ field }) => (
+                  <TextField
+                    label={"Approve rate"}
+                    type="number"
+                    fullWidth
+                    disabled={mutation.isLoading}
+                    error={errors.body?.approveRate !== undefined}
+                    helperText={errors.body?.approveRate?.message}
+                    placeholder={"Approve rate"}
+                    margin="normal"
+                    id="approveRate"
                     {...field}
                   />
                 )}

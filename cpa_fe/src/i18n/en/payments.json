@@ -9,5 +9,11 @@
   "status": "Status",
   "createdAt": "Created at",
   "editedAt": "Edited at",
-  "username": "Username"
+  "username": "Username",
+  "settings": "Payment settings",
+  "info": "Information",
+  "paymentSettingsMinimumAmount": "Minimum payout amount = ${{number}}",
+  "paymentSettingsDescription": "The account setting below should be the same as in you payment account",
+  "bankName": "Bank name",
+  "accountHolder": "Account holder"
 }

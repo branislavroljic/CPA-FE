@@ -9,5 +9,11 @@
   "status": "Status",
   "createdAt": "Kreirano u",
   "editedAt": "Izmenjeno u",
-  "username": "Korisničko ime"
+  "username": "Korisničko ime",
+  "settings": "Podešavanja plaćanja",
+  "info": "Informacije",
+  "paymentSettingsMinimumAmount": "Minimalni iznos za isplatu = ${{number}}",
+  "paymentSettingsDescription": "Postavke naloga ispod treba da budu iste kao u vašem računu za plaćanje",
+  "bankName": "Naziv banke",
+  "accountHolder": "Vlasnik naloga"
 }

@@ -87,30 +87,17 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
           <Chip label={renderedCellValue} color="warning" />
         ),
     },
-
     {
-      accessorKey: "baseUrl",
+      accessorKey: "userIP",
+      header: "IP",
+    },
+    {
+      accessorKey: "baseURL",
       header: t("order.baseUrl"),
     },
     {
       accessorKey: "referrer",
       header: "Referrer",
-    },
-    {
-      accessorKey: "ip",
-      header: "IP",
-    },
-    {
-      accessorKey: "operatingSystem",
-      header: t("loginHistory.operatingSystem"),
-    },
-    {
-      accessorKey: "browser",
-      header: t("loginHistory.browser"),
-    },
-    {
-      accessorKey: "device",
-      header: t("loginHistory.device"),
     },
     {
       accessorKey: "sub1",
@@ -127,6 +114,22 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
     {
       accessorKey: "sub4",
       header: "sub4",
+    },
+    {
+      accessorKey: "operatingSystem",
+      header: t("loginHistory.operatingSystem"),
+    },
+    {
+      accessorKey: "browserName",
+      header: t("loginHistory.browser"),
+    },
+    {
+      accessorKey: "browserVersion",
+      header: t("loginHistory.browserVersion"),
+    },
+    {
+      accessorKey: "deviceType",
+      header: t("loginHistory.device"),
     },
   ] as MRT_ColumnDef<Order>[];
 

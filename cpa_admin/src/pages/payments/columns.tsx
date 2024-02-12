@@ -35,6 +35,11 @@ const defaultColumns = (paymentStatuses: SelectInput[]) =>
       enableColumnFilter: false,
     },
     {
+      accessorKey: "info",
+      header: "Info",
+      enableColumnFilter: false,
+    },
+    {
       accessorKey: "status",
       header: "Status",
       Cell: ({ renderedCellValue, row }) => (

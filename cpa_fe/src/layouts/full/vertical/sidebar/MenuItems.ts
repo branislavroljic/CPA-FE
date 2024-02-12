@@ -55,7 +55,12 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
       icon: IconCoin,
       href: "/payments",
     },
-
+    {
+      id: uniqueId(),
+      title: i18n.t("payments.settings"),
+      icon: IconCoin,
+      href: "/payment_settings",
+    },
     {
       id: uniqueId(),
       title: "Referral",
@@ -101,7 +106,7 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
     {
       id: uniqueId(),
       title: t("order.balanceTitle"),
-    icon: IconScale,
+      icon: IconScale,
       href: "/balance",
     },
     {

@@ -17,7 +17,7 @@ const paymentSchema = z.object({
         num: 0,
       }),
     }),
-  method: z.string(),
+  userPaymentMethodId: z.coerce.number(),
   userId: z.coerce.number(),
 });
 

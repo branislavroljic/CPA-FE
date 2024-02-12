@@ -31,6 +31,7 @@ export type Product = {
   image: string;
   googleDriveLink?: string;
   limit_per_day: number;
+  approveRate?: number;
   country_code: string;
   categories: Category[];
   categoriesIDs?: string[];
@@ -53,6 +54,7 @@ export type InputProduct = {
   type: string;
   googleDriveLink?: string;
   limit_per_day: number;
+  approveRate?: number;
   country_code: string;
   categoriesIDs?: string[];
   landingPagesString?: string;

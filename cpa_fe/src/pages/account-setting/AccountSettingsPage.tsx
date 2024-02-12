@@ -17,6 +17,7 @@ import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 import LinkForms from "./social-links/LinkForms";
 import CompanyInfoForm from "./company-info/CompanyInfoForm";
 import SecurityInfoForm from "./security/SecurityForm";
+import SecurityIcon from "@mui/icons-material/Security";
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -98,7 +99,7 @@ const AccountSetting = () => {
               value="security"
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <AccountCircleOutlined />
+                  <SecurityIcon />
                   <TabName>{t("user.security")}</TabName>
                 </Box>
               }

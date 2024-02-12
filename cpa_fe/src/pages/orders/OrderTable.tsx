@@ -69,12 +69,13 @@ export default function OrderTable() {
     columns,
     initialState: {
       columnVisibility: {
-        baseUrl: false,
+        baseURL: false,
         referrer: false,
-        ip: false,
+        userIP: false,
         operatingSystem: false,
-        browser: false,
-        device: false,
+        browserName: false,
+        browserVersion: false,
+        deviceType: false,
         sub1: false,
         sub2: false,
         sub3: false,

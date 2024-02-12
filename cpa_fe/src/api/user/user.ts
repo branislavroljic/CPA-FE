@@ -6,6 +6,7 @@ import {
   addPaginationParams,
   get,
 } from "../utils";
+import { PaymentSettings, WirePaymentSettings } from "@api/payment/settings";
 
 const baseUrl = new URL("user/", import.meta.env.VITE_API_URL);
 
@@ -96,6 +97,16 @@ export type Order = {
   landingPage: string;
   userId: number;
   userUsername: string;
+  userIP?: string;
+  referrer?: string;
+  sub1?: string;
+  sub2?: string;
+  sub3?: string;
+  sub4?: string;
+  operatingSystem?: string;
+  browserName?: string;
+  browserVersion?: string;
+  deviceType?: string;
 };
 
 export type BalanceOrder = {
@@ -205,6 +216,14 @@ export interface Notifications {
   totalNotifications: number;
   notReadNotifications: number;
   userId: number;
+}
+
+export interface PaymentMethod {
+  id: number;
+  method: string;
+  info: string;
+  userId: number;
+  available: boolean;
 }
 
 export function getLoginHistory(
@@ -332,4 +351,21 @@ export function getUnreadNotifications(id: number) {
 
 export function getNotifications(id?: number): Promise<Notifications> {
   return get(new URL(id + "/notification", baseUrl));
+}
+
+export function getPaymentMethodInfo(
+  method: string,
+  id?: number
+): Promise<PaymentSettings> {
+  return get(new URL(id + "/payment_info/" + method, baseUrl));
+}
+
+export function getWirePaymentMethodInfo(
+  id?: number
+): Promise<WirePaymentSettings> {
+  return get(new URL(id + "/wire_payment_info", baseUrl));
+}
+
+export function getAllPaymentMethods(id?: number): Promise<PaymentMethod[]> {
+  return get(new URL(id + "/all_payment_methods", baseUrl));
 }

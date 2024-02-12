@@ -16,6 +16,7 @@ export type Payment = {
   amount: number;
   balanceBeforeRequest: number;
   method: string;
+  info: string;
   description: string;
   descriptionEng: string;
   rejectComment: string;

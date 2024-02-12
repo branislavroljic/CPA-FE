@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
 import { useTranslation } from "react-i18next";
 import {
@@ -21,13 +21,14 @@ import paymentSchema from "./paymentSchema";
 import { Controller, useForm } from "react-hook-form";
 import useAuthStore from "@stores/authStore";
 import { InputPayment } from "@api/payment/payment";
+import { getAllPaymentMethods } from "@api/user/user";
+import { useQuery } from "@tanstack/react-query";
 
 export default function PaymentModal() {
   const { item, isOpen, closeModal, submitAction } = usePaymentModalStore();
   const [hasChanged, setHasChanged] = useState(false);
   const { user } = useAuthStore((state) => state);
 
-  const methods = useMemo(() => ["INVOICE"], []);
   const {
     register,
     handleSubmit,
@@ -36,6 +37,11 @@ export default function PaymentModal() {
     formState: { errors, isValid },
   } = useForm<InputPayment>({
     resolver: zodResolver(paymentSchema),
+  });
+
+  const { data } = useQuery({
+    queryKey: ["payment_methods", user?.id],
+    queryFn: () => getAllPaymentMethods(user?.id ?? 0),
   });
 
   useEffect(() => reset(), [isOpen, reset]);
@@ -125,25 +131,26 @@ export default function PaymentModal() {
 
           <Controller
             control={control}
-            name="method"
+            name="userPaymentMethodId"
             rules={{ required: true }}
-            defaultValue={item?.method ?? undefined}
+            defaultValue={item?.userPaymentMethodId ?? undefined}
             render={({ field: { onChange, value } }) => (
               <Autocomplete
                 onChange={(_event, item) => {
-                  onChange(item);
+                  onChange(item?.id);
                 }}
-                value={methods.find((m) => m === value)}
-                options={methods}
-                getOptionLabel={(option) => option}
+                value={data?.find((m) => m.id === value)}
+                options={data ?? []}
+                getOptionDisabled={(option) => !option.available}
+                getOptionLabel={(option) => option?.method}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label={t("payments.method")}
                     margin="normal"
                     variant="outlined"
-                    error={errors.method !== undefined}
-                    helperText={errors.method?.message}
+                    error={errors.userPaymentMethodId !== undefined}
+                    helperText={errors.userPaymentMethodId?.message}
                     required
                   />
                 )}
