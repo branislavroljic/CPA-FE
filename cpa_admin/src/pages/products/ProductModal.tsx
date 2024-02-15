@@ -47,7 +47,7 @@ export default function ProductModal() {
   const { isOpen, item, closeModal, submitAction, shouldClose } =
     useProductModalStore();
   const [hasChanged, setHasChanged] = useState(false);
-  const types = useMemo(() => ["BASIC", "REGULAR", "VIP"], []);
+  const types = useMemo(() => ["PUBLIC", "VIP"], []);
   const statuses = useMemo(() => ["ACTIVE", "PAUSED", "PENDING"], []);
 
   const loaderData = useLoaderData() as unknown[];
@@ -456,6 +456,26 @@ export default function ProductModal() {
               />
             </Grid>
 
+            <Grid item xs={12} sm={12}>
+              <Controller
+                name="body.googleDriveLink"
+                control={control}
+                defaultValue={item?.googleDriveLink ?? undefined}
+                render={({ field }) => (
+                  <TextField
+                    label={"Google drive link"}
+                    fullWidth
+                    disabled={mutation.isLoading}
+                    error={!!errors.body?.googleDriveLink}
+                    helperText={errors.body?.googleDriveLink?.message}
+                    placeholder={"Google drive link"}
+                    margin="normal"
+                    id="googleDriveLink"
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
             <Grid item xs={12} sm={12}>
               <Controller
                 name="body.landingPagesString"

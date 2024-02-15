@@ -40,10 +40,8 @@ const defaultColumns = (
       enableColumnFilter: false,
     },
     {
-      accessorFn: (row) => new Date(row.time), //convert to date for sorting and filtering
-      id: "dateTime",
+      accessorKey: "dateTime",
       header: "Date and time",
-      Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
       enableColumnFilter: false,
     },
     {

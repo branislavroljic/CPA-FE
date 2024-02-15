@@ -3,7 +3,7 @@
   "title": "Plaćanja",
   "amount": "Iznos",
   "balanceBeforeRequest": "Stanje pre zahteva",
-  "method": "Metod",
+  "method": "Model",
   "description": "Opis",
   "rejectComment": "Komentar o odbijanju",
   "status": "Status",

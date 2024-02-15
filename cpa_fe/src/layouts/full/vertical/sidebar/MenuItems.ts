@@ -21,6 +21,7 @@ import {
   IconBasket,
   IconChartAreaLine,
   IconCoin,
+  IconCoins,
   IconHistoryToggle,
   IconLink,
   IconPoint,
@@ -30,6 +31,7 @@ import {
 import { TFunction } from "i18next";
 import { ConnectWithoutContactOutlined } from "@mui/icons-material";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import InsightsIcon from "@mui/icons-material/Insights";
 
 const Menuitems = (t: TFunction<"translation", "translation">) =>
   [
@@ -42,6 +44,12 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
       title: i18n.t("statistics.title"),
       icon: DashboardCustomizeOutlinedIcon,
       href: "/",
+    },
+    {
+      id: uniqueId(),
+      title: t("reports.title"),
+      icon: QueryStatsIcon,
+      href: "/reports",
     },
     {
       id: uniqueId(),
@@ -58,7 +66,7 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
     {
       id: uniqueId(),
       title: i18n.t("payments.settings"),
-      icon: IconCoin,
+      icon: IconCoins,
       href: "/payment_settings",
     },
     {
@@ -68,25 +76,38 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
       href: "/referrals",
     },
 
+    // {
+    //   id: uniqueId(),
+    //   title: "Postback",
+    //   icon: IconChartAreaLine,
+    //   href: "/postback/",
+    //   children: [
+    //     {
+    //       id: uniqueId(),
+    //       title: t("postback.title"),
+    //       icon: IconPoint,
+    //       href: "/postback/rule",
+    //     },
+    //     {
+    //       id: uniqueId(),
+    //       title: t("postback.history"),
+    //       icon: IconPoint,
+    //       href: "/postback/history",
+    //     },
+    //   ],
+    // },
+
     {
       id: uniqueId(),
       title: "Postback",
       icon: IconChartAreaLine,
-      href: "/postback/",
-      children: [
-        {
-          id: uniqueId(),
-          title: t("postback.title"),
-          icon: IconPoint,
-          href: "/postback/rule",
-        },
-        {
-          id: uniqueId(),
-          title: t("postback.history"),
-          icon: IconPoint,
-          href: "/postback/history",
-        },
-      ],
+      href: "/postback/rule",
+    },
+    {
+      id: uniqueId(),
+      title: t("postback.history"),
+      icon: InsightsIcon,
+      href: "/postback/history",
     },
 
     {
@@ -108,12 +129,6 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
       title: t("order.balanceTitle"),
       icon: IconScale,
       href: "/balance",
-    },
-    {
-      id: uniqueId(),
-      title: t("reports.title"),
-      icon: QueryStatsIcon,
-      href: "/reports",
     },
     {
       id: uniqueId(),

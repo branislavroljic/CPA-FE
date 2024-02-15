@@ -40,7 +40,7 @@ const ProductFilter = () => {
   const loaderData = useLoaderData() as unknown[];
   const countries = loaderData[0] as Country[];
   const categories = loaderData[1] as Category[];
-  const productTypes = ["BASIC", "REGULAR", "VIP"];
+  const productTypes = ["PUBLIC", "VIP"];
 
   const {
     filter,
@@ -85,13 +85,7 @@ const ProductFilter = () => {
                   <IconPremiumRights
                     stroke="1.5"
                     size="19"
-                    color={
-                      type === "BASIC"
-                        ? "grey"
-                        : type === "REGULAR"
-                        ? "green"
-                        : "yellow"
-                    }
+                    color={type === "PUBLIC" ? "grey" : "yellow"}
                   />
                 </ListItemIcon>
                 <ListItemText>{type}</ListItemText>

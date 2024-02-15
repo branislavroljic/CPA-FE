@@ -206,14 +206,14 @@ const ProductList = ({ onClick }: Props) => {
           >
             <IconEdit size="18" color="#1C9CEA" />
           </IconButton>
-          <IconButton
+          {/* <IconButton
             onClick={() => {
               setDeleteId(product.id);
               setIsDeleteOpen(true);
             }}
           >
             <IconTrash size="18" color="red" />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </BlankCard>
     </Grid>

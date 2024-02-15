@@ -16,6 +16,7 @@ import {
   Stack,
   TextField,
   Button,
+  IconButton,
 } from "@mui/material";
 
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
@@ -32,6 +33,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import vipSchema from "./vipSchema";
 import { Controller, useForm } from "react-hook-form";
 import useNotifiedMutation from "@ui/hooks/useNotifiedMutation";
+import { IconBrandGoogleDrive } from "@tabler/icons-react";
+
 const PathNames = {
   product: "/products/:productId",
 } as const;
@@ -159,9 +162,27 @@ const ProductDetailsPage = () => {
                       {/* ------------------------------------------- */}
                       {/* Price */}
                       {/* ------------------------------------------- */}
-                      <Typography mt={2} variant="h4" fontWeight={600}>
-                        {`${productDetails.price} ${productDetails.currency}`}
-                      </Typography>
+                      <Stack
+                        direction={"row"}
+                        alignItems={"baseline"}
+                        justifyContent={"space-between"}
+                      >
+                        <Typography mt={2} variant="h4" fontWeight={600}>
+                          {`${productDetails.price} ${productDetails.currency}`}
+                        </Typography>
+                        {productDetails.googleDriveLink && (
+                          <IconButton
+                            onClick={() =>
+                              window.open(
+                                productDetails.googleDriveLink,
+                                "_blank"
+                              )
+                            }
+                          >
+                            <IconBrandGoogleDrive color="orange" />
+                          </IconButton>
+                        )}
+                      </Stack>
                     </>
                   ) : (
                     "No product"

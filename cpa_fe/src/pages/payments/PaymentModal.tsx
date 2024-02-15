@@ -49,6 +49,7 @@ export default function PaymentModal() {
   const handleCloseModal = (hasChanged: boolean) => {
     if (hasChanged) {
       invalidateAllQueries(queryClient, "payments");
+      invalidateAllQueries(queryClient, "balance");
     }
     closeModal();
   };

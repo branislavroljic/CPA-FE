@@ -86,6 +86,13 @@ const ProductList = ({ onClick }: Props) => {
               display={"inline"}
               component={Link}
               to={`${product.id}`}
+              style={{
+                color: "initial",
+                textDecoration: "none",
+                transition: "color 0.3s",
+              }}
+              onMouseOver={(e) => (e.target.style.color = "#EE9D05")}
+              onMouseOut={(e) => (e.target.style.color = "initial")}
             >
               {product.name}
             </Typography>

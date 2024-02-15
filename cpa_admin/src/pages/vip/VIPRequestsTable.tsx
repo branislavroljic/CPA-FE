@@ -48,7 +48,7 @@ export default function VIPRequestsTable() {
           <IconButton
             color="error"
             onClick={(e) => {
-              resolveVIPRequest(item.userId, "BLOCKED").then((response) => {
+              resolveVIPRequest(item.id, "BLOCKED").then((response) => {
                 if (response.status === 200) {
                   refetch();
                 }

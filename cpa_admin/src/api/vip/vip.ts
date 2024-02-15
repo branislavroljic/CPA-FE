@@ -18,9 +18,9 @@ export function getVIPRequests(): Promise<VIPRequest[]> {
   return get(baseUrl);
 }
 
-export function resolveVIPRequest(userId: number, status: string) {
+export function resolveVIPRequest(requestId: number, status: string) {
   return put(
-    new URL(userId + "/resolve", baseUrlWithSlash),
+    new URL(requestId + "/resolve", baseUrlWithSlash),
     JSON.stringify({ status: status })
   );
 }

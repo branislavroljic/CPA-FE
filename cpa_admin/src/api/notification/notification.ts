@@ -1,11 +1,11 @@
-import { del, get, post } from "@api/utils";
+import { del, post } from "@api/utils";
 
 export interface Notification {
   id?: number;
   title: string;
-  titleEng: string;
+  titleEng?: string;
   text: string;
-  textEng: string;
+  textEng?: string;
 }
 
 const baseUrl = new URL("notification", import.meta.env.VITE_API_URL);

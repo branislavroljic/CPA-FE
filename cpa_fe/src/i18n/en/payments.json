@@ -3,7 +3,7 @@
   "title": "Payments",
   "amount": "Amount",
   "balanceBeforeRequest": "Balance before request",
-  "method": "Method",
+  "method": "Model",
   "description": "Description",
   "rejectComment": "Reject comment",
   "status": "Status",

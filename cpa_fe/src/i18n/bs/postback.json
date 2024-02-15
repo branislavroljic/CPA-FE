@@ -14,7 +14,7 @@
   "urlParams": "URL parametri",
   "addParam": "Dodaj parametar",
   "addPostback": "Dodaj postback",
-  "history": "Istorija",
+  "history": "Postback istorija",
   "requestUrl": "Zahtevani url",
   "timestamp": "Vreme"
 }

@@ -52,9 +52,9 @@ const NoteList = () => {
     if (data && data.totalNotifications) {
       const notification = data.notifications[0];
       if (!notification.read) handleNotificationClicked(notification);
-      else setNotification(data.notifications[0]);
+      setNotification(data.notifications[0]);
     }
-  }, []);
+  }, [data]);
 
   return (
     <>

@@ -44,7 +44,7 @@ export type LoginHistory = {
   browser: string;
   browserVersion: string;
   operatingSystem: string;
-  createdTime: Date;
+  createdTime: string;
   userUsername: string;
 };
 
@@ -58,8 +58,8 @@ export type Payment = {
   rejectComment: string;
   rejectCommentEng: string;
   status: string;
-  createdAt: Date;
-  editedAt: Date;
+  createdAt: string;
+  editedAt: string;
   userUsername: string;
 };
 
@@ -146,7 +146,7 @@ export type PostbackHistory = {
   id: number;
   requestUrl: string;
   status: string;
-  time: Date;
+  time: string;
   productId: number;
 };
 

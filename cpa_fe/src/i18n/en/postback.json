@@ -14,7 +14,7 @@
   "urlParams": "URL params",
   "addParam": "Add param",
   "addPostback": "Add postback",
-  "history": "History",
+  "history": "Postback history",
   "requestUrl": "Request url",
   "timestamp": "Timestamp"
 }

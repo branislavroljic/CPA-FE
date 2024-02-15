@@ -57,6 +57,7 @@ export interface ProductDetails {
   payout: number;
   type: string;
   image: string;
+  googleDriveLink?: string;
   limit_per_day: number;
   country_code: string;
   categories: Category[];

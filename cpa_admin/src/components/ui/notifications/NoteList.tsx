@@ -37,7 +37,7 @@ const NoteList = () => {
   });
 
   useEffect(() => {
-    if (data && data.length) setNotification(data[0]);
+    if (data && data.totalNotifications) setNotification(data.notifications[0]);
   }, [data, setNotification]);
 
   return (
@@ -68,8 +68,8 @@ const NoteList = () => {
               maxHeight: "700px",
             }}
           >
-            {data && data.length ? (
-              data
+            {data && data?.totalNotifications ? (
+              data?.notifications
                 .filter((n: any) =>
                   n.title.toLocaleLowerCase().includes(searchTerm)
                 )

@@ -22,8 +22,8 @@ export type Payment = {
   rejectComment: string;
   rejectCommentEng: string;
   status: string;
-  createdAt: Date;
-  editedAt: Date;
+  createdAt: string;
+  editedAt: string;
   userId: number;
   userUsername: string;
 };

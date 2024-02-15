@@ -105,6 +105,13 @@ export interface Notification {
   timeCreated: string;
 }
 
+export interface Notifications {
+  notifications: Notification[];
+  totalNotifications: number;
+  notReadNotifications: number;
+  userId: number;
+}
+
 export interface AccountManager {
   id: number;
   name: string;
@@ -150,7 +157,7 @@ export function updateVIP(id: number, status: string) {
   );
 }
 
-export function getNotifications(id: number): Promise<Notification[]> {
+export function getNotifications(id: number): Promise<Notifications> {
   return get(new URL(id + "/notification", baseUrlWithSlash));
 }
 
