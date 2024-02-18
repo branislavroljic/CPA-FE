@@ -154,7 +154,7 @@ export default function PaymentsTable() {
     defaultColumn: {
       minSize: 10,
       maxSize: 1000,
-      size: 120,
+      size: 90,
     },
   });
 

@@ -11,16 +11,16 @@ const BCrumb = [
     title: "Home",
   },
   {
-    title: "Shop",
+    title: "Offers",
   },
 ];
 const ProductsPage = () => {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <PageContainer title="Shop List" description="this is Shop List page">
+    <PageContainer title="Offers" description="this is Offers List page">
       {/* breadcrumb */}
-      <Breadcrumb title="Ecom-Shop" items={BCrumb} />
+      <Breadcrumb title="Offers" items={BCrumb} />
       <AppCard>
         {/* ------------------------------------------- */}
         {/* Left part */}

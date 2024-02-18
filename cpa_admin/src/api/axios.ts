@@ -51,6 +51,7 @@ const refreshTokenFunction = () => {
 const axiosClient = () => {
   const defaultOptions = {
     baseURL: baseUrl,
+    header: headers(),
   };
 
   const instance = axios.create(defaultOptions);

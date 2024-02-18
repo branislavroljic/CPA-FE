@@ -127,12 +127,6 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   </Typography>
                   <Typography variant="h6">{`${product.payout} ${product.currency}`}</Typography>
                 </Stack>
-                <Stack>
-                  <Typography variant="overline" color={"lightgray"}>
-                    {t("products.limit")}
-                  </Typography>
-                  <Typography variant="h6">{`${product.limit_per_day}/day`}</Typography>
-                </Stack>
               </Stack>
             </CardContent>
           </BlankCard>

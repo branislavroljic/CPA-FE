@@ -99,7 +99,7 @@ const ProductList = ({ onClick }: Props) => {
             <Chip label={product.type} size="small" color="success" />
           </Box>
           <Stack mt={1} direction="row" alignItems="center" gap={1} mb={1}>
-            {product.categories.map((category) => (
+            {product?.categories.map((category) => (
               <Chip
                 label={category.name}
                 size="small"

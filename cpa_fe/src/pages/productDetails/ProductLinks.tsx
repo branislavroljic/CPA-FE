@@ -105,10 +105,10 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const handlePrelandingPageSeleted = (page: LandingPage) => {
     if (page === selectedPrelandingPage) {
       setSelectedPrelandingPage(null);
-      offerURL?.searchParams.delete("plp");
+      offerURL?.searchParams.delete("prelp");
     } else {
       setSelectedPrelandingPage(page);
-      offerURL?.searchParams.set("plp", "" + page.id);
+      offerURL?.searchParams.set("prelp", "" + page.id);
     }
   };
 
@@ -119,7 +119,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
           <Tabs
             value={value}
             onChange={handleTabChange}
-            aria-label="basic tabs example"
+            aria-label="basic tabs exam e"
             textColor="primary"
             allowScrollButtonsMobile
             scrollButtons

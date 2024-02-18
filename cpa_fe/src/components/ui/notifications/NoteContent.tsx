@@ -72,15 +72,7 @@ const NoteContent = ({ toggleNoteSidebar }: Props) => {
               {activeNotification.timeCreated}
             </Typography>
           </Stack>
-          <Typography
-            id="outlined-multiline-static"
-            placeholder="Edit Note"
-            style={{
-              paddingTop: 20,
-            }}
-          >
-            {activeNotification.text}
-          </Typography>
+          <div dangerouslySetInnerHTML={{ __html: activeNotification.text }} />
         </Box>
       ) : (
         <Box sx={{ textAlign: "center", fontSize: "24px", mt: 2 }}>

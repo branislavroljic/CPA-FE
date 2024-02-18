@@ -83,7 +83,6 @@ export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
 
   const loginUser = async (input: LoginInput) => {
-    console.log("laga");
     const baseUrl = new URL("auth/signin", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
@@ -106,7 +105,7 @@ export default function LoginPage() {
       openNotification({
         isError: true,
         primaryText: i18n.t("util.errorOccurred"),
-        secondaryText: await result.text(),
+        secondaryText: (await result.json()).message,
       });
       return;
     }

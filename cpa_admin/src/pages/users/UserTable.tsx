@@ -112,7 +112,7 @@ export default function UserTable() {
   );
 
   const statisticsButton = (item: User, key: string) => (
-    <Tooltip arrow title={t("statistic.name")} key={key}>
+    <Tooltip arrow title={"Dashboard"} key={key}>
       <IconButton
         color="info"
         onClick={(e) => {

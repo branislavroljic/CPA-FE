@@ -178,7 +178,7 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
       openNotification({
         isError: true,
         primaryText: i18n.t("util.errorOccurred"),
-        secondaryText: await result.text(),
+        secondaryText: (await result.json()).message,
       });
       return;
     }

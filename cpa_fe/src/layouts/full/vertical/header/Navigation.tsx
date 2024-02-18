@@ -100,13 +100,7 @@ const AppDD = () => {
           startIcon={<PaidOutlinedIcon />}
           endIcon={<KeyboardArrowDownIcon />}
         >
-          <Stack>
-            <Typography> {t("user.balance")}</Typography>
-            <Typography sx={{ fontWeight: 700 }}>
-              {" "}
-              {`$${balance?.balance ?? ""}`}
-            </Typography>
-          </Stack>
+          {t("user.balance")}
         </Button>
         <Menu
           id="msgs-menu"

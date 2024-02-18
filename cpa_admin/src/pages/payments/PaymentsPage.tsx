@@ -19,7 +19,7 @@ export default function PaymentsPage() {
   );
   return (
     <PageContainer title="" description="this is innerpage">
-      <Breadcrumb items={BCrumb} title={"Plaćanja"} />
+      <Breadcrumb items={BCrumb} title={"Payments"} />
       <ThemeProvider theme={createTheme(theme, enUS)}>
         <PaymentsTable />
       </ThemeProvider>
