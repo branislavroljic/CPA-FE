@@ -59,10 +59,14 @@ interface SubValues {
 const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const [value, setValue] = React.useState(0);
   const { user } = useAuthStore();
-  const initialOfferURL = useMemo(
-    () => (product.offerUrl ? new URL(product.offerUrl) : null),
-    [product.offerUrl]
-  );
+  const initialOfferURL = useMemo(() => {
+    let url = null;
+    if (product.offerUrl) {
+      url = new URL(product.offerUrl);
+      url.searchParams.set("prelp", "" + -1);
+    }
+    return url;
+  }, [product.offerUrl]);
   const [offerURL] = useState(initialOfferURL);
 
   const [subValues, setSubValues] = useState<SubValues>({
@@ -75,8 +79,9 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const [selectedLandingPage, setSelectedLandingPage] =
     useState<LandingPage | null>(null);
 
-  const [selectedPrelandingPage, setSelectedPrelandingPage] =
-    useState<LandingPage | null>(null);
+  const [selectedPrelandingPage, setSelectedPrelandingPage] = useState<
+    LandingPage | number
+  >(-1);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -104,8 +109,9 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
 
   const handlePrelandingPageSeleted = (page: LandingPage) => {
     if (page === selectedPrelandingPage) {
-      setSelectedPrelandingPage(null);
-      offerURL?.searchParams.delete("prelp");
+      setSelectedPrelandingPage(-1);
+      // offerURL?.searchParams.delete("prelp");
+      offerURL?.searchParams.set("prelp", "" + -1);
     } else {
       setSelectedPrelandingPage(page);
       offerURL?.searchParams.set("prelp", "" + page.id);

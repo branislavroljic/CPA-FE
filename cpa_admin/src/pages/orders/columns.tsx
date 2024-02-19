@@ -40,7 +40,7 @@ const defaultColumns = (
       enableColumnFilter: false,
     },
     {
-      accessorKey: "dateTime",
+      accessorKey: "time",
       header: "Date and time",
       enableColumnFilter: false,
     },
