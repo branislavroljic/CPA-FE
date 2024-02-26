@@ -1,15 +1,15 @@
 {
-  "byType": "Po tipu",
-  "byCategory": "Po kategoriji",
-  "byCountry": "Po zemlji",
-  "byPaymentModel": "Po modelu plaćanja",
+  "byType": "Tip",
+  "byCategory": "Kategorija",
+  "byCountry": "Zemlja",
+  "byPaymentModel": "Model laćanja",
   "title": "Ponude",
   "resetFilters": "Resetuj filtere",
   "country": "Država",
   "price": "Cijena",
   "payout": "Isplata",
   "limit": "Limit",
-  "paymentModel": "Model plaćanja",
+  "paymentModel": "Model",
   "approveRate": "Stopa odobrenja",
   "earnPerClick": "Zarada po kliku",
   "conversionRate": "Stopa konverzije",
@@ -18,5 +18,8 @@
   "vipAccessDesc": "Ovo je VIP ponuda i morate imati pristup kako biste je reklamirali. Pošaljite zahtjev:",
   "description": "Opis",
   "VIPAccessRequested": "Zahtev za VIP pristup",
-  "VIPAccessRequestDesc": "Vaš zahtev za VIP pristup se obrađuje..."
+  "VIPAccessRequestDesc": "Vaš zahtev za VIP pristup se obrađuje...",
+  "category" : "Kat",
+  "search" : "Pretraži ponudu",
+  "vertical" : "Vertikala"
 }

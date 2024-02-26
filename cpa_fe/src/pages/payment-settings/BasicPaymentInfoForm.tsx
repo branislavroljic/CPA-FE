@@ -17,10 +17,12 @@ import Spinner from "@ui/view/spinner/Spinner";
 
 interface BasicPaymentInfoFormProps {
   method: string;
+  fieldName: string;
 }
 
 const BasicPaymentInfoForm: React.FC<BasicPaymentInfoFormProps> = ({
   method,
+  fieldName,
 }) => {
   const { user } = useAuthStore((state) => state);
 
@@ -93,7 +95,7 @@ const BasicPaymentInfoForm: React.FC<BasicPaymentInfoFormProps> = ({
                   }}
                   htmlFor="info"
                 >
-                  {t("payments.info")}
+                  {fieldName}
                 </CustomFormLabel>
                 <Controller
                   control={control}

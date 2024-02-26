@@ -111,7 +111,7 @@ const productSchema = z.object({
         field: "Limit per day",
       }),
     }),
-    approveRate: z.coerce.number().optional(),
+    approveRate: z.number().nullable(),
     country_code: z.string({
       required_error: i18n.t("util.required.male", {
         field: "Country code",

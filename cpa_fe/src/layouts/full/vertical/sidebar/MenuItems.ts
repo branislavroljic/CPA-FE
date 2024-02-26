@@ -24,7 +24,6 @@ import {
   IconCoins,
   IconHistoryToggle,
   IconLink,
-  IconPoint,
   IconScale,
   IconShoppingCart,
 } from "@tabler/icons-react";
@@ -62,12 +61,6 @@ const Menuitems = (t: TFunction<"translation", "translation">) =>
       title: i18n.t("payments.title"),
       icon: IconCoin,
       href: "/payments",
-    },
-    {
-      id: uniqueId(),
-      title: i18n.t("payments.settings"),
-      icon: IconCoins,
-      href: "/payment_settings",
     },
     {
       id: uniqueId(),

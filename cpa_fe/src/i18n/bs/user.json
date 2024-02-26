@@ -37,5 +37,7 @@
   "manager": "Menadžer",
   "referralTitle": "Provizije za preporuke:",
   "referralDesc": "Donesite preporuke i dobijte:",
-  "referralFees": "provizije za preporuke"
+  "referralFees": "provizije za preporuke",
+  "payments": "Detalji plaćanja",
+  "total" : "Ukupno"
 }

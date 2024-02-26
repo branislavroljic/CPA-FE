@@ -21,12 +21,12 @@ const defaultColumns = (paymentStatuses: SelectInput[]) =>
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: "Payout",
       enableColumnFilter: false,
     },
     {
       accessorKey: "balanceBeforeRequest",
-      header: "Balance before request",
+      header: "Previous balance",
       enableColumnFilter: false,
     },
     {

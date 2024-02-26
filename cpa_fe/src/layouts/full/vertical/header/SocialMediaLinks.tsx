@@ -36,7 +36,7 @@ const Links = [
   },
 ];
 
-const SocialMediaLinks = () => {
+const  SocialMediaLinks = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -76,7 +76,7 @@ const SocialMediaLinks = () => {
             sx={{ py: 2, px: 3 }}
             // onClick={() => customizer.setLanguage(option.value)}
           >
-            <Link href={option.value} underline="hover">
+            <Link href={option.value} underline="hover" color={"black"}>
               <Stack direction="row" spacing={2} alignItems="center">
                 <option.icon />
                 <Typography> {option.name}</Typography>

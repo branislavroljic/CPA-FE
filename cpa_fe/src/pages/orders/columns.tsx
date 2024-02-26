@@ -65,7 +65,7 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
     },
 
     {
-      accessorFn: (row) => `${row.totalPrice} $`,
+      accessorFn: (row) => `${row.totalPrice} ${row.productCurrency}`,
       header: t("order.totalPrice"),
     },
     {

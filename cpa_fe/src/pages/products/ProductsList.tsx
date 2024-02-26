@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Spinner from "@ui/view/spinner/Spinner";
 import ProductSearch from "./ProductSearch";
+import i18n from "../../i18n";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -34,7 +35,7 @@ const ProductList = ({ onClick }: Props) => {
   const { filter } = useProductFilterStore();
   const { t } = useTranslation();
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
-    ["products", filter],
+    ["products", filter, i18n],
     async ({ pageParam = 0 }) => {
       const pageRequest = {
         page: pageParam,
@@ -68,6 +69,12 @@ const ProductList = ({ onClick }: Props) => {
       key={product.id}
     >
       <BlankCard className="hoverCard">
+        <Chip
+          style={{ margin: 5 }}
+          label={product.status}
+          size="small"
+          color={product.status == "ACTIVE" ? "success" : "warning"}
+        />
         <Typography component={Link} to={`${product.id}`}>
           <img
             src={`https://api.klixlead.com/api/product/images/${product.image}`}
@@ -96,7 +103,12 @@ const ProductList = ({ onClick }: Props) => {
             >
               {product.name}
             </Typography>
-            <Chip label={product.type} size="small" color="success" />
+
+            <Chip
+              label={product.type}
+              size="small"
+              color={product.type == "PUBLIC" ? "default" : "warning"}
+            />
           </Box>
           <Stack mt={1} direction="row" alignItems="center" gap={1} mb={1}>
             {product?.categories.map((category) => (

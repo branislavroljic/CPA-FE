@@ -330,7 +330,7 @@ export default function ProductModal() {
               <Controller
                 name="body.approveRate"
                 control={control}
-                defaultValue={item?.approveRate ?? undefined}
+                defaultValue={item?.approveRate ?? null}
                 render={({ field }) => (
                   <TextField
                     label={"Approve rate"}

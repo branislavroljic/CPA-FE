@@ -1,10 +1,7 @@
 import { useTheme } from "@mui/material/styles";
 import {
-  ListItemText,
-  ListItemButton,
   List,
   Divider,
-  ListItemIcon,
   Typography,
   Box,
   Button,
@@ -19,7 +16,6 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { IconPremiumRights } from "@tabler/icons-react";
 import { useProductFilterStore } from "@stores/productStore";
 import { CircleFlag } from "react-circle-flags";
 import { useLoaderData } from "react-router-dom";
@@ -84,7 +80,25 @@ const ProductFilter = () => {
             {t("products.byType")}
           </Typography>
           <br />
-          {productTypes.map((type, index) => {
+          <Box p={3} pt={0}>
+            <Autocomplete
+              onChange={(_event, item) => {
+                updateFilterProductType(item ?? undefined);
+              }}
+              value={filter.paymentModel}
+              options={productTypes}
+              getOptionLabel={(option) => option}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={t("products.byType")}
+                  margin="normal"
+                  variant="outlined"
+                />
+              )}
+            />
+          </Box>
+          {/* {productTypes.map((type, index) => {
             return (
               <ListItemButton
                 sx={{ mb: 1, mx: 1 }}
@@ -102,7 +116,7 @@ const ProductFilter = () => {
                 <ListItemText>{type}</ListItemText>
               </ListItemButton>
             );
-          })}
+          })} */}
         </Box>
 
         <Divider></Divider>
@@ -112,7 +126,9 @@ const ProductFilter = () => {
           </Typography>
           <br />
           <FormControl sx={{ minWidth: 200 }}>
-            <InputLabel id="demo-multiple-chip-label">Category</InputLabel>
+            <InputLabel id="demo-multiple-chip-label">
+              {t("products.category")}
+            </InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"

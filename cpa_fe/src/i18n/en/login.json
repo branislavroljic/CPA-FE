@@ -24,5 +24,14 @@
   "backToLogin": "Back to Login",
   "successfulVerification": "Successful Verification",
   "successfulVerificationSubtitle": "Your account has been successfully verified. Click below to go to the login page.",
-  "goToLogin": "Go to Login"
+  "goToLogin": "Go to Login",
+  "checkYourEmail": "Check your email",
+  "checkYourEmailSubtitle": "Check your email to confirm your account.",
+  "supperAffiliate": "Supper affiliate(more than 3 years)",
+  "experienced": "Experienced(1-3 years)",
+  "noExperience": "I don't have experience yet.",
+  "chatService": "Chat service",
+  "individual": "Individual",
+  "company": "Company",
+  "experience": "Experience"
 }

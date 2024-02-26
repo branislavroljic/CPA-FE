@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 export interface NotificationData {
-  primaryText: string;
+  primaryText?: string;
   secondaryText?: string;
   isError?: boolean;
 }

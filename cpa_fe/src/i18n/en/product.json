@@ -1,15 +1,15 @@
 {
-  "byType": "By type",
-  "byCategory": "By category",
-  "byCountry": "By country",
-  "byPaymentModel": "By payment model",
+  "byType": "Type",
+  "byCategory": "Category",
+  "byCountry": "Country",
+  "byPaymentModel": "Payment model",
   "title": "Offers",
   "resetFilters": "Reset filters",
   "country": "Country",
   "price": "Price",
   "payout": "Payout",
   "limit": "Limit",
-  "paymentModel": "Payment model",
+  "paymentModel": "Model",
   "approveRate": "Approve rate",
   "earnPerClick": "Earn per click",
   "conversionRate": "Conversion rate",
@@ -18,5 +18,8 @@
   "vipAccessDesc": "This is a VIP offer and you need to have access in order to advertise it. Send request:",
   "description": "Description",
   "VIPAccessRequested": "VIP access requested",
-  "VIPAccessRequestDesc" : "Your VIP access request is being processed..."
+  "VIPAccessRequestDesc" : "Your VIP access request is being processed...",
+  "category" : "Cat",
+  "search" : "Search offer",
+  "vertical" : "Vertical"
 }

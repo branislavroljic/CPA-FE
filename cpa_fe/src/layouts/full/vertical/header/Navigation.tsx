@@ -9,6 +9,9 @@ import useAuthStore from "@stores/authStore";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "@ui/view/spinner/Spinner";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { InputPayment, requestPayment } from "@api/payment/payment";
+import PaymentModal from "@pages/payments/PaymentModal";
+import { usePaymentModalStore } from "@stores/paymentStore";
 
 const MenuItem = ({ label, value }: any) => (
   <Stack>
@@ -46,6 +49,7 @@ const AppDD = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
   const [anchorEl3, setAnchorEl3] = useState(null);
 
+  const openModal = usePaymentModalStore((state) => state.openModal);
   const { data: balance, isLoading: isBalanceLoading } = useQuery({
     queryKey: ["balance", user?.id],
     queryFn: () => getBalance(user?.id),
@@ -108,27 +112,47 @@ const AppDD = () => {
           keepMounted
           open={Boolean(anchorEl2)}
           onClose={handleClose2}
-          anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
-          transformOrigin={{ horizontal: "left", vertical: "top" }}
+          anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+          transformOrigin={{ horizontal: "center", vertical: "top" }}
           sx={{
             "& .MuiMenu-paper": {
-              width: "170px",
+              width: "250px",
             },
             "& .MuiMenu-paper ul": {
               p: 2,
             },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           {isBalanceLoading ? (
             <Spinner />
           ) : (
-            <Stack direction={"column"} spacing={2}>
-              <MenuItem
-                label={t("user.balance")}
-                value={`$${balance?.balance}`}
-              />
-              <Divider />
-              <MenuItem label={t("user.paid")} value={`$${balance?.paid}`} />
+            <Stack spacing={2}>
+              <Stack direction={"row"} spacing={2} justifyContent={"center"}>
+                <MenuItem
+                  label={t("user.balance")}
+                  value={`$${balance?.balance}`}
+                />
+                <Divider orientation="vertical" />
+                <MenuItem label={t("user.paid")} value={`$${balance?.paid}`} />
+                <Divider orientation="vertical" />
+                <MenuItem
+                  label={t("user.total")}
+                  value={`$${balance?.total}`}
+                />
+                <Divider orientation="vertical" />
+              </Stack>
+              <Button
+                color="secondary"
+                onClick={() => {
+                  openModal({} as InputPayment, requestPayment, true);
+                }}
+                variant="contained"
+              >
+                {t("payments.requestPayment")}
+              </Button>
             </Stack>
           )}
         </Menu>

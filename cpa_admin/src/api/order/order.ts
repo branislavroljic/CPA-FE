@@ -22,6 +22,7 @@ export type Order = {
   note: string;
   quantity: number;
   totalPrice: number;
+  productCurrency: string;
   productId: number;
   preLandingPage: string;
   landingPage: string;

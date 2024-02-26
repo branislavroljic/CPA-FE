@@ -1,6 +1,6 @@
 import { useNotificationStore } from "@stores/notificationStore";
 import { useMutation } from "@tanstack/react-query";
-import {  AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { useTranslation } from "react-i18next";
 
 export type ErrorMessage = {
@@ -43,7 +43,7 @@ export default function useNotifiedMutation<T>(
 
         openNotification({
           isError: true,
-          primaryText: t("util.errorOccurred"),
+          primaryText: undefined,
           secondaryText: message.message,
         });
 
@@ -65,7 +65,7 @@ export default function useNotifiedMutation<T>(
     onError: (error: any) => {
       openNotification({
         isError: true,
-        primaryText: t("util.errorOccurred"),
+        primaryText: undefined,
         secondaryText: error.response?.data?.message,
       });
     },

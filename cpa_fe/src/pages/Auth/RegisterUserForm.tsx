@@ -138,7 +138,7 @@ const registerSchema = z.object({
 
 type RegisterInput = z.infer<typeof registerSchema>;
 
-const RegisterUserForm = ({ setIsSuccessful }: any) => {
+const RegisterUserForm = ({ setIsConfirmMail }: any) => {
   const [searchParams] = useSearchParams();
 
   const refId = searchParams.get("refId");
@@ -183,7 +183,7 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
       return;
     }
 
-    setIsSuccessful(true);
+    setIsConfirmMail(true);
     return;
   };
 
@@ -286,7 +286,7 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
 
           <Grid item xs={12} sm={6} lg={6}>
             <CustomFormLabel htmlFor="chatService" sx={{ marginTop: "0px" }}>
-              Chat service
+              {t("login.chatService")}
             </CustomFormLabel>
             <Controller
               control={control}
@@ -426,7 +426,9 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
 
           <Box>
             <FormControl component="fieldset">
-              <CustomFormLabel component="legend">Experience</CustomFormLabel>
+              <CustomFormLabel component="legend">
+                {t("login.experience")}
+              </CustomFormLabel>
               <Controller
                 rules={{ required: true }}
                 control={control}
@@ -436,17 +438,17 @@ const RegisterUserForm = ({ setIsSuccessful }: any) => {
                     <FormControlLabel
                       value="SUPER_AFFILIATE"
                       control={<Radio />}
-                      label="Supper affiliate(more than 3 years)"
+                      label={t("login.supperAffiliate")}
                     />
                     <FormControlLabel
                       value="EXPERIENCED"
                       control={<Radio />}
-                      label="Experienced(1-3 years)"
+                      label={t("login.experienced")}
                     />
                     <FormControlLabel
                       value="NO_EXPERIENCE"
                       control={<Radio />}
-                      label="I don't have experience yet."
+                      label={t("login.noExperience")}
                     />
                   </RadioGroup>
                 )}

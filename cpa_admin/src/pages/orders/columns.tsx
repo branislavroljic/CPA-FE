@@ -35,9 +35,8 @@ const defaultColumns = (
       enableColumnFilter: false,
     },
     {
-      accessorKey: "totalPrice",
+      accessorFn: (row) => `${row.totalPrice} ${row.productCurrency}`,
       header: "Total price",
-      enableColumnFilter: false,
     },
     {
       accessorKey: "time",

@@ -8,6 +8,7 @@ import ScrollToTop from "@ui/shared/ScrollToTop";
 import Notification from "@ui/Notification";
 import { useCustomizerStore } from "@stores/customizerStore";
 import { useNotificationStore } from "@stores/notificationStore";
+import PaymentModal from "@pages/payments/PaymentModal";
 
 const MainWrapper = styled("div")(() => ({
   display: "flex",
@@ -53,6 +54,7 @@ const FullLayout: FC = () => {
   return (
     <ScrollToTop>
       <MainWrapper>
+        <PaymentModal />
         {/* ------------------------------------------- */}
         {/* Sidebar */}
         {/* ------------------------------------------- */}

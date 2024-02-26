@@ -17,6 +17,7 @@ import {
   TextField,
   Button,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
@@ -114,6 +115,14 @@ const ProductDetailsPage = () => {
             {/* Carousel */}
             {/* ------------------------------------------- */}
             <Grid container spacing={3}>
+              <Chip
+                label={productDetails.status}
+                style={{ margin: 5 }}
+                size="small"
+                color={
+                  productDetails.status == "ACTIVE" ? "success" : "warning"
+                }
+              />
               <Grid item xs={12} sm={12} lg={12}>
                 <img
                   src={`https://api.klixlead.com/api/product/images/${productDetails.image}`}
@@ -136,7 +145,11 @@ const ProductDetailsPage = () => {
                         <Chip
                           label={productDetails.type}
                           size="small"
-                          color="success"
+                          color={
+                            productDetails.type == "PUBLIC"
+                              ? "default"
+                              : "warning"
+                          }
                         />
                       </Box>
 
@@ -171,6 +184,7 @@ const ProductDetailsPage = () => {
                           {`${productDetails.price} ${productDetails.currency}`}
                         </Typography>
                         {productDetails.googleDriveLink && (
+                          <Tooltip title={"Photo"}>
                           <IconButton
                             onClick={() =>
                               window.open(
@@ -181,6 +195,7 @@ const ProductDetailsPage = () => {
                           >
                             <IconBrandGoogleDrive color="orange" />
                           </IconButton>
+                          </Tooltip>
                         )}
                       </Stack>
                     </>

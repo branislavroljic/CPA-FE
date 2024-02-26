@@ -92,6 +92,12 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   </Typography>
                   <Typography variant="h6">{product.flow ?? "N/A"}</Typography>
                 </Stack>
+                <Stack>
+                  <Typography variant="overline" color={"lightgray"}>
+                    {t("products.vertical")}
+                  </Typography>
+                  <Typography variant="h6">{product.vertical ?? "N/A"}</Typography>
+                </Stack>
               </Stack>
               <Typography color="textSecondary" mt={4}>
                 {product.description}

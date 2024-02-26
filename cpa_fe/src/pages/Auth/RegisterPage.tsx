@@ -12,7 +12,7 @@ import TabList from "@mui/lab/TabList";
 import { AccountCircleOutlined } from "@mui/icons-material";
 import MuiTab, { TabProps } from "@mui/material/Tab";
 import RegisterCompanyForm from "./RegisterCompanyForm";
-import BusinessIcon from '@mui/icons-material/Business';
+import BusinessIcon from "@mui/icons-material/Business";
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -34,6 +34,7 @@ const TabName = styled("span")(({ theme }) => ({
 
 export default function RegisterPage() {
   const [value, setValue] = useState<string>("registerUser");
+  const [isConfirmMail, setIsConfirmMail] = useState(false);
 
   const [searchParams] = useSearchParams();
 
@@ -72,51 +73,67 @@ export default function RegisterPage() {
           sx={{ height: "100vh" }}
         >
           {!isSuccessful ? (
-            <Card
-              elevation={9}
-              sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "550px" }}
-            >
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <Logo />
+            !isConfirmMail ? (
+              <Card
+                elevation={9}
+                sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "550px" }}
+              >
+                <Box display="flex" alignItems="center" justifyContent="center">
+                  <Logo />
+                </Box>
+                <TabContext value={value}>
+                  <TabList
+                    centered={true}
+                    onChange={handleChange}
+                    aria-label="account-settings tabs"
+                    sx={{
+                      borderBottom: (theme) =>
+                        `1px solid ${theme.palette.divider}`,
+                    }}
+                  >
+                    {" "}
+                    <Tab
+                      value="registerUser"
+                      label={
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <AccountCircleOutlined />
+                          <TabName>Individual</TabName>
+                        </Box>
+                      }
+                    />
+                    <Tab
+                      value="registerCompany"
+                      label={
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <BusinessIcon />
+                          <TabName>Company</TabName>
+                        </Box>
+                      }
+                    />
+                  </TabList>
+                  <TabPanel sx={{ p: 0 }} value="registerUser">
+                    <RegisterUserForm setIsConfirmMail={setIsConfirmMail} />
+                  </TabPanel>
+                  <TabPanel sx={{ p: 0 }} value="registerCompany">
+                    <RegisterCompanyForm setIsConfirmMail={setIsConfirmMail} />
+                  </TabPanel>
+                </TabContext>
+              </Card>
+            ) : (
+              <Box
+                sx={{
+                  backgroundImage: 'url("/assets/backgrounds/background.png")',
+                }}
+                margin={"0 auto"}
+              >
+                <Banner
+                  title={t("login.checkYourEmail")}
+                  subtitle={t("login.checkYourEmailSubtitle")}
+                  goToText={t("login.goToLogin")}
+                  onGoToClick={() => navigate("/")}
+                />
               </Box>
-              <TabContext value={value}>
-                <TabList
-                  centered={true}
-                  onChange={handleChange}
-                  aria-label="account-settings tabs"
-                  sx={{
-                    borderBottom: (theme) =>
-                      `1px solid ${theme.palette.divider}`,
-                  }}
-                >
-                  {" "}
-                  <Tab
-                    value="registerUser"
-                    label={
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <AccountCircleOutlined />
-                        <TabName>Individual</TabName>
-                      </Box>
-                    }
-                  />
-                  <Tab
-                    value="registerCompany"
-                    label={
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <BusinessIcon />
-                        <TabName>Company</TabName>
-                      </Box>
-                    }
-                  />
-                </TabList>
-                <TabPanel sx={{ p: 0 }} value="registerUser">
-                  <RegisterUserForm />
-                </TabPanel>
-                <TabPanel sx={{ p: 0 }} value="registerCompany">
-                  <RegisterCompanyForm />
-                </TabPanel>
-              </TabContext>
-            </Card>
+            )
           ) : (
             <Box
               sx={{

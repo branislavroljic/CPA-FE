@@ -166,6 +166,7 @@ export default function LayoutAuth() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+
       <AppBar position="fixed" open={open}>
         <Toolbar
           sx={{

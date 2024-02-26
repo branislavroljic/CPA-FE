@@ -54,7 +54,7 @@ export type InputProduct = {
   type: string;
   googleDriveLink?: string;
   limit_per_day: number;
-  approveRate?: number;
+  approveRate: number | null;
   country_code: string;
   categoriesIDs?: string[];
   landingPagesString?: string;

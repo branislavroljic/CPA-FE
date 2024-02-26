@@ -31,21 +31,8 @@ const TabName = styled("span")(({ theme }) => ({
   },
 }));
 
-const PaymenSettingsPage = () => {
+const PaymentSettingsPage = () => {
   const { t } = useTranslation();
-
-  const BCrumb = useMemo(
-    () => [
-      {
-        to: "/",
-        title: t("util.home"),
-      },
-      {
-        title: t("payments.settings"),
-      },
-    ],
-    [t]
-  );
 
   const [value, setValue] = useState<string>("WIRE");
 
@@ -58,10 +45,6 @@ const PaymenSettingsPage = () => {
       title={t("payments.settings")}
       description="this is Payment Settings page"
     >
-      {/* breadcrumb */}
-      <Breadcrumb title={t("payments.settings")} items={BCrumb} />
-      {/* end breadcrumb */}
-
       <Card>
         <TabContext value={value}>
           <TabList
@@ -149,28 +132,28 @@ const PaymenSettingsPage = () => {
             <WirePaymentInfoForm />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="PAYONEER">
-            <BasicPaymentInfoForm method="PAYONEER" />
+            <BasicPaymentInfoForm method="PAYONEER" fieldName={"E-mail"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="WEB_MONEY">
-            <BasicPaymentInfoForm method="WEB_MONEY" />
+            <BasicPaymentInfoForm method="WEB_MONEY" fieldName={"Wallet ID"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="PAYPAL">
-            <BasicPaymentInfoForm method="PAYPAL" />
+            <BasicPaymentInfoForm method="PAYPAL" fieldName={"E-mail"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="PAXUM">
-            <BasicPaymentInfoForm method="PAXUM" />
+            <BasicPaymentInfoForm method="PAXUM" fieldName={"E-mail"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="CAPITALIST">
-            <BasicPaymentInfoForm method="CAPITALIST" />
+            <BasicPaymentInfoForm method="CAPITALIST" fieldName={"E-mail"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="BITCOIN">
-            <BasicPaymentInfoForm method="BITCOIN" />
+            <BasicPaymentInfoForm method="BITCOIN" fieldName={"E-mail"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="USDT_TRC20">
-            <BasicPaymentInfoForm method="USDT_TRC20" />
+            <BasicPaymentInfoForm method="USDT_TRC20" fieldName={"E-mail"} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="USDT_ERC20">
-            <BasicPaymentInfoForm method="USDT_ERC20" />
+            <BasicPaymentInfoForm method="USDT_ERC20" fieldName={"E-mail"} />
           </TabPanel>
         </TabContext>
       </Card>
@@ -178,4 +161,4 @@ const PaymenSettingsPage = () => {
   );
 };
 
-export default PaymenSettingsPage;
+export default PaymentSettingsPage;

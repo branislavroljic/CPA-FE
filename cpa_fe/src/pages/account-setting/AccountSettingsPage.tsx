@@ -18,6 +18,8 @@ import LinkForms from "./social-links/LinkForms";
 import CompanyInfoForm from "./company-info/CompanyInfoForm";
 import SecurityInfoForm from "./security/SecurityForm";
 import SecurityIcon from "@mui/icons-material/Security";
+import PaymentsPage from "@pages/payments/PaymentsPage";
+import PaymentSettingsPage from "@pages/payment-settings/PaymentSettingsPage";
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -113,6 +115,15 @@ const AccountSetting = () => {
                 </Box>
               }
             />
+            <Tab
+              value="payments"
+              label={
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <ApartmentOutlinedIcon />
+                  <TabName>{t("user.payments")}</TabName>
+                </Box>
+              }
+            />
           </TabList>
 
           <TabPanel sx={{ p: 0 }} value="account">
@@ -126,6 +137,9 @@ const AccountSetting = () => {
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value="info">
             <CompanyInfoForm />
+          </TabPanel>
+          <TabPanel sx={{ p: 0 }} value="payments">
+            <PaymentSettingsPage />
           </TabPanel>
         </TabContext>
       </Card>

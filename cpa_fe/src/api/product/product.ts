@@ -38,6 +38,7 @@ export interface Product {
   categories: Category[];
   approve_rate: number;
   earn_per_click: number;
+  status: string;
 }
 
 export interface LandingPage {
@@ -68,6 +69,8 @@ export interface ProductDetails {
   conversion_rate: number;
   flow: string;
   offerUrl?: string;
+  status: string;
+  vertical: string;
 }
 
 export interface FilterProduct {

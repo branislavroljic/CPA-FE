@@ -24,5 +24,14 @@
   "backToLogin": "Nazad na prijavu",
   "successfulVerification": "Uspješna verifikacija",
   "successfulVerificationSubtitle": "Vaš nalog je uspješno verifikovan. Kliknite ispod na idete na prijavu.",
-  "goToLogin": "Idi na prijavu"
+  "goToLogin": "Idi na prijavu",
+  "checkYourEmail": "Provjerite e-mail",
+  "checkYourEmailSubtitle": "Provjerite e-mail kako biste potvrdili Vaš nalog.",
+  "supperAffiliate": "Super partner (više od 3 godine)",
+  "experienced": "Iskusan (1-3 godine)",
+  "noExperience": "Još uvek nemam iskustva.",
+  "chatService": "Čet servis",
+  "individual": "Individual",
+  "company": "Kompanija",
+  "experience": "Iskustvo"
 }

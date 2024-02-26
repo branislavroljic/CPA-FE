@@ -4,7 +4,9 @@ import axiosClient, { headers } from "./axios";
 export type PredefinedRequest = Omit<RequestInit, "method" | "body">;
 
 export function get(url: string | URL) {
-  return axiosClient.get(url.toString()).then((x) => x.data);
+  return axiosClient
+    .get(url.toString(), { headers: headers() })
+    .then((x) => x.data);
 }
 
 export function post(url: string | URL, body: string) {

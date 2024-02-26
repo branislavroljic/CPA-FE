@@ -91,6 +91,7 @@ export type Order = {
   note: string;
   quantity: number;
   totalPrice: number;
+  productCurrency?: string;
   productId: number;
   productName: string;
   preLandingPage: string;
@@ -201,6 +202,7 @@ export type StatisticsReport = {
 export type Balance = {
   balance: number;
   paid: number;
+  total: number;
 };
 
 export interface Notification {

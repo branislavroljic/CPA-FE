@@ -22,7 +22,7 @@ const ProductsPage = () => {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <PageContainer title="Shop List" description="this is Shop List page">
+    <PageContainer title="Klixlead" description="this is Shop List page">
       {/* breadcrumb */}
       <Breadcrumb title={t("products.title")} items={BCrumb} />
       <AppCard>

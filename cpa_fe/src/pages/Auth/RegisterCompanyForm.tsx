@@ -184,7 +184,7 @@ const registerCompanySchema = z.object({
 
 type RegisterInput = z.infer<typeof registerCompanySchema>;
 
-const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
+const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
   const openNotification = useNotificationStore(
     (state) => state.openNotification
   );
@@ -224,7 +224,7 @@ const RegisterCompanyForm = ({ setIsSuccessful }: any) => {
       return;
     }
 
-    setIsSuccessful(true);
+    setIsConfirmMail(true);
     return;
   };
 

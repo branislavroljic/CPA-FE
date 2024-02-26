@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosRequestHeaders } from "axios";
-import i18n from "../i18n";
 import { USER_KEY, getUserFromStorage } from "./auth";
 import { AuthUser } from "./user/user";
 
@@ -12,7 +11,7 @@ export const headers = (
   return {
     Accept: "application/json",
     "Content-Type": contentType,
-    "Accept-Language": i18n.language,
+    "Accept-Language": 'en',
     "Access-Control-Allow-Origin": "*",
     ...additionalHeaders,
   };

@@ -2,14 +2,16 @@
 import { TextField, InputAdornment } from "@mui/material";
 import { useProductFilterStore } from "@stores/productStore";
 import { IconSearch } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 export default function ProductSearch() {
   const { filter, updateFilterNameSearch } = useProductFilterStore();
+  const {t} = useTranslation();
   return (
     <TextField
       id="outlined-search"
-      placeholder="Search Product"
+      placeholder={t('products.search')}
       size="small"
       type="search"
       variant="outlined"

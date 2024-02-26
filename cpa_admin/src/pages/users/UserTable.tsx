@@ -19,7 +19,6 @@ import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
 import i18n from "../../i18n";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
-import { useTranslation } from "react-i18next";
 import useAuthStore from "@stores/authStore";
 import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -76,8 +75,6 @@ export default function UserTable() {
     ],
     []
   );
-
-  const { t } = useTranslation();
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: [
