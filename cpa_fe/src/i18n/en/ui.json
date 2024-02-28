@@ -10,5 +10,6 @@
   "personalDetails": "Personal Details",
   "personalDetailsDescription": "To change your personal details, edit and save them here",
   "settings": "Settings",
-  "themeOption" : "Theme option"
+  "themeOption" : "Theme option",
+  "photo" : "Photo"
 }

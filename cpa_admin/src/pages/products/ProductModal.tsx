@@ -49,6 +49,7 @@ export default function ProductModal() {
   const [hasChanged, setHasChanged] = useState(false);
   const types = useMemo(() => ["PUBLIC", "VIP"], []);
   const statuses = useMemo(() => ["ACTIVE", "PAUSED", "PENDING"], []);
+  const vertical = useMemo(() => ["NUTRA", "E_COMMERCE"], []);
 
   const loaderData = useLoaderData() as unknown[];
   const categories = loaderData[1] as Category[];
@@ -376,6 +377,33 @@ export default function ProductModal() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
+              <Controller
+                control={control}
+                name="body.vertical"
+                defaultValue={item?.vertical ?? undefined}
+                render={({ field: { onChange, value } }) => (
+                  <Autocomplete
+                    onChange={(event, item) => {
+                      onChange(item);
+                    }}
+                    value={vertical.find((m) => m === value)}
+                    options={vertical}
+                    getOptionLabel={(option) => option}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label={"Vertical"}
+                        margin="normal"
+                        variant="outlined"
+                        error={errors.body?.vertical !== undefined}
+                      />
+                    )}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={12}>
               <Controller
                 control={control}
                 name="body.status"

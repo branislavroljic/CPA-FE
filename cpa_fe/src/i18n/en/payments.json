@@ -2,7 +2,7 @@
   "requestPayment": "Request payment",
   "title": "Payments",
   "amount": "Amount",
-  "balanceBeforeRequest": "Balance before request",
+  "balanceBeforeRequest": "Previous balance",
   "method": "Model",
   "description": "Description",
   "rejectComment": "Reject comment",

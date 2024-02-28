@@ -13,7 +13,8 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
       header: t("order.offerName"),
     },
     {
-      accessorKey: "payout",
+      id: "payout",
+      accessorFn: (row) => `$ ${row.payout}`,
       header: t("order.payout"),
     },
   ] as MRT_ColumnDef<BalanceOrder>[];

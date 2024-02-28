@@ -2,7 +2,7 @@
   "requestPayment": "Zahtjevaj isplatu",
   "title": "Plaćanja",
   "amount": "Iznos",
-  "balanceBeforeRequest": "Stanje prije zahteva",
+  "balanceBeforeRequest": "Prethodno stanje",
   "method": "Model",
   "description": "Opis",
   "rejectComment": "Komentar o odbijanju",

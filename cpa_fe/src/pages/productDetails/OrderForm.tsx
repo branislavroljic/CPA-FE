@@ -116,8 +116,8 @@ const OrderForm = ({ product }: { product: ProductDetails }) => {
                     id="country"
                     required
                     disabled={true}
-                    error={errors.name !== undefined}
-                    helperText={errors.name?.message}
+                    error={errors.country !== undefined}
+                    helperText={errors.country?.message}
                     placeholder={t("company.country")}
                     variant="outlined"
                     fullWidth

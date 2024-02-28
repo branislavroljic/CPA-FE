@@ -37,8 +37,8 @@ export type Product = {
   categoriesIDs?: string[];
   approve_rate: number;
   earn_per_click: number;
-  landingPagesString?: string;
-  prelandingPagesString?: string;
+   
+  vertical?: string;
 };
 
 export type InputProduct = {
@@ -59,6 +59,7 @@ export type InputProduct = {
   categoriesIDs?: string[];
   landingPagesString?: string;
   prelandingPagesString?: string;
+  vertical?: string;
 };
 
 export interface Country {

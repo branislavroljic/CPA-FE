@@ -7,33 +7,22 @@ const orderSchema = z.object({
   name: z
     .string({
       required_error: i18n.t("util.required.male", {
-        field: i18n.t("user.name"),
+        field: i18n.t("user.fullName"),
       }),
     })
     .min(1, {
       message: i18n.t("util.length", {
-        field: i18n.t("user.name"),
+        field: i18n.t("user.fullName"),
         num: 1,
       }),
     })
     .max(standardMaxLength, {
       message: i18n.t("util.maxLength", {
-        field: i18n.t("user.name"),
+        field: i18n.t("user.fullName"),
         num: standardMaxLength,
       }),
     }),
-  country: z
-    .string({
-      required_error: i18n.t("util.required.female", {
-        field: i18n.t("user.country"),
-      }),
-    })
-    .max(standardMaxLength, {
-      message: i18n.t("util.maxLength", {
-        field: i18n.t("user.country"),
-        num: standardMaxLength,
-      }),
-    }),
+  country: z.string(),
   address: z
     .string({
       required_error: i18n.t("util.required.female", {
@@ -47,7 +36,11 @@ const orderSchema = z.object({
       }),
     }),
   phoneNumber: z
-    .string()
+    .string({
+      required_error: i18n.t("util.required.male", {
+        field: i18n.t("user.phoneNumber"),
+      }),
+    })
     .regex(
       new RegExp("^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{3,10}$"),
       {
@@ -55,16 +48,9 @@ const orderSchema = z.object({
           field: i18n.t("user.phoneNumber"),
         }),
       }
-    )
-    .optional(),
+    ),
   note: z
     .string()
-    .min(1, {
-      message: i18n.t("util.length", {
-        field: i18n.t("order.note"),
-        num: 1,
-      }),
-    })
     .max(standardMaxLength, {
       message: i18n.t("util.maxLength", {
         field: i18n.t("order.note"),
@@ -72,8 +58,16 @@ const orderSchema = z.object({
       }),
     })
     .optional(),
-  quantity: z.coerce.number(),
-  totalPrice: z.coerce.number(),
+  quantity: z.coerce.number({
+    invalid_type_error: i18n.t("util.invalidFormat", {
+      field: i18n.t("order.quantity"),
+    }),
+  }),
+  totalPrice: z.coerce.number({
+    invalid_type_error: i18n.t("util.invalidFormat", {
+      field: i18n.t("order.totalPrice"),
+    }),
+  } ),
   productId: z.coerce.number(),
   userId: z.coerce.number(),
 });

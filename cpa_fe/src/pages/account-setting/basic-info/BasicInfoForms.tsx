@@ -26,6 +26,7 @@ import {
 import basicInfoSchema from "./basicInfoSchema";
 import Spinner from "@ui/view/spinner/Spinner";
 import { getRestCountries } from "@api/external/restCounties";
+import i18n from "../../../i18n";
 
 const BasicInfoForms = () => {
   const { user } = useAuthStore((state) => state);
@@ -35,13 +36,13 @@ const BasicInfoForms = () => {
     isLoading,
     refetch: refetchBasicInfo,
   } = useQuery({
-    queryKey: ["basic_info", user?.id],
+    queryKey: ["basic_info", user?.id, i18n.t],
     queryFn: () => getBasicInfo(user?.id),
   });
 
   const { data: restCountiesData, isLoading: isLoadingRestCountries } =
     useQuery({
-      queryKey: ["rest_countries"],
+      queryKey: ["rest_countries", i18n.t],
       queryFn: () => getRestCountries(),
     });
 

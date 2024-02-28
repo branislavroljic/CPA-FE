@@ -304,11 +304,11 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                     <TextField
                       {...params}
                       sx={{
-                        marginTop: "0px !important",
+                        marginTop: "5px !important",
                         marginBottom: "0px",
                         padding: "0px !important",
+                        "& .MuiInputBase-root": { height: "45px" },
                       }}
-                      margin="normal"
                       variant="outlined"
                       error={errors.chatService !== undefined}
                       helperText={errors.chatService?.message}

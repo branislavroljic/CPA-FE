@@ -39,5 +39,6 @@
   "referralDesc": "Donesite preporuke i dobijte:",
   "referralFees": "provizije za preporuke",
   "payments": "Detalji plaćanja",
-  "total" : "Ukupno"
+  "total" : "Ukupno",
+  "fullName" : "Ime i prezime"
 }

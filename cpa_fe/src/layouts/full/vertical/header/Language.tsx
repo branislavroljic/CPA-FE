@@ -15,14 +15,14 @@ import React from "react";
 
 const Languages = [
   {
-    flagname: "English (UK)",
-    icon: FlagEn,
-    value: "en",
-  },
-  {
     flagname: "Srpski",
     icon: FlagBs,
     value: "bs",
+  },
+  {
+    flagname: "English (UK)",
+    icon: FlagEn,
+    value: "en",
   },
 ];
 
@@ -43,7 +43,13 @@ const Language = () => {
   };
   useEffect(() => {
     i18n.changeLanguage(customizer.isLanguage);
-  }, [customizer.isLanguage, i18n]);
+    // queryClient.clear()
+  }, [i18n]);
+
+  // useEffect(() => {
+  //   console.log("bio sam tu");
+  //   queryClient.clear();
+  // }, [i18n]);
 
   return (
     <>

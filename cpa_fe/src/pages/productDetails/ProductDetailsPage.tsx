@@ -184,17 +184,17 @@ const ProductDetailsPage = () => {
                           {`${productDetails.price} ${productDetails.currency}`}
                         </Typography>
                         {productDetails.googleDriveLink && (
-                          <Tooltip title={"Photo"}>
-                          <IconButton
-                            onClick={() =>
-                              window.open(
-                                productDetails.googleDriveLink,
-                                "_blank"
-                              )
-                            }
-                          >
-                            <IconBrandGoogleDrive color="orange" />
-                          </IconButton>
+                          <Tooltip title={t("ui.photo")}>
+                            <IconButton
+                              onClick={() =>
+                                window.open(
+                                  productDetails.googleDriveLink,
+                                  "_blank"
+                                )
+                              }
+                            >
+                              <IconBrandGoogleDrive color="orange" />
+                            </IconButton>
                           </Tooltip>
                         )}
                       </Stack>
@@ -207,7 +207,7 @@ const ProductDetailsPage = () => {
             </Grid>
           </ChildCard>
         </Grid>
-        <Grid item xs={12} sm={6} lg={7}>
+        <Grid item xs={12} sm={12} lg={7}>
           <ProductInfo product={productDetails} />
         </Grid>
         <Grid item xs={12} sm={12} lg={12}>

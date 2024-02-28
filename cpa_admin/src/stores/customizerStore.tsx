@@ -38,7 +38,7 @@ export const useCustomizerStore = create<StateType>()(
       isSidebarHover: false,
       isMobileSidebar: false,
       isHorizontal: false,
-      isLanguage: localStorage.getItem('my_benefit_lang') ?? 'bs',
+      isLanguage: localStorage.getItem('my_benefit_lang') ?? 'en',
       isCardShadow: true,
       borderRadius: 7,
       setDarkMode: (mode: string) => {

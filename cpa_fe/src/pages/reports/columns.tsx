@@ -4,6 +4,14 @@ import { Report } from "@api/user/user";
 const defaultColumns = (t: TFunction<"translation", "translation">) =>
   [
     {
+      accessorKey: "productId",
+      header: t("products.id"),
+    },
+    {
+      accessorKey: "productName",
+      header: t("products.name"),
+    },
+    {
       accessorKey: "total",
       header: t("reports.total"),
     },

@@ -31,7 +31,7 @@ const NoteList = () => {
     queryFn: () => getNotifications(user?.id),
   });
 
-  const mutation = useNotifiedMutation({
+  const readNotificationMutation = useNotifiedMutation({
     mutationFn: readNotification,
     onSuccess: () => {
       refetch();
@@ -42,10 +42,14 @@ const NoteList = () => {
 
   const handleNotificationClicked = useCallback(
     (n: Notification) => {
-      mutation.mutate({ userId: data?.userId, notificationId: n.id });
+      if (!n.read)
+        readNotificationMutation.mutate({
+          userId: data?.userId,
+          notificationId: n.id,
+        });
       setNotification(n);
     },
-    [data?.userId, mutation, setNotification]
+    [data?.userId, readNotificationMutation, setNotification]
   );
 
   useEffect(() => {

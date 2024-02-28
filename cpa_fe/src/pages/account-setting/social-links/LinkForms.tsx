@@ -19,6 +19,7 @@ import {
 import socialMediaLinksSchema from "./socialMediaLinksSchema";
 import messagingLinksSchema from "./messagingLinksSchema";
 import Spinner from "@ui/view/spinner/Spinner";
+import i18n from "../../../i18n";
 
 const LinkForms = () => {
   const { user } = useAuthStore((state) => state);
@@ -28,7 +29,7 @@ const LinkForms = () => {
     isLoading: isSocialMedialLinksLoading,
     refetch: refetchSocialMediaLinks,
   } = useQuery({
-    queryKey: ["social_media_links", user?.id],
+    queryKey: ["social_media_links", user?.id, i18n.t],
     queryFn: () => getSocialMediaLinks(user?.id),
   });
   const {

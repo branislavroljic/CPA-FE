@@ -105,6 +105,11 @@ const productSchema = z.object({
         field: "Type",
       }),
     }),
+    vertical: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Vertical",
+      }),
+    }),
     googleDriveLink: z.string().optional(),
     limit_per_day: z.coerce.number({
       required_error: i18n.t("util.required.male", {

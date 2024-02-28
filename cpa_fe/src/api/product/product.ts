@@ -77,7 +77,7 @@ export interface FilterProduct {
   nameSearch?: string;
   country_code?: string;
   type?: string;
-  categories?: string[];
+  category?: string[];
   paymentModel?: string;
 }
 
@@ -108,7 +108,7 @@ export function getProducts(
     const commonProps = {
       country_code: filter.country_code,
       type: filter.type,
-      categories: filter.categories,
+      category: filter.category,
       paymentModel: filter.paymentModel,
     };
 

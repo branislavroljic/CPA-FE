@@ -7,5 +7,7 @@
   "address": "Address",
   "zipcode": "Zip code",
   "companyEmail": "Company email",
-  "tax": "Tax"
+  "tax": "Tax",
+  "company" : "Company",
+  "individual" : "Individual"
 }

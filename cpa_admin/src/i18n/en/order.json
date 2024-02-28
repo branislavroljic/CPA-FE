@@ -2,7 +2,7 @@
   "note": "Note",
   "quantity": "Quantity",
   "totalPrice": "Total price",
-  "productName" : "Product name",
+  "productName" : "Offer name",
   "time" : "Time",
   "prelandingPage" : "Prelanding page",
   "landingPage" : "Landing page",
@@ -11,5 +11,6 @@
   "orderId" : "Order ID",
   "offerName" : "Offer name",
   "payout" : "Payout",
-  "balanceTitle" : "Balance"
+  "balanceTitle" : "Balance",
+  "id" : "Offer ID"
 }

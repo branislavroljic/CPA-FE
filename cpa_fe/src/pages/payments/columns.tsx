@@ -3,9 +3,7 @@ import { TFunction } from "i18next";
 import { Chip } from "@mui/material";
 import { Payment } from "@api/user/user";
 
-const defaultColumns = (
-  t: TFunction<"translation", "translation">
-) =>
+const defaultColumns = (t: TFunction<"translation", "translation">) =>
   [
     {
       accessorKey: "id",
@@ -13,11 +11,12 @@ const defaultColumns = (
     },
     {
       id: "amount",
-      accessorFn: (row) => `${row.amount} $`,
+      accessorFn: (row) => `$ ${row.amount}`,
       header: t("payments.amount"),
     },
     {
-      accessorKey: "balanceBeforeRequest",
+      id: "balanceBeforeRequest",
+      accessorFn: (row) => `$ ${row.balanceBeforeRequest}`,
       header: t("payments.balanceBeforeRequest"),
     },
     {

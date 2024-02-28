@@ -39,5 +39,6 @@
   "referralDesc": "Bring referrals and get:",
   "referralFees": "referral fees",
   "payments": "Payment Details",
-  "total" : "Total"
+  "total" : "Total",
+  "fullName" : "Full name"
 }

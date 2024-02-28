@@ -53,7 +53,8 @@ export default function RegisterPage() {
       <Box
         sx={{
           backgroundImage: 'url("/assets/backgrounds/background.png")',
-          minHeight: "120vh",
+          backgroundSize: "cover",
+          minHeight: !isSuccessful && !isConfirmMail ? "120vh" : "100vh",
           position: "relative",
           "&:before": {
             content: '""',
@@ -97,7 +98,7 @@ export default function RegisterPage() {
                       label={
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                           <AccountCircleOutlined />
-                          <TabName>Individual</TabName>
+                          <TabName>{t("company.individual")}</TabName>
                         </Box>
                       }
                     />
@@ -106,7 +107,7 @@ export default function RegisterPage() {
                       label={
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                           <BusinessIcon />
-                          <TabName>Company</TabName>
+                          <TabName>{t("company.company")}</TabName>
                         </Box>
                       }
                     />
@@ -135,20 +136,22 @@ export default function RegisterPage() {
               </Box>
             )
           ) : (
-            <Box
-              sx={{
-                backgroundImage: 'url("/assets/backgrounds/background.png")',
-              }}
-              margin={"0 auto"}
-            >
-              <Banner
-                title={t("login.successfulVerification")}
-                subtitle={t("login.successfulVerificationSubtitle")}
-                goToText={t("login.goToLogin")}
-                onGoToClick={() => navigate("/")}
-              />
-            </Box>
-          )}
+          <Box
+            sx={{
+              backgroundImage: 'url("/assets/backgrounds/background.png")',
+            }}
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'center'}
+          >
+            <Banner
+              title={t("login.successfulVerification")}
+              subtitle={t("login.successfulVerificationSubtitle")}
+              goToText={t("login.goToLogin")}
+              onGoToClick={() => navigate("/")}
+            />
+          </Box>
+          )} 
         </Grid>
       </Box>
     </PageContainer>

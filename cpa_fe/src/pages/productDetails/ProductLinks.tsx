@@ -20,6 +20,7 @@ import { DefaultCopyField } from "@eisberg-labs/mui-copy-field";
 import { IconExternalLink } from "@tabler/icons-react";
 import OrderForm from "./OrderForm";
 import useAuthStore from "@stores/authStore";
+import { useTranslation } from "react-i18next";
 
 const a11yProps = (index: number) => {
   return {
@@ -58,6 +59,7 @@ interface SubValues {
 
 const ProductLinks = ({ product }: { product: ProductDetails }) => {
   const [value, setValue] = React.useState(0);
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const initialOfferURL = useMemo(() => {
     let url = null;
@@ -133,7 +135,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
           >
             <Tab label="Link builder" {...a11yProps(0)} />
             <Tab label="Api request" {...a11yProps(1)} />
-            <Tab label="Order" {...a11yProps(2)} />
+            <Tab label= {t("order.order")} {...a11yProps(2)} />
           </Tabs>
         </Box>
         {/* ------------------------------------------- */}
@@ -144,7 +146,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
             <Grid item xs={12} sm={12}>
               <CardContent>
                 <Typography variant="h5" mb={3}>
-                  {"ORDER"}
+                  {t("order.order")}
                 </Typography>
                 <Divider />
                 <OrderForm product={product} />

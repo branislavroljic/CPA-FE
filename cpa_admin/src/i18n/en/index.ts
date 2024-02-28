@@ -5,6 +5,7 @@ import userTrans from "./user.json";
 import uiTrans from "./ui.json";
 import notificationTrans from "./notification.json";
 import linksTrans from "./links.json";
+import orderTrans from "./order.json";
 
 const enResources = {
   translation: {
@@ -15,6 +16,7 @@ const enResources = {
     ui: uiTrans,
     notification: notificationTrans,
     links: linksTrans,
+    order: orderTrans,
   },
 };
 

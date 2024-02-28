@@ -32,9 +32,9 @@ export default function PostbackModal() {
   const { user } = useAuthStore((state) => state);
 
   const loaderData = useLoaderData() as unknown[];
-  const statuses = loaderData[0] as string[];
-  const methods = loaderData[1] as string[];
-  const levels = (loaderData[2] as string[]) ?? [];
+  const statuses = useMemo(() => ["ACTIVE", "INACTIVE"], []);
+  const methods = useMemo(() => ["S2S"], []);
+  const levels = useMemo(() => ["GLOBAL", "SPECIFIC"], []);
   const products = (loaderData[3] as { id: number; name: string }[]) ?? [];
 
   const events = useMemo(() => ["REQUESTED", "TRASH", "CANCELLED", "DONE"], []);

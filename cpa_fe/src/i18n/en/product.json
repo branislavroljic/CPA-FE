@@ -18,8 +18,10 @@
   "vipAccessDesc": "This is a VIP offer and you need to have access in order to advertise it. Send request:",
   "description": "Description",
   "VIPAccessRequested": "VIP access requested",
-  "VIPAccessRequestDesc" : "Your VIP access request is being processed...",
-  "category" : "Cat",
-  "search" : "Search offer",
-  "vertical" : "Vertical"
+  "VIPAccessRequestDesc": "Your VIP access request is being processed...",
+  "category": "Cat",
+  "search": "Search offer",
+  "vertical": "Vertical",
+  "id": "Offer ID",
+  "name": "Offer name"
 }

@@ -13,7 +13,13 @@ export interface ProductFilterState {
 }
 
 export const useProductFilterStore = create<ProductFilterState>((set) => ({
-  filter: { nameSearch: "", country_code: "", type: "", category: "" },
+  filter: {
+    nameSearch: "",
+    country_code: "",
+    type: "",
+    category: [],
+    paymentModel: "",
+  },
   updateFilterNameSearch: (nameSearch) =>
     set((state) => ({
       filter: { ...state.filter, nameSearch: nameSearch },
@@ -28,7 +34,7 @@ export const useProductFilterStore = create<ProductFilterState>((set) => ({
     })),
   updateFilterCategories: (categories) =>
     set((state) => ({
-      filter: { ...state.filter, categories: categories },
+      filter: { ...state.filter, category: categories },
     })),
   updateFilterPaymentModel: (paymentModel) =>
     set((state) => ({
@@ -40,6 +46,8 @@ export const useProductFilterStore = create<ProductFilterState>((set) => ({
         country_code: undefined,
         type: undefined,
         category: undefined,
+        paymentModel: undefined,
+        nameSearch: undefined,
       },
     })),
 }));

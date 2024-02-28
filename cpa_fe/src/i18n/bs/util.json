@@ -32,7 +32,7 @@
   "fetchingError": "Nije moguće učitati podatke sa servera",
   "changesError": "Nije moguće sačuvati promjene na serveru",
   "success": "Uspješna operacija",
-  "persistSuccess": "Promjene su uspješno sačuvane",
+  "persistSuccess": "Akcija je uspješno izvršena",
   "searchBy": "Pretražite po {{field}}...",
   "pick": "Izaberite {{field}}",
   "showDeleted": "Prikaži izbrisane {{field}}",

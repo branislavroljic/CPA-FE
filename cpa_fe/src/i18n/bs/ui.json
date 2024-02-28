@@ -10,5 +10,6 @@
   "personalDetails": "Lični podaci",
   "personalDetailsDescription": "Da biste promijenili svoje lične podatke, uredite ih i sačuvajte odavde",
   "settings" : "Podešavanja",
-  "themeOption" : "Izbor teme"
+  "themeOption" : "Izbor teme",
+  "photo" : "Slika"
 }

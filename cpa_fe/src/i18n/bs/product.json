@@ -2,7 +2,7 @@
   "byType": "Tip",
   "byCategory": "Kategorija",
   "byCountry": "Zemlja",
-  "byPaymentModel": "Model laćanja",
+  "byPaymentModel": "Model plaćanja",
   "title": "Ponude",
   "resetFilters": "Resetuj filtere",
   "country": "Država",
@@ -21,5 +21,7 @@
   "VIPAccessRequestDesc": "Vaš zahtev za VIP pristup se obrađuje...",
   "category" : "Kat",
   "search" : "Pretraži ponudu",
-  "vertical" : "Vertikala"
+  "vertical" : "Vertikala",
+  "id" : "ID ponude",
+  "name": "Naziv ponude"
 }

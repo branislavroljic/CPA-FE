@@ -63,7 +63,11 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
             <CardContent>
               <Stack direction="row" alignItems="center" gap={4}>
                 <Stack>
-                  <Typography variant="overline" color={"lightgray"}>
+                  <Typography
+                    variant="overline"
+                    color={"lightgray"}
+                    style={{ lineHeight: "20px" }}
+                  >
                     {t("products.approveRate")}
                   </Typography>
                   <Typography variant="h6">{`${
@@ -71,7 +75,11 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   } %`}</Typography>
                 </Stack>
                 <Stack>
-                  <Typography variant="overline" color={"lightgray"}>
+                  <Typography
+                    variant="overline"
+                    color={"lightgray"}
+                    style={{ lineHeight: "20px" }}
+                  >
                     {t("products.conversionRate")}
                   </Typography>
                   <Typography variant="h6">{`${
@@ -79,7 +87,11 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   } %`}</Typography>
                 </Stack>
                 <Stack>
-                  <Typography variant="overline" color={"lightgray"}>
+                  <Typography
+                    variant="overline"
+                    style={{ lineHeight: "20px" }}
+                    color={"lightgray"}
+                  >
                     {t("products.earnPerClick")}
                   </Typography>
                   <Typography variant="h6">{`${
@@ -96,7 +108,9 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   <Typography variant="overline" color={"lightgray"}>
                     {t("products.vertical")}
                   </Typography>
-                  <Typography variant="h6">{product.vertical ?? "N/A"}</Typography>
+                  <Typography variant="h6">
+                    {product.vertical ?? "N/A"}
+                  </Typography>
                 </Stack>
               </Stack>
               <Typography color="textSecondary" mt={4}>
@@ -131,7 +145,7 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   <Typography variant="overline" color={"lightgray"}>
                     {t("products.payout")}
                   </Typography>
-                  <Typography variant="h6">{`${product.payout} ${product.currency}`}</Typography>
+                  <Typography variant="h6">{`$ ${product.payout}`}</Typography>
                 </Stack>
               </Stack>
             </CardContent>

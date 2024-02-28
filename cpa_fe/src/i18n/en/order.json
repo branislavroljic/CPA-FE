@@ -12,5 +12,6 @@
   "offerName": "Offer name",
   "payout": "Payout",
   "balanceTitle": "Balance",
-  "baseUrl": "Base URL"
+  "baseUrl": "Base URL",
+  "order": "Order"
 }

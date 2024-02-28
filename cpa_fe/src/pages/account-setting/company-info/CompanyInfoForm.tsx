@@ -26,18 +26,19 @@ import {
 import Spinner from "@ui/view/spinner/Spinner";
 import { getRestCountries } from "@api/external/restCounties";
 import companyInfoSchema from "./companyInfoSchema";
+import i18n from "../../../i18n";
 
 const CompanyInfoForm = () => {
   const { user } = useAuthStore((state) => state);
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["company_info", user?.id],
+    queryKey: ["company_info", user?.id, i18n.t],
     queryFn: () => getCompanyInfo(user?.id),
   });
 
   const { data: restCountiesData, isLoading: isLoadingRestCountries } =
     useQuery({
-      queryKey: ["rest_countries"],
+      queryKey: ["rest_countries", i18n.t],
       queryFn: () => getRestCountries(),
     });
 

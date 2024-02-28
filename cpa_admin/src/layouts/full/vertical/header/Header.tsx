@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 
-import { IconMenu2 } from "@tabler/icons-react";
+import { IconBellRinging, IconMenu2 } from "@tabler/icons-react";
 import Profile from "./Profile";
 import Search from "./Search";
 import { useCustomizerStore } from "@stores/customizerStore";
@@ -62,15 +62,20 @@ const Header = () => {
 
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Button
+          <IconButton
+            size="large"
+            aria-label="show 11 new notifications"
             color="inherit"
-            sx={{ color: (theme: any) => theme.palette.text.secondary }}
-            variant="text"
+            aria-controls="msgs-menu"
+            aria-haspopup="true"
+            sx={{
+              color: "text.secondary",
+            }}
             to="/notifications"
             component={Link}
           >
-            News
-          </Button>
+            <IconBellRinging size="21" stroke="1.5" />
+          </IconButton>
           {/* <Language /> */}
           {/* ------------------------------------------- */}
           {/* Ecommerce Dropdown */}

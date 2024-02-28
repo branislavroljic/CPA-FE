@@ -53,7 +53,7 @@ const ProductFilter = () => {
   } = useProductFilterStore();
 
   const handleCategoryChange = (
-    event: SelectChangeEvent<typeof filter.categories>
+    event: SelectChangeEvent<typeof filter.category>
   ) => {
     const {
       target: { value },
@@ -85,7 +85,7 @@ const ProductFilter = () => {
               onChange={(_event, item) => {
                 updateFilterProductType(item ?? undefined);
               }}
-              value={filter.paymentModel}
+              value={filter.type}
               options={productTypes}
               getOptionLabel={(option) => option}
               renderInput={(params) => (
@@ -133,7 +133,7 @@ const ProductFilter = () => {
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
               multiple
-              value={filter.categories ?? []}
+              value={filter.category ?? []}
               onChange={handleCategoryChange}
               input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => (
@@ -168,18 +168,18 @@ const ProductFilter = () => {
           <Stack direction={"row"} flexWrap="wrap" gap={1}>
             {countries.map((country: Country) => {
               return (
-                <CircleFlag
-                  countryCode={country?.code?.toLowerCase()}
-                  height="25"
-                  key={country.name}
-                  onClick={() => updateFilterCountryCode(country?.code)}
-                  style={{
-                    ...(country?.code?.toLowerCase() ==
-                    filter.country_code?.toLocaleLowerCase()
-                      ? { borderRadius: "30px", border: "3px solid orange" }
-                      : {}),
-                  }}
-                ></CircleFlag>
+                  <CircleFlag
+                    countryCode={country?.code?.toLowerCase()}
+                    height="25"
+                    key={country.name}
+                    onClick={() => updateFilterCountryCode(country?.code)}
+                    style={{
+                      ...(country?.code?.toLowerCase() ==
+                      filter.country_code?.toLocaleLowerCase()
+                        ? { borderRadius: "30px", border: "3px solid orange" }
+                        : {}),
+                    }}
+                  ></CircleFlag>
               );
             })}
           </Stack>

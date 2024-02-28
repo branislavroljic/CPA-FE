@@ -128,6 +128,8 @@ export type Report = {
   revenue: number;
   totalTrashRevenue: number;
   totalCancelledRevenue: number;
+  productName: string;
+  productId: number;
 };
 
 export type Postback = {

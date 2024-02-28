@@ -323,7 +323,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   onChange={(_event, item) => {
                     onChange(item);
                   }}
-                  value={restCountiesData?.find((c) => c === value)}
+                  value={restCountiesData?.find((c  : any) => c === value)}
                   options={restCountiesData ?? []}
                   getOptionLabel={(option) => `${option}`}
                   renderInput={(params) => (
@@ -332,8 +332,10 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                       margin="normal"
                       variant="outlined"
                       sx={{
-                        marginTop: "0px",
+                        marginTop: "0px !important",
                         marginBottom: "0px",
+                        padding: "0px !important",
+                        "& .MuiInputBase-root": { height: "45px" },
                       }}
                       error={errors.country !== undefined}
                       helperText={errors.country?.message}
@@ -444,8 +446,10 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                     <TextField
                       {...params}
                       sx={{
-                        marginTop: "0px",
+                        marginTop: "5px !important",
                         marginBottom: "0px",
+                        padding: "0px !important",
+                        "& .MuiInputBase-root": { height: "45px" },
                       }}
                       margin="normal"
                       variant="outlined"

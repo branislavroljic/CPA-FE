@@ -180,7 +180,7 @@ const ProductList = ({ onClick }: Props) => {
                 <Typography variant="overline" color={"lightgray"}>
                   {t("products.payout")}
                 </Typography>
-                <Typography variant="h6">{`${product.payout} ${product.currency}`}</Typography>
+                <Typography variant="h6">{`$ ${product.payout}`}</Typography>
               </Stack>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>

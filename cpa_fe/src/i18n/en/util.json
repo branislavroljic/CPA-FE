@@ -32,7 +32,7 @@
   "fetchingError": "Unable to fetch data from the server",
   "changesError": "Unable to save changes on the server",
   "success": "Successful operation",
-  "persistSuccess": "Changes have been successfully saved",
+  "persistSuccess": "The action has been successfully executed",
   "searchBy": "Search by {{field}}...",
   "pick": "Pick {{field}}",
   "showDeleted": "Show deleted {{field}}",
