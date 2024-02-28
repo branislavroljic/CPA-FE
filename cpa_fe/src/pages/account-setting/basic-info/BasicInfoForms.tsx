@@ -36,14 +36,15 @@ const BasicInfoForms = () => {
     isLoading,
     refetch: refetchBasicInfo,
   } = useQuery({
-    queryKey: ["basic_info", user?.id, i18n.t],
+    queryKey: ["basic_info", user?.id, i18n],
     queryFn: () => getBasicInfo(user?.id),
   });
 
   const { data: restCountiesData, isLoading: isLoadingRestCountries } =
     useQuery({
-      queryKey: ["rest_countries", i18n.t],
+      queryKey: ["rest_countries", i18n],
       queryFn: () => getRestCountries(),
+      staleTime: 0,
     });
 
   const {
@@ -77,7 +78,7 @@ const BasicInfoForms = () => {
   };
 
   return (
-    <Grid container justifyContent={'center'} paddingTop={5}>
+    <Grid container justifyContent={"center"} paddingTop={5}>
       {/* Edit Details */}
       {isLoading || isLoadingRestCountries ? (
         <Grid item xs={12} lg={6}>

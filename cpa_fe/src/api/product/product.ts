@@ -124,6 +124,7 @@ export function getProducts(
       };
   }
 
+
   return get(
     addPaginationParams(
       addListFilterParams(

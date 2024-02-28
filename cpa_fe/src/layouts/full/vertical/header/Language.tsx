@@ -44,7 +44,7 @@ const Language = () => {
   useEffect(() => {
     i18n.changeLanguage(customizer.isLanguage);
     // queryClient.clear()
-  }, [i18n]);
+  }, [customizer.isLanguage, i18n]);
 
   // useEffect(() => {
   //   console.log("bio sam tu");
@@ -82,7 +82,12 @@ const Language = () => {
           <MenuItem
             key={index}
             sx={{ py: 2, px: 3 }}
-            onClick={() => customizer.setLanguage(option.value)}
+            onClick={() => {
+              customizer.setLanguage(option.value);
+              // setTimeout(() => {
+              //   window.location.reload();
+              // }, 1500);
+            }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar

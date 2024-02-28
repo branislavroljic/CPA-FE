@@ -6,15 +6,15 @@
   "finalUrl": "Konačni URL",
   "event": "Događaj",
   "level": "Nivo",
-  "product": "Proizvod",
+  "product": "Ponuda",
   "status": "Status",
   "userId": "ID korisnika",
-  "productName": "Naziv proizvoda",
+  "productName": "Naziv ponude",
   "value": "Vrijednost",
   "urlParams": "URL parametri",
   "addParam": "Dodaj parametar",
   "addPostback": "Dodaj postback",
   "history": "Postback istorija",
-  "requestUrl": "Zahtevani url",
+  "requestUrl": "Zahtijevani url",
   "timestamp": "Vrijeme"
 }

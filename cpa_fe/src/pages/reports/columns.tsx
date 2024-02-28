@@ -40,11 +40,13 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
     //   header: t("reports.totalHoldRevenue"),
     // },
     {
-      accessorKey: "holdRevenue",
+      id: "holdRevenue",
+      accessorFn: (row) => `$ ${row.holdRevenue}`,
       header: t("reports.holdRevenue"),
     },
     {
-      accessorKey: "revenue",
+      id: "revenue",
+      accessorFn: (row) => `$ ${row.revenue}`,
       header: t("reports.revenue"),
     },
     // {

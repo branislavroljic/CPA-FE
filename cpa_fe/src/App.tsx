@@ -12,7 +12,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       {/* <RTL direction={customizer.activeDir}> */}
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
         <CssBaseline />
         {/* <ScrollToTop> */}
         <RouterProvider router={router} />

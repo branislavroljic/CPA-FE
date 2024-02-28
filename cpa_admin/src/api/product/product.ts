@@ -37,7 +37,8 @@ export type Product = {
   categoriesIDs?: string[];
   approve_rate: number;
   earn_per_click: number;
-   
+  landingPagesString?: string;
+  prelandingPagesString?: string;
   vertical?: string;
 };
 
@@ -93,7 +94,10 @@ export function getProducts(
 ): Promise<Page<Product>> {
   return get(
     addPaginationParams(
-      addListFilterParams(baseUrl, filter ?? (null as any)),
+      addListFilterParams(
+        new URL("admin", baseUrlWithSlash),
+        filter ?? (null as any)
+      ),
       pagination
     )
   );
