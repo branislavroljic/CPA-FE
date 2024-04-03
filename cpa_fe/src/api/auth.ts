@@ -6,13 +6,12 @@ export const USER_KEY = 'user';
 const baseUrl = new URL('auth/', import.meta.env.VITE_API_URL);
 
 export type VerifyRecoverPasswordRequest = {
-  verificationCode: string;
-  password: string;
+  apiKey: string;
+  newPassword: string;
 };
 
 export type PasswordRecoveryRequest = {
-  email?: string;
-  phoneNumber?: string;
+  mail?: string;
 };
 
 // export function confirmUser(request: PasswordChangeRequest) {

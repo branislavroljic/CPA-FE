@@ -58,8 +58,8 @@ export type InputProduct = {
   approveRate: number | null;
   country_code: string;
   categoriesIDs?: string[];
-  landingPagesString?: string;
-  prelandingPagesString?: string;
+  landingPagesString?: string | null;
+  prelandingPagesString?: string | null;
   vertical?: string;
 };
 

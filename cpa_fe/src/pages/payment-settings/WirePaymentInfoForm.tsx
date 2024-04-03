@@ -63,6 +63,9 @@ const WirePaymentInfoForm = () => {
         <Grid item xs={12} lg={6}>
           <BlankCard>
             <CardContent>
+              <Typography variant="h4" mb={1} align="center">
+                WIRE
+              </Typography>
               <Typography variant="h5" mb={1}>
                 {t("payments.paymentSettingsMinimumAmount", { number: 100 })}
               </Typography>

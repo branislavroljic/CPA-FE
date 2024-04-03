@@ -199,9 +199,9 @@ const ProductList = ({ onClick }: Props) => {
     <Grid item xs={12} lg={12} md={12} sm={12}>
       <Box textAlign="center" mt={6}>
         {/* <img src={emptyCart} alt="cart" width="200px" /> */}
-        <Typography variant="h2">There is no Product</Typography>
+        <Typography variant="h2">Loading...</Typography>
         <Typography variant="h6" mb={3}>
-          The Product you are searching is no longer available.
+          Loading products...
         </Typography>
       </Box>
     </Grid>

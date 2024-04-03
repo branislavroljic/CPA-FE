@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Stack,
-  Button,
   TextField,
   InputAdornment,
   IconButton,
@@ -26,6 +25,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getRestCountries } from "@api/external/restCounties";
 import { useQuery } from "@tanstack/react-query";
 import { useNotificationStore } from "@stores/notificationStore";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -140,8 +140,9 @@ type RegisterInput = z.infer<typeof registerSchema>;
 
 const RegisterUserForm = ({ setIsConfirmMail }: any) => {
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
-  const refId = searchParams.get("refId");
+  const refId = searchParams.get("ref_id");
 
   const openNotification = useNotificationStore(
     (state) => state.openNotification
@@ -164,6 +165,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
   } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
 
   const registerUser = async (input: RegisterInput) => {
+    setLoading(true);
     const baseUrl = new URL("auth/signup", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
@@ -174,6 +176,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
       },
     });
 
+    setLoading(false);
     if (!result.ok) {
       openNotification({
         isError: true,
@@ -457,18 +460,19 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
           </Box>
         </Grid>
 
-        <Button
+        <LoadingButton
           color="primary"
           variant="contained"
           size="large"
           fullWidth
           type="submit"
+          loading={loading}
           sx={{ marginTop: "20px" }}
         >
           {t("login.register")}
-        </Button>
+        </LoadingButton>
       </Box>
-      <Stack direction="row" spacing={1} mt={2}>
+      <Stack direction="row" spacing={1} mt={2} justifyContent="center">
         <Typography color="textSecondary" variant="h6" fontWeight="400">
           {t("login.alreadyHaveAnAccount")}
         </Typography>

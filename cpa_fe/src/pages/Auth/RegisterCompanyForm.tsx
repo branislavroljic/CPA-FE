@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Stack,
-  Button,
   TextField,
   InputAdornment,
   IconButton,
@@ -23,6 +22,7 @@ import { getRestCountries } from "@api/external/restCounties";
 import { useQuery } from "@tanstack/react-query";
 import CustomTextField from "@ui/forms/theme-elements/CustomTextField";
 import { useNotificationStore } from "@stores/notificationStore";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -188,6 +188,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
   const openNotification = useNotificationStore(
     (state) => state.openNotification
   );
+  const [loading, setLoading] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -205,6 +206,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
   } = useForm<RegisterInput>({ resolver: zodResolver(registerCompanySchema) });
 
   const registerUser = async (input: RegisterInput) => {
+    setLoading(true);
     const baseUrl = new URL("auth/signup", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
@@ -215,6 +217,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
       },
     });
 
+    setLoading(false);
     if (!result.ok) {
       openNotification({
         isError: true,
@@ -323,7 +326,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   onChange={(_event, item) => {
                     onChange(item);
                   }}
-                  value={restCountiesData?.find((c  : any) => c === value)}
+                  value={restCountiesData?.find((c: any) => c === value)}
                   options={restCountiesData ?? []}
                   getOptionLabel={(option) => `${option}`}
                   renderInput={(params) => (
@@ -566,18 +569,19 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
           </Grid>
         </Grid>
 
-        <Button
+        <LoadingButton
           color="primary"
           variant="contained"
           size="large"
           fullWidth
           type="submit"
+          loading={loading}
           sx={{ marginTop: "20px" }}
         >
           {t("login.register")}
-        </Button>
+        </LoadingButton>
       </Box>
-      <Stack direction="row" spacing={1} mt={2}>
+      <Stack direction="row" spacing={1} mt={2} justifyContent="center">
         <Typography color="textSecondary" variant="h6" fontWeight="400">
           {t("login.alreadyHaveAnAccount")}
         </Typography>

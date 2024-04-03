@@ -5,16 +5,23 @@ import BlankCard from "@ui/shared/BlankCard";
 export interface BannerProps {
   title: string;
   subtitle?: string;
-  goToText: string;
-  onGoToClick: () => void;
+  goToText?: string;
+  hasImage?: boolean;
+  onGoToClick?: () => void;
 }
 
-const Banner = ({ title, subtitle, goToText, onGoToClick }: BannerProps) => {
+const Banner = ({
+  title,
+  subtitle,
+  goToText,
+  onGoToClick,
+  hasImage = true,
+}: BannerProps) => {
   return (
     <BlankCard>
       <CardContent sx={{ p: "30px" }}>
         <Box textAlign="center">
-          <img src={starBg} alt="star" width={150} />
+          {hasImage && <img src={starBg} alt="star" width={150} />}
 
           <Typography variant="h5">{title}</Typography>
           {subtitle && (
@@ -23,14 +30,16 @@ const Banner = ({ title, subtitle, goToText, onGoToClick }: BannerProps) => {
             </Typography>
           )}
 
-          <Button
-            color="primary"
-            variant="contained"
-            size="large"
-            onClick={onGoToClick}
-          >
-            {goToText}
-          </Button>
+          {goToText && (
+            <Button
+              color="primary"
+              variant="contained"
+              size="large"
+              onClick={onGoToClick}
+            >
+              {goToText}
+            </Button>
+          )}
         </Box>
       </CardContent>
     </BlankCard>

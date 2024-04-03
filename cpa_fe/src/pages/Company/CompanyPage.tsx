@@ -20,7 +20,7 @@ export default function CompanyPage() {
     [t]
   );
   return (
-    <PageContainer title="Workers" description="this is innerpage">
+    <PageContainer title="Klix Lead" description="this is innerpage">
       <Breadcrumb items={BCrumb} title={t("company.page")} />
       <ThemeProvider
         theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}

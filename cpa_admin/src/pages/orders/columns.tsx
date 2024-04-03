@@ -55,7 +55,7 @@ const defaultColumns = (
       Cell: ({ renderedCellValue, row }) =>
         row.original.status === "DONE" ? (
           <Chip label={renderedCellValue} color="success" />
-        ) : row.original.status === "CANCELLED" ? (
+        ) : row.original.status === "CANCELLED" || row.original.status === "TRASH" ? (
           <Chip label={renderedCellValue} color="error" />
         ) : (
           <Chip label={renderedCellValue} color="warning" />

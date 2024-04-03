@@ -48,7 +48,7 @@ export const useCustomizerStore = create<StateType>()(
       setLanguage: (language: string) => {
         localStorage.setItem('my_benefit_lang', language);
         set(() => ({ isLanguage: language }));
-      },
+    },
       toggleSidebar: () => set((state) => ({ isCollapse: !state.isCollapse })),
       hoverSidebar: (value: boolean) =>
         set(() => ({ isSidebarHover: value })),

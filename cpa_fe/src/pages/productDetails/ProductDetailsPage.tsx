@@ -99,7 +99,7 @@ const ProductDetailsPage = () => {
 
   return (
     <PageContainer
-      title="Product details"
+      title="Klix Lead"
       description="this is product details page"
     >
       {/* breadcrumb */}

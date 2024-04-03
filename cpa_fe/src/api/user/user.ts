@@ -33,6 +33,7 @@ export type User = {
   accountManager?: AccountManager;
   referrerLink?: string;
   enabledVipProducts?: string;
+  status: string;
 };
 
 export type LoginHistory = {

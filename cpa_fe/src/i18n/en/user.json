@@ -40,5 +40,6 @@
   "referralFees": "referral fees",
   "payments": "Payment Details",
   "total" : "Total",
-  "fullName" : "Full name"
+  "fullName" : "Full name",
+  "yourManager" : "Your manager"
 }

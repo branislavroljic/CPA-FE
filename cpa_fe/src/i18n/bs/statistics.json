@@ -1,6 +1,6 @@
 {
   "title": "Statistika",
-  "welcomeBack": "Statistika",
+  "welcomeBack": "Dobrodošli nazad, {{name}}!",
   "today": "Danas",
   "yesterday": "Juče",
   "thisWeek": "Ove nedjelje",
@@ -12,7 +12,8 @@
   "requested": "Zahtijevano",
   "conversionRateToday": "Današnja stopa konverzije",
   "conversionToday": "Današnja konverzija",
-  "statistics" : "Statistika",
-  "cancelled" : "Otkazano",
-  "trash" : "Otpad"
+  "statistics": "Statistika",
+  "cancelled": "Otkazano",
+  "trash": "Otpad",
+  "approveRate": "Stopa odobrenja"
 }

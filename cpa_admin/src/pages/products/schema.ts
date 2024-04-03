@@ -29,30 +29,16 @@ const productSchema = z.object({
         field: "Name in English",
       }),
     }),
-    description: z
-      .string({
-        required_error: i18n.t("util.required.male", {
-          field: "Description",
-        }),
-      })
-      .max(longerMaxLength, {
-        message: i18n.t("util.maxLength", {
-          field: "Description",
-          num: longerMaxLength,
-        }),
+    description: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Description",
       }),
-    descriptionEng: z
-      .string({
-        required_error: i18n.t("util.required.male", {
-          field: "Description in English",
-        }),
-      })
-      .max(longerMaxLength, {
-        message: i18n.t("util.maxLength", {
-          field: "Description in English",
-          num: longerMaxLength,
-        }),
+    }),
+    descriptionEng: z.string({
+      required_error: i18n.t("util.required.male", {
+        field: "Description in English",
       }),
+    }),
     status: z.string({
       required_error: i18n.t("util.required.male", {
         field: "Status",
@@ -116,7 +102,7 @@ const productSchema = z.object({
         field: "Limit per day",
       }),
     }),
-    approveRate: z.number().nullable(),
+    approveRate: z.coerce.number().nullable(),
     country_code: z.string({
       required_error: i18n.t("util.required.male", {
         field: "Country code",
@@ -131,8 +117,8 @@ const productSchema = z.object({
         })
         .optional()
     ),
-    landingPagesString: z.string().optional(),
-    prelandingPagesString: z.string().optional(),
+    landingPagesString: z.string().nullable(),
+    prelandingPagesString: z.string().nullable(),
   }),
 });
 

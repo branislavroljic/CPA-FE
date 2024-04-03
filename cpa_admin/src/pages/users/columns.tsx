@@ -53,6 +53,7 @@ const defaultColumns = (accountStatuses: SelectInput[]) =>
       enableColumnFilter: false,
     },
     {
+      id : "status",
       accessorFn: (row) => row.status.replace(/_/g, " "),
       header: "Status",
       muiTableHeadCellProps: {

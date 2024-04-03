@@ -8,7 +8,6 @@ import { USER_KEY } from "@api/auth";
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/system";
 import {
-  Button,
   Card,
   Checkbox,
   FormControlLabel,
@@ -28,6 +27,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import { useNotificationStore } from "@stores/notificationStore";
+
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -69,6 +70,8 @@ type LoginInput = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
   const openNotification = useNotificationStore(
     (state) => state.openNotification
   );
@@ -88,6 +91,7 @@ export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
 
   const loginUser = async (input: LoginInput) => {
+    setLoading(true);
     const baseUrl = new URL("auth/signin", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
@@ -98,6 +102,7 @@ export default function LoginPage() {
       },
     });
 
+    setLoading(false);
     if (!result.ok) {
       setError("username", {
         message: "",
@@ -121,6 +126,11 @@ export default function LoginPage() {
     }
     sessionStorage.setItem(USER_KEY, JSON.stringify(loginResponse));
     setUser(loginResponse);
+    // navigate("/", {
+    //   state: {
+    //     isVerified: false,
+    //   },
+    // });
     navigate("/");
     return;
   };
@@ -263,9 +273,9 @@ export default function LoginPage() {
                       >
                         {t('login.forgotPassword')}
                       </Link> */}
-                      {/* <Typography
+                      <Typography
                         component={Link}
-                        to="/forgot-password"
+                        to="/forgot_password"
                         fontWeight="500"
                         sx={{
                           textDecoration: "none",
@@ -273,19 +283,20 @@ export default function LoginPage() {
                         }}
                       >
                         {t("login.forgotPassword")}
-                      </Typography> */}
+                      </Typography>
                     </Stack>
                   </Stack>
                   <Box>
-                    <Button
+                    <LoadingButton
                       color="primary"
                       variant="contained"
                       size="large"
                       fullWidth
                       type="submit"
+                      loading={loading}
                     >
                       {t("login.login")}
-                    </Button>
+                    </LoadingButton>
                   </Box>
 
                   <Stack
@@ -314,6 +325,7 @@ export default function LoginPage() {
                     <Typography
                       component={Link}
                       to="/register"
+                      variant="h6"
                       fontWeight="500"
                       sx={{
                         textDecoration: "none",

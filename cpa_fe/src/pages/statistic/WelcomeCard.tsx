@@ -59,7 +59,7 @@ const WelcomeCard = ({
                 <Divider orientation="vertical" sx={{ color: "black" }} />
                 <Box>
                   <Stack direction={"row"} gap={1}>
-                    <Typography variant="h2">{conversionRateToday}</Typography>
+                    <Typography variant="h2">{`${conversionRateToday.toFixed(2)}%`}</Typography>
                     <IconArrowUpRight color="#39B69A" />
                   </Stack>
                   <Typography variant="caption" color="GrayText">
@@ -70,7 +70,7 @@ const WelcomeCard = ({
             </Box>
           </Grid>
           <Grid item sm={5}>
-            <Box mb="-90px">
+            <Box mb="-50px">
               <img src={welcomeImg} alt={welcomeImg} width={"300px"} />
             </Box>
           </Grid>

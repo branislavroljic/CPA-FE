@@ -180,6 +180,7 @@ export default function ProductModal() {
                     fullWidth
                     multiline
                     required
+                    rows={2}
                     maxRows={"infinity"}
                     disabled={mutation.isLoading}
                     error={!!errors.body?.description}
@@ -204,6 +205,7 @@ export default function ProductModal() {
                     fullWidth
                     multiline
                     required
+                    rows={2}
                     maxRows={"infinity"}
                     disabled={mutation.isLoading}
                     error={!!errors.body?.descriptionEng}
@@ -334,13 +336,13 @@ export default function ProductModal() {
                 defaultValue={item?.approveRate ?? null}
                 render={({ field }) => (
                   <TextField
-                    label={"Approve rate"}
+                    label={"Conversion rate"}
                     type="number"
                     fullWidth
                     disabled={mutation.isLoading}
                     error={errors.body?.approveRate !== undefined}
                     helperText={errors.body?.approveRate?.message}
-                    placeholder={"Approve rate"}
+                    placeholder={"Conversion rate"}
                     margin="normal"
                     id="approveRate"
                     {...field}
@@ -508,7 +510,7 @@ export default function ProductModal() {
               <Controller
                 name="body.landingPagesString"
                 control={control}
-                defaultValue={item?.landingPagesString ?? undefined}
+                defaultValue={item?.landingPagesString ?? null}
                 render={({ field }) => (
                   <TextField
                     label={"Landing pages"}
@@ -529,7 +531,7 @@ export default function ProductModal() {
               <Controller
                 name="body.prelandingPagesString"
                 control={control}
-                defaultValue={item?.prelandingPagesString ?? undefined}
+                defaultValue={item?.prelandingPagesString ?? null}
                 render={({ field }) => (
                   <TextField
                     label={"Prelanding pages"}

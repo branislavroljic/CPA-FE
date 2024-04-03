@@ -21,7 +21,7 @@ export default function LoginHistoryPage() {
     [t]
   );
   return (
-    <PageContainer title="" description="this is innerpage">
+    <PageContainer title="Klix Lead" description="this is innerpage">
       <Breadcrumb items={BCrumb} title={t("loginHistory.title")} />
       <ThemeProvider
         theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}

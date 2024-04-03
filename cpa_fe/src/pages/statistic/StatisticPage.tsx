@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Box, CircularProgress, Grid, useTheme } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import useAuthStore from "@stores/authStore";
@@ -23,6 +23,9 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { StatisticsCardProps } from "@ui/shared/StatisticsCard";
 import WelcomeCard from "./WelcomeCard";
 import AreaChart, { AreaChartProp } from "@ui/dashboard/AreaChart";
+import NotVerifiedModal from "./NotVerifiedModal";
+import { useNotVerifiedModalStore } from "@stores/notVerifiedModalStore";
+import WelcomeCardV2 from "./WelcomeCardV2";
 
 export interface BarChartProps {
   title: string;
@@ -35,6 +38,7 @@ export interface BarChartProps {
 }
 
 export default function StatisticsPage() {
+  const { openModal, closeModal } = useNotVerifiedModalStore();
   const user = useAuthStore((state) => state.user);
   const { t } = useTranslation();
 
@@ -43,6 +47,14 @@ export default function StatisticsPage() {
   const secondary = theme.palette.secondary.main;
   const success = theme.palette.success.main;
   const info = theme.palette.info.main;
+
+  useEffect(() => {
+    closeModal();
+  }, []);
+
+  useEffect(() => {
+    if (user?.status != "APPROVED") openModal();
+  }, [openModal, user?.status]);
 
   const { data: dashboardData, isLoading: isDashboardDataLoading } = useQuery({
     queryKey: ["dashboard", user?.id],
@@ -85,7 +97,7 @@ export default function StatisticsPage() {
       },
       {
         icon: <PercentIcon />,
-        title: t("statistics.conversionRate"),
+        title: t("statistics.approveRate"),
         item: {
           today: `${dashboardData?.conversionRateToday.toFixed(2)}%`,
           yesterday: `${dashboardData?.conversionRateYesterday.toFixed(2)}%`,
@@ -160,7 +172,7 @@ export default function StatisticsPage() {
       },
       {
         values: isConversionRateLoading ? [] : conversionRateData,
-        labelName: t("statistics.conversionRate"),
+        labelName: t("statistics.approveRate"),
         color: info,
       },
     ] as AreaChartProp[];
@@ -181,14 +193,15 @@ export default function StatisticsPage() {
   ]);
 
   return (
-    <PageContainer description="this is statistics page">
+    <PageContainer title="Klix Lead" description="this is statistics page">
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>
-            <WelcomeCard
+            {/* <WelcomeCard
               conversionToday={dashboardData?.conversionsToday ?? 0}
               conversionRateToday={dashboardData?.conversionRateToday ?? 0}
-            />
+            /> */}
+            <WelcomeCardV2 />
           </Grid>
 
           {/* column */}
@@ -205,6 +218,7 @@ export default function StatisticsPage() {
           </Grid>
         </Grid>
       </Box>
+      <NotVerifiedModal />
     </PageContainer>
   );
 }

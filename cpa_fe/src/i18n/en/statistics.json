@@ -14,5 +14,6 @@
   "conversionToday": "Conversion today",
   "statistics" : "Statistics",
   "cancelled" : "Cancelled",
-  "trash" : "Trash"
+  "trash" : "Trash",
+  "approveRate" : "Approve rate"
 }

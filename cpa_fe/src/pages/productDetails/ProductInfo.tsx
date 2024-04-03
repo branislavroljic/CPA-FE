@@ -86,7 +86,7 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                     product.conversion_rate ?? "N/A"
                   } %`}</Typography>
                 </Stack>
-                <Stack>
+                {/* <Stack>
                   <Typography
                     variant="overline"
                     style={{ lineHeight: "20px" }}
@@ -97,7 +97,7 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                   <Typography variant="h6">{`${
                     product.earn_per_click ?? "N/A"
                   } ${product.currency}`}</Typography>
-                </Stack>
+                </Stack> */}
                 <Stack>
                   <Typography variant="overline" color={"lightgray"}>
                     {t("products.flow")}

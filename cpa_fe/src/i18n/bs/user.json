@@ -40,5 +40,6 @@
   "referralFees": "provizije za preporuke",
   "payments": "Detalji plaćanja",
   "total" : "Ukupno",
-  "fullName" : "Ime i prezime"
+  "fullName" : "Ime i prezime",
+  "yourManager" : "Tvoj manadžer"
 }

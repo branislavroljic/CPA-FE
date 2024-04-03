@@ -6,7 +6,6 @@ import {
   Button,
   Stack,
   TextField,
-  Divider,
 } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
@@ -16,42 +15,26 @@ import Logo from "@layout/full/shared/logo/Logo";
 import { Controller, useForm } from "react-hook-form";
 import { PasswordRecoveryRequest } from "@api/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "@stores/notificationStore";
+import { useState } from "react";
+import Banner from "./Banner";
 
 const forgotPasswordSchema = z
   .object({
-    email: z
-      .string()
-      .email({
-        message: i18n.t("util.invalidFormat", {
-          field: i18n.t("user.email"),
-        }),
-      })
-      .optional()
-      .or(z.literal(""))
-      .transform((d) => (d === "" ? undefined : d)),
-    phoneNumber: z
-      .string()
-      .regex(
-        new RegExp("^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$"),
-        {
-          message: i18n.t("util.invalidFormat", {
-            field: i18n.t("user.phoneNumber"),
-          }),
-        }
-      )
-      .optional()
-      .or(z.literal(""))
-      .transform((d) => (d === "" ? undefined : d)),
+    mail: z.string().email({
+      message: i18n.t("util.invalidFormat", {
+        field: i18n.t("user.email"),
+      }),
+    }),
   })
   .partial()
   .superRefine((data, ctx) => {
-    if (!data.email && !data.phoneNumber) {
+    if (!data.mail) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        path: ["email", "phoneNumber"],
+        path: ["mail"],
         message: i18n.t("util.required.male", {
           field: `${i18n.t("login.email")} ${i18n.t("util.or")} ${i18n.t(
             "login.phoneNumber"
@@ -62,6 +45,7 @@ const forgotPasswordSchema = z
   });
 
 export default function ForgotPasswordPage() {
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const openNotification = useNotificationStore(
     (state) => state.openNotification
   );
@@ -70,18 +54,14 @@ export default function ForgotPasswordPage() {
     handleSubmit,
     control,
     formState: { errors },
-    watch,
   } = useForm<PasswordRecoveryRequest>({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const recoverPassword = async (request: PasswordRecoveryRequest) => {
-    const baseUrl = new URL(
-      "auth/recover-password",
-      import.meta.env.VITE_API_URL
-    );
+    const baseUrl = new URL("forgot_password", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
       body: JSON.stringify(request),
@@ -92,11 +72,7 @@ export default function ForgotPasswordPage() {
     });
 
     if (!result.ok) {
-      setError("email", {
-        message: "",
-        type: "server",
-      });
-      setError("phoneNumber", {
+      setError("mail", {
         message: "",
         type: "server",
       });
@@ -108,7 +84,7 @@ export default function ForgotPasswordPage() {
       return;
     }
 
-    navigate("/recover-password");
+    setIsSuccessful(true);
     return;
   };
 
@@ -146,111 +122,80 @@ export default function ForgotPasswordPage() {
             justifyContent="center"
             alignItems="center"
           >
-            <Card
-              elevation={9}
-              sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
-            >
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <Logo />
-              </Box>
-              <Typography
-                color="textSecondary"
-                textAlign="center"
-                variant="subtitle2"
-                fontWeight="400"
+            {!isSuccessful ? (
+              <Card
+                elevation={9}
+                sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
               >
-                {t("login.recoverPasswordMessage")}
-              </Typography>
-              <Box
-                component="form"
-                onSubmit={handleSubmit(recoverPassword)}
-                // sx={{ mt: 1 }}
-              >
-                <Stack mt={4}>
-                  <Box>
-                    <CustomFormLabel htmlFor="email">
-                      {t("login.email")}
-                    </CustomFormLabel>
-                    <Controller
-                      control={control}
-                      name="email"
-                      defaultValue=""
-                      render={({ field }) => (
-                        <TextField
-                          error={errors.email !== undefined}
-                          helperText={errors.email?.message}
-                          disabled={!!watch("phoneNumber")}
-                          variant="outlined"
-                          fullWidth
-                          id="email"
-                          autoComplete="email"
-                          autoFocus
-                          {...field}
-                        />
-                      )}
-                    />
-                  </Box>
-
-                  <Box pt={3}>
-                    <Divider>
-                      <Typography
-                        component="span"
-                        color="textSecondary"
-                        variant="h6"
-                        fontWeight="400"
-                        position="relative"
-                        px={2}
-                      >
-                        {t("util.or")}
-                      </Typography>
-                    </Divider>
-                  </Box>
-
-                  <Box>
-                    <CustomFormLabel htmlFor="phoneNumber">
-                      {t("login.phoneNumber")}
-                    </CustomFormLabel>
-                    <Controller
-                      control={control}
-                      name="phoneNumber"
-                      defaultValue=""
-                      render={({ field }) => (
-                        <TextField
-                          error={errors.phoneNumber !== undefined}
-                          helperText={errors.phoneNumber?.message}
-                          disabled={!!watch("email")}
-                          variant="outlined"
-                          fullWidth
-                          id="phoneNumber"
-                          autoComplete="phoneNumber"
-                          {...field}
-                        />
-                      )}
-                    />
-                  </Box>
-                </Stack>
-                <Stack mt={2} spacing={2}>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    size="large"
-                    fullWidth
-                    type="submit"
-                  >
-                    {t("login.recoverPassword")}
-                  </Button>
-                  <Button
-                    color="primary"
-                    size="large"
-                    fullWidth
-                    component={Link}
-                    to="/login"
-                  >
-                    {t("login.backToLogin")}
-                  </Button>
-                </Stack>
-              </Box>
-            </Card>
+                <Box display="flex" alignItems="center" justifyContent="center">
+                  <Logo />
+                </Box>
+                <Typography
+                  color="textSecondary"
+                  textAlign="center"
+                  variant="subtitle2"
+                  fontWeight="400"
+                >
+                  {t("login.recoverPasswordMessage")}
+                </Typography>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit(recoverPassword)}
+                  // sx={{ mt: 1 }}
+                >
+                  <Stack mt={4}>
+                    <Box>
+                      <CustomFormLabel htmlFor="email">
+                        {t("login.email")}
+                      </CustomFormLabel>
+                      <Controller
+                        control={control}
+                        name="mail"
+                        defaultValue=""
+                        render={({ field }) => (
+                          <TextField
+                            error={errors.mail !== undefined}
+                            helperText={errors.mail?.message}
+                            variant="outlined"
+                            fullWidth
+                            id="mail"
+                            autoComplete="mail"
+                            autoFocus
+                            {...field}
+                          />
+                        )}
+                      />
+                    </Box>
+                  </Stack>
+                  <Stack mt={2} spacing={2}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      size="large"
+                      fullWidth
+                      type="submit"
+                    >
+                      {t("login.recoverPassword")}
+                    </Button>
+                    <Button
+                      color="primary"
+                      size="large"
+                      fullWidth
+                      component={Link}
+                      to="/login"
+                    >
+                      {t("login.backToLogin")}
+                    </Button>
+                  </Stack>
+                </Box>
+              </Card>
+            ) : (
+              <Banner
+                title={t("login.checkYourEmail")}
+                subtitle={t("login.checkYourEmailForgorPassword")}
+                hasImage={false}
+              />
+            )}
           </Grid>
         </Grid>
       </Box>

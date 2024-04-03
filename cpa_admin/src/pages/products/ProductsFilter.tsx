@@ -16,6 +16,8 @@ import {
   MenuItem,
   OutlinedInput,
   InputLabel,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 import { IconPremiumRights } from "@tabler/icons-react";
 import { useProductFilterStore } from "@stores/productStore";
@@ -23,6 +25,7 @@ import { CircleFlag } from "react-circle-flags";
 import { useLoaderData } from "react-router-dom";
 import { Country } from "@api/product/product";
 import { Category } from "@api/category/category";
+import { useMemo } from "react";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,7 +43,7 @@ const ProductFilter = () => {
   const loaderData = useLoaderData() as unknown[];
   const countries = loaderData[0] as Country[];
   const categories = loaderData[1] as Category[];
-  const productTypes = ["PUBLIC", "VIP"];
+  const productTypes = useMemo(() => ["PUBLIC", "VIP"], []);
 
   const {
     filter,
@@ -68,12 +71,35 @@ const ProductFilter = () => {
         {/* ------------------------------------------- */}
         {/* Type filter */}
         {/* ------------------------------------------- */}
-        <Box pl={3}>
-          <Typography variant="subtitle2" fontWeight={600}>
-            By type
+        <Box>
+          <Typography
+            variant="subtitle2"
+            fontWeight={600}
+            paddingLeft={3}
+            paddingTop={1}
+          >
+            Type
           </Typography>
           <br />
-          {productTypes.map((type, index) => {
+          <Box p={3} pt={0}>
+            <Autocomplete
+              onChange={(_event, item) => {
+                updateFilterProductType(item ?? undefined);
+              }}
+              value={filter.type}
+              options={productTypes}
+              getOptionLabel={(option) => option}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={"Type"}
+                  margin="normal"
+                  variant="outlined"
+                />
+              )}
+            />
+          </Box>
+          {/* {productTypes.map((type, index) => {
             return (
               <ListItemButton
                 sx={{ mb: 1, mx: 1 }}
@@ -91,13 +117,13 @@ const ProductFilter = () => {
                 <ListItemText>{type}</ListItemText>
               </ListItemButton>
             );
-          })}
+          })} */}
         </Box>
 
         <Divider></Divider>
         <Box p={3}>
           <Typography variant="subtitle2" fontWeight={600}>
-            By category
+            Category
           </Typography>
           <br />
           <FormControl sx={{ minWidth: 200 }}>
@@ -132,7 +158,7 @@ const ProductFilter = () => {
         </Box>
         <Divider></Divider>
         <Typography variant="h6" px={3} mt={3} pb={2}>
-          By country
+          Country
         </Typography>
         {/* ------------------------------------------- */}
         {/* Filter By colors */}

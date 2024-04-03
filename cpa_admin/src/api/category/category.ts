@@ -11,7 +11,7 @@ export type Category = {
 };
 
 export function getCategories(): Promise<Category[]> {
-  return get(baseUrl);
+  return get(new URL("admin", baseUrlWithSlash));
 }
 
 export function createCategory(input: Category) {

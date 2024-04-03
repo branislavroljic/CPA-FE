@@ -50,7 +50,9 @@ const WelcomeCard = ({
                 <Divider orientation="vertical" sx={{ color: "black" }} />
                 <Box>
                   <Stack direction={"row"} gap={1}>
-                    <Typography variant="h2">{conversionRateToday}</Typography>
+                    <Typography variant="h2">{`${conversionRateToday.toFixed(
+                      2
+                    )}%`}</Typography>
                     <IconArrowUpRight color="#39B69A" />
                   </Stack>
                   <Typography variant="caption" color="GrayText">

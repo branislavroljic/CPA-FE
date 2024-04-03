@@ -8,7 +8,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import PageContainer from "@ui/container/PageContainer";
 import Logo from "@layout/full/shared/logo/Logo";
 import { z } from "zod";
@@ -21,35 +21,36 @@ import Banner from "./Banner";
 import { VerifyRecoverPasswordRequest } from "@api/auth";
 import { useNotificationStore } from "@stores/notificationStore";
 
-const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
+// const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
 const recoverPasswordSchema = z.object({
-  verificationCode: z.string({
-    required_error: i18n.t("util.required.non", {
-      field: i18n.t("login.verificationCodeLabel"),
+  apiKey: z.string({
+    required_error: i18n.t("util.required.male", {
+      field: i18n.t("login.apiKey"),
     }),
   }),
-  password: z
-    .string({
-      required_error: i18n.t("util.required.female", {
-        field: i18n.t("login.passwordLabel"),
-      }),
-    })
-    .min(8, {
-      message: i18n.t("util.length", {
-        field: i18n.t("login.passwordLabel"),
-        num: 8,
-      }),
-    })
-    .max(standardMaxLength, {
-      message: i18n.t("util.maxLength", {
-        field: i18n.t("login.passwordLabel"),
-        num: standardMaxLength,
-      }),
+  newPassword: z.string({
+    required_error: i18n.t("util.required.female", {
+      field: i18n.t("login.passwordLabel"),
     }),
+  }),
+  // .min(8, {
+  //   message: i18n.t("util.length", {
+  //     field: i18n.t("login.passwordLabel"),
+  //     num: 8,
+  //   }),
+  // })
+  // .max(standardMaxLength, {
+  //   message: i18n.t("util.maxLength", {
+  //     field: i18n.t("login.passwordLabel"),
+  //     num: standardMaxLength,
+  //   }),
+  // }),
 });
 
 export default function RecoverPasswordPage() {
+  const [searchParams] = useSearchParams();
+
   const openNotification = useNotificationStore(
     (state) => state.openNotification
   );
@@ -60,6 +61,7 @@ export default function RecoverPasswordPage() {
     handleSubmit,
     control,
     formState: { errors },
+    register,
   } = useForm<VerifyRecoverPasswordRequest>({
     resolver: zodResolver(recoverPasswordSchema),
   });
@@ -68,7 +70,7 @@ export default function RecoverPasswordPage() {
 
   const registerUser = async (input: VerifyRecoverPasswordRequest) => {
     const baseUrl = new URL(
-      "auth/verify-recover-password",
+      "forgot_password/verify",
       import.meta.env.VITE_API_URL
     );
     const result = await fetch(baseUrl, {
@@ -81,11 +83,11 @@ export default function RecoverPasswordPage() {
     });
 
     if (!result.ok) {
-      setError("verificationCode", {
+      setError("apiKey", {
         message: "",
         type: "server",
       });
-      setError("password", {
+      setError("newPassword", {
         message: "",
         type: "server",
       });
@@ -102,6 +104,8 @@ export default function RecoverPasswordPage() {
   };
 
   const { t } = useTranslation();
+
+  const apiKey = searchParams.get("apiKey");
 
   return (
     <PageContainer description="this is recover password page">
@@ -144,47 +148,34 @@ export default function RecoverPasswordPage() {
                   <Logo />
                 </Box>
                 <Box component="form" onSubmit={handleSubmit(registerUser)}>
+                  {apiKey && (
+                    <input
+                      type="hidden"
+                      {...register("apiKey", {
+                        required: false,
+                        value: apiKey,
+                      })}
+                    />
+                  )}
                   <Stack mb={3}>
                     <Box>
-                      <CustomFormLabel htmlFor="verificationCode">
-                        {t("login.verificationCodeLabel")}
-                      </CustomFormLabel>
-                      <Controller
-                        control={control}
-                        name="verificationCode"
-                        defaultValue=""
-                        render={({ field }) => (
-                          <TextField
-                            error={errors.verificationCode !== undefined}
-                            helperText={errors.verificationCode?.message}
-                            required
-                            variant="outlined"
-                            fullWidth
-                            id="verificationCode"
-                            autoFocus
-                            {...field}
-                          />
-                        )}
-                      />
-                    </Box>
-                    <Box>
-                      <CustomFormLabel htmlFor="password">
+                      <CustomFormLabel htmlFor="newPassword">
                         {t("login.passwordLabel")}
                       </CustomFormLabel>
                       <Controller
                         control={control}
-                        name="password"
+                        name="newPassword"
                         defaultValue=""
                         render={({ field }) => (
                           <TextField
-                            error={errors.password !== undefined}
-                            helperText={errors.password?.message}
+                            error={errors.newPassword !== undefined}
+                            helperText={errors.newPassword?.message}
                             margin="normal"
                             required
                             fullWidth
                             variant="outlined"
-                            type="password"
-                            id="password"
+                            type="newPassword"
+                            id="newPassword"
                             {...field}
                           />
                         )}
@@ -198,7 +189,7 @@ export default function RecoverPasswordPage() {
                     fullWidth
                     type="submit"
                   >
-                    {t("login.register")}
+                    {t("login.recoverPassword")}
                   </Button>
                 </Box>
                 <Stack direction="row" spacing={1} mt={3}>
@@ -224,8 +215,8 @@ export default function RecoverPasswordPage() {
               </Card>
             ) : (
               <Banner
-                title={t("login.successfulVerification")}
-                subtitle={t("login.successfulVerificationSubtitle")}
+                title={t("login.passwordChange")}
+                subtitle={t("login.successfulPaswordChange")}
                 goToText={t("login.goToLogin")}
                 onGoToClick={() => navigate("/")}
               />

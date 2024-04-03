@@ -92,7 +92,7 @@ const FullLayout: FC = () => {
 
             <Notification
               isShowing={isOpen}
-              primaryText={data.primaryText}
+              primaryText={data.primaryText??''}
               secondaryText={data.secondaryText}
               isError={data.isError}
               closeNotification={closeNotification}

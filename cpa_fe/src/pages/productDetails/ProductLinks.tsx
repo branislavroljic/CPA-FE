@@ -105,7 +105,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
       offerURL?.searchParams.delete("lp");
     } else {
       setSelectedLandingPage(page);
-      offerURL?.searchParams.set("lp", "" + page.id);
+      offerURL?.searchParams.set("lp", "" + page.landingIdOnServer);
     }
   };
 
@@ -116,7 +116,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
       offerURL?.searchParams.set("prelp", "" + -1);
     } else {
       setSelectedPrelandingPage(page);
-      offerURL?.searchParams.set("prelp", "" + page.id);
+      offerURL?.searchParams.set("prelp", "" + page.landingIdOnServer);
     }
   };
 
@@ -324,7 +324,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                       }}
                     >
                       {` POST /api/v1/orders/create/ HTTP/1.1
-                          Host: https://api.monadlead.com
+                          Host: https://api.klixlead.com
                           Content-Type: application/json
                           {
                           "apiKey": "54a42b948d9c93bcc638eaa4ff550836",

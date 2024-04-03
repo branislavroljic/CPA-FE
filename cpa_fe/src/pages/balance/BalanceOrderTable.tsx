@@ -25,10 +25,7 @@ import { BalanceOrder, getBalanceOrders } from "@api/user/user";
 import useAuthStore from "@stores/authStore";
 import { enUS, srRS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import dayjs from "dayjs";
+import { DateRangePicker } from "rsuite";
 
 export default function BalanceBalanceOrderTable() {
   const { user } = useAuthStore();
@@ -38,8 +35,10 @@ export default function BalanceBalanceOrderTable() {
     pageSize: 10,
   });
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([
-    { id: "dateTime", value: [new Date().toString(), new Date().toString()] },
+    { id: "dateTime", value: [new Date(), new Date()] },
   ]);
+
+  const [value, setValue] = useState([new Date(), new Date()]);
 
   const { t } = useTranslation();
 
@@ -92,7 +91,7 @@ export default function BalanceBalanceOrderTable() {
             <RefreshIcon />
           </IconButton>
         </Tooltip>
-        <DemoContainer components={["SingleInputDateRangeField"]}>
+        {/* <DemoContainer components={["SingleInputDateRangeField"]}>
           <DateRangePicker
             slots={{ field: SingleInputDateRangeField }}
             name="allowedRange"
@@ -114,7 +113,22 @@ export default function BalanceBalanceOrderTable() {
                 ]);
             }}
           />
-        </DemoContainer>
+        </DemoContainer> */}
+        <DateRangePicker
+          value={value}
+          onChange={(newValue) => {
+            if (newValue) {
+              setValue(newValue);
+              setColumnFilters((prev) => [
+                ...prev,
+                {
+                  id: "dateTime",
+                  value: [newValue[0], newValue[1]],
+                },
+              ]);
+            }
+          }}
+        />
       </Box>
     ),
     rowCount: data?.totalCount ?? 0,

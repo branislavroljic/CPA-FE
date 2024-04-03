@@ -19,7 +19,7 @@
   "newToBenefit": "First time here?",
   "createAccount": "Create an Account",
   "alreadyHaveAnAccount": "Already have an account?",
-  "recoverPasswordMessage": "Enter the email address or phone number associated with your account, and we'll send you a verification code to reset your password.",
+  "recoverPasswordMessage": "Enter the email address associated with your account, and we'll send you an email code to reset your password.",
   "recoverPassword": "Recover Password",
   "backToLogin": "Back to Login",
   "successfulVerification": "Successful Verification",

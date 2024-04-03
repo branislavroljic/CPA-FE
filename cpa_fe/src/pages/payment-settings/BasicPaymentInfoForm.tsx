@@ -16,11 +16,13 @@ import { getPaymentMethodInfo } from "@api/user/user";
 import Spinner from "@ui/view/spinner/Spinner";
 
 interface BasicPaymentInfoFormProps {
+  title: string;
   method: string;
   fieldName: string;
 }
 
 const BasicPaymentInfoForm: React.FC<BasicPaymentInfoFormProps> = ({
+  title,
   method,
   fieldName,
 }) => {
@@ -68,6 +70,9 @@ const BasicPaymentInfoForm: React.FC<BasicPaymentInfoFormProps> = ({
         <Grid item xs={12} lg={6}>
           <BlankCard>
             <CardContent>
+              <Typography variant="h4" mb={1} align="center">
+                {title}
+              </Typography>
               <Typography variant="h5" mb={1}>
                 {t("payments.paymentSettingsMinimumAmount", { number: 100 })}
               </Typography>

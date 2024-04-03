@@ -45,6 +45,7 @@ export interface LandingPage {
   id: number;
   url: string;
   product: Product;
+  landingIdOnServer: number;
 }
 
 export interface ProductDetails {
@@ -123,7 +124,6 @@ export function getProducts(
         name: filter.nameSearch,
       };
   }
-
 
   return get(
     addPaginationParams(

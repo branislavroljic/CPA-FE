@@ -186,7 +186,7 @@ export default function LayoutAuth() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="h1" color="inherit">
-            MojBenefit
+            Klix Lead
           </Typography>
           <Box component="div" sx={{ ml: "auto" }}>
             <IconButton
@@ -275,7 +275,7 @@ export default function LayoutAuth() {
         <Outlet />
         <Notification
           isShowing={isOpen}
-          primaryText={data.primaryText}
+          primaryText={data.primaryText??''}
           secondaryText={data.secondaryText}
           isError={data.isError}
           closeNotification={closeNotification}

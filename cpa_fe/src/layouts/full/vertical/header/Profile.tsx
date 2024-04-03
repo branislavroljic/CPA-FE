@@ -151,7 +151,7 @@ const Profile = () => {
             </Typography>
             <Tooltip title={user?.email} enterDelay={500}>
               <Typography
-                variant="subtitle2"
+                variant="caption"
                 color="textSecondary"
                 display="flex"
                 alignItems="center"

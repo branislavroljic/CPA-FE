@@ -19,9 +19,17 @@ import {
 import { useProductFilterStore } from "@stores/productStore";
 import { CircleFlag } from "react-circle-flags";
 import { useLoaderData } from "react-router-dom";
-import { Category, Country } from "@api/product/product";
+import {
+  Category,
+  Country,
+  getCategories,
+  getCountries,
+} from "@api/product/product";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import i18n from "../../i18n";
+import Spinner from "@ui/view/spinner/Spinner";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,9 +45,13 @@ const MenuProps = {
 const ProductFilter = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const loaderData = useLoaderData() as any[];
-  const countries = (loaderData[0] as Country[]) ?? [];
-  const categories = (loaderData[1] as Category[]) ?? [];
+  // const loaderData = useLoaderData() as any[];
+
+  const { data: loaderData, isLoading } = useQuery(
+    ["countries_and_categories", i18n],
+    () => Promise.all([getCountries(), getCategories()])
+  );
+
   const productTypes = useMemo(() => ["PUBLIC", "VIP"], []);
   const paymentModels = useMemo(() => ["CPA"], []);
 
@@ -63,6 +75,11 @@ const ProductFilter = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
+  if (isLoading) return <Spinner />;
+
+  const countries = (loaderData[0] as Country[]) ?? [];
+  const categories = (loaderData[1] as Category[]) ?? [];
 
   return (
     <>
@@ -168,18 +185,18 @@ const ProductFilter = () => {
           <Stack direction={"row"} flexWrap="wrap" gap={1}>
             {countries.map((country: Country) => {
               return (
-                  <CircleFlag
-                    countryCode={country?.code?.toLowerCase()}
-                    height="25"
-                    key={country.name}
-                    onClick={() => updateFilterCountryCode(country?.code)}
-                    style={{
-                      ...(country?.code?.toLowerCase() ==
-                      filter.country_code?.toLocaleLowerCase()
-                        ? { borderRadius: "30px", border: "3px solid orange" }
-                        : {}),
-                    }}
-                  ></CircleFlag>
+                <CircleFlag
+                  countryCode={country?.code?.toLowerCase()}
+                  height="25"
+                  key={country.name}
+                  onClick={() => updateFilterCountryCode(country?.code)}
+                  style={{
+                    ...(country?.code?.toLowerCase() ==
+                    filter.country_code?.toLocaleLowerCase()
+                      ? { borderRadius: "30px", border: "3px solid orange" }
+                      : {}),
+                  }}
+                ></CircleFlag>
               );
             })}
           </Stack>

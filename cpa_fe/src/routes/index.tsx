@@ -30,6 +30,7 @@ import StatisticsPage from "@pages/statistic/StatisticPage";
 import React from "react";
 import Notifications from "@pages/notifications/Notifications";
 import PaymentSettingsPage from "@pages/payment-settings/PaymentSettingsPage";
+import i18n from "../i18n";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -83,11 +84,11 @@ const browserConfig = createBrowserRouter([
             index: true,
             element: <ProductsPage />,
             errorElement: <ErrorPage />,
-            loader: () =>
-              queryClient.fetchQuery({
-                queryKey: ["countries_and_categories"],
-                queryFn: () => Promise.all([getCountries(), getCategories()]),
-              }),
+            // loader: () =>
+            //   queryClient.fetchQuery({
+            //     queryKey: ["countries_and_categories", i18n],
+            //     queryFn: () => Promise.all([getCountries(), getCategories()]),
+            //   }),
           },
           {
             id: "product",
@@ -240,13 +241,13 @@ const browserConfig = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        id: "forgot-password",
-        path: "/forgot-password",
+        id: "forgot_password",
+        path: "/forgot_password",
         element: <ForgotPasswordPage />,
       },
       {
-        id: "recover-password",
-        path: "/recover-password",
+        id: "recover_password",
+        path: "/recover_password",
         element: <RecoverPasswordPage />,
       },
     ],

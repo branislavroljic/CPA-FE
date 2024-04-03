@@ -83,7 +83,7 @@ export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
 
   const loginUser = async (input: LoginInput) => {
-    const baseUrl = new URL("auth/signin", import.meta.env.VITE_API_URL);
+    const baseUrl = new URL("auth/signin/admin", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
       body: JSON.stringify(input),

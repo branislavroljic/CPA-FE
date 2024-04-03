@@ -19,7 +19,7 @@
   "newToBenefit": "Prvi put ste ovdje?",
   "createAccount": "Kreiraj nalog",
   "alreadyHaveAnAccount": "Već imate nalog?",
-  "recoverPasswordMessage": "Unesite e-mail adresu ili broj telefona povezan sa vašim nalogom i poslaćemo vam verifikacioni kod za resetovanje vaše lozinke.",
+  "recoverPasswordMessage": "Unesite e-mail adresu  povezan sa vašim nalogom i poslaćemo vam e-mail za resetovanje Vaše lozinke.",
   "recoverPassword": "Oporavi lozinku",
   "backToLogin": "Nazad na prijavu",
   "successfulVerification": "Uspješna verifikacija",
@@ -33,5 +33,11 @@
   "chatService": "Čet servis",
   "individual": "Individual",
   "company": "Kompanija",
-  "experience": "Iskustvo"
+  "experience": "Iskustvo",
+  "apiKey": "API ključ",
+  "checkYourEmailForgorPassword": "Provjerite e-mail kako biste oporavili lozinku",
+  "accountVerification": "Verifikacija naloga",
+  "notVerifiedOrApproved": "Vaš nalog nije verifikovan ili odobren",
+  "passwordChange": "Lozinka promijenjena",
+  "successfulPaswordChange": "Lozinka uspješno promijenjena"
 }
