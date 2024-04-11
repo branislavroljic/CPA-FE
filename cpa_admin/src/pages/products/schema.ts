@@ -29,16 +29,30 @@ const productSchema = z.object({
         field: "Name in English",
       }),
     }),
-    description: z.string({
-      required_error: i18n.t("util.required.male", {
-        field: "Description",
+    description: z
+      .string({
+        required_error: i18n.t("util.required.male", {
+          field: "Description",
+        }),
+      })
+      .max(2999, {
+        message: i18n.t("util.maxLength", {
+          field: "Description",
+          num: 3000,
+        }),
       }),
-    }),
-    descriptionEng: z.string({
-      required_error: i18n.t("util.required.male", {
-        field: "Description in English",
+    descriptionEng: z
+      .string({
+        required_error: i18n.t("util.required.male", {
+          field: "Description in English",
+        }),
+      })
+      .max(2999, {
+        message: i18n.t("util.maxLength", {
+          field: "Description in English",
+          num: 3000,
+        }),
       }),
-    }),
     status: z.string({
       required_error: i18n.t("util.required.male", {
         field: "Status",
@@ -103,6 +117,7 @@ const productSchema = z.object({
       }),
     }),
     approveRate: z.coerce.number().nullable(),
+    conversionRate: z.coerce.number().nullable(),
     country_code: z.string({
       required_error: i18n.t("util.required.male", {
         field: "Country code",

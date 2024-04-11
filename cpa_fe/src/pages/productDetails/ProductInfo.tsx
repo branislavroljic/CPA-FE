@@ -61,30 +61,27 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
         <Grid item xs={12} lg={12}>
           <BlankCard>
             <CardContent>
-              <Stack direction="row" alignItems="center" gap={4}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                gap={4}
+                justifyContent={"space-between"}
+              >
                 <Stack>
-                  <Typography
-                    variant="overline"
-                    color={"lightgray"}
-                    style={{ lineHeight: "20px" }}
-                  >
+                  <Typography variant="overline" color={"lightgray"}>
                     {t("products.approveRate")}
                   </Typography>
-                  <Typography variant="h6">{`${
-                    product.approve_rate ?? "N/A"
-                  } %`}</Typography>
+                  <Typography variant="h6">
+                    {`${product.approveRate ?? "N/A"} %`}
+                  </Typography>
                 </Stack>
                 <Stack>
-                  <Typography
-                    variant="overline"
-                    color={"lightgray"}
-                    style={{ lineHeight: "20px" }}
-                  >
+                  <Typography variant="overline" color={"lightgray"}>
                     {t("products.conversionRate")}
                   </Typography>
-                  <Typography variant="h6">{`${
-                    product.conversion_rate ?? "N/A"
-                  } %`}</Typography>
+                  <Typography variant="h6">
+                    {`${product.conversionRate ?? "N/A"} %`}
+                  </Typography>
                 </Stack>
                 {/* <Stack>
                   <Typography
@@ -112,8 +109,20 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                     {product.vertical ?? "N/A"}
                   </Typography>
                 </Stack>
+                <Stack>
+                  <Typography variant="overline" color={"lightgray"}>
+                    {t("products.limit")}
+                  </Typography>
+                  <Typography variant="h6">
+                    {product.limit_per_day ?? "N/A"}
+                  </Typography>
+                </Stack>
               </Stack>
-              <Typography color="textSecondary" mt={4}>
+              <Typography
+                color="textSecondary"
+                mt={4}
+                style={{ whiteSpace: "pre-line" }}
+              >
                 {product.description}
               </Typography>
             </CardContent>

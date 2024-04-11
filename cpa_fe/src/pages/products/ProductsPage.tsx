@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
 import PageContainer from "@ui/container/PageContainer";
 import AppCard from "@ui/shared/AppCard";
@@ -25,23 +25,28 @@ const ProductsPage = () => {
     <PageContainer title="Klix Lead" description="this is Shop List page">
       {/* breadcrumb */}
       <Breadcrumb title={t("products.title")} items={BCrumb} />
-      <AppCard>
-        {/* ------------------------------------------- */}
-        {/* Left part */}
-        {/* ------------------------------------------- */}
-        <ProductsSidebar
-          isMobileSidebarOpen={isMobileSidebarOpen}
-          onSidebarClose={() => setMobileSidebarOpen(false)}
-        />
+
+      {/* ------------------------------------------- */}
+      {/* Left part */}
+      {/* ------------------------------------------- */}
+      <Stack direction={"row"}>
+        <Box>
+          <ProductsSidebar
+            isMobileSidebarOpen={isMobileSidebarOpen}
+            onSidebarClose={() => setMobileSidebarOpen(false)}
+          />
+        </Box>
         {/* ------------------------------------------- */}
         {/* Right part */}
         {/* ------------------------------------------- */}
-        <Box p={3} flexGrow={1}>
-          <ProductsList
-            onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
-          />
-        </Box>
-      </AppCard>
+        <AppCard>
+          <Box p={3} flexGrow={1}>
+            <ProductsList
+              onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
+            />
+          </Box>
+        </AppCard>
+      </Stack>
     </PageContainer>
   );
 };

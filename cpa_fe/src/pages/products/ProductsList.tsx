@@ -61,20 +61,20 @@ const ProductList = ({ onClick }: Props) => {
     <Grid
       item
       xs={12}
-      lg={5}
-      md={5}
-      sm={5}
+      lg={6}
+      md={6}
+      sm={6}
       display="flex"
       alignItems="stretch"
       key={product.id}
     >
       <BlankCard className="hoverCard">
-        <Chip
+        {/* <Chip
           style={{ margin: 5 }}
           label={product.status}
           size="small"
           color={product.status == "ACTIVE" ? "success" : "warning"}
-        />
+        /> */}
         <Typography component={Link} to={`${product.id}`}>
           <img
             src={`https://api.klixlead.com/api/product/images/${product.image}`}

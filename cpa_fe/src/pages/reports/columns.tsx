@@ -23,10 +23,10 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
       accessorKey: "conversions",
       header: t("reports.conversions"),
     },
-    {
-      accessorKey: "conversionRate",
-      header: t("reports.conversionRate"),
-    },
+    // {
+    //   accessorKey: "conversionRate",
+    //   header: t("reports.conversionRate"),
+    // },
     {
       accessorKey: "trash",
       header: t("reports.trash"),

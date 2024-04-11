@@ -50,7 +50,7 @@ export const Profile = () => {
           <Avatar src={ProfileImg} alt={ProfileImg} />
 
           <Box>
-            <Typography variant="h6">{user?.username} </Typography>
+            <Typography variant="h6" color={'white'}>{user?.username} </Typography>
           </Box>
           <Box sx={{ ml: "auto" }}>
             <Tooltip title={t("login.logout")} placement="top">

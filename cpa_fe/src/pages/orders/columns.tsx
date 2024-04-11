@@ -58,14 +58,14 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
     },
 
     {
-      accessorFn: (row) => new Date(row.time), //convert to date for sorting and filtering
+      accessorFn: (row) => row.time, //convert to date for sorting and filtering
       id: "dateTime",
       header: t("order.dateTime"),
-      Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
+      // Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
     },
 
     {
-      accessorFn: (row) => `${row.totalPrice} ${row.productCurrency}`,
+      accessorFn: (row) => `${row.totalPrice.toFixed(2)} ${row.productCurrency}`,
       header: t("order.totalPrice"),
     },
     {

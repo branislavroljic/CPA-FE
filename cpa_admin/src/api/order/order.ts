@@ -22,11 +22,23 @@ export type Order = {
   note: string;
   quantity: number;
   totalPrice: number;
-  productCurrency: string;
+  productCurrency?: string;
   productId: number;
+  productName: string;
   preLandingPage: string;
   landingPage: string;
-  productName: string;
+  userId: number;
+  userUsername: string;
+  userIP?: string;
+  referrer?: string;
+  sub1?: string;
+  sub2?: string;
+  sub3?: string;
+  sub4?: string;
+  operatingSystem?: string;
+  browserName?: string;
+  browserVersion?: string;
+  deviceType?: string;
 };
 
 export type UpdateOrderStatus = {

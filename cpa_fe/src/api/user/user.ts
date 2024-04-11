@@ -226,6 +226,7 @@ export interface Notifications {
 export interface PaymentMethod {
   id: number;
   method: string;
+  methodString: string;
   info: string;
   userId: number;
   available: boolean;

@@ -55,13 +55,58 @@ const defaultColumns = (
       Cell: ({ renderedCellValue, row }) =>
         row.original.status === "DONE" ? (
           <Chip label={renderedCellValue} color="success" />
-        ) : row.original.status === "CANCELLED" || row.original.status === "TRASH" ? (
+        ) : row.original.status === "CANCELLED" ||
+          row.original.status === "TRASH" ? (
           <Chip label={renderedCellValue} color="error" />
         ) : (
           <Chip label={renderedCellValue} color="warning" />
         ),
       filterVariant: "select",
       filterSelectOptions: orderStatuses,
+    },
+    {
+      accessorKey: "userIP",
+      header: "IP",
+    },
+    {
+      accessorKey: "baseURL",
+      header: "Base URL",
+    },
+    {
+      accessorKey: "referrer",
+      header: "Referrer",
+    },
+    {
+      accessorKey: "sub1",
+      header: "sub1",
+    },
+    {
+      accessorKey: "sub2",
+      header: "sub2",
+    },
+    {
+      accessorKey: "sub3",
+      header: "sub3",
+    },
+    {
+      accessorKey: "sub4",
+      header: "sub4",
+    },
+    {
+      accessorKey: "operatingSystem",
+      header: "Operating system",
+    },
+    {
+      accessorKey: "browserName",
+      header: "Browser",
+    },
+    {
+      accessorKey: "browserVersion",
+      header: "Browser version",
+    },
+    {
+      accessorKey: "deviceType",
+      header: "Device",
     },
   ] as MRT_ColumnDef<Order>[];
 

@@ -36,7 +36,7 @@ export interface Product {
   limit_per_day: number;
   country_code: string;
   categories: Category[];
-  approve_rate: number;
+  approvRate: number;
   earn_per_click: number;
   status: string;
 }
@@ -63,11 +63,11 @@ export interface ProductDetails {
   limit_per_day: number;
   country_code: string;
   categories?: Category[];
-  approve_rate: number;
+  approveRate: number;
   earn_per_click: number;
   landingPages: LandingPage[];
   prelandingPages?: LandingPage[];
-  conversion_rate: number;
+  conversionRate: number;
   flow: string;
   offerUrl?: string;
   status: string;

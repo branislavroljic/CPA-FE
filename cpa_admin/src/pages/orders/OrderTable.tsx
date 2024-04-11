@@ -110,6 +110,21 @@ export default function OrderTable() {
 
   const table = useMaterialReactTable({
     columns,
+    initialState: {
+      columnVisibility: {
+        baseURL: false,
+        referrer: false,
+        userIP: false,
+        operatingSystem: false,
+        browserName: false,
+        browserVersion: false,
+        deviceType: false,
+        sub1: false,
+        sub2: false,
+        sub3: false,
+        sub4: false,
+      },
+    },
     data: data?.rows ?? defaultData,
     enableSorting: false,
     manualPagination: true,
@@ -152,7 +167,7 @@ export default function OrderTable() {
       showProgressBars: isFetching,
     },
     localization: MRT_Localization_EN,
-    enableHiding: false,
+    enableHiding: true,
     defaultColumn: {
       minSize: 10,
       maxSize: 1000,

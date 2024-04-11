@@ -52,6 +52,7 @@ export type User = {
   telegramLink: string;
   whatsappLink: string;
   accountManagerId: number;
+  accountManagerUsername?: string;
   paid?: number;
 };
 

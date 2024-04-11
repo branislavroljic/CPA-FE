@@ -137,7 +137,7 @@ const ProductList = ({ onClick }: Props) => {
             <Stack gap={0}>
               <Typography variant="overline">APPROVE RATE</Typography>
               <Typography color="textPrimary" mt={-0.5}>
-                {`${product.approve_rate ?? 0} %`}
+                {`${product.approveRate ?? 0} %`}
               </Typography>
             </Stack>
             <Stack>

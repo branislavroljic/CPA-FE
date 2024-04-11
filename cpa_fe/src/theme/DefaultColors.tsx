@@ -2,15 +2,15 @@ const baselightTheme = {
   direction: "ltr",
   palette: {
     primary: {
-      main: "#EE9D05",
-      light: "#ffd991",
-      dark: "#b07507",
+      main: "#D89F42",
+      light: "#E8CA92",
+      dark: "#D89F42",
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#2B4187",
-      light: "#77befc",
-      dark: "#061c61",
+      main: "#4F75F2",
+      light: "#293068",
+      dark: "#88A3F7",
       contrastText: "#ffffff",
     },
     success: {

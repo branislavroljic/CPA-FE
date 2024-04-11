@@ -267,6 +267,14 @@ export default function UserTable() {
               : "N/A"
           }
         />
+        <TextWithTitle
+          title={"Account manager username"}
+          text={
+            row.original.accountManagerUsername
+              ? row.original.accountManagerUsername
+              : "N/A"
+          }
+        />
         {/* <TextWithTitle
           title={" Account manager username"}
           text={row.original.accountManager?.username ?? "N/A"}

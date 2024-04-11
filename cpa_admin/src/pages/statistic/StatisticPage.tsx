@@ -46,7 +46,7 @@ export default function StatisticsPage() {
       },
       {
         icon: <PercentIcon />,
-        title: "Conversion rate",
+        title: "Approve rate", //ovo je Conversion rate
         item: {
           today: `${dashboardData?.conversionRateToday.toFixed(2)}%`,
           yesterday: `${dashboardData?.conversionRateYesterday.toFixed(2)}%`,

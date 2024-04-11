@@ -143,7 +143,7 @@ export default function PaymentModal() {
                 value={data?.find((m) => m.id === value)}
                 options={data ?? []}
                 getOptionDisabled={(option) => !option.available}
-                getOptionLabel={(option) => option?.method}
+                getOptionLabel={(option) => option?.methodString}
                 renderInput={(params) => (
                   <TextField
                     {...params}

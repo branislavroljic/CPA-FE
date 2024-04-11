@@ -3,15 +3,15 @@ const DarkThemeColors = [
     name: "ORANGE_THEME",
     palette: {
       primary: {
-        main: "#FA896B",
-        light: "#402E32",
-        dark: "#F48162",
+        main: "#D89F42",
+        light: "#E8CA92",
+        dark: "#D89F42",
         contrastText: "#ffffff",
       },
       secondary: {
-        main: "#0074BA",
-        light: "#082E45",
-        dark: "#006FB1",
+        main: "#4F75F2",
+        light: "#293068",
+        dark: "#88A3F7",
         contrastText: "#ffffff",
       },
     },

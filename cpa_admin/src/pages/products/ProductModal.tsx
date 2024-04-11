@@ -89,6 +89,7 @@ export default function ProductModal() {
   const { t } = useTranslation();
 
   const saveProduct = (newItem: InputFormData<InputProduct>) => {
+    console.log(isValid);
     if (isValid) {
       mutation.mutate(newItem);
     }
@@ -180,7 +181,7 @@ export default function ProductModal() {
                     fullWidth
                     multiline
                     required
-                    rows={2}
+                    rows={3}
                     maxRows={"infinity"}
                     disabled={mutation.isLoading}
                     error={!!errors.body?.description}
@@ -205,7 +206,7 @@ export default function ProductModal() {
                     fullWidth
                     multiline
                     required
-                    rows={2}
+                    rows={3}
                     maxRows={"infinity"}
                     disabled={mutation.isLoading}
                     error={!!errors.body?.descriptionEng}
@@ -285,7 +286,7 @@ export default function ProductModal() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <Controller
                 name="body.payout"
                 control={control}
@@ -307,7 +308,7 @@ export default function ProductModal() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <Controller
                 name="body.limit_per_day"
                 control={control}
@@ -329,22 +330,43 @@ export default function ProductModal() {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
               <Controller
                 name="body.approveRate"
                 control={control}
                 defaultValue={item?.approveRate ?? null}
                 render={({ field }) => (
                   <TextField
-                    label={"Conversion rate"}
+                    label={"Approve rate"}
                     type="number"
                     fullWidth
                     disabled={mutation.isLoading}
                     error={errors.body?.approveRate !== undefined}
                     helperText={errors.body?.approveRate?.message}
-                    placeholder={"Conversion rate"}
+                    placeholder={"Approve rate"}
                     margin="normal"
                     id="approveRate"
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="body.conversionRate"
+                control={control}
+                defaultValue={item?.conversionRate ?? null}
+                render={({ field }) => (
+                  <TextField
+                    label={"Conversion rate"}
+                    type="number"
+                    fullWidth
+                    disabled={mutation.isLoading}
+                    error={errors.body?.conversionRate !== undefined}
+                    helperText={errors.body?.conversionRate?.message}
+                    placeholder={"Conversion rate"}
+                    margin="normal"
+                    id="conversionRate"
                     {...field}
                   />
                 )}
