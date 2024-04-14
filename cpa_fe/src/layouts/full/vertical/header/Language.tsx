@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useCustomizerStore } from "@stores/customizerStore";
 import React from "react";
+import queryClient from "../../../../query-client";
 
 const Languages = [
   {
@@ -43,7 +44,7 @@ const Language = () => {
   };
   useEffect(() => {
     i18n.changeLanguage(customizer.isLanguage);
-    // queryClient.clear()
+    // queryClient.clear();
   }, [customizer.isLanguage, i18n]);
 
   // useEffect(() => {

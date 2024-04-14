@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Stack,
-  TextField,
   InputAdornment,
   IconButton,
   Autocomplete,
@@ -12,6 +11,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Paper,
 } from "@mui/material";
 import { Link, useSearchParams } from "react-router-dom";
 import { z } from "zod";
@@ -26,6 +26,7 @@ import { getRestCountries } from "@api/external/restCounties";
 import { useQuery } from "@tanstack/react-query";
 import { useNotificationStore } from "@stores/notificationStore";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { GradientTextField } from "@layout/LayoutUnauth";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -209,7 +210,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
         )}
         <Grid container direction={"row"} spacing={1}>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="name">
+            <CustomFormLabel htmlFor="name" color="white">
               {t("user.firstname")}
             </CustomFormLabel>
             <Controller
@@ -217,7 +218,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
               name="name"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.name !== undefined}
                   helperText={errors.name?.message}
                   required
@@ -226,12 +227,15 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   id="name"
                   autoFocus
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="surname">
+            <CustomFormLabel htmlFor="surname" color="white">
               {t("user.lastname")}
             </CustomFormLabel>
             <Controller
@@ -239,7 +243,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
               name="surname"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.surname !== undefined}
                   helperText={errors.surname?.message}
                   required
@@ -247,12 +251,19 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="surname"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={12} lg={12}>
-            <CustomFormLabel htmlFor="country" sx={{ marginTop: "0px" }}>
+            <CustomFormLabel
+              htmlFor="country"
+              sx={{ marginTop: "0px" }}
+              color="white"
+            >
               {t("company.country")}
             </CustomFormLabel>
             <Controller
@@ -265,17 +276,24 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   onChange={(_event, item) => {
                     onChange(item);
                   }}
+                  PaperComponent={(props) => (
+                    <Paper
+                      {...props}
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    />
+                  )}
                   value={restCountiesData?.find((c: any) => c === value)}
                   options={restCountiesData ?? []}
                   getOptionLabel={(option) => `${option}`}
                   renderInput={(params) => (
-                    <TextField
+                    <GradientTextField
                       {...params}
                       margin="normal"
                       variant="outlined"
                       sx={{
                         marginTop: "0px",
                         marginBottom: "0px",
+                        "& input": { color: "white" },
                       }}
                       error={errors.country !== undefined}
                       helperText={errors.country?.message}
@@ -288,7 +306,11 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
           </Grid>
 
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="chatService" sx={{ marginTop: "0px" }}>
+            <CustomFormLabel
+              htmlFor="chatService"
+              sx={{ marginTop: "0px" }}
+              color="white"
+            >
               {t("login.chatService")}
             </CustomFormLabel>
             <Controller
@@ -300,17 +322,24 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   onChange={(event, item) => {
                     onChange(item);
                   }}
+                  PaperComponent={(props) => (
+                    <Paper
+                      {...props}
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    />
+                  )}
                   value={chatServices.find((m) => m === value)}
                   options={chatServices}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
-                    <TextField
+                    <GradientTextField
                       {...params}
                       sx={{
                         marginTop: "5px !important",
                         marginBottom: "0px",
                         padding: "0px !important",
                         "& .MuiInputBase-root": { height: "45px" },
+                        "& input": { color: "white" },
                       }}
                       variant="outlined"
                       error={errors.chatService !== undefined}
@@ -324,7 +353,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
           </Grid>
 
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="chatServiceUsername">
+            <CustomFormLabel htmlFor="chatServiceUsername" color="white">
               {t("login.usernameLabel")}
             </CustomFormLabel>
             <Controller
@@ -332,7 +361,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
               name="chatServiceUsername"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.chatServiceUsername !== undefined}
                   helperText={errors.chatServiceUsername?.message}
                   required
@@ -340,19 +369,24 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="chatServiceUsername"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
 
           <Grid item xs={12} sm={12} lg={12}>
-            <CustomFormLabel htmlFor="email">{t("user.email")}</CustomFormLabel>
+            <CustomFormLabel htmlFor="email" color="white">
+              {t("user.email")}
+            </CustomFormLabel>
             <Controller
               control={control}
               name="email"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   sx={{ marginTop: "0px" }}
                   error={errors.email !== undefined}
                   helperText={errors.email?.message}
@@ -361,12 +395,15 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="email"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="username">
+            <CustomFormLabel htmlFor="username" color="white">
               {t("login.usernameLabel")}
             </CustomFormLabel>
             <Controller
@@ -374,7 +411,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
               name="username"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.username !== undefined}
                   helperText={errors.username?.message}
                   required
@@ -382,12 +419,15 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="username"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="password">
+            <CustomFormLabel htmlFor="password" color="white">
               {t("login.passwordLabel")}
             </CustomFormLabel>
             <Controller
@@ -395,7 +435,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
               name="password"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   sx={{ marginTop: "0px" }}
                   error={errors.password !== undefined}
                   helperText={errors.password?.message}
@@ -407,6 +447,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                   id="password"
                   {...field}
                   InputProps={{
+                    style: { color: "white" },
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
@@ -429,7 +470,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
 
           <Box>
             <FormControl component="fieldset">
-              <CustomFormLabel component="legend">
+              <CustomFormLabel component="legend" color="white">
                 {t("login.experience")}
               </CustomFormLabel>
               <Controller
@@ -442,16 +483,19 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
                       value="SUPER_AFFILIATE"
                       control={<Radio />}
                       label={t("login.supperAffiliate")}
+                      sx={{ color: "white" }}
                     />
                     <FormControlLabel
                       value="EXPERIENCED"
                       control={<Radio />}
                       label={t("login.experienced")}
+                      sx={{ color: "white" }}
                     />
                     <FormControlLabel
                       value="NO_EXPERIENCE"
                       control={<Radio />}
                       label={t("login.noExperience")}
+                      sx={{ color: "white" }}
                     />
                   </RadioGroup>
                 )}
@@ -461,7 +505,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
         </Grid>
 
         <LoadingButton
-          color="primary"
+          color="secondary"
           variant="contained"
           size="large"
           fullWidth
@@ -473,16 +517,17 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
         </LoadingButton>
       </Box>
       <Stack direction="row" spacing={1} mt={2} justifyContent="center">
-        <Typography color="textSecondary" variant="h6" fontWeight="400">
+        <Typography color="white" variant="h6" fontWeight="300">
           {t("login.alreadyHaveAnAccount")}
         </Typography>
         <Typography
           component={Link}
           to="/login"
           fontWeight="500"
+          variant="h6"
           sx={{
             textDecoration: "none",
-            color: "primary.main",
+            color: "#3A75FC",
           }}
         >
           {t("login.login")}

@@ -40,7 +40,7 @@ const ProductsPage = () => {
         {/* Right part */}
         {/* ------------------------------------------- */}
         <AppCard>
-          <Box p={3} flexGrow={1}>
+          <Box p={3} flexGrow={1}  sx={{ width: "100%" }}>
             <ProductsList
               onClick={() => setMobileSidebarOpen(!isMobileSidebarOpen)}
             />

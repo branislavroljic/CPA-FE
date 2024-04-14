@@ -18,7 +18,6 @@ import {
 } from "@mui/material";
 import { useProductFilterStore } from "@stores/productStore";
 import { CircleFlag } from "react-circle-flags";
-import { useLoaderData } from "react-router-dom";
 import {
   Category,
   Country,

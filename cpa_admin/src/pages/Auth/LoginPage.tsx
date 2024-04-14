@@ -25,6 +25,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import i18n from "../../i18n";
+import { GradientCard, GradientTextField } from "@layout/LayoutUnauth";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -156,7 +157,7 @@ export default function LoginPage() {
             justifyContent="center"
             alignItems="center"
           >
-            <Card
+            <GradientCard
               elevation={9}
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "450px" }}
             >
@@ -171,7 +172,7 @@ export default function LoginPage() {
                 >
                   <Stack>
                     <Box>
-                      <CustomFormLabel htmlFor="username">
+                      <CustomFormLabel htmlFor="username" color="white">
                         {t("login.usernameLabel")}
                       </CustomFormLabel>
                       <Controller
@@ -179,7 +180,7 @@ export default function LoginPage() {
                         name="username"
                         defaultValue=""
                         render={({ field }) => (
-                          <TextField
+                          <GradientTextField
                             error={errors.username !== undefined}
                             helperText={errors.username?.message}
                             required
@@ -189,12 +190,15 @@ export default function LoginPage() {
                             autoComplete="username"
                             autoFocus
                             {...field}
+                            InputProps={{
+                              style: { color: "white" },
+                            }}
                           />
                         )}
                       />
                     </Box>
                     <Box>
-                      <CustomFormLabel htmlFor="password">
+                      <CustomFormLabel htmlFor="password" color="white">
                         {t("login.passwordLabel")}
                       </CustomFormLabel>
                       <Controller
@@ -202,7 +206,7 @@ export default function LoginPage() {
                         name="password"
                         defaultValue=""
                         render={({ field }) => (
-                          <TextField
+                          <GradientTextField
                             error={errors.password !== undefined}
                             helperText={errors.password?.message}
                             margin="normal"
@@ -213,6 +217,7 @@ export default function LoginPage() {
                             id="password"
                             {...field}
                             InputProps={{
+                              style: { color: "white" },
                               endAdornment: (
                                 <InputAdornment position="end">
                                   <IconButton
@@ -246,7 +251,7 @@ export default function LoginPage() {
                   </Box>
                 </Box>
               </Box>
-            </Card>
+            </GradientCard>
           </Grid>
         </Grid>
       </Box>

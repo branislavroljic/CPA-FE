@@ -459,7 +459,7 @@ export default function ProductModal() {
                 name="body.categoriesIDs"
                 control={control}
                 // defaultValue={item?.categories.map((c) => c.id + "") ?? []}
-                defaultValue={item?.categories?.map((c) => c.id + "") ?? []}
+                defaultValue={item?.categories?.map((c) => c.id) ?? []}
                 render={({ field }) => (
                   <FormControl sx={{ minWidth: 540 }}>
                     <InputLabel id="demo-multiple-chip-label">
@@ -470,7 +470,10 @@ export default function ProductModal() {
                       id="demo-multiple-chip"
                       multiple
                       value={field.value}
-                      onChange={(e) => field.onChange(e.target.value)}
+                      onChange={(e) => {
+                        console.log(e)
+                        console.log(e.target.value)
+                        field.onChange(e.target.value)}}
                       input={
                         <OutlinedInput id="select-multiple-chip" label="Chip" />
                       }

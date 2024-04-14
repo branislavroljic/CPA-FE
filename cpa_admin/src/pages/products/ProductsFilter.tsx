@@ -1,10 +1,7 @@
 import { useTheme } from "@mui/material/styles";
 import {
-  ListItemText,
-  ListItemButton,
   List,
   Divider,
-  ListItemIcon,
   Typography,
   Box,
   Button,
@@ -19,7 +16,6 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { IconPremiumRights } from "@tabler/icons-react";
 import { useProductFilterStore } from "@stores/productStore";
 import { CircleFlag } from "react-circle-flags";
 import { useLoaderData } from "react-router-dom";
@@ -54,11 +50,14 @@ const ProductFilter = () => {
   } = useProductFilterStore();
 
   const handleCategoryChange = (
-    event: SelectChangeEvent<typeof filter.categories>
+    event: SelectChangeEvent<typeof filter.category>
   ) => {
     const {
       target: { value },
     } = event;
+    // if () {
+    //   updateFilterCategories(undefined);
+    // }
     updateFilterCategories(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
@@ -132,7 +131,7 @@ const ProductFilter = () => {
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
               multiple
-              value={filter.categories ?? []}
+              value={filter.category ?? []}
               onChange={handleCategoryChange}
               input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => (

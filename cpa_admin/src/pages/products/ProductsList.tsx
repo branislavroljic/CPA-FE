@@ -112,27 +112,29 @@ const ProductList = ({ onClick }: Props) => {
             </Typography>
             <Chip label={product.type} size="small" color="success" />
           </Box>
-          <Stack mt={1} direction="row" alignItems="center">
-            {product?.categories.map((category) => (
-              <Chip
-                label={category.name}
-                size="small"
-                color={
-                  category.color && category.color.length
-                    ? (category.color as
-                        | "default"
-                        | "primary"
-                        | "secondary"
-                        | "error"
-                        | "success"
-                        | "info"
-                        | "warning"
-                        | undefined)
-                    : "primary"
-                }
-              />
-            ))}
-          </Stack>
+          <div style={{ overflowX: "auto", paddingBottom : 15 }} >
+            <Stack mt={1} direction="row" alignItems="center">
+              {product?.categories.map((category) => (
+                <Chip
+                  label={category.name}
+                  size="small"
+                  color={
+                    category.color && category.color.length
+                      ? (category.color as
+                          | "default"
+                          | "primary"
+                          | "secondary"
+                          | "error"
+                          | "success"
+                          | "info"
+                          | "warning"
+                          | undefined)
+                      : "primary"
+                  }
+                />
+              ))}
+            </Stack>
+          </div>
           <Stack direction="row" alignItems="center" gap={2}>
             <Stack gap={0}>
               <Typography variant="overline">APPROVE RATE</Typography>

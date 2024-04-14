@@ -6,13 +6,11 @@ import LoginHistoryPage from "@pages/login-history/LoginHistoryPage";
 import PaymentsPage from "@pages/payments/PaymentsPage";
 import DomainsPage from "@pages/domains/DomainsPage";
 import ProductsPage from "@pages/products/ProductsPage";
-import { productLoader } from "@pages/productDetails/ProductDetailsPage";
+// import { productLoader } from "@pages/productDetails/ProductDetailsPage";
 import ProductDetailsPage from "@pages/productDetails/ProductDetailsPage";
 import ReferralPage from "@pages/referral/ReferralPage";
 import queryClient from "../query-client";
 import {
-  getCategories,
-  getCountries,
   getProductsShortResponse,
 } from "@api/product/product";
 import OrderPage from "@pages/orders/OrderPage";
@@ -30,7 +28,6 @@ import StatisticsPage from "@pages/statistic/StatisticPage";
 import React from "react";
 import Notifications from "@pages/notifications/Notifications";
 import PaymentSettingsPage from "@pages/payment-settings/PaymentSettingsPage";
-import i18n from "../i18n";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -98,7 +95,7 @@ const browserConfig = createBrowserRouter([
                 index: true,
                 element: <ProductDetailsPage />,
                 errorElement: <ErrorPage />,
-                loader: productLoader,
+                // loader: productLoader,
               },
             ],
           },

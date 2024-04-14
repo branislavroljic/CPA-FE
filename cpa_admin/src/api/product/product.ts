@@ -78,7 +78,7 @@ export type ProductFormData = {
 export interface FilterProduct {
   country_code?: string;
   type?: string;
-  categories?: string[];
+  category?: string[];
 }
 
 export function getCountries(): Promise<Country> {

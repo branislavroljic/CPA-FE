@@ -110,27 +110,29 @@ const ProductList = ({ onClick }: Props) => {
               color={product.type == "PUBLIC" ? "default" : "warning"}
             />
           </Box>
-          <Stack mt={1} direction="row" alignItems="center" gap={1} mb={1}>
-            {product?.categories.map((category) => (
-              <Chip
-                label={category.name}
-                size="small"
-                color={
-                  category.color && category.color.length
-                    ? (category.color as
-                        | "default"
-                        | "primary"
-                        | "secondary"
-                        | "error"
-                        | "success"
-                        | "info"
-                        | "warning"
-                        | undefined)
-                    : "primary"
-                }
-              />
-            ))}
-          </Stack>
+          <div style={{ overflowX: "auto", paddingBottom: 15 }}>
+            <Stack mt={1} direction="row" alignItems="center" gap={1} mb={1}>
+              {product?.categories.map((category) => (
+                <Chip
+                  label={category.name}
+                  size="small"
+                  color={
+                    category.color && category.color.length
+                      ? (category.color as
+                          | "default"
+                          | "primary"
+                          | "secondary"
+                          | "error"
+                          | "success"
+                          | "info"
+                          | "warning"
+                          | undefined)
+                      : "primary"
+                  }
+                />
+              ))}
+            </Stack>
+          </div>
           {/* <Stack direction="row" alignItems="center" gap={2}>
             <Stack gap={0}>
               <Typography variant="overline">
@@ -199,9 +201,9 @@ const ProductList = ({ onClick }: Props) => {
     <Grid item xs={12} lg={12} md={12} sm={12}>
       <Box textAlign="center" mt={6}>
         {/* <img src={emptyCart} alt="cart" width="200px" /> */}
-        <Typography variant="h2">Loading...</Typography>
+        <Typography variant="h2">No offers</Typography>
         <Typography variant="h6" mb={3}>
-          Loading products...
+          The offer is not available
         </Typography>
       </Box>
     </Grid>

@@ -7,12 +7,12 @@ export interface ProductFilterState {
   filter: FilterProduct;
   updateFilterCountryCode: (countryCode?: string) => void;
   updateFilterProductType: (productType?: string) => void;
-  updateFilterCategories: (Product?: string[]) => void;
+  updateFilterCategories: (categories?: string[]) => void;
   resetFilter: () => void;
 }
 
 export const useProductFilterStore = create<ProductFilterState>((set) => ({
-  filter: { country_code: "", type: "", Product: "" },
+  filter: { country_code: "", type: "", category: undefined },
   updateFilterCountryCode: (countryCode) =>
     set((state) => ({
       filter: { ...state.filter, country_code: countryCode },
@@ -23,7 +23,7 @@ export const useProductFilterStore = create<ProductFilterState>((set) => ({
     })),
   updateFilterCategories: (categories) =>
     set((state) => ({
-      filter: { ...state.filter, categories: categories },
+      filter: { ...state.filter, category: categories },
     })),
   resetFilter: () =>
     set((state) => ({
@@ -31,7 +31,7 @@ export const useProductFilterStore = create<ProductFilterState>((set) => ({
         ...state.filter,
         country_code: undefined,
         type: undefined,
-        Product: undefined,
+        category: undefined,
       },
     })),
 }));

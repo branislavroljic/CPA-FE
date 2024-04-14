@@ -93,14 +93,19 @@ export function addListFilterParams(baseUrl: URL, ...filters: object[]): URL {
   filters.forEach((f) => {
     if (!f) return;
     for (const [k, v] of Object.entries(f)) {
-      if (v != null && !(typeof v == "string" && v.trim().length == 0)) {
+      if (
+        v != null &&
+        !(
+          (typeof v === "string" && v.trim().length === 0) ||
+          (Array.isArray(v) && v.length === 0)
+        )
+      ) {
         modifiedUrl.searchParams.set(k, v);
       }
     }
   });
   return modifiedUrl;
 }
-
 export function addFilterParams(baseUrl: URL, filters: MRT_ColumnFiltersState) {
   const modifiedUrl = new URL(baseUrl);
   filters.forEach((f) => {

@@ -4,10 +4,10 @@ import {
   Box,
   Typography,
   Stack,
-  TextField,
   InputAdornment,
   IconButton,
   Autocomplete,
+  Paper,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { z } from "zod";
@@ -20,9 +20,9 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getRestCountries } from "@api/external/restCounties";
 import { useQuery } from "@tanstack/react-query";
-import CustomTextField from "@ui/forms/theme-elements/CustomTextField";
 import { useNotificationStore } from "@stores/notificationStore";
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from "@mui/lab/LoadingButton";
+import { GradientTextField } from "@layout/LayoutUnauth";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -241,7 +241,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
       <Box component="form" onSubmit={handleSubmit(registerUser)}>
         <Grid container direction={"row"} spacing={1}>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="name">
+            <CustomFormLabel htmlFor="name" color="white">
               {t("user.firstname")}
             </CustomFormLabel>
             <Controller
@@ -249,7 +249,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="name"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.name !== undefined}
                   helperText={errors.name?.message}
                   required
@@ -258,12 +258,15 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   id="name"
                   autoFocus
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="surname">
+            <CustomFormLabel htmlFor="surname" color="white">
               {t("user.lastname")}
             </CustomFormLabel>
             <Controller
@@ -271,7 +274,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="surname"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.surname !== undefined}
                   helperText={errors.surname?.message}
                   required
@@ -279,6 +282,9 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="surname"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
@@ -289,6 +295,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                 mt: 0,
               }}
               htmlFor="companyName"
+              color="white"
             >
               {t("company.companyName")}
             </CustomFormLabel>
@@ -296,7 +303,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="companyName"
               control={control}
               render={({ field }) => (
-                <CustomTextField
+                <GradientTextField
                   sx={{
                     marginTop: "0px",
                   }}
@@ -308,12 +315,19 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   variant="outlined"
                   fullWidth
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="country" sx={{ marginTop: "0px" }}>
+            <CustomFormLabel
+              htmlFor="country"
+              sx={{ marginTop: "0px" }}
+              color="white"
+            >
               {t("company.country")}
             </CustomFormLabel>
             <Controller
@@ -329,8 +343,14 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   value={restCountiesData?.find((c: any) => c === value)}
                   options={restCountiesData ?? []}
                   getOptionLabel={(option) => `${option}`}
+                  PaperComponent={(props) => (
+                    <Paper
+                      {...props}
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    />
+                  )}
                   renderInput={(params) => (
-                    <TextField
+                    <GradientTextField
                       {...params}
                       margin="normal"
                       variant="outlined"
@@ -339,6 +359,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                         marginBottom: "0px",
                         padding: "0px !important",
                         "& .MuiInputBase-root": { height: "45px" },
+                        "& input": { color: "white" },
                       }}
                       error={errors.country !== undefined}
                       helperText={errors.country?.message}
@@ -355,6 +376,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                 mt: 0,
               }}
               htmlFor="address"
+              color="white"
             >
               {t("company.address")}
             </CustomFormLabel>
@@ -362,7 +384,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="address"
               control={control}
               render={({ field }) => (
-                <CustomTextField
+                <GradientTextField
                   id="address"
                   required
                   error={errors.address !== undefined}
@@ -371,6 +393,9 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   variant="outlined"
                   fullWidth
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
@@ -381,6 +406,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                 mt: 0,
               }}
               htmlFor="city"
+              color="white"
             >
               {t("company.city")}
             </CustomFormLabel>
@@ -389,7 +415,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               control={control}
               defaultValue={""}
               render={({ field }) => (
-                <CustomTextField
+                <GradientTextField
                   id="city"
                   required
                   error={errors.city !== undefined}
@@ -398,6 +424,9 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   variant="outlined"
                   fullWidth
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
@@ -408,6 +437,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                 mt: 0,
               }}
               htmlFor="address"
+              color="white"
             >
               {t("company.zipcode")}
             </CustomFormLabel>
@@ -416,7 +446,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               control={control}
               defaultValue={""}
               render={({ field }) => (
-                <CustomTextField
+                <GradientTextField
                   id="zipcode"
                   required
                   error={errors.zipcode !== undefined}
@@ -425,12 +455,19 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   variant="outlined"
                   fullWidth
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="chatService" sx={{ marginTop: "0px" }}>
+            <CustomFormLabel
+              htmlFor="chatService"
+              sx={{ marginTop: "0px" }}
+              color="white"
+            >
               Chat service
             </CustomFormLabel>
             <Controller
@@ -445,14 +482,21 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   value={chatServices.find((m) => m === value)}
                   options={chatServices}
                   getOptionLabel={(option) => option}
+                  PaperComponent={(props) => (
+                    <Paper
+                      {...props}
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    />
+                  )}
                   renderInput={(params) => (
-                    <TextField
+                    <GradientTextField
                       {...params}
                       sx={{
                         marginTop: "5px !important",
                         marginBottom: "0px",
                         padding: "0px !important",
                         "& .MuiInputBase-root": { height: "45px" },
+                        "& input": { color: "white" },
                       }}
                       margin="normal"
                       variant="outlined"
@@ -466,7 +510,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="chatServiceUsername">
+            <CustomFormLabel htmlFor="chatServiceUsername" color="white">
               {t("login.usernameLabel")}
             </CustomFormLabel>
             <Controller
@@ -474,7 +518,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="chatServiceUsername"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.chatServiceUsername !== undefined}
                   helperText={errors.chatServiceUsername?.message}
                   required
@@ -482,18 +526,23 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="chatServiceUsername"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={12} lg={12}>
-            <CustomFormLabel htmlFor="email">{t("user.email")}</CustomFormLabel>
+            <CustomFormLabel htmlFor="email" color="white">
+              {t("user.email")}
+            </CustomFormLabel>
             <Controller
               control={control}
               name="email"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   sx={{ marginTop: "0px" }}
                   error={errors.email !== undefined}
                   helperText={errors.email?.message}
@@ -502,12 +551,15 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="email"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="username">
+            <CustomFormLabel htmlFor="username" color="white">
               {t("login.usernameLabel")}
             </CustomFormLabel>
             <Controller
@@ -515,7 +567,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="username"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   error={errors.username !== undefined}
                   helperText={errors.username?.message}
                   required
@@ -523,12 +575,15 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   fullWidth
                   id="username"
                   {...field}
+                  InputProps={{
+                    style: { color: "white" },
+                  }}
                 />
               )}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <CustomFormLabel htmlFor="password">
+            <CustomFormLabel htmlFor="password" color="white">
               {t("login.passwordLabel")}
             </CustomFormLabel>
             <Controller
@@ -536,7 +591,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               name="password"
               defaultValue=""
               render={({ field }) => (
-                <TextField
+                <GradientTextField
                   sx={{ marginTop: "0px" }}
                   error={errors.password !== undefined}
                   helperText={errors.password?.message}
@@ -548,6 +603,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   id="password"
                   {...field}
                   InputProps={{
+                    style: { color: "white" },
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
@@ -570,7 +626,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
         </Grid>
 
         <LoadingButton
-          color="primary"
+          color="secondary"
           variant="contained"
           size="large"
           fullWidth
@@ -582,16 +638,17 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
         </LoadingButton>
       </Box>
       <Stack direction="row" spacing={1} mt={2} justifyContent="center">
-        <Typography color="textSecondary" variant="h6" fontWeight="400">
+        <Typography variant="h6" fontWeight="400" color="white">
           {t("login.alreadyHaveAnAccount")}
         </Typography>
         <Typography
           component={Link}
           to="/login"
           fontWeight="500"
+          variant="h6"
           sx={{
             textDecoration: "none",
-            color: "primary.main",
+            color: "#3A75FC",
           }}
         >
           {t("login.login")}

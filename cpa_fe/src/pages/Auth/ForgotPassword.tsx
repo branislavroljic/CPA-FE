@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "@stores/notificationStore";
 import { useState } from "react";
 import Banner from "./Banner";
+import { GradientCard, GradientTextField } from "@layout/LayoutUnauth";
 
 const forgotPasswordSchema = z
   .object({
@@ -123,7 +124,7 @@ export default function ForgotPasswordPage() {
             alignItems="center"
           >
             {!isSuccessful ? (
-              <Card
+              <GradientCard
                 elevation={9}
                 sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
               >
@@ -131,7 +132,7 @@ export default function ForgotPasswordPage() {
                   <Logo />
                 </Box>
                 <Typography
-                  color="textSecondary"
+                  sx={{ color: "white" }}
                   textAlign="center"
                   variant="subtitle2"
                   fontWeight="400"
@@ -145,7 +146,7 @@ export default function ForgotPasswordPage() {
                 >
                   <Stack mt={4}>
                     <Box>
-                      <CustomFormLabel htmlFor="email">
+                      <CustomFormLabel htmlFor="email"  sx={{ color: "white" }}>
                         {t("login.email")}
                       </CustomFormLabel>
                       <Controller
@@ -153,7 +154,7 @@ export default function ForgotPasswordPage() {
                         name="mail"
                         defaultValue=""
                         render={({ field }) => (
-                          <TextField
+                          <GradientTextField
                             error={errors.mail !== undefined}
                             helperText={errors.mail?.message}
                             variant="outlined"
@@ -162,6 +163,9 @@ export default function ForgotPasswordPage() {
                             autoComplete="mail"
                             autoFocus
                             {...field}
+                            InputProps={{
+                              style: { color: "white" },
+                            }}
                           />
                         )}
                       />
@@ -169,7 +173,7 @@ export default function ForgotPasswordPage() {
                   </Stack>
                   <Stack mt={2} spacing={2}>
                     <Button
-                      color="primary"
+                      color="secondary"
                       variant="contained"
                       size="large"
                       fullWidth
@@ -178,7 +182,7 @@ export default function ForgotPasswordPage() {
                       {t("login.recoverPassword")}
                     </Button>
                     <Button
-                      color="primary"
+                      color="secondary"
                       size="large"
                       fullWidth
                       component={Link}
@@ -188,7 +192,7 @@ export default function ForgotPasswordPage() {
                     </Button>
                   </Stack>
                 </Box>
-              </Card>
+              </GradientCard>
             ) : (
               <Banner
                 title={t("login.checkYourEmail")}

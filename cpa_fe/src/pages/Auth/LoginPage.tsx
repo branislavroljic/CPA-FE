@@ -8,14 +8,12 @@ import { USER_KEY } from "@api/auth";
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/system";
 import {
-  Card,
   Checkbox,
   FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { User } from "@api/user/user";
@@ -29,6 +27,7 @@ import { useState } from "react";
 import { useNotificationStore } from "@stores/notificationStore";
 
 import LoadingButton from "@mui/lab/LoadingButton";
+import { GradientCard, GradientTextField } from "@layout/LayoutUnauth";
 
 const standardMaxLength = import.meta.env.VITE_STANDARD_FIELD_MAX_LENGTH;
 
@@ -171,9 +170,19 @@ export default function LoginPage() {
             justifyContent="center"
             alignItems="center"
           >
-            <Card
-              elevation={9}
-              sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "450px" }}
+            <GradientCard
+              elevation={0}
+              sx={{
+                p: 4,
+                zIndex: 1,
+                width: "100%",
+                maxWidth: "450px",
+                // borderRadius: "16px",
+                // border: "2px solid",
+                // borderImageSlice: 1,
+                // borderImageSource:
+                //   "linear-gradient(180deg, #E3A02B 0%, #3A77F5 100%)",
+              }}
             >
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Logo />
@@ -186,7 +195,7 @@ export default function LoginPage() {
                 >
                   <Stack>
                     <Box>
-                      <CustomFormLabel htmlFor="username">
+                      <CustomFormLabel htmlFor="username" color="white">
                         {t("login.usernameLabel")}
                       </CustomFormLabel>
                       <Controller
@@ -194,7 +203,7 @@ export default function LoginPage() {
                         name="username"
                         defaultValue=""
                         render={({ field }) => (
-                          <TextField
+                          <GradientTextField
                             error={errors.username !== undefined}
                             helperText={errors.username?.message}
                             required
@@ -204,12 +213,15 @@ export default function LoginPage() {
                             autoComplete="username"
                             autoFocus
                             {...field}
+                            InputProps={{
+                              style: { color: "white" },
+                            }}
                           />
                         )}
                       />
                     </Box>
                     <Box>
-                      <CustomFormLabel htmlFor="password">
+                      <CustomFormLabel htmlFor="password" color="white">
                         {t("login.passwordLabel")}
                       </CustomFormLabel>
                       <Controller
@@ -217,7 +229,7 @@ export default function LoginPage() {
                         name="password"
                         defaultValue=""
                         render={({ field }) => (
-                          <TextField
+                          <GradientTextField
                             error={errors.password !== undefined}
                             helperText={errors.password?.message}
                             margin="normal"
@@ -226,8 +238,13 @@ export default function LoginPage() {
                             variant="outlined"
                             type={showPassword ? "text" : "password"}
                             id="password"
+                            // sx={{
+                            //   backgroundImage:
+                            //     "linear-gradient(278.24deg, rgba(58, 117, 252, 0.4) 0%, rgba(58, 117, 252, 0) 100%)",
+                            // }}
                             {...field}
                             InputProps={{
+                              style: { color: "white" },
                               endAdornment: (
                                 <InputAdornment position="end">
                                   <IconButton
@@ -254,10 +271,10 @@ export default function LoginPage() {
                       my={2}
                     >
                       <FormControlLabel
+                        sx={{ color: "white" }}
                         control={
                           <Checkbox
                             value="remember"
-                            color="primary"
                             {...register("rememberMe")}
                           />
                         }
@@ -279,7 +296,7 @@ export default function LoginPage() {
                         fontWeight="500"
                         sx={{
                           textDecoration: "none",
-                          color: "primary.main",
+                          color: "#3A75FC",
                         }}
                       >
                         {t("login.forgotPassword")}
@@ -288,7 +305,7 @@ export default function LoginPage() {
                   </Stack>
                   <Box>
                     <LoadingButton
-                      color="primary"
+                      color="secondary"
                       variant="contained"
                       size="large"
                       fullWidth
@@ -306,7 +323,7 @@ export default function LoginPage() {
                     mt={3}
                   >
                     <Typography
-                      color="textSecondary"
+                      sx={{ color: "white" }}
                       variant="h6"
                       fontWeight="500"
                     >
@@ -329,7 +346,7 @@ export default function LoginPage() {
                       fontWeight="500"
                       sx={{
                         textDecoration: "none",
-                        color: "primary.main",
+                        color: "#3A75FC",
                       }}
                     >
                       {t("login.createAccount")}
@@ -337,7 +354,7 @@ export default function LoginPage() {
                   </Stack>
                 </Box>
               </Box>
-            </Card>
+            </GradientCard>
           </Grid>
         </Grid>
       </Box>

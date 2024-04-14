@@ -12,7 +12,7 @@ import { AccountCircleOutlined } from "@mui/icons-material";
 import MuiTab, { TabProps } from "@mui/material/Tab";
 import RegisterCompanyForm from "./RegisterCompanyForm";
 import BusinessIcon from "@mui/icons-material/Business";
-import { useTheme } from "@emotion/react";
+import { GradientCard } from "@layout/LayoutUnauth";
 
 const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
@@ -64,7 +64,7 @@ export default function RegisterPage() {
     <PageContainer description="this is Register page">
       <Box
         sx={{
-          backgroundImage: 'url("/assets/backgrounds/background.png")',
+          // backgroundImage: 'url("/assets/backgrounds/background.png")',
           backgroundSize: "cover",
           minHeight: minHeight,
           position: "relative",
@@ -97,7 +97,7 @@ export default function RegisterPage() {
           >
             {!isSuccessful ? (
               !isConfirmMail ? (
-                <Card
+                <GradientCard
                   elevation={9}
                   sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "550px" }}
                 >
@@ -140,7 +140,7 @@ export default function RegisterPage() {
                       />
                     </TabPanel>
                   </TabContext>
-                </Card>
+                </GradientCard>
               ) : (
                 <Box
                   sx={{
