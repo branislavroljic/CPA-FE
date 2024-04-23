@@ -50,7 +50,7 @@ const PaymentSettingsPage = () => {
 
   return (
     <PageContainer
-      title={"Klix Lead"}
+      title={"Pure Sell"}
       description="this is Payment Settings page"
     >
       <Card>

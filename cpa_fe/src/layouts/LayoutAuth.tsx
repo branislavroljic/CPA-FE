@@ -186,7 +186,7 @@ export default function LayoutAuth() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="h1" color="inherit">
-            Klix Lead
+            Pure Sell
           </Typography>
           <Box component="div" sx={{ ml: "auto" }}>
             <IconButton

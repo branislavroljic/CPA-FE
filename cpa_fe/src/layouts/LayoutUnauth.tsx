@@ -17,7 +17,7 @@ export const GradientCard = styled(Card)<GradientProps>(
     outline: "none",
     position: "relative",
     borderRadius,
-    background: `linear-gradient(to bottom, ${gradientColors.join(",")})`,
+    background: `white`,
     backgroundColor: "transparent",
 
     "&::before": {

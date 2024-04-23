@@ -22,7 +22,7 @@ const Notifications = () => {
   );
 
   return (
-    <PageContainer title="Klix Lead" description="this is Note page">
+    <PageContainer title="Pure Sell" description="this is Note page">
       <Breadcrumb title={t("notification.title")} items={BCrumb} />
       <AppCard>
         {isMobileSidebarOpen ? (

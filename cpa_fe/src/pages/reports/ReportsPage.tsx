@@ -21,7 +21,7 @@ export default function ReportsPage() {
     [t]
   );
   return (
-    <PageContainer title="Klix Lead" description="this is innerpage">
+    <PageContainer title="Pure Sell" description="this is innerpage">
       <Breadcrumb items={BCrumb} title={t("reports.title")} />
       <ThemeProvider
         theme={createTheme(theme, i18n.language === "en" ? enUS : srRS)}

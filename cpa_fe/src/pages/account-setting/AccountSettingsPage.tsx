@@ -63,7 +63,7 @@ const AccountSetting = () => {
 
   return (
     <PageContainer
-      title={"Klix Lead"}
+      title={"Pure Sell"}
       description="this is Account Setting page"
     >
       {/* breadcrumb */}

@@ -193,7 +193,7 @@ export default function StatisticsPage() {
   ]);
 
   return (
-    <PageContainer title="Klix Lead" description="this is statistics page">
+    <PageContainer title="Pure Sell" description="this is statistics page">
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>

@@ -61,8 +61,8 @@ const ProductList = ({ onClick }: Props) => {
     <Grid
       item
       xs={12}
-      lg={6}
-      md={6}
+      lg={4}
+      md={4}
       sm={6}
       display="flex"
       alignItems="stretch"
@@ -127,7 +127,7 @@ const ProductList = ({ onClick }: Props) => {
                           | "info"
                           | "warning"
                           | undefined)
-                      : "primary"
+                      : "secondary"
                   }
                 />
               ))}
@@ -182,14 +182,9 @@ const ProductList = ({ onClick }: Props) => {
                 <Typography variant="overline" color={"lightgray"}>
                   {t("products.payout")}
                 </Typography>
-                <Typography variant="h6">{`$ ${product.payout}`}</Typography>
+                <Typography variant="h6">{`${product.payout} KM`}</Typography>
               </Stack>
-              <Stack>
-                <Typography variant="overline" color={"lightgray"}>
-                  {t("products.paymentModel")}
-                </Typography>
-                <Typography variant="h6">CPA</Typography>
-              </Stack>
+              
             </Stack>
           </Stack>
         </CardContent>

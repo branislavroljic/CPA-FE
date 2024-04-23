@@ -107,7 +107,7 @@ const ProductDetailsPage = () => {
   };
 
   return (
-    <PageContainer title="Klix Lead" description="this is product details page">
+    <PageContainer title="Pure Sell" description="this is product details page">
       {/* breadcrumb */}
       <Breadcrumb title="Product Detail" items={BCrumb} />
       {isLoading ? (
