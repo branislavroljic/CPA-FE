@@ -95,6 +95,7 @@ export default function PaymentsTable() {
             openModal({} as InputPayment, requestPayment, true);
           }}
           variant="contained"
+          style={{ color: "white" }}
         >
           {t("payments.requestPayment")}
         </Button>

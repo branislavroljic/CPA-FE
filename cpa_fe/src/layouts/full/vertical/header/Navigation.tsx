@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -19,38 +20,40 @@ import { useQuery } from "@tanstack/react-query";
 import Spinner from "@ui/view/spinner/Spinner";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { InputPayment, requestPayment } from "@api/payment/payment";
-import PaymentModal from "@pages/payments/PaymentModal";
 import { usePaymentModalStore } from "@stores/paymentStore";
 
-const MenuItem = ({ label, value }: any) => (
-  <Stack>
-    <Typography
-      style={{
-        fontWeight: "400",
-        fontSize: "1rem",
-        lineHeight: "1.5",
-        letterSpacing: "0.00938em",
-        textAlign: "left",
-      }}
-      color="primary"
-    >
-      {label}
-    </Typography>
-    <Typography
-      style={{
-        fontWeight: "700",
-        fontSize: "1rem",
-        lineHeight: "1.5",
-        letterSpacing: "0.00938em",
-        textAlign: "left",
-        marginTop: "8px",
-      }}
-      color="secondary"
-    >
-      {value}
-    </Typography>
-  </Stack>
-);
+const MenuItem = ({ label, value }: any) => {
+  const theme = useTheme();
+  return (
+    <Stack>
+      <Typography
+        style={{
+          fontWeight: "400",
+          fontSize: "1rem",
+          lineHeight: "1.5",
+          letterSpacing: "0.00938em",
+          textAlign: "left",
+        }}
+        color="primary"
+      >
+        {label}
+      </Typography>
+      <Typography
+        style={{
+          fontWeight: "700",
+          fontSize: "1rem",
+          lineHeight: "1.5",
+          letterSpacing: "0.00938em",
+          textAlign: "left",
+          marginTop: "8px",
+        }}
+        color={theme.palette.mode == "light" ? "secondary" : "#fff"}
+      >
+        {value}
+      </Typography>
+    </Stack>
+  );
+};
 
 const AppDD = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
@@ -167,6 +170,7 @@ const AppDD = () => {
               </Stack>
               <Button
                 color="secondary"
+                style={{ color: "white" }}
                 onClick={() => {
                   openModal({} as InputPayment, requestPayment, true);
                 }}

@@ -20,6 +20,7 @@ import {
   IconBasket,
   IconCategory,
   IconCoin,
+  IconHeartHandshake,
   IconShoppingCart,
   IconUsersGroup,
   IconVip,
@@ -56,6 +57,12 @@ const Menuitems = () =>
       title: "Orders",
       icon: IconShoppingCart,
       href: "/orders",
+    },
+    {
+      id: uniqueId(),
+      title: "Partners",
+      icon: IconHeartHandshake,
+      href: "/partners",
     },
     {
       id: uniqueId(),

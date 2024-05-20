@@ -62,7 +62,7 @@ const loginSchema = z.object({
         num: standardMaxLength,
       }),
     }),
-  rememberMe: z.boolean(),
+  rememberMe: z.boolean().optional(),
 });
 
 type LoginInput = z.infer<typeof loginSchema>;
@@ -83,13 +83,18 @@ export default function LoginPage() {
     control,
     register,
     formState: { errors },
-  } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
+    watch,
+  } = useForm<LoginInput>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: { rememberMe: false },
+  });
 
   const navigate = useNavigate();
 
   const setUser = useAuthStore((state) => state.setUser);
 
   const loginUser = async (input: LoginInput) => {
+
     setLoading(true);
     const baseUrl = new URL("auth/signin", import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
@@ -274,12 +279,23 @@ export default function LoginPage() {
                         sx={{ color: "white" }}
                         control={
                           <Checkbox
-                            value="remember"
                             {...register("rememberMe")}
+                            checked={watch("rememberMe")}
                           />
                         }
                         label={t("login.rememberMe")}
                       />
+                      {/* <Controller
+                        name="rememberMe"
+                        control={control}
+                        defaultValue={false}
+                        render={({ field }) => (
+                          <FormControlLabel
+                            control={<Checkbox {...field} />}
+                            label="Autre"
+                          />
+                        )}
+                      /> */}
                       {/* <Link
                         href="#"
                         fontWeight="500"
@@ -310,6 +326,7 @@ export default function LoginPage() {
                       size="large"
                       fullWidth
                       type="submit"
+                      style={{ color: "white" }} 
                       loading={loading}
                     >
                       {t("login.login")}

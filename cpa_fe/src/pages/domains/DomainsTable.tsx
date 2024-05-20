@@ -142,7 +142,8 @@ export default function DomainsTable() {
           onClick={() => {
             openModal({} as InputDomain, addDomain, true);
           }}
-          variant="contained"
+          variant="contained" 
+          style={{ color: "white" }}
         >
           {t("domain.addDomain")}
         </Button>

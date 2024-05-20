@@ -21,7 +21,6 @@ import PercentIcon from "@mui/icons-material/Percent";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { StatisticsCardProps } from "@ui/shared/StatisticsCard";
-import WelcomeCard from "./WelcomeCard";
 import AreaChart, { AreaChartProp } from "@ui/dashboard/AreaChart";
 import NotVerifiedModal from "./NotVerifiedModal";
 import { useNotVerifiedModalStore } from "@stores/notVerifiedModalStore";

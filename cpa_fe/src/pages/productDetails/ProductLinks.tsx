@@ -135,7 +135,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
           >
             <Tab label="Link builder" {...a11yProps(0)} />
             <Tab label="Api request" {...a11yProps(1)} />
-            <Tab label= {t("order.order")} {...a11yProps(2)} />
+            <Tab label={t("order.order")} {...a11yProps(2)} />
           </Tabs>
         </Box>
         {/* ------------------------------------------- */}
@@ -303,7 +303,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                       {`"apiKey": "${user?.apiKey}", 
                       "name":STRING ("Donald"),
                       "phoneNumber": STRING || NUMBER ("479-200-8330" || 4792008330), 
-                      "productId": "653",
+                      "offerId": ${product.id},
                       "countryCode": STRING ("US"), 
                       "baseUrl": STRING ("https || http"://domain.com), 
                       "referrer": STRING ("https ||http"://domain.com?page=order), 
@@ -327,10 +327,10 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                           Host: https://api.klixlead.com
                           Content-Type: application/json
                           {
-                          "apiKey": "54a42b948d9c93bcc638eaa4ff550836",
+                          "apiKey": "${user?.apiKey}",
                           "name": "INSERT_NAME_FROM_FORM",
                           "phoneNumber": "INSERT_PHONE_FROM_FORM",
-                          "offerId": "653",
+                          "offerId": ${product.id},
                           "countryCode": "INSERT_COUNTRY_CODE_FROM_LP",
                           "baseUrl": "INSERT_YOUR_DOMAIN",
                           "referrer": "INSERT_YOUR_REFERRER_DOMAIN",
@@ -366,7 +366,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                     </pre>
                   </Grid>
                   <Grid item xs={12} sm={12} lg={12}>
-                    <Typography>RESPONSE CODE 400</Typography>
+                    <Typography>RESPONSE CODE 40X</Typography>
                     <pre
                       style={{
                         backgroundColor: "rgb(242, 244, 244)",
@@ -376,13 +376,14 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                       }}
                     >
                       {`{
-                      "type": "error",
-                      "field": "FIRST_FOUND_INVALID_FIELD",
-                      "reason": "the field is incorrect||empty||wrong format||not found"
+                       "statusCode": 40X,
+                       "timestamp": "TIMESTAMP",
+                       "message": "EXCEPTION MESSAGE",
+                       "description": "DESCRIPTION_URI"
                     }`}
                     </pre>
                   </Grid>
-                  <Grid item xs={12} sm={12} lg={12}>
+                  {/* <Grid item xs={12} sm={12} lg={12}>
                     <Typography>RESPONSE CODE 405</Typography>
                     <pre
                       style={{
@@ -407,9 +408,9 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                     >
                       {`Wrong request body (form data, binary...). Only JSON body allowed`}
                     </pre>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12} sm={12} lg={12}>
-                    <Typography>RESPONSE CODE 500</Typography>
+                    <Typography>RESPONSE CODE 50X</Typography>
                     <pre
                       style={{
                         backgroundColor: "rgb(242, 244, 244)",
@@ -418,7 +419,12 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                         fontSize: "small",
                       }}
                     >
-                      {`Something went very wrong!!!`}
+                      {`{
+                        "statusCode": 50X,
+                       "timestamp": "TIMESTAMP",
+                       "message": "EXCEPTION MESSAGE",
+                       "description": "DESCRIPTION_URI"
+                      }`}
                     </pre>
                   </Grid>
                 </Grid>

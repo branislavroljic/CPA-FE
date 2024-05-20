@@ -9,6 +9,7 @@
   "price": "Price",
   "payout": "Payout",
   "limit": "Limit",
+  "day": "day",
   "paymentModel": "Model",
   "approveRate": "Approve rate",
   "earnPerClick": "Earn per click",

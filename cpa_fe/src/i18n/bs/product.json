@@ -9,6 +9,7 @@
   "price": "Cijena",
   "payout": "Isplata",
   "limit": "Limit",
+  "day": "danu",
   "paymentModel": "Model",
   "approveRate": "Stopa odobrenja",
   "earnPerClick": "Zarada po kliku",

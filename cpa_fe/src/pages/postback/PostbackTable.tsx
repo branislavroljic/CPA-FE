@@ -117,6 +117,7 @@ export default function PostbackTable() {
             openModal({} as Postback, createPostback, true);
           }}
           variant="contained"
+          style={{ color: "white" }}
         >
           {t("postback.addPostback")}
         </Button>

@@ -10,6 +10,7 @@ import {
   Chip,
   Divider,
   Tooltip,
+  useTheme,
 } from "@mui/material";
 import { IconMenu2 } from "@tabler/icons-react";
 import BlankCard from "@ui/shared/BlankCard";
@@ -32,6 +33,7 @@ interface Props {
 
 const ProductList = ({ onClick }: Props) => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
+  const theme = useTheme();
   const { filter } = useProductFilterStore();
   const { t } = useTranslation();
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
@@ -57,7 +59,7 @@ const ProductList = ({ onClick }: Props) => {
     }
   );
 
-  const renderItem = (product: Product) => (
+  const renderItem = (product: Product, theme: Theme) => (
     <Grid
       item
       xs={12}
@@ -94,12 +96,15 @@ const ProductList = ({ onClick }: Props) => {
               component={Link}
               to={`${product.id}`}
               style={{
-                color: "initial",
+                color: theme.palette.mode == "light" ? "#000" : "#fff",
                 textDecoration: "none",
                 transition: "color 0.3s",
               }}
               onMouseOver={(e) => (e.target.style.color = "#EE9D05")}
-              onMouseOut={(e) => (e.target.style.color = "initial")}
+              onMouseOut={(e) =>
+                (e.target.style.color =
+                  theme.palette.mode == "light" ? "#000" : "#fff")
+              }
             >
               {product.name}
             </Typography>
@@ -234,7 +239,7 @@ const ProductList = ({ onClick }: Props) => {
         <>
           <FlatList
             list={data?.pages?.flatMap((page) => page.data.rows) ?? []}
-            renderItem={renderItem}
+            renderItem={(product) => renderItem(product, theme)}
             renderWhenEmpty={renderEmptyList}
             hasMoreItems={hasNextPage}
             loadMoreItems={fetchNextPage}

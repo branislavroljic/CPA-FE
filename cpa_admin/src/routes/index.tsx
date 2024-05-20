@@ -17,6 +17,7 @@ import { getAccountManagers } from "@api/user/user";
 import UserStatisticsPage from "@pages/userStatistics/UserStatisticsPage";
 import ReportsPage from "@pages/reports/ReportsPage";
 import VIPRequestsPage from "@pages/vip/VIPRequestsPage";
+import PartnersPage from "@pages/Partners/PartnersPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -85,6 +86,23 @@ const browserConfig = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <OrderPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "partners",
+        path: "/partners",
+        children: [
+          {
+            index: true,
+            element: <PartnersPage />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            id: "partner_orders",
+            path: ":userId/orders",
             element: <OrderPage />,
             errorElement: <ErrorPage />,
           },

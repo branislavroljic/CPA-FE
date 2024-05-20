@@ -5,6 +5,7 @@ import {
   Divider,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useCustomizerStore } from "@stores/customizerStore";
 import { ReactNode } from "react";
@@ -34,6 +35,7 @@ const StatisticsCard = ({
 }: StatisticsCardProps) => {
   const { t } = useTranslation();
   const isCardShadow = useCustomizerStore((state) => state.isCardShadow);
+  const theme = useTheme();
 
   return (
     <Card
@@ -58,7 +60,7 @@ const StatisticsCard = ({
             fontSize={"19px"}
             fontWeight={500}
             lineHeight={1.5}
-            color={"#475f7b"}
+            color={theme.palette.mode == "light" ? "#000" : "#fff"}
           >
             {title}
           </Typography>
@@ -85,7 +87,7 @@ const StatisticsCard = ({
           <Stack>
             <Typography
               variant="body1"
-              color={"#475f7b80"}
+              color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
               fontWeight={400}
               fontSize={"15px"}
             >
@@ -94,7 +96,7 @@ const StatisticsCard = ({
             <Typography
               variant="body1"
               fontWeight={500}
-              color={"#475f7b"}
+                color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
               fontSize={"25px"}
               lineHeight={1.5}
             >
@@ -105,7 +107,7 @@ const StatisticsCard = ({
             <Stack direction={"row"} gap={5} justifyContent={"space-between"}>
               <Typography
                 variant="body1"
-                color={"#475f7b80"}
+                  color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
                 fontWeight={400}
                 fontSize={"15px"}
               >
@@ -113,7 +115,7 @@ const StatisticsCard = ({
               </Typography>
               <Typography
                 variant="body1"
-                color={"#475f7b"}
+                  color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
                 fontWeight={500}
                 fontSize={"15px"}
               >
@@ -123,7 +125,7 @@ const StatisticsCard = ({
             <Stack direction={"row"} gap={5} justifyContent={"space-between"}>
               <Typography
                 variant="body1"
-                color={"#475f7b80"}
+                  color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
                 fontWeight={400}
                 fontSize={"15px"}
               >
@@ -131,7 +133,7 @@ const StatisticsCard = ({
               </Typography>
               <Typography
                 variant="body1"
-                color={"#475f7b"}
+                  color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
                 fontWeight={500}
                 fontSize={"15px"}
               >
@@ -141,7 +143,7 @@ const StatisticsCard = ({
             <Stack direction={"row"} gap={5} justifyContent={"space-between"}>
               <Typography
                 variant="body1"
-                color={"#475f7b80"}
+                  color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
                 fontWeight={400}
                 fontSize={"15px"}
               >
@@ -149,7 +151,7 @@ const StatisticsCard = ({
               </Typography>
               <Typography
                 variant="body1"
-                color={"#475f7b"}
+                  color={ theme.palette.mode == "light" ? "#475f7b80" : "#fff"}
                 fontWeight={500}
                 fontSize={"15px"}
               >

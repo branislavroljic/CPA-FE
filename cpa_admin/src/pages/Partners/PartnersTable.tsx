@@ -4,7 +4,6 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_PaginationState,
-  MRT_ColumnFiltersState,
 } from "material-react-table";
 import {
   Box,
@@ -19,123 +18,61 @@ import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
 import i18n from "../../i18n";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
-import { useTranslation } from "react-i18next";
-import useAuthStore from "@stores/authStore";
 import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import {
-  Order,
-  UpdateOrderStatus,
-  getOrders,
-  updateOrderStatus,
-} from "@api/order/order";
-import OrderModal from "./OrderModal";
-import { useOrderModalStore } from "@stores/orderStore";
-import { IconSwitch } from "@tabler/icons-react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Company, getCompanies } from "@api/company/company";
+import { IconShoppingCart } from "@tabler/icons-react";
 
-export default function OrderTable() {
-  const { user } = useAuthStore();
-  const { userId } = useParams();
+export default function PartnersTable() {
   const theme = useTheme();
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
-    []
-  );
+  const navigate = useNavigate();
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
-  const openModal = useOrderModalStore((state) => state.openModal);
-
-  const orderStatuses = useMemo(
-    () => [
-      {
-        text: "REQUESTED",
-        value: "REQUESTED",
-      },
-      {
-        text: "TRASH",
-        value: "TRASH",
-      },
-      {
-        text: "CANCELLED",
-        value: "CANCELLED",
-      },
-      {
-        text: "DONE",
-        value: "DONE",
-      },
-    ],
-    []
-  );
-
-  const { t } = useTranslation();
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
-    queryKey: [
-      "orders",
-      pagination.pageIndex,
-      pagination.pageSize,
-      user?.id,
-      columnFilters,
-      userId,
-    ],
+    queryKey: ["partners", pagination.pageIndex, pagination.pageSize],
     queryFn: async () => {
       const pageRequest = {
         page: pagination.pageIndex,
         size: pagination.pageSize,
       } as PageRequest;
 
-      return getOrders(pageRequest, columnFilters, userId);
+      return getCompanies(pageRequest);
     },
   });
 
-  const changeStatusButton = (item: Order, key: string) => (
-    <Tooltip arrow title={"Change status"} key={key}>
+  const statisticsButton = (item: Company, key: string) => (
+    <Tooltip arrow title={"Orders"} key={key}>
       <IconButton
-        color="warning"
+        color="info"
         onClick={(e) => {
-          openModal(item as UpdateOrderStatus, updateOrderStatus, true);
+          navigate(item.userId + "/orders", { state: item });
           e.stopPropagation();
         }}
       >
-        <IconSwitch />
+        <IconShoppingCart />
       </IconButton>
     </Tooltip>
   );
 
-  const columns = useMemo<MRT_ColumnDef<Order>[]>(
-    () => defaultColumns(orderStatuses, t),
-    [orderStatuses, t]
-  );
+  const columns = useMemo<MRT_ColumnDef<Company>[]>(() => defaultColumns(), []);
 
-  const defaultData = useMemo(() => [] as Order[], []);
+  const defaultData = useMemo(() => [] as Company[], []);
 
   const table = useMaterialReactTable({
     columns,
-    initialState: {
-      columnVisibility: {
-        baseURL: false,
-        referrer: false,
-        userIP: false,
-        operatingSystem: false,
-        browserName: false,
-        browserVersion: false,
-        deviceType: false,
-        sub1: false,
-        sub2: false,
-        sub3: false,
-        sub4: false,
-      },
-    },
     data: data?.rows ?? defaultData,
     enableSorting: false,
     manualPagination: true,
-    manualFiltering: true,
     enableColumnActions: false,
     enableGlobalFilter: false,
-    enableFilters: true,
+    enableFilters: false,
     enableRowActions: true,
+    enableColumnResizing: true,
+    layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
       ? {
           color: "error",
@@ -143,7 +80,6 @@ export default function OrderTable() {
         }
       : undefined,
     onPaginationChange: setPagination,
-    onColumnFiltersChange: setColumnFilters,
     renderTopToolbarCustomActions: () => (
       <Box sx={{ display: "flex", gap: "1rem", p: "4px" }}>
         <Tooltip arrow title="Refresh Data">
@@ -155,9 +91,9 @@ export default function OrderTable() {
     ),
     renderRowActions: ({ row }) => (
       <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "8px" }}>
-        {changeStatusButton(
-          row.original as Order,
-          (row.original as Order).id + "_" + "order"
+        {statisticsButton(
+          row.original as Company,
+          (row.original as Company).id + "_" + "statistics"
         )}
       </Box>
     ),
@@ -165,16 +101,20 @@ export default function OrderTable() {
     state: {
       isLoading,
       pagination,
-      columnFilters,
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
     localization: MRT_Localization_EN,
-    enableHiding: true,
+    enableHiding: false,
+    displayColumnDefOptions: {
+      "mrt-row-actions": {
+        size: 100, //make actions column wider
+      },
+    },
     defaultColumn: {
-      minSize: 10,
+      minSize: 70,
       maxSize: 1000,
-      size: 120,
+      size: 130,
     },
   });
 
@@ -183,7 +123,7 @@ export default function OrderTable() {
       <ThemeProvider theme={createTheme(theme, enUS)}>
         <MaterialReactTable table={table} />
       </ThemeProvider>
-      <OrderModal />
+      {/* <CompanyModal /> */}
     </>
   );
 }

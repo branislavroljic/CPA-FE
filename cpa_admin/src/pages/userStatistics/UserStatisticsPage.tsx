@@ -1,10 +1,8 @@
 import { useMemo } from "react";
 import { Box, CircularProgress, Grid, useTheme } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import useAuthStore from "@stores/authStore";
 import PageContainer from "@ui/container/PageContainer";
 import TopCards from "@ui/dashboard/TopCards";
-import { useTranslation } from "react-i18next";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
@@ -36,7 +34,6 @@ export interface BarChartProps {
 
 export default function UserStatisticsPage() {
   const { state } = useLocation();
-  const { t } = useTranslation();
 
   const theme = useTheme();
   const primary = theme.palette.primary.main;

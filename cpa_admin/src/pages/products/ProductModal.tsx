@@ -89,7 +89,7 @@ export default function ProductModal() {
   const { t } = useTranslation();
 
   const saveProduct = (newItem: InputFormData<InputProduct>) => {
-    console.log(isValid);
+
     if (isValid) {
       mutation.mutate(newItem);
     }
@@ -472,7 +472,6 @@ export default function ProductModal() {
                       value={field.value}
                       onChange={(e) => {
                         console.log(e)
-                        console.log(e.target.value)
                         field.onChange(e.target.value)}}
                       input={
                         <OutlinedInput id="select-multiple-chip" label="Chip" />

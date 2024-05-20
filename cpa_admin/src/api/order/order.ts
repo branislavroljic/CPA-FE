@@ -62,14 +62,19 @@ export type Report = {
 
 export function getOrders(
   pagination: PageRequest,
-  filter?: MRT_ColumnFiltersState
+  filter?: MRT_ColumnFiltersState,
+  userId?: string
 ): Promise<Page<Order>> {
-  return get(
-    addPaginationParams(
-      addFilterParams(baseUrl, filter ?? (null as any)),
-      pagination
-    )
+  const url = addPaginationParams(
+    addFilterParams(baseUrl, filter ?? (null as any)),
+    pagination
   );
+
+  if (userId) {
+    url.searchParams.append("userId", userId);
+  }
+
+  return get(url);
 }
 
 export function updateOrderStatus(input: UpdateOrderStatus) {

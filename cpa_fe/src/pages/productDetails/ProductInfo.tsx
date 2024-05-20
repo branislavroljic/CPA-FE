@@ -6,6 +6,7 @@ import {
   Stack,
   CardContent,
   Grid,
+  useTheme,
 } from "@mui/material";
 import ChildCard from "@ui/shared/ChildCard";
 import { ProductDetails } from "@api/product/product";
@@ -45,6 +46,7 @@ const TabPanel = (props: TabProps) => {
 
 const ProductInfo = ({ product }: { product: ProductDetails }) => {
   const [value, setValue] = React.useState(0);
+  const theme = useTheme();
 
   const { t } = useTranslation();
 
@@ -114,12 +116,12 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
                     {t("products.limit")}
                   </Typography>
                   <Typography variant="h6">
-                    {product.limit_per_day ?? "N/A"}
+                    {`${product.limit_per_day}/${t("products.day")}` ?? "N/A"}
                   </Typography>
                 </Stack>
               </Stack>
               <Typography
-                color="textSecondary"
+                color={theme.palette.mode == "light" ? "#000" : "#fff"}
                 mt={4}
                 style={{ whiteSpace: "pre-line" }}
               >
@@ -131,7 +133,7 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
         {/* ------------------------------------------- */}
         {/* Reviews Tab */}
         {/* ------------------------------------------- */}
-        <Grid item xs={12} lg={12}>
+        {/* <Grid item xs={12} lg={12}>
           <BlankCard>
             <CardContent>
               <Stack direction="row" alignItems="center" gap={4}>
@@ -159,7 +161,7 @@ const ProductInfo = ({ product }: { product: ProductDetails }) => {
               </Stack>
             </CardContent>
           </BlankCard>
-        </Grid>
+        </Grid> */}
       </Grid>
     </ChildCard>
   );

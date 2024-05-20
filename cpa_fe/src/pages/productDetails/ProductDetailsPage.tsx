@@ -1,11 +1,4 @@
-import {
-  ActionFunctionArgs,
-  LoaderFunction,
-  ParamParseKey,
-  Params,
-  useLoaderData,
-  useParams,
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // MUI Elements
 import {
@@ -38,6 +31,7 @@ import { IconBrandGoogleDrive } from "@tabler/icons-react";
 import i18n from "../../i18n";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "@ui/view/spinner/Spinner";
+import { CircleFlag } from "react-circle-flags";
 
 // const PathNames = {
 //   product: "/products/:productId",
@@ -125,16 +119,16 @@ const ProductDetailsPage = () => {
               {/* ------------------------------------------- */}
               <Grid container spacing={3}>
                 <Chip
-                  label={productDetails.status}
+                  label={productDetails?.status}
                   style={{ margin: 5 }}
                   size="small"
                   color={
-                    productDetails.status == "ACTIVE" ? "success" : "warning"
+                    productDetails?.status == "ACTIVE" ? "success" : "warning"
                   }
                 />
                 <Grid item xs={12} sm={12} lg={12}>
                   <img
-                    src={`https://api.klixlead.com/api/product/images/${productDetails.image}`}
+                    src={`https://api.klixlead.com/api/product/images/${productDetails?.image}`}
                     alt="img"
                     width="100%"
                   />
@@ -173,7 +167,7 @@ const ProductDetailsPage = () => {
                             mb={1}
                             gap={1}
                           >
-                            {productDetails.categories.map(
+                            {productDetails?.categories?.map(
                               (category, index) => (
                                 <Chip
                                   label={category.name}
@@ -188,7 +182,7 @@ const ProductDetailsPage = () => {
                         {/* ------------------------------------------- */}
                         {/* Price */}
                         {/* ------------------------------------------- */}
-                        <Stack
+                        {/* <Stack
                           direction={"row"}
                           alignItems={"baseline"}
                           justifyContent={"space-between"}
@@ -199,6 +193,72 @@ const ProductDetailsPage = () => {
                           {productDetails.googleDriveLink && (
                             <Tooltip title={t("ui.photo")}>
                               <IconButton
+                                onClick={() =>
+                                  window.open(
+                                    productDetails.googleDriveLink,
+                                    "_blank"
+                                  )
+                                }
+                              >
+                                <IconBrandGoogleDrive color="orange" />
+                              </IconButton>
+                            </Tooltip>
+                          )}
+                        </Stack> */}
+                        <Stack
+                          direction={"row"}
+                          alignItems={"center"}
+                          justifyContent={"space-between"}
+                        >
+                          <Stack direction="row" alignItems="baseline" gap={4}>
+                            <Stack>
+                              <Typography
+                                variant="overline"
+                                color={"lightgray"}
+                              >
+                                {t("products.country")}
+                              </Typography>
+                              <Tooltip
+                                title={productDetails.country_code.toLowerCase()}
+                              >
+                                <CircleFlag
+                                  countryCode={productDetails.country_code.toLowerCase()}
+                                  height="25"
+                                />
+                              </Tooltip>
+                            </Stack>
+                            <Stack>
+                              <Typography
+                                variant="overline"
+                                color={"lightgray"}
+                              >
+                                {t("products.price")}
+                              </Typography>
+                              <Typography variant="h6">{`${productDetails.price} ${productDetails.currency}`}</Typography>
+                            </Stack>
+                            <Stack>
+                              <Typography
+                                variant="overline"
+                                color={"lightgray"}
+                              >
+                                {t("products.payout")}
+                              </Typography>
+                              <Typography variant="h6">{`$ ${productDetails.payout}`}</Typography>
+                            </Stack>
+                            <Stack>
+                              <Typography
+                                variant="overline"
+                                color={"lightgray"}
+                              >
+                                {t("products.paymentModel")}
+                              </Typography>
+                              <Typography variant="h6">CPA</Typography>
+                            </Stack>
+                          </Stack>
+                          {productDetails.googleDriveLink && (
+                            <Tooltip title={t("ui.photo")}>
+                              <IconButton
+                              style={{marginTop : 10}}
                                 onClick={() =>
                                   window.open(
                                     productDetails.googleDriveLink,
@@ -224,7 +284,7 @@ const ProductDetailsPage = () => {
             <ProductInfo product={productDetails} />
           </Grid>
           <Grid item xs={12} sm={12} lg={12}>
-            {productDetails.type == "VIP" &&
+            {productDetails?.type == "VIP" &&
             user?.enabledVipProducts == "BLOCKED" ? (
               <Stack spacing={2} alignItems={"center"}>
                 <Divider>
@@ -286,7 +346,7 @@ const ProductDetailsPage = () => {
                   </Button>
                 </Box>
               </Stack>
-            ) : productDetails.type == "VIP" &&
+            ) : productDetails?.type == "VIP" &&
               user?.enabledVipProducts == "REQUESTED" ? (
               <Stack spacing={3}>
                 <Divider>

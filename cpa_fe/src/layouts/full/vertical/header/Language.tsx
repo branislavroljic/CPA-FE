@@ -47,11 +47,6 @@ const Language = () => {
     // queryClient.clear();
   }, [customizer.isLanguage, i18n]);
 
-  // useEffect(() => {
-  //   console.log("bio sam tu");
-  //   queryClient.clear();
-  // }, [i18n]);
-
   return (
     <>
       <IconButton
