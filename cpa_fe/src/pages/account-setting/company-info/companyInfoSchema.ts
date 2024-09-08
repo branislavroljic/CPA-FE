@@ -75,7 +75,7 @@ const companyInfoSchema = z.object({
       field: i18n.t("company.companyEmail"),
     }),
   }),
-  tex: z
+  tax: z
     .string({
       required_error: i18n.t("util.required.male", {
         field: i18n.t("company.tax"),

@@ -57,7 +57,7 @@ export default function StatisticsPage() {
       },
       {
         icon: <PauseRoundedIcon />,
-        title: "Requestion",
+        title: "Hold",
         item: {
           today: dashboardData?.requestedToday,
           yesterday: dashboardData?.requestedYesterday,

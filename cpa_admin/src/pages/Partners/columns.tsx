@@ -25,10 +25,6 @@ const defaultColumns = () =>
             gap: "1rem",
           }}
         >
-          <CircleFlag
-            countryCode={row.original.country.toLowerCase()}
-            height="25"
-          />
           <span>{renderedCellValue}</span>
         </Box>
       ),
@@ -37,6 +33,10 @@ const defaultColumns = () =>
     {
       accessorKey: "city",
       header: "City",
+    },
+    {
+      accessorKey: "address",
+      header: "Address",
     },
     {
       accessorKey: "address",

@@ -37,7 +37,7 @@ export default function PostbackModal() {
   const levels = useMemo(() => ["GLOBAL", "SPECIFIC"], []);
   const products = (loaderData[3] as { id: number; name: string }[]) ?? [];
 
-  const events = useMemo(() => ["REQUESTED", "TRASH", "CANCELLED", "DONE"], []);
+  const events = useMemo(() => ["HOLD", "TRASH", "CANCELLED", "APPROVED"], []);
   const urlValues = useMemo(
     () => [
       "{event}",
@@ -55,6 +55,9 @@ export default function PostbackModal() {
       "{os_name}",
       "{os_version}",
       "{payout}",
+      "{order_id}",
+      "{currency}",
+      "{status}",
     ],
     []
   );

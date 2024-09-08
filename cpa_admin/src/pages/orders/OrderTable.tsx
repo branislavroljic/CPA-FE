@@ -50,8 +50,8 @@ export default function OrderTable() {
   const orderStatuses = useMemo(
     () => [
       {
-        text: "REQUESTED",
-        value: "REQUESTED",
+        text: "HOLD",
+        value: "HOLD",
       },
       {
         text: "TRASH",
@@ -62,8 +62,8 @@ export default function OrderTable() {
         value: "CANCELLED",
       },
       {
-        text: "DONE",
-        value: "DONE",
+        text: "APPROVED",
+        value: "APPROVED",
       },
     ],
     []

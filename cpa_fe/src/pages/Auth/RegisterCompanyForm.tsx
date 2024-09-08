@@ -93,7 +93,7 @@ const registerCompanySchema = z.object({
         num: standardMaxLength,
       }),
     }),
-  city: z
+  companyCity: z
     .string({
       required_error: i18n.t("util.required.male", {
         field: i18n.t("company.city"),
@@ -105,7 +105,7 @@ const registerCompanySchema = z.object({
         num: standardMaxLength,
       }),
     }),
-  address: z
+  companyAddress: z
     .string({
       required_error: i18n.t("util.required.female", {
         field: i18n.t("company.address"),
@@ -117,7 +117,7 @@ const registerCompanySchema = z.object({
         num: standardMaxLength,
       }),
     }),
-  zipcode: z
+  companyZipCode: z
     .string({
       required_error: i18n.t("util.required.male", {
         field: i18n.t("company.zipcode"),
@@ -311,7 +311,6 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
                   required
                   error={errors.companyName !== undefined}
                   helperText={errors.companyName?.message}
-                  placeholder={t("company.companyName")}
                   variant="outlined"
                   fullWidth
                   {...field}
@@ -381,15 +380,14 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               {t("company.address")}
             </CustomFormLabel>
             <Controller
-              name="address"
+              name="companyAddress"
               control={control}
               render={({ field }) => (
                 <GradientTextField
                   id="address"
                   required
-                  error={errors.address !== undefined}
-                  helperText={errors.address?.message}
-                  placeholder={t("company.address")}
+                  error={errors.companyAddress !== undefined}
+                  helperText={errors.companyAddress?.message}
                   variant="outlined"
                   fullWidth
                   {...field}
@@ -411,16 +409,15 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               {t("company.city")}
             </CustomFormLabel>
             <Controller
-              name="city"
+              name="companyCity"
               control={control}
               defaultValue={""}
               render={({ field }) => (
                 <GradientTextField
                   id="city"
                   required
-                  error={errors.city !== undefined}
-                  helperText={errors.city?.message}
-                  placeholder={t("company.city")}
+                  error={errors.companyCity !== undefined}
+                  helperText={errors.companyCity?.message}
                   variant="outlined"
                   fullWidth
                   {...field}
@@ -442,16 +439,15 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
               {t("company.zipcode")}
             </CustomFormLabel>
             <Controller
-              name="zipcode"
+              name="companyZipCode"
               control={control}
               defaultValue={""}
               render={({ field }) => (
                 <GradientTextField
                   id="zipcode"
                   required
-                  error={errors.zipcode !== undefined}
-                  helperText={errors.zipcode?.message}
-                  placeholder={t("company.zipcode")}
+                  error={errors.companyZipCode !== undefined}
+                  helperText={errors.companyZipCode?.message}
                   variant="outlined"
                   fullWidth
                   {...field}
@@ -632,6 +628,7 @@ const RegisterCompanyForm = ({ setIsConfirmMail }: any) => {
           fullWidth
           type="submit"
           loading={loading}
+          style={{ color: "white" }}
           sx={{ marginTop: "20px" }}
         >
           {t("login.register")}

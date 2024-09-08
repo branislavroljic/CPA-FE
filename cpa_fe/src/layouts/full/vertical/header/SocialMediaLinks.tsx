@@ -17,22 +17,22 @@ const Links = [
   {
     name: "Facebook",
     icon: FacebookOutlinedIcon,
-    value: "https://www.google.com",
+    value: "https://www.facebook.com/klixlead",
   },
   {
     name: "Telegram",
     icon: TelegramIcon,
-    value: "https://www.google.com",
+    value: "https://t.me/klixmare",
   },
   {
     name: "Instagram",
     icon: InstagramIcon,
-    value: "https://www.google.com",
+    value: "https://www.instagram.com/klixlead.network",
   },
   {
     name: "LinkedIn",
     icon: LinkedInIcon,
-    value: "https://www.google.com",
+    value: "https://www.linkedin.com/company/klixlead/",
   },
 ];
 

@@ -20,6 +20,11 @@ const defaultColumns = (
       enableColumnFilter: false,
     },
     {
+      accessorKey: "userUsername",
+      header: "Username",
+      enableColumnFilter: false,
+    },
+    {
       accessorKey: "phoneNumber",
       header: "Phone number",
       enableColumnFilter: false,
@@ -53,7 +58,7 @@ const defaultColumns = (
         align: "center",
       },
       Cell: ({ renderedCellValue, row }) =>
-        row.original.status === "DONE" ? (
+        row.original.status === "APPROVED" ? (
           <Chip label={renderedCellValue} color="success" />
         ) : row.original.status === "CANCELLED" ||
           row.original.status === "TRASH" ? (
@@ -77,19 +82,19 @@ const defaultColumns = (
       header: "Referrer",
     },
     {
-      accessorKey: "sub1",
+      accessorKey: "sub_1",
       header: "sub1",
     },
     {
-      accessorKey: "sub2",
+      accessorKey: "sub_2",
       header: "sub2",
     },
     {
-      accessorKey: "sub3",
+      accessorKey: "sub_3",
       header: "sub3",
     },
     {
-      accessorKey: "sub4",
+      accessorKey: "sub_4",
       header: "sub4",
     },
     {

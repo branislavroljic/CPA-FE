@@ -512,6 +512,7 @@ const RegisterUserForm = ({ setIsConfirmMail }: any) => {
           type="submit"
           loading={loading}
           sx={{ marginTop: "20px" }}
+          style={{ color: "white" }} 
         >
           {t("login.register")}
         </LoadingButton>

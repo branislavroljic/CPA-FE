@@ -52,10 +52,10 @@ const defaultColumns = (
       accessorKey: "event",
       header: t("postback.event"),
       Cell: ({ renderedCellValue, row }) =>
-        row.original.event === "REQUESTED" ? (
+        row.original.event === "HOLD" ? (
           <Chip label={renderedCellValue} color="warning" />
         ) : row.original.event === "TRASH" ? (
-          <Chip label={renderedCellValue} color="info" />
+          <Chip label={renderedCellValue} color="error" />
         ) : row.original.event === "CANCELLED" ? (
           <Chip label={renderedCellValue} color="error" />
         ) : (

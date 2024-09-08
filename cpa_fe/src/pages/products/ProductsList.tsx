@@ -26,6 +26,7 @@ import { useTranslation } from "react-i18next";
 import Spinner from "@ui/view/spinner/Spinner";
 import ProductSearch from "./ProductSearch";
 import i18n from "../../i18n";
+import CategoryChip from "./CategoryChip";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -118,23 +119,7 @@ const ProductList = ({ onClick }: Props) => {
           <div style={{ overflowX: "auto", paddingBottom: 15 }}>
             <Stack mt={1} direction="row" alignItems="center" gap={1} mb={1}>
               {product?.categories.map((category) => (
-                <Chip
-                  label={category.name}
-                  size="small"
-                  color={
-                    category.color && category.color.length
-                      ? (category.color as
-                          | "default"
-                          | "primary"
-                          | "secondary"
-                          | "error"
-                          | "success"
-                          | "info"
-                          | "warning"
-                          | undefined)
-                      : "primary"
-                  }
-                />
+                <CategoryChip category={category} />
               ))}
             </Stack>
           </div>
@@ -165,7 +150,6 @@ const ProductList = ({ onClick }: Props) => {
             justifyContent="space-between"
             mt={1}
           >
-            <Stack direction="row" alignItems="baseline" gap={4}>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>
                   {t("products.country")}
@@ -177,25 +161,26 @@ const ProductList = ({ onClick }: Props) => {
                   />
                 </Tooltip>
               </Stack>
-              <Stack>
-                <Typography variant="overline" color={"lightgray"}>
-                  {t("products.price")}
-                </Typography>
-                <Typography variant="h6">{`${product.price} ${product.currency}`}</Typography>
+              <Stack direction="row" alignItems="center" gap={4}>
+                <Stack>
+                  <Typography variant="overline" color={"lightgray"}>
+                    {t("products.price")}
+                  </Typography>
+                  <Typography variant="h6">{`${product.price} ${product.currency}`}</Typography>
+                </Stack>
+                <Stack>
+                  <Typography variant="overline" color={"lightgray"}>
+                    {t("products.payout")}
+                  </Typography>
+                  <Typography variant="h6">{`$ ${product.payout}`}</Typography>
+                </Stack>
+                <Stack>
+                  <Typography variant="overline" color={"lightgray"}>
+                    {t("products.paymentModel")}
+                  </Typography>
+                  <Typography variant="h6">CPA</Typography>
+                </Stack>
               </Stack>
-              <Stack>
-                <Typography variant="overline" color={"lightgray"}>
-                  {t("products.payout")}
-                </Typography>
-                <Typography variant="h6">{`$ ${product.payout}`}</Typography>
-              </Stack>
-              <Stack>
-                <Typography variant="overline" color={"lightgray"}>
-                  {t("products.paymentModel")}
-                </Typography>
-                <Typography variant="h6">CPA</Typography>
-              </Stack>
-            </Stack>
           </Stack>
         </CardContent>
       </BlankCard>
@@ -235,7 +220,7 @@ const ProductList = ({ onClick }: Props) => {
       {/* ------------------------------------------- */}
       {/* Page Listing product */}
       {/* ------------------------------------------- */}
-      <Grid container spacing={3} justifyContent={"space-around"}>
+      <Grid container spacing={3}>
         <>
           <FlatList
             list={data?.pages?.flatMap((page) => page.data.rows) ?? []}

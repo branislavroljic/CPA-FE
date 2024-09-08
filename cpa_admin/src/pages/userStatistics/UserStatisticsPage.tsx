@@ -93,7 +93,7 @@ export default function UserStatisticsPage() {
       },
       {
         icon: <PauseRoundedIcon />,
-        title: "Requested",
+        title: "Hold",
         item: {
           today: dashboardData?.requestedToday,
           yesterday: dashboardData?.requestedYesterday,

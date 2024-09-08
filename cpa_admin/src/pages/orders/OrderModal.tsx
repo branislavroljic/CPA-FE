@@ -44,7 +44,8 @@ export default function OrderModal() {
   };
 
   const OrderStatuses = useMemo(
-    () => ["REQUESTED", "TRASH", "CANCELLED", "DONE"],
+    // () => ["REQUESTED", "TRASH", "CANCELLED", "DONE"],
+    () => ["HOLD", "TRASH", "CANCELLED", "APPROVED"], 
     []
   );
 
@@ -81,10 +82,7 @@ export default function OrderModal() {
 
       <Divider />
       <DialogContent>
-        <Box
-          component="form"
-          sx={{ mt: 1 }}
-        >
+        <Box component="form" sx={{ mt: 1 }}>
           <input
             type="hidden"
             {...register("id", {

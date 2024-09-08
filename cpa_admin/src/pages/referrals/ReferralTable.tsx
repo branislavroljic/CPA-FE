@@ -29,7 +29,6 @@ export default function Referraltable() {
     pageSize: 10,
   });
 
-
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: ["referral", pagination.pageIndex, pagination.pageSize],
     queryFn: async () => {
@@ -79,10 +78,7 @@ export default function Referraltable() {
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
-    localization:
-      i18n.language === "en"
-        ? MRT_Localization_EN
-        : MRT_Localization_SR_LATN_RS,
+    localization: MRT_Localization_EN,
     enableHiding: true,
     defaultColumn: {
       minSize: 10,

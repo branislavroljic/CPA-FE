@@ -78,7 +78,7 @@ const defaultColumns = (t: TFunction<"translation", "translation">) =>
         align: "center",
       },
       Cell: ({ renderedCellValue, row }) =>
-        row.original.status === "DONE" ? (
+        row.original.status === "APPROVED" ? (
           <Chip label={renderedCellValue} color="success" />
         ) : row.original.status === "CANCELLED" ||
           row.original.status === "TRASH" ? (

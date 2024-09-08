@@ -47,6 +47,7 @@ const CompanyInfoForm = () => {
     reset,
     control,
     formState: { errors, isValid },
+    register,
   } = useForm<CompanyInfo>({
     resolver: zodResolver(companyInfoSchema),
   });
@@ -87,6 +88,13 @@ const CompanyInfoForm = () => {
                 {t("company.companyInfoDescription")}
               </Typography>
               <form>
+                <input
+                  type="hidden"
+                  {...register("userId", {
+                    required: true,
+                    value: user?.id ?? 1,
+                  })}
+                />
                 <Grid container spacing={3} paddingLeft={3}>
                   <CustomFormLabel
                     sx={{
@@ -262,21 +270,21 @@ const CompanyInfoForm = () => {
                     sx={{
                       mt: 2,
                     }}
-                    htmlFor="tex"
+                    htmlFor="tax"
                   >
                     {t("company.tax")}
                   </CustomFormLabel>
                   <Controller
-                    name="tex"
+                    name="tax"
                     control={control}
-                    defaultValue={data?.tex ?? undefined}
+                    defaultValue={data?.tax ?? undefined}
                     render={({ field }) => (
                       <CustomTextField
-                        id="tex"
+                        id="tax"
                         required
                         disabled={companyInfoMutation.isLoading}
-                        error={errors.tex !== undefined}
-                        helperText={errors.tex?.message}
+                        error={errors.tax !== undefined}
+                        helperText={errors.tax?.message}
                         placeholder={t("company.tax")}
                         variant="outlined"
                         fullWidth

@@ -1,11 +1,9 @@
 import {
   Grid,
   Box,
-  Card,
   Typography,
   Button,
   Stack,
-  TextField,
 } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import CustomFormLabel from "@ui/forms/theme-elements/CustomFormLabel";
@@ -178,6 +176,8 @@ export default function ForgotPasswordPage() {
                       size="large"
                       fullWidth
                       type="submit"
+                      style={{ color: "white" }}
+                      
                     >
                       {t("login.recoverPassword")}
                     </Button>

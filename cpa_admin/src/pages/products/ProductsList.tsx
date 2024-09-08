@@ -34,6 +34,8 @@ import queryClient, { invalidateAllQueries } from "../../query-client";
 import { ConfirmModal } from "@ui/modal/ConfirmModal";
 import { useTranslation } from "react-i18next";
 import ProductModal from "./ProductModal";
+import { Category } from "@mui/icons-material";
+import CategoryChip from "./CategoryChip";
 
 interface Props {
   onClick: (event: React.SyntheticEvent | Event) => void;
@@ -112,30 +114,14 @@ const ProductList = ({ onClick }: Props) => {
             </Typography>
             <Chip label={product.type} size="small" color="success" />
           </Box>
-          <div style={{ overflowX: "auto", paddingBottom : 15 }} >
-            <Stack mt={1} direction="row" alignItems="center">
+          <div style={{ overflowX: "auto", paddingBottom: 15 }}>
+            <Stack mt={1} direction="row" alignItems="center" gap={1}>
               {product?.categories.map((category) => (
-                <Chip
-                  label={category.name}
-                  size="small"
-                  color={
-                    category.color && category.color.length
-                      ? (category.color as
-                          | "default"
-                          | "primary"
-                          | "secondary"
-                          | "error"
-                          | "success"
-                          | "info"
-                          | "warning"
-                          | undefined)
-                      : "primary"
-                  }
-                />
+                <CategoryChip category={category} />
               ))}
             </Stack>
           </div>
-          <Stack direction="row" alignItems="center" gap={2}>
+          {/* <Stack direction="row" alignItems="center" gap={2}>
             <Stack gap={0}>
               <Typography variant="overline">APPROVE RATE</Typography>
               <Typography color="textPrimary" mt={-0.5}>
@@ -148,7 +134,7 @@ const ProductList = ({ onClick }: Props) => {
                 {`${product.earn_per_click ?? 0} ${product.currency}`}
               </Typography>
             </Stack>
-          </Stack>
+          </Stack> */}
           <Divider />
           <Stack
             display={"flex"}
@@ -178,7 +164,7 @@ const ProductList = ({ onClick }: Props) => {
                 <Typography variant="overline" color={"lightgray"}>
                   PAYOUT
                 </Typography>
-                <Typography variant="h6">{`${product.payout} ${product.currency}`}</Typography>
+                <Typography variant="h6">{`$${product.payout}`}</Typography>
               </Stack>
               <Stack>
                 <Typography variant="overline" color={"lightgray"}>

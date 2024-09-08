@@ -3,6 +3,14 @@ import { Report } from "@api/order/order";
 const defaultColumns = () =>
   [
     {
+      accessorKey: "productId",
+      header: "Offer Id",
+    },
+    {
+      accessorKey: "productName",
+      header: "Offer name",
+    },
+    {
       accessorKey: "total",
       header: "Total",
     },

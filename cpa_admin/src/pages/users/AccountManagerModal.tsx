@@ -66,7 +66,7 @@ export default function AccountManagerModal() {
   const submitAccountManager = (
     changeManagerInput: ChangeAccountManagerInput
   ) => {
-    if (isValid && item?.id) {
+    if (isValid && item?.id && changeManagerInput.accountManagerId) {
       mutation.mutate({
         id: item?.id,
         accountManagerId: changeManagerInput.accountManagerId,
@@ -93,7 +93,7 @@ export default function AccountManagerModal() {
               control={control}
               name="accountManagerId"
               rules={{ required: true }}
-              defaultValue={item?.accountManagerId}
+              defaultValue={item?.accountManagerId ?? undefined}
               render={({ field: { onChange, value } }) => (
                 <Autocomplete
                   onChange={(_event, item) => {
@@ -105,7 +105,7 @@ export default function AccountManagerModal() {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label={"Account manager"}
+                      label={"Select account manager"}
                       margin="normal"
                       variant="outlined"
                       error={errors.accountManagerId !== undefined}
@@ -131,6 +131,7 @@ export default function AccountManagerModal() {
           color="primary"
           variant="contained"
           onClick={handleSubmit(submitAccountManager)}
+          disabled={!isValid}
         >
           {t("util.save")}
         </Button>

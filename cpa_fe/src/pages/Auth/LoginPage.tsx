@@ -94,9 +94,23 @@ export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
 
   const loginUser = async (input: LoginInput) => {
-
     setLoading(true);
-    const baseUrl = new URL("auth/signin", import.meta.env.VITE_API_URL);
+
+    // Get the current URL
+    const currentUrl = window.location.href;
+    let endpoint;
+
+    // Check if the URL contains 'affiliate' or 'partner' and set the endpoint accordingly
+    if (currentUrl.includes("affiliate")) {
+      endpoint = "auth/signin";
+    } else if (currentUrl.includes("partner")) {
+      endpoint = "auth/signin/partner";
+    } else {
+      // Default to 'auth/signin' if neither is found
+      endpoint = "auth/signin";
+    }
+
+    const baseUrl = new URL(endpoint, import.meta.env.VITE_API_URL);
     const result = await fetch(baseUrl, {
       method: "POST",
       body: JSON.stringify(input),
@@ -326,7 +340,7 @@ export default function LoginPage() {
                       size="large"
                       fullWidth
                       type="submit"
-                      style={{ color: "white" }} 
+                      style={{ color: "white" }}
                       loading={loading}
                     >
                       {t("login.login")}

@@ -9,6 +9,7 @@ import { getCountries } from "@api/product/product";
 import PaymentsPage from "@pages/payments/PaymentsPage";
 import OrderPage from "@pages/orders/OrderPage";
 import UserPage from "@pages/users/UserPage";
+import AnalyticsUserPage from "@pages/analytics/users/UsersPage";
 import React from "react";
 import Notifications from "@pages/notifications/Notifications";
 import StatisticsPage from "@pages/statistic/StatisticPage";
@@ -18,6 +19,8 @@ import UserStatisticsPage from "@pages/userStatistics/UserStatisticsPage";
 import ReportsPage from "@pages/reports/ReportsPage";
 import VIPRequestsPage from "@pages/vip/VIPRequestsPage";
 import PartnersPage from "@pages/Partners/PartnersPage";
+import MarketarPage from "@pages/analytics/marketars/MarketarsPage";
+import AnalyticsPage from "@pages/analytics/analytics/AnalyticsPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -159,6 +162,40 @@ const browserConfig = createBrowserRouter([
           {
             index: true,
             element: <VIPRequestsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "analytics",
+        path: "/analytics",
+        children: [
+          {
+            index: true,
+            element: <AnalyticsUserPage />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            id: "analytics_marketars",
+            path: ":userId/marketars",
+            children: [
+              {
+                index: true,
+                element: <MarketarPage />,
+                errorElement: <ErrorPage />,
+              },
+              {
+                id: "marketar_analytics",
+                path: ":marketarId/analytics",
+                element: <AnalyticsPage />,
+                errorElement: <ErrorPage />,
+              },
+            ],
+          },
+          {
+            id: "user_analytics",
+            path: ":userId/analytics",
+            element: <AnalyticsPage />,
             errorElement: <ErrorPage />,
           },
         ],

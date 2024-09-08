@@ -54,6 +54,7 @@ export type User = {
   accountManagerId: number;
   accountManagerUsername?: string;
   paid?: number;
+  hasExternalMarketars?: boolean;
 };
 
 export type DasboardData = {

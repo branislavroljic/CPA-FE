@@ -323,7 +323,7 @@ const ProductLinks = ({ product }: { product: ProductDetails }) => {
                         fontSize: "small",
                       }}
                     >
-                      {` POST /api/v1/orders/create/ HTTP/1.1
+                      {` POST /api/v1/orders/create HTTP/1.1
                           Host: https://api.klixlead.com
                           Content-Type: application/json
                           {

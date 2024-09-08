@@ -188,6 +188,7 @@ export default function RecoverPasswordPage() {
                     size="large"
                     fullWidth
                     type="submit"
+                    style={{ color: "white" }} 
                   >
                     {t("login.recoverPassword")}
                   </Button>

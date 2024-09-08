@@ -15,7 +15,7 @@ export type CompanyInfo = {
   address: string;
   zipcode: string;
   companyEmail: string;
-  tex: string;
+  tax: string;
   userId: number;
 };
 
@@ -48,7 +48,7 @@ export function updateBasicInfo(input: BasicInfo, id?: number) {
 }
 
 export function changePassword(input: ChangePassword, id?: number) {
-  return post(new URL(id + "/basic_info", baseUrl), JSON.stringify(input));
+  return post(new URL(id + "/change_password", baseUrl), JSON.stringify(input));
 }
 
 export function getSocialMediaLinks(id?: number): Promise<SocialMediaLinks> {

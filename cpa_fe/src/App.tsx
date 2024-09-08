@@ -6,7 +6,7 @@ import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/de";
-import 'rsuite/dist/rsuite.min.css';
+import "rsuite/dist/rsuite.min.css";
 
 function App() {
   const theme = ThemeSettings();
@@ -15,11 +15,11 @@ function App() {
     <ThemeProvider theme={theme}>
       {/* <RTL direction={customizer.activeDir}> */}
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
-        <CssBaseline />
-        {/* <ScrollToTop> */}
-        <RouterProvider router={router} />
+          <CssBaseline />
+          {/* <ScrollToTop> */}
+          <RouterProvider router={router} />
 
-        {/* </ScrollToTop> */}
+          {/* </ScrollToTop> */}
       </LocalizationProvider>
       {/* </RTL> */}
     </ThemeProvider>

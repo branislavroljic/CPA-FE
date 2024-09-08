@@ -7,7 +7,7 @@
   "address": "Adresa",
   "zipcode": "Poštanski broj",
   "companyEmail": "Email kompanije",
-  "tax": "Porez",
+  "tax": "Poreski broj",
   "company" : "Kompanija",
   "individual" : "Pojedinac"
 }

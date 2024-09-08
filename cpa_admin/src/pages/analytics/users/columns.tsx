@@ -2,7 +2,6 @@ import { MRT_ColumnDef } from "material-react-table";
 import { Box, Chip } from "@mui/material";
 import { SelectInput } from "@api/utils";
 import { User } from "@api/user/user";
-import { CircleFlag } from "react-circle-flags";
 import VerifiedIcon from "@mui/icons-material/VerifiedTwoTone";
 
 const defaultColumns = (accountStatuses: SelectInput[]) =>

@@ -84,7 +84,7 @@ export type Referral = {
 export type Order = {
   id: number;
   time: string;
-  status: "REQUESTED" | "TRASH" | "CANCELLED" | "DONE";
+  status: "HOLD" | "TRASH" | "CANCELLED" | "APPROVED";
   name: string;
   country: string;
   address: string;

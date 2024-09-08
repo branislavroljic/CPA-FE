@@ -26,13 +26,13 @@ import {
   IconVip,
 } from "@tabler/icons-react";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
-import { ConnectWithoutContactOutlined } from "@mui/icons-material";
+import { Analytics, AnalyticsOutlined, ConnectWithoutContactOutlined } from "@mui/icons-material";
 
 const Menuitems = () =>
   [
     {
       navlabel: true,
-      subheader: "Pocetna",
+      subheader: "HOME",
     },
     {
       id: uniqueId(),
@@ -93,6 +93,12 @@ const Menuitems = () =>
       title: "VIP requests",
       icon: IconVip,
       href: "/vip_requests",
+    },
+    {
+      id: uniqueId(),
+      title: "Analytics",
+      icon: AnalyticsOutlined,
+      href: "/analytics",
     },
   ] as MenuitemsType[];
 

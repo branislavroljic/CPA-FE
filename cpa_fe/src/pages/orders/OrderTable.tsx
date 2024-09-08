@@ -26,6 +26,7 @@ import useAuthStore from "@stores/authStore";
 import { enUS, srRS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { DateRangePicker } from "rsuite";
+import { setEndTime, setStartTime } from "@pages/util/util";
 
 export default function OrderTable() {
   const { user } = useAuthStore();
@@ -34,11 +35,15 @@ export default function OrderTable() {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const initialStartDate = setStartTime(new Date());
+  const initialEndDate = setEndTime(new Date());
+
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([
-    { id: "dateTime", value: [new Date(), new Date()] },
+    { id: "dateTime", value: [initialStartDate, initialEndDate] },
   ]);
 
-  const [value, setValue] = useState([new Date(), new Date()]);
+  const [value, setValue] = useState([initialStartDate, initialEndDate]);
 
   const { t } = useTranslation();
 
@@ -130,12 +135,16 @@ export default function OrderTable() {
           value={value}
           onChange={(newValue) => {
             if (newValue) {
-              setValue(newValue);
+              const [startDate, endDate] = newValue;
+              const updatedStartDate = setStartTime(startDate);
+              const updatedEndDate = setEndTime(endDate);
+
+              setValue([updatedStartDate, updatedEndDate]);
               setColumnFilters((prev) => [
                 ...prev,
                 {
                   id: "dateTime",
-                  value: [newValue[0], newValue[1]],
+                  value: [updatedStartDate, updatedEndDate],
                 },
               ]);
             }

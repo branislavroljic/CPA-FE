@@ -14,7 +14,7 @@ const baseUrlWithSlash = new URL("orders/", import.meta.env.VITE_API_URL);
 export type Order = {
   id: number;
   time: string;
-  status: "REQUESTED" | "TRASH" | "CANCELLED" | "DONE";
+  status: "HOLD" | "TRASH" | "CANCELLED" | "APPROVED";
   name: string;
   country: string;
   address: string;
@@ -31,10 +31,10 @@ export type Order = {
   userUsername: string;
   userIP?: string;
   referrer?: string;
-  sub1?: string;
-  sub2?: string;
-  sub3?: string;
-  sub4?: string;
+  sub_1?: string;
+  sub_2?: string;
+  sub3_?: string;
+  sub_4?: string;
   operatingSystem?: string;
   browserName?: string;
   browserVersion?: string;
@@ -47,6 +47,8 @@ export type UpdateOrderStatus = {
 };
 
 export type Report = {
+  productName: string;
+  productId: number;
   total: number;
   hold: number;
   conversions: number;
