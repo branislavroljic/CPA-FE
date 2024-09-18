@@ -65,7 +65,7 @@ export default function MarketarTable() {
           color="warning"
           onClick={(e) => {
             navigate(item.id + "/analytics", {
-              state: { userId: item.id, markertarId: item.externalMarketarId },
+              state: { userId: state.id, markertarId: item.externalMarketarId },
             });
             e.stopPropagation();
           }}
