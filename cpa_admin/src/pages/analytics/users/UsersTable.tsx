@@ -88,7 +88,7 @@ export default function UserTable() {
 
   const marketarsAnalyticsButton = (item: User, key: string) => (
     <>
-      {item.hasExternalMarketars ? (
+      {/* {item.hasExternalMarketars ? (
         <Tooltip arrow title={"Details"} key={key}>
           <IconButton
             onClick={(e) => {
@@ -99,21 +99,25 @@ export default function UserTable() {
             <FormatListBulleted />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip arrow title={"Analytics"} key={key}>
-          <IconButton
-            color="warning"
-            onClick={(e) => {
-              navigate(item.id + "/analytics", {
-                state: { userId: item.id, markertarId: null },
-              });
-              e.stopPropagation();
-            }}
-          >
-            <Analytics />
-          </IconButton>
-        </Tooltip>
-      )}
+      ) : ( */}
+      <Tooltip arrow title={"Analytics"} key={key}>
+        <IconButton
+          color="warning"
+          onClick={(e) => {
+            navigate(item.id + "/analytics", {
+              state: {
+                userId: item.id,
+                hasExternalMarketars: item.hasExternalMarketars,
+                marketarId: item.id,
+              },
+            });
+            e.stopPropagation();
+          }}
+        >
+          <Analytics />
+        </IconButton>
+      </Tooltip>
+      {/* )} */}
     </>
   );
 

@@ -3,25 +3,25 @@ import { ThemeProvider, createTheme, useTheme } from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import { useMemo } from "react";
 import Breadcrumb from "@layout/full/shared/breadcrumb/Breadcrumb";
-import CategoryTable from "./CategoryTable";
+import CustomPayoutTable from "./CutomPayoutTable";
 
-export default function CategoryPage() {
+export default function CustomPayoutPage() {
   const theme = useTheme();
 
   const BCrumb = useMemo(
     () => [
       {
         to: "/",
-        title: "Categories",
+        title: "Custom payout",
       },
     ],
     []
   );
   return (
     <PageContainer title="" description="this is innerpage">
-      <Breadcrumb items={BCrumb} title={"Categories"} />
+      <Breadcrumb items={BCrumb} title={"Custom payout"} />
       <ThemeProvider theme={createTheme(theme, enUS)}>
-        <CategoryTable />
+        <CustomPayoutTable />
       </ThemeProvider>
     </PageContainer>
   );

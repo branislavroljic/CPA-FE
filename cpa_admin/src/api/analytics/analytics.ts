@@ -63,6 +63,27 @@ export type Analytics = {
   cancelled: number;
 };
 
+export type AnalyticsPerDate = {
+  date: Date;
+  total: number;
+  hold: number;
+  conversions: number;
+  conversionRate: number;
+  trash: number;
+  cancelled: number;
+};
+
+export type AnalyticsPerOffer = {
+  productId: number;
+  productName: string;
+  total: number;
+  hold: number;
+  conversions: number;
+  conversionRate: number;
+  trash: number;
+  cancelled: number;
+};
+
 export function getUsers(
   pagination: PageRequest,
   filter?: MRT_ColumnFiltersState
@@ -98,4 +119,36 @@ export function getAnalytics(filter: any, userId: number, marketarId?: number) {
   }
 
   return get(url);
+}
+
+export function getAnalyticsPerDate(
+  userId: number,
+  filter: MRT_ColumnFiltersState,
+  pagination: PageRequest
+): Promise<Page<AnalyticsPerDate>> {
+  return get(
+    addPaginationParams(
+      addFilterParams(
+        new URL(userId + "/analytics_per_date", baseUrlWithSlash),
+        filter
+      ),
+      pagination
+    )
+  );
+}
+
+export function getAnalyticsPerOffer(
+  userId: number,
+  filter: MRT_ColumnFiltersState,
+  pagination: PageRequest
+): Promise<Page<AnalyticsPerOffer>> {
+  return get(
+    addPaginationParams(
+      addFilterParams(
+        new URL(userId + "/analytics_per_product", baseUrlWithSlash),
+        filter
+      ),
+      pagination
+    )
+  );
 }

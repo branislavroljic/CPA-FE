@@ -21,6 +21,7 @@ import VIPRequestsPage from "@pages/vip/VIPRequestsPage";
 import PartnersPage from "@pages/Partners/PartnersPage";
 import MarketarPage from "@pages/analytics/marketars/MarketarsPage";
 import AnalyticsPage from "@pages/analytics/analytics/AnalyticsPage";
+import CustomPayoutPage from "@pages/custom_payout/CustomPayoutPage";
 
 const FullLayout = React.lazy(() => import("@layout/full/FullLayout"));
 const LayoutUnauth = React.lazy(() => import("@layout/LayoutUnauth"));
@@ -196,6 +197,17 @@ const browserConfig = createBrowserRouter([
             id: "user_analytics",
             path: ":userId/analytics",
             element: <AnalyticsPage />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        id: "customPayouts",
+        path: "/custom_payouts",
+        children: [
+          {
+            index: true,
+            element: <CustomPayoutPage />,
             errorElement: <ErrorPage />,
           },
         ],

@@ -26,7 +26,12 @@ import {
   IconVip,
 } from "@tabler/icons-react";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
-import { Analytics, AnalyticsOutlined, ConnectWithoutContactOutlined } from "@mui/icons-material";
+import {
+  Analytics,
+  AnalyticsOutlined,
+  ConnectWithoutContactOutlined,
+  Wallet,
+} from "@mui/icons-material";
 
 const Menuitems = () =>
   [
@@ -99,6 +104,12 @@ const Menuitems = () =>
       title: "Analytics",
       icon: AnalyticsOutlined,
       href: "/analytics",
+    },
+    {
+      id: uniqueId(),
+      title: "Custom payout",
+      icon: Wallet,
+      href: "/custom_payouts",
     },
   ] as MenuitemsType[];
 

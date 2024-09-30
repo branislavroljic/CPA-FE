@@ -4,6 +4,7 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_PaginationState,
+  MRT_ColumnFiltersState,
 } from "material-react-table";
 import {
   Box,
@@ -14,32 +15,54 @@ import {
   useTheme,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import defaultColumns from "./columns";
 import { PageRequest } from "@api/utils";
-import i18n from "../../../i18n";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
+import useAuthStore from "@stores/authStore";
 import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Analytics } from "@mui/icons-material";
-import { getMarketars, Marketar } from "@api/analytics/analytics";
+import defaultColumns from "./columns";
+import i18n from "../../../../i18n";
+import {
+  AnalyticsPerOffer,
+  getAnalyticsPerOffer,
+} from "@api/analytics/analytics";
+import { useLocation } from "react-router-dom";
 
-export default function MarketarTable() {
-  // const { user } = useAuthStore();
+interface AnalyticsPerOfferTableProps {
+  startDate?: Date | null;
+  endDate?: Date | null;
+}
+
+export default function AnalyticsPerOfferTable({
+  startDate,
+  endDate,
+}: AnalyticsPerOfferTableProps) {
+  const { user } = useAuthStore();
   const theme = useTheme();
-  const navigate = useNavigate();
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
     pageSize: 5,
   });
+
+  const columnFilters: MRT_ColumnFiltersState = useMemo(
+    () => [
+      { id: "dateTime", value: [startDate?.toString(), endDate?.toString()] },
+    ],
+    [startDate, endDate]
+  );
+
   const { state } = useLocation();
+  console.log(state)
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: [
-      "marketars",
+      "analytics_per_offer",
       pagination.pageIndex,
       pagination.pageSize,
-      state?.id,
+      user?.id,
+      startDate,
+      endDate,
+      columnFilters,
     ],
     queryFn: async () => {
       const pageRequest = {
@@ -47,48 +70,25 @@ export default function MarketarTable() {
         size: pagination.pageSize,
       } as PageRequest;
 
-      return getMarketars(Number(state?.marketarId) ?? 1, pageRequest);
+      return getAnalyticsPerOffer(state?.userId, columnFilters, pageRequest);
     },
   });
 
-  const columns = useMemo<MRT_ColumnDef<Marketar>[]>(
+  const columns = useMemo<MRT_ColumnDef<AnalyticsPerOffer>[]>(
     () => defaultColumns(),
     []
   );
 
-  const defaultData = useMemo(() => [] as Marketar[], []);
-
-  const marketarsAnalyticsButton = (item: Marketar, key: string) => (
-    <>
-      <Tooltip arrow title={"Analytics"} key={key}>
-        <IconButton
-          color="warning"
-          onClick={(e) => {
-            navigate("/analytics/" + item.id + "/analytics", {
-              state: {
-                userId: item.userId,
-                markertarId: item.externalMarketarId,
-              },
-            });
-            e.stopPropagation();
-          }}
-        >
-          <Analytics />
-        </IconButton>
-      </Tooltip>
-    </>
-  );
+  const defaultData = useMemo(() => [] as AnalyticsPerOffer[], []);
 
   const table = useMaterialReactTable({
     columns,
     data: data?.rows ?? defaultData,
     enableSorting: false,
     manualPagination: true,
-    manualFiltering: false,
     enableColumnActions: false,
     enableGlobalFilter: false,
     enableFilters: false,
-    enableRowActions: true,
     enableColumnResizing: true,
     layoutMode: "grid",
     muiToolbarAlertBannerProps: isError
@@ -98,7 +98,6 @@ export default function MarketarTable() {
         }
       : undefined,
     onPaginationChange: setPagination,
-
     renderTopToolbarCustomActions: () => (
       <Box sx={{ display: "flex", gap: "1rem", p: "4px" }}>
         <Tooltip arrow title="Refresh Data">
@@ -108,40 +107,26 @@ export default function MarketarTable() {
         </Tooltip>
       </Box>
     ),
-    renderRowActions: ({ row }) => (
-      <Box sx={{ display: "flex", flexWrap: "nowrap", gap: "8px" }}>
-        {marketarsAnalyticsButton(
-          row.original as Marketar,
-          (row.original as Marketar).id + "_" + "analytics"
-        )}
-      </Box>
-    ),
     rowCount: data?.totalCount ?? 0,
     state: {
       isLoading,
       pagination,
+      columnFilters,
       showAlertBanner: isError,
       showProgressBars: isFetching,
     },
     localization: MRT_Localization_EN,
-    enableHiding: false,
-    // displayColumnDefOptions: {
-    //   "mrt-row-actions": {
-    //     size: 200, //make actions column wider
-    //   },
-    // },
+    enableHiding: true,
     defaultColumn: {
-      minSize: 70,
+      minSize: 10,
       maxSize: 1000,
-      size: 120,
+      size: 70,
     },
   });
 
   return (
-    <>
-      <ThemeProvider theme={createTheme(theme, enUS)}>
-        <MaterialReactTable table={table} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={createTheme(theme, enUS)}>
+      <MaterialReactTable table={table} />
+    </ThemeProvider>
   );
 }
