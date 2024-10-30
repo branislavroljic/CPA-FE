@@ -1,8 +1,14 @@
 import { enUS } from "@mui/material/locale";
-import { Stack, ThemeProvider, createTheme, useTheme } from "@mui/material";
+import {
+  Stack,
+  TextField,
+  ThemeProvider,
+  Typography,
+  createTheme,
+  useTheme,
+} from "@mui/material";
 import PageContainer from "@ui/container/PageContainer";
 import { useMemo, useState } from "react";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import dayjs from "dayjs";
 import { useLocation, useParams } from "react-router-dom";
@@ -13,18 +19,26 @@ import AnalyticsTopCards from "@ui/dashboard/AnalyticsTopCards";
 import AnalyticsPerDateTable from "./analytics-per-date/AnalyticsPerDateTable";
 import AnalyticsPerOfferTable from "./analytics-per-offer/AnalyticsPerOfferTable";
 import MarketarTable from "../marketars/MarketarsTable";
+import { setEndTime, setStartTime } from "@pages/util/util";
+
+import { DateRangePicker } from "rsuite";
+import { MRT_ColumnFiltersState } from "material-react-table";
 
 export default function AnalyticsPage() {
   const theme = useTheme();
   const params = useParams();
-  const [columnFilters, setColumnFilters] = useState([
-    { id: "dateTime", value: [new Date().toString(), new Date().toString()] },
-  ]);
-  const { state } = useLocation();
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
 
-  const { data, isLoading } = useQuery({
+  const initialStartDate = setStartTime(new Date());
+  const initialEndDate = setEndTime(new Date());
+
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([
+    { id: "dateTime", value: [initialStartDate, initialEndDate] },
+  ]);
+  const [value, setValue] = useState([initialStartDate, initialEndDate]);
+
+  const { state } = useLocation();
+
+  const { data } = useQuery({
     queryKey: ["analytics", params.userId, columnFilters],
     queryFn: () =>
       getAnalytics(columnFilters, state?.userId, state?.markertarId),
@@ -98,33 +112,35 @@ export default function AnalyticsPage() {
             }}
           >
             <DateRangePicker
-              slots={{ field: SingleInputDateRangeField }}
-              name="allowedRange"
-              value={[
-                dayjs(columnFilters[0].value[0] ?? dayjs(new Date())),
-                dayjs(columnFilters[0].value[1] ?? dayjs(new Date())),
-              ]}
+              isoWeek
+              value={value}
               onChange={(newValue) => {
                 if (newValue) {
+                  const [startDate, endDate] = newValue;
+                  const updatedStartDate = setStartTime(startDate);
+                  const updatedEndDate = setEndTime(endDate);
+
+                  setValue([updatedStartDate, updatedEndDate]);
                   setColumnFilters((prev) => [
                     ...prev,
                     {
                       id: "dateTime",
-                      value: [
-                        newValue[0].$d,
-                        newValue[1] ? newValue[1].$d : new Date().toString(),
-                      ],
+                      value: [updatedStartDate, updatedEndDate],
                     },
                   ]);
-                  setStartDate(newValue[0]?.$d || new Date());
-                  setEndDate(newValue[1]?.$d || new Date());
                 }
               }}
             />
             <AnalyticsTopCards data={overallStatisticsData} />
           </div>
-          <AnalyticsPerDateTable startDate={startDate} endDate={endDate} />
-          <AnalyticsPerOfferTable startDate={startDate} endDate={endDate} />
+          <Typography variant="h5" align="center">
+            Analytics per date
+          </Typography>
+          <AnalyticsPerDateTable startDate={value[0]} endDate={value[1]} />
+          <Typography variant="h5" align="center">
+            Analytics per offer
+          </Typography>
+          <AnalyticsPerOfferTable startDate={value[0]} endDate={value[1]} />
           {state?.hasExternalMarketars && <MarketarTable />}
         </Stack>
       </ThemeProvider>

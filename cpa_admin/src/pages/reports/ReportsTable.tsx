@@ -22,11 +22,10 @@ import { MRT_Localization_EN } from "material-react-table/locales/en";
 import useAuthStore from "@stores/authStore";
 import { enUS } from "@mui/material/locale";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import dayjs from "dayjs";
 import { Report, getReports } from "@api/order/order";
+import { setEndTime, setStartTime } from "@pages/util/util";
+import { DateRangePicker } from "rsuite";
 
 export default function ReportsTable() {
   const { user } = useAuthStore();
@@ -35,9 +34,15 @@ export default function ReportsTable() {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const initialStartDate = setStartTime(new Date());
+  const initialEndDate = setEndTime(new Date());
+
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([
-    { id: "dateTime", value: [new Date().toString(), new Date().toString()] },
+    { id: "dateTime", value: [initialStartDate, initialEndDate] },
   ]);
+
+  const [value, setValue] = useState([initialStartDate, initialEndDate]);
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({
     queryKey: [
@@ -87,24 +92,23 @@ export default function ReportsTable() {
         </Tooltip>
         <DemoContainer components={["SingleInputDateRangeField"]}>
           <DateRangePicker
-            slots={{ field: SingleInputDateRangeField }}
-            name="allowedRange"
-            value={[
-              dayjs(columnFilters[0].value[0] ?? dayjs(new Date())),
-              dayjs(columnFilters[0].value[1] ?? dayjs(new Date())),
-            ]}
+            isoWeek
+            value={value}
             onChange={(newValue) => {
-              if (newValue)
+              if (newValue) {
+                const [startDate, endDate] = newValue;
+                const updatedStartDate = setStartTime(startDate);
+                const updatedEndDate = setEndTime(endDate);
+
+                setValue([updatedStartDate, updatedEndDate]);
                 setColumnFilters((prev) => [
                   ...prev,
                   {
                     id: "dateTime",
-                    value: [
-                      newValue[0].$d,
-                      newValue[1] ? newValue[1].$d : new Date().toString(),
-                    ],
+                    value: [updatedStartDate, updatedEndDate],
                   },
                 ]);
+              }
             }}
           />
         </DemoContainer>

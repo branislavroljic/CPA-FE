@@ -44,9 +44,6 @@ export default function ReportsTable() {
 
   const [value, setValue] = useState([initialStartDate, initialEndDate]);
 
-  const englishDateString = value[0].toLocaleString("en-US");
-  console.log(englishDateString);
-
   const { t } = useTranslation();
 
   const { data, isError, isFetching, isLoading, refetch } = useQuery({

@@ -20,11 +20,11 @@ const defaultColumns = () =>
     },
     {
       accessorKey: "conversions",
-      header: "Conversions",
+      header: "Approved",
     },
     {
-      accessorKey: "conversionRate",
-      header: "Conversion rate",
+      accessorFn: (row) => `${row.conversionRate} %`,
+      header: "Approve rate",
     },
     {
       accessorKey: "trash",

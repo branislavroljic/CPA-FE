@@ -6,6 +6,8 @@ import "./App.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/de";
+import "rsuite/dist/rsuite.min.css";
+
 function App() {
   const theme = ThemeSettings();
 

@@ -12,12 +12,10 @@ const defaultColumns = (
     {
       accessorKey: "id",
       header: "ID",
-      enableColumnFilter: false,
     },
     {
       accessorKey: "name",
       header: "First name",
-      enableColumnFilter: false,
     },
     {
       accessorKey: "userUsername",
@@ -27,7 +25,6 @@ const defaultColumns = (
     {
       accessorKey: "phoneNumber",
       header: "Phone number",
-      enableColumnFilter: false,
     },
     {
       accessorKey: "productName",
@@ -42,6 +39,7 @@ const defaultColumns = (
     {
       accessorFn: (row) => `${row.totalPrice} ${row.productCurrency}`,
       header: "Total price",
+      enableColumnFilter: false,
     },
     {
       accessorKey: "time",
@@ -92,10 +90,12 @@ const defaultColumns = (
     {
       accessorKey: "sub_3",
       header: "sub3",
+      enableColumnFilter: false,
     },
     {
       accessorKey: "sub_4",
       header: "sub4",
+      enableColumnFilter: false,
     },
     {
       accessorKey: "operatingSystem",
